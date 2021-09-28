@@ -8,16 +8,16 @@ public class Critica{
 		MuyBaja, Baja, Normal, Alta, muyAlta
 	}
 	
-	private String tittle; 
+	private String title; 
 	private puntuacion puntuacion; 
 	private String resena; 
 	private int like; 
 	private int dislike;
 	private String username; 
 	
-	public Critica(String tittle, puntuacion puntuacion, String resena)
+	public Critica(String title, puntuacion puntuacion, String resena)
 	{
-		this.tittle = tittle; 
+		this.title = title; 
 		this.puntuacion = puntuacion; 
 		this.resena=resena; 
 		this.like = 0; 
@@ -25,9 +25,13 @@ public class Critica{
 	}
 	
 	//GETTERS
-	public String getTittle()
+	public String getTitle()
 	{
-		return this.tittle; 
+		return this.title; 
+	}
+	public String getUsername() 
+	{
+		return this.username;
 	}
 	public puntuacion getPuntuacion()
 	{
@@ -48,9 +52,13 @@ public class Critica{
 	}
 	
 	//SETTERS 
-	public void setTittle(String tittle)
+	public void settitle(String title)
 	{
-		this.tittle = tittle; 
+		this.title = title; 
+	}
+	public void setUsername(String username)
+	{
+		this.username=username;
 	}
 	public void setPuntuacion(puntuacion puntuacion)
 	{
