@@ -1,12 +1,20 @@
 package espectador;
+import fichero.users.IOUsers;
 
-public class Espectador {
+public class Espectador extends IOUsers{
 
 	private String name; 
 	private String mail;
 	private String username; 
 	
-	
+	//Constructor parametrizado
+	public Espectador(String name, String mail, String username)
+	{
+		this.name=name; 
+		this.mail=mail;
+		this.username = username;
+		userToFich(this.name, this.mail, this.username); 
+	}
 	//OBSERVADORES
 	
 	public String getName()
@@ -35,5 +43,6 @@ public class Espectador {
 	{
 		this.username = username; 
 	}	
+	
 	
 }

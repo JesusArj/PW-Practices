@@ -1,5 +1,4 @@
 package scanner;
-
 import java.util.Scanner;  
 public class ScannerUsers {  
 public static void main(String args[]){  
