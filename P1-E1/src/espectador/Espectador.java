@@ -8,6 +8,13 @@ public class Espectador extends IOUsers{
 	private String username; 
 	
 	//Constructor parametrizado
+	
+	//constructor vacio
+	public Espectador()
+	{
+		
+	}
+	
 	public Espectador(String name, String mail, String username)
 	{
 		this.name=name; 
