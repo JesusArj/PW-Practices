@@ -25,24 +25,12 @@ public class IOUsers {
 			propiedades.load(entrada);
 			//RELLENAMOS CON LOS NUEVOS DATOS
 			int elems = propiedades.size();
-			if (elems==0) {
-				propiedades.setProperty("name"+1, name);
-				propiedades.setProperty("mail"+1, mail); 
-				propiedades.setProperty("username"+1, username);
-				propiedades.store(new FileWriter(rutaFicheroPropiedades), "");
-			}
-			else {
-				for(int i=1; i<elems;i++) {
-					propiedades.setProperty("name"+i, name);
-					propiedades.setProperty("mail"+i, mail); 
-					propiedades.setProperty("username"+i, username); 
-					//CARGAMOS LOS DATOS AL FICHERO
-					propiedades.store(new FileWriter(rutaFicheroPropiedades), "");
-				}
-			}
-			
+			propiedades.setProperty("name"+((elems/3)+1), name);
+			propiedades.setProperty("mail"+((elems/3)+1), mail); 
+			propiedades.setProperty("username"+((elems/3)+1), username); 
+			propiedades.store(new FileWriter(rutaFicheroPropiedades), "");
 
-			}catch(FileNotFoundException e) {
+			}catch(FileNotFoundException e) { 
 			e.printStackTrace();
 			}catch(IOException e) {
 			e.printStackTrace(); 
