@@ -35,13 +35,14 @@ public class IOCredenciales {
 	        }	
 	    }
 	
-	public ArrayList<Credenciales> fichCredToVec(ArrayList<Credenciales> v)
+	public ArrayList<Credenciales> fichCredToVec()
 	{
 		String rutaAbsoluta = new File("").getAbsolutePath();
 		String rutaFichero = rutaAbsoluta + "/credenciales.txt";
 		FileReader fr = null;
 		BufferedReader br = null;
 		Credenciales c1 = new Credenciales(); 
+		ArrayList<Credenciales> cred = new ArrayList<Credenciales>();
 		
 		try {
 			// Apertura del fichero y creacion de BufferedReader para poder hacer una lectura comoda (disponer del metodo readLine()).
@@ -54,6 +55,7 @@ public class IOCredenciales {
         	    for (String s : data) {
         	    	c1.setUser(s);
         	    	c1.setPasswd(s);
+        	    	cred.add(c1);
         	    	}
         	}
 	        
@@ -65,21 +67,20 @@ public class IOCredenciales {
 	         // una excepcion.
 	         try{                    
 	            if( null != fr ){   
-	               fr.close();     
+	               fr.close();    
+	               return cred;
 	            }                  
 	         }catch (Exception e2){ 
 	            e2.printStackTrace();
 	         }
-	      }
-		
-		return v; 
-	
+	      }	
+		return cred;
 	}
 	
 	public boolean comprobarUserExist(String User)
 	{
 		ArrayList<Credenciales> v = new ArrayList<Credenciales>();
-		fichCredToVec(v);
+		v = fichCredToVec();
 		for(Credenciales c : v) {
 			if(c.getUser()==User)
 				return true;
@@ -90,7 +91,7 @@ public class IOCredenciales {
 	public boolean comprobarPasswd(String User, String Passwd)
 	{
 		ArrayList<Credenciales> v = new ArrayList<Credenciales>();
-		fichCredToVec(v);
+		v = fichCredToVec();
 		for(Credenciales c : v) {
 			if(c.getUser()==User) {
 				if(c.getPasswd()==Passwd)
@@ -99,5 +100,4 @@ public class IOCredenciales {
 		}
 		return false;
 	}
-	
 }
