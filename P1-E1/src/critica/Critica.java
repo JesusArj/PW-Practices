@@ -9,13 +9,13 @@ public class Critica{
 	}
 	
 	private String title; 
-	private puntuacion puntuacion; 
+	private String puntuacion; 
 	private String resena; 
 	private int like; 
 	private int dislike;
 	private String username; 
 	
-	public Critica(String title, puntuacion puntuacion, String resena)
+	public Critica(String title, String puntuacion, String resena)
 	{
 		this.title = title; 
 		this.puntuacion = puntuacion; 
@@ -24,6 +24,9 @@ public class Critica{
 		this.dislike =0; 
 	}
 	
+	public Critica() {
+	}
+
 	//GETTERS
 	public String getTitle()
 	{
@@ -33,7 +36,7 @@ public class Critica{
 	{
 		return this.username;
 	}
-	public puntuacion getPuntuacion()
+	public String getPuntuacion()
 	{
 		return this.puntuacion; 
 	}
@@ -60,7 +63,7 @@ public class Critica{
 	{
 		this.username=username;
 	}
-	public void setPuntuacion(puntuacion puntuacion)
+	public void setPuntuacion(String puntuacion)
 	{
 		this.puntuacion=puntuacion; 
 	}
@@ -68,11 +71,19 @@ public class Critica{
 	{
 		this.resena=resena; 
 	}
-	public void setLike()
+	public void setLike(int Like)
+	{
+		this.like = Like; 
+	}
+	public void setDislike(int Dislike)
+	{
+		this.dislike = Dislike; 
+	}
+	public void addLike()
 	{
 		this.like ++; 
 	}
-	public void voidsetDislike()
+	public void addDislike()
 	{
 		this.dislike ++; 
 	}

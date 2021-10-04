@@ -1,4 +1,4 @@
-package fichero.criticas;
+package fichero.credenciales;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,22 +7,20 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import critica.Critica;
+import credenciales.Credenciales;
 
-public class IOCriticas {
-
-	//funcion que añade un usuario al fichero de usuarios
-	public void criticaToFich(String title, String puntuacion, String resena, String username, int like, int dislike)
-	{		
+public class IOCredenciales {
+	public void RegisterUserToFich(String username, String Passwd)
+	{
 		String rutaAbsoluta = new File("").getAbsolutePath();
-		String rutaFichero = rutaAbsoluta + "/criticas.txt";
+		String rutaFichero = rutaAbsoluta + "/credenciales.txt";
 		FileWriter fichero = null;
 	    PrintWriter pw = null; 
 	    try
 	    {	
 	    	fichero= new FileWriter(rutaFichero, true); 
 	    	pw = new PrintWriter(fichero); 
-	    	pw.println(title+"//"+puntuacion +"//" + resena+"//"+ username + "//" + like +"//" + dislike); 
+	    	pw.println(username+"//"+ Passwd); 
 	    }catch (Exception e) {
 	       e.printStackTrace();
 	    } finally {
@@ -37,31 +35,26 @@ public class IOCriticas {
 	        }	
 	    }
 	
-	public ArrayList<Critica> fichToVec(ArrayList<Critica> v)
+	public ArrayList<Credenciales> fichCredToVec(ArrayList<Credenciales> v)
 	{
 		String rutaAbsoluta = new File("").getAbsolutePath();
-		String rutaFichero = rutaAbsoluta + "/criticas.txt";
+		String rutaFichero = rutaAbsoluta + "/credenciales.txt";
 		FileReader fr = null;
 		BufferedReader br = null;
-		Critica c1 = new Critica(); 
+		Credenciales c1 = new Credenciales(); 
 		
 		try {
-			
 			// Apertura del fichero y creacion de BufferedReader para poder hacer una lectura comoda (disponer del metodo readLine()).
 	        fr = new FileReader (rutaFichero);
 	        br = new BufferedReader(fr);
 	        //lectura
 	        String linea; 
-        	while ((linea = br.readLine()) != null) {
+	        while ((linea = br.readLine()) != null) {
         	    String[] data = linea.split("//");
         	    for (String s : data) {
-        	    	c1.settitle(s);
-        	    	c1.setPuntuacion(s);
-        	    	c1.setResena(s);
-        	    	c1.setLike(Integer.parseInt(s));
-        	    	c1.setDislike(Integer.parseInt(s));
-        	    	c1.setUsername(s);
-        	    }
+        	    	c1.setUser(s);
+        	    	c1.setPasswd(s);
+        	    	}
         	}
 	        
 		}catch(Exception e){
@@ -83,15 +76,28 @@ public class IOCriticas {
 	
 	}
 	
-	public boolean comprobarCriticaExist(String title)
+	public boolean comprobarUserExist(String User)
 	{
-		ArrayList<Critica> v = new ArrayList<Critica>();
-		fichToVec(v);
-		for(Critica c : v) {
-			if(c.getTitle()==title)
+		ArrayList<Credenciales> v = new ArrayList<Credenciales>();
+		fichCredToVec(v);
+		for(Credenciales c : v) {
+			if(c.getUser()==User)
 				return true;
 		}
 		return false;
 	}
+	
+	public boolean comprobarPasswd(String User, String Passwd)
+	{
+		ArrayList<Credenciales> v = new ArrayList<Credenciales>();
+		fichCredToVec(v);
+		for(Credenciales c : v) {
+			if(c.getUser()==User) {
+				if(c.getPasswd()==Passwd)
+					return true;
+			}
+		}
+		return false;
+	}
+	
 }
-

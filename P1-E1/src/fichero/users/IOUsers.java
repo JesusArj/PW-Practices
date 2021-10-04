@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+
 import espectador.*;
 
 public class IOUsers 
@@ -88,9 +89,15 @@ public class IOUsers
 	
 	}
 	
-	private boolean comprobarUserExist(String Mail)
+	public boolean comprobarUserExist(String Mail)
 	{
-		return false; 
+		ArrayList<Espectador> v = new ArrayList<Espectador>();
+		fichToVec(v);
+		for(Espectador e : v) {
+			if(e.getMail()==Mail)
+				return true;
+		}
+		return false;
 	}
 }
 
