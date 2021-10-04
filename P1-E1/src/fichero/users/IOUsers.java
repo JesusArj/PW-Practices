@@ -46,7 +46,7 @@ public class IOUsers
 		String rutaFichero = rutaAbsoluta + "/usuarios.txt";
 		FileReader fr = null;
 		BufferedReader br = null;
-		Espectador e1 = new Espectador(); 
+		 Espectador e1 = new Espectador();
 		
 		try {
 			
@@ -54,19 +54,24 @@ public class IOUsers
 	        fr = new FileReader (rutaFichero);
 	        br = new BufferedReader(fr);
 	        //lectura
-	        String linea; 
+	        String linea=""; 
 	        int aux=0; 
 	        while((linea=br.readLine())!=null)
-	        {
+	        { 
 	        	if((aux%3)==0)
-	        	e1.setName(linea); 
-	        	if((aux%3)==1)
-		        e1.setMail(linea); 
-	        	if((aux%3)==2)
+	        	{
+	        		e1.setName(linea);
+	        	}
+	        	else if((aux%3)==1)
+	        	{
+	        		e1.setMail(linea); 
+	        	}
+	        	else if((aux%3)==2)
 	        	{
 	        		e1.setUsername(linea);
-	        		v.add(e1); 
-	        	}
+	        		v.add(e1);
+	        		e1 = new Espectador();
+	        }
 	        	aux++; 
 	        }
 	        
@@ -94,7 +99,7 @@ public class IOUsers
 		ArrayList<Espectador> v = new ArrayList<Espectador>();
 		fichToVec(v);
 		for(Espectador e : v) {
-			if(e.getMail()==Mail)
+			if(e.getMail().equals(Mail))
 				return true;
 		}
 		return false;

@@ -2,12 +2,17 @@ package main.program;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Iterator;
 
+import credenciales.Credenciales;
+import espectador.Espectador;
 import fichero.credenciales.IOCredenciales;
 public class mainProgram {
 
 	public static void main(String[] args) throws IOException 
 	{
+		
         String User = null, Passwd = null, inicial = null;
         System.out.println("Bienvenido a nuestro sistema de gestion de criticas.");
         System.out.println("Para iniciar sesion pulse 1. Para registrarse pulse 2. Para salir pulse cualquier otra tecla.");
@@ -235,7 +240,7 @@ public class mainProgram {
         }
         
 	}
-}	
+}
 
 
 
