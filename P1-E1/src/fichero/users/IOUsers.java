@@ -1,5 +1,5 @@
 //TODO: En el constructor hay que inicializar un vector de espectadores que vuelque todos los datos del fichero
-//en dicho vector. Luego se obtendrá el tamaño del vector para poder seguir escribiendo en el fichero de datos.
+//en dicho vector. Luego se obtendrï¿½ el tamaï¿½o del vector para poder seguir escribiendo en el fichero de datos.
 
 package fichero.users;
 import java.io.BufferedReader;
@@ -14,8 +14,8 @@ import espectador.*;
 public class IOUsers 
 {
 	
-	//funcion que añade un usuario al fichero de usuarios
-	public void userToFich(String name, String username, String mail)
+	//funcion que aï¿½ade un usuario al fichero de usuarios
+	public void RegisterUserToFich(String name, String username, String mail, String passwd)
 	{
 		String rutaAbsoluta = new File("").getAbsolutePath();
 		String rutaFichero = rutaAbsoluta + "/usuarios.txt";
@@ -25,7 +25,7 @@ public class IOUsers
 	    {	
 	    	fichero= new FileWriter(rutaFichero, true); 
 	    	pw = new PrintWriter(fichero); 
-	    	pw.println(name+"\n"+username+"\n"+mail); 
+	    	pw.println(name+"\t"+username+"\t"+mail+"\t"+passwd); 
 	    }catch (Exception e) {
 	       e.printStackTrace();
 	    } finally {
@@ -57,22 +57,15 @@ public class IOUsers
 	        String linea=""; 
 	        int aux=0; 
 	        while((linea=br.readLine())!=null)
-	        { 
-	        	if((aux%3)==0)
-	        	{
-	        		e1.setName(linea);
-	        	}
-	        	else if((aux%3)==1)
-	        	{
-	        		e1.setMail(linea); 
-	        	}
-	        	else if((aux%3)==2)
-	        	{
-	        		e1.setUsername(linea);
-	        		v.add(e1);
-	        		e1 = new Espectador();
-	        }
-	        	aux++; 
+			String[] data = linea.split("\t");
+        	    for(String s : data) {
+					e1.setName(s);
+					e1.setUsername(s);
+    	        	e1.setEmail(s);
+    	        	e1.setPasswd(s); 
+    	        	v.add(e1); 
+    	        	e1 = new Espectador(); 
+        	    }
 	        }
 	        
 		}catch(Exception e){
@@ -103,6 +96,30 @@ public class IOUsers
 				return true;
 		}
 		return false;
+	}
+
+	public boolean comprobarPasswd(String email, String Passwd)
+	{
+		ArrayList<Espectador> v = new ArrayList<Espectador>();
+		v = fichCredToVec(v);
+		for(Espectador c : v) {
+			if(c.getEmail().equals(email)) {
+				if(c.getPasswd().equals(Passwd))
+					return true;
+			}
+		}
+		return false;
+	}
+
+	public Espectador buscarPorCorreo(String email){
+		ArrayList<Espectador> v = new ArrayList<Espectador>();
+		v = fichCredToVec(v);
+		for(Espectador c : v) {
+			if(c.getEmail().equals(email)) {
+				return c;
+			}
+		}
+		return Espectador();
 	}
 }
 

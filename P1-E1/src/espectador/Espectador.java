@@ -20,8 +20,12 @@ public class Espectador extends IOUsers{
 	/**
 	 * Cadena que almacena el username del usuario
 	 */
-	private String username; 
-	
+	private String username;
+	/**
+	 * Cadena que almacena la contraseña del usuario
+	 */
+	private String passwd;
+
 	/**
 	 * Constructor sin parametros usado en inicializacion
 	 * de variables
@@ -34,13 +38,15 @@ public class Espectador extends IOUsers{
 	 * @param name Nombre del usuario
 	 * @param mail Mail del usuario
 	 * @param username Username del usuario
+	 * @param passwd Contraseña del usuario
 	 */
-	public Espectador(String name, String mail, String username)
+	public Espectador(String name, String mail, String username, String passwd)
 	{
 		this.name=name; 
 		this.mail=mail;
 		this.username = username;
-		userToFich(this.name, this.mail, this.username); 
+		this.passwd = passwd;
+		userToFich(this.name, this.mail, this.username, this.passwd); 
 	}
 	//OBSERVADORES
 	/**
@@ -66,6 +72,15 @@ public class Espectador extends IOUsers{
 	public String getUsername()
 	{
 		return this.username; 
+	}
+	/**
+	 * Getter de la contrase�a. Usado para hacer login. 
+	 * No es seguro que sea public y la contrase�a 
+	 * est� almacenada en texto plano.
+	 * @return Cadena que contiene la contrase�a
+	 */
+	public String getPasswd() {
+		return this.Passwd;
 	}
 	
 	//MODIFICADORES
@@ -93,4 +108,11 @@ public class Espectador extends IOUsers{
 	{
 		this.username = username; 
 	}	
+	/**
+	 * Setter de la contrase�a
+	 * @param Passwd Contrase�a del user
+	 */
+	public void setPasswd(String Passwd) {
+		this.Passwd = Passwd;
+	}
 }

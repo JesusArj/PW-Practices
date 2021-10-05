@@ -7,7 +7,7 @@ public class GestorCriticas {
 			private static GestorCriticas instance = null;
 
 			// Other properties
-			private String user;
+			private String user = null;
 			
 			// 2 - Private constructor
 
