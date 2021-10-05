@@ -7,17 +7,18 @@ public class mainProgram {
 
 	public static void main(String[] args) throws IOException 
 	{
-        String email = null, Passwd = null, inicial = null;
+        String email = null, passwd = null, opcion = null, name = null, username = null;
+        IOUsers io = new IOUsers();
         System.out.println("Bienvenido a nuestro sistema de gestion de criticas.");
         System.out.println("Para iniciar sesion pulse 1. Para registrarse pulse 2. Para salir pulse cualquier otra tecla.");
         BufferedReader login = new BufferedReader(
 	            new InputStreamReader(System.in));
         try {
-			inicial = login.readLine();
+			opcion = login.readLine();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        if("1".equals(inicial)) {
+        if("1".equals(opcion)) {
         	System.out.println("Por favor, introduzca sus credenciales.");
             System.out.println("Email:");
     	        BufferedReader readerUser = new BufferedReader(
@@ -31,14 +32,12 @@ public class mainProgram {
     	        BufferedReader readerPasswd = new BufferedReader(
     		            new InputStreamReader(System.in));
     	        try {
-    				Passwd = readerPasswd.readLine();
+    				passwd = readerPasswd.readLine();
     			} catch (IOException e) {
     				e.printStackTrace();
     			}
             System.out.println("Cargando . . .");
-            IOUsers io = new IOUsers();
             if(io.comprobarUserExist(email)==false) {
-            	String opcion = null;
                 System.out.println("email no registrado.");
                 System.out.println("Para registrarse pulse 1. Para salir pulse cualquier otra tecla.");
                 BufferedReader readerRegister = new BufferedReader(
@@ -49,7 +48,6 @@ public class mainProgram {
     				e.printStackTrace();
     			}
     	        if("1".equals(opcion)) {
-    	        	String passwd = null;
     	            System.out.println("Introduzca su email:");
     	            BufferedReader Register = new BufferedReader(
     			            new InputStreamReader(System.in));
@@ -67,18 +65,18 @@ public class mainProgram {
     					e.printStackTrace();
 					}
 					System.out.println("Introduzca su nombre:");
-    	            BufferedReader Register1 = new BufferedReader(
+    	            BufferedReader Register11 = new BufferedReader(
     			            new InputStreamReader(System.in));
     		        try {
-    					String name = Register1.readLine();
+    					name = Register11.readLine();
     				} catch (IOException e) {
     					e.printStackTrace();
 					}
 					System.out.println("Introduzca su username:");
-    	            BufferedReader Register1 = new BufferedReader(
+    	            BufferedReader Register111 = new BufferedReader(
     			            new InputStreamReader(System.in));
     		        try {
-    					String username = Register1.readLine();
+    					username = Register111.readLine();
     				} catch (IOException e) {
     					e.printStackTrace();
 					}
@@ -122,7 +120,7 @@ public class mainProgram {
     	            return;
                 }
             }
-            if(io.comprobarPasswd(email, Passwd)==false) {
+            if(io.comprobarPasswd(email, passwd)==false) {
             	int intentos = 1;
     	        String opcion1 = null;
     	        Boolean timeout = true;
@@ -139,12 +137,12 @@ public class mainProgram {
     	            return;
     	        }
     	        else {
-    	        	while(!(io.comprobarPasswd(email, Passwd)) && timeout) {
+    	        	while(!(io.comprobarPasswd(email, passwd)) && timeout) {
     	            	System.out.println("Password:");
     		 	        BufferedReader reader = new BufferedReader(
     		 		            new InputStreamReader(System.in));
     		 	        try {
-    		 				Passwd = reader.readLine();
+    		 				passwd = reader.readLine();
     		 			} catch (IOException e) {
     		 				e.printStackTrace();
     		 			}
@@ -193,8 +191,8 @@ public class mainProgram {
     	        }     
             }
      	}
-        else if("2".equals(inicial)) {
-        	String passwd = null;
+        else if("2".equals(opcion)) {
+        	passwd = null;
 		   
 			System.out.println("Introduzca su email:");
 			BufferedReader Register = new BufferedReader(
@@ -213,18 +211,18 @@ public class mainProgram {
 				e.printStackTrace();
 			}
 			System.out.println("Introduzca su nombre:");
-			BufferedReader Register1 = new BufferedReader(
+			BufferedReader Register11 = new BufferedReader(
 					new InputStreamReader(System.in));
 			try {
-				String name = Register1.readLine();
+				name = Register11.readLine();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			System.out.println("Introduzca su username:");
-			BufferedReader Register1 = new BufferedReader(
+			BufferedReader Register111 = new BufferedReader(
 					new InputStreamReader(System.in));
 			try {
-				String username = Register1.readLine();
+				username = Register111.readLine();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -233,8 +231,8 @@ public class mainProgram {
 			newUser.RegisterUserToFich(name,username,email, passwd);
 			
 	        System.out.println("Ha sido registrado correctamente.");
-	        System.out.println("Bienvenido a nuestro sistema " + email + ".");
-    		String opcion = null;
+	        System.out.println("Bienvenido a nuestro sistema " + io.buscarPorCorreo(email).getUsername() + ".");
+    		
 			while(opcion !="1" || opcion!= "2" || opcion!="3") {
             	System.out.println("�Qu� desea hacer?");
             	System.out.println("1. Modificar mis datos");

@@ -46,7 +46,7 @@ public class Espectador extends IOUsers{
 		this.mail=mail;
 		this.username = username;
 		this.passwd = passwd;
-		userToFich(this.name, this.mail, this.username, this.passwd); 
+		RegisterUserToFich(this.name, this.mail, this.username, this.passwd); 
 	}
 	//OBSERVADORES
 	/**
@@ -80,7 +80,7 @@ public class Espectador extends IOUsers{
 	 * @return Cadena que contiene la contrase�a
 	 */
 	public String getPasswd() {
-		return this.Passwd;
+		return this.passwd;
 	}
 	
 	//MODIFICADORES
@@ -113,6 +113,6 @@ public class Espectador extends IOUsers{
 	 * @param Passwd Contrase�a del user
 	 */
 	public void setPasswd(String Passwd) {
-		this.Passwd = Passwd;
+		this.passwd = Passwd;
 	}
 }

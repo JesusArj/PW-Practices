@@ -55,13 +55,12 @@ public class IOUsers
 	        br = new BufferedReader(fr);
 	        //lectura
 	        String linea=""; 
-	        int aux=0; 
-	        while((linea=br.readLine())!=null)
+	        while((linea=br.readLine())!=null) {
 			String[] data = linea.split("\t");
         	    for(String s : data) {
 					e1.setName(s);
 					e1.setUsername(s);
-    	        	e1.setEmail(s);
+    	        	e1.setMail(s);
     	        	e1.setPasswd(s); 
     	        	v.add(e1); 
     	        	e1 = new Espectador(); 
@@ -101,9 +100,9 @@ public class IOUsers
 	public boolean comprobarPasswd(String email, String Passwd)
 	{
 		ArrayList<Espectador> v = new ArrayList<Espectador>();
-		v = fichCredToVec(v);
+		v = fichToVec(v);
 		for(Espectador c : v) {
-			if(c.getEmail().equals(email)) {
+			if(c.getMail().equals(email)) {
 				if(c.getPasswd().equals(Passwd))
 					return true;
 			}
@@ -113,13 +112,13 @@ public class IOUsers
 
 	public Espectador buscarPorCorreo(String email){
 		ArrayList<Espectador> v = new ArrayList<Espectador>();
-		v = fichCredToVec(v);
+		v = fichToVec(v);
 		for(Espectador c : v) {
-			if(c.getEmail().equals(email)) {
+			if(c.getMail().equals(email)) {
 				return c;
 			}
 		}
-		return Espectador();
+		return null;
 	}
 }
 
