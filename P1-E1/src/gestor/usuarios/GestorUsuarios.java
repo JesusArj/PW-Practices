@@ -1,42 +1,66 @@
 package gestor.usuarios;
+import espectador.Espectador;
+import fichero.users.IOUsers;
 
 public class GestorUsuarios {
 
 		// 1 - The singleton
 
 			private static GestorUsuarios instance = null;
-
-			public String user;
 			
-			private GestorUsuarios(String user) 
+			public IOUsers User = new IOUsers();
+			public String Mail;
+			
+			private GestorUsuarios(String Mail) 
 			{
-				this.user= user; 
+				//RELLENAMOS ESPECTADORES
+				this.Mail = Mail; 
 			}
 
 			// 3 - Access point to the instance
 
-			public static GestorUsuarios getInstance(String user) {
+			public static GestorUsuarios getInstance(String Mail) {
 				if(instance == null) {
-					instance = new GestorUsuarios(user);
+					instance = new GestorUsuarios(Mail);
 				}
 				return instance;
 			}
 			
-			public static void darAltaUser(String user) {
-				
+			public void darAltaUser(Espectador e1) 
+			{
+				if(instance!=null)
+				{
+					this.User.RegisterUserToFich(e1.getName(), e1.getUsername(), e1.getMail(), e1.getPasswd());
+				}
 			}
 			
-			public static void darBajaUser(String user) {
-				
+			public void darBajaUser() 
+			{
+				if(instance!=null)
+				{
+					this.User.borrarUser(this.Mail);
+					System.exit(1);
+				}
 			}
 			
 			/*public static String getUser() {
 				//IOUsers -> io.get(this.user);
 			}*/
 			
-			public static void updateUser(String user) {
-				
+			public void verDatosUser()
+			{
+				if(instance!=null)
+				{
+					User.imprimirDatosUser(this.Mail);
+				}
 			}
 			
+			//TODO: 
+			/*
+			public static void updateUser(String Mail) 
+			{
+				
+			}
+			*/
 		
 	}

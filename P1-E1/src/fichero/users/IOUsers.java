@@ -19,27 +19,35 @@ public class IOUsers
 	//funcion que a�ade un usuario al fichero de usuarios
 	public void RegisterUserToFich(String name, String username, String mail, String passwd)
 	{
-		String rutaAbsoluta = new File("").getAbsolutePath();
-		String rutaFichero = rutaAbsoluta + "/usuarios.txt";
-		FileWriter fichero = null;
-	    PrintWriter pw = null; 
-	    try
-	    {	
-	    	fichero= new FileWriter(rutaFichero, true); 
-	    	pw = new PrintWriter(fichero); 
-	    	pw.println(name+"//"+username+"//"+mail+"//"+passwd); 
-	    }catch (Exception e) {
-	       e.printStackTrace();
-	    } finally {
-	           try {
-	        	   // Aprovechamos el finally para asegurarnos que se cierra el fichero.
-	           if (fichero != null)
-	              fichero.close();
-	           
-	           } catch (Exception e2) {
-	              e2.printStackTrace();
+		if(comprobarUserExist(mail)==true)
+		{
+			System.err.println("No ha sido posible realizar el registro, el email ya esta registrado en nuestro sistema");
+			return;
+		}
+		else
+		{
+			String rutaAbsoluta = new File("").getAbsolutePath();
+			String rutaFichero = rutaAbsoluta + "/usuarios.txt";
+			FileWriter fichero = null;
+		    PrintWriter pw = null; 
+		    try
+		    {	
+		    	fichero= new FileWriter(rutaFichero, true); 
+		    	pw = new PrintWriter(fichero); 
+		    	pw.println(name+"//"+username+"//"+mail+"//"+passwd); 
+		    }catch (Exception e) {
+		       e.printStackTrace();
+		    } finally {
+		           try {
+		        	   // Aprovechamos el finally para asegurarnos que se cierra el fichero.
+		           if (fichero != null)
+		              fichero.close();
+		           
+		           } catch (Exception e2) {
+		              e2.printStackTrace();
+		           }
 	           }
-	        }	
+	      }	
 	    }
 	
 	public ArrayList<Espectador> fichToVec(ArrayList<Espectador> v)
@@ -122,6 +130,16 @@ public class IOUsers
 		return null;
 	}
 	
+	public void imprimirDatosUser(String email)
+	{
+		Espectador e1= new Espectador(); 
+		e1 = buscarPorCorreo(email); 
+		System.out.println("SUS DATOS DE USUARIO SON: "); 
+		System.out.println("Nombre: " + e1.getName()); 
+		System.out.println("Correo electronico: " + e1.getMail()); 
+		System.out.println("Usuario: " + e1.getUsername()); 
+	}
+	
 	public void borrarUser(String mail) {
 		ArrayList<Espectador> v = new ArrayList<Espectador>();
 		v = fichToVec(v);
@@ -142,6 +160,7 @@ public class IOUsers
 		for(Espectador c : v) {
 			c.RegisterUserToFich(c.getName(), c.getUsername(), c.getMail(), c.getPasswd());
 		}
+		System.out.println("Has sido eliminado correctamente del sistema."); 
 	}
 	
 	public void borrarUser(Espectador e) {
@@ -166,6 +185,5 @@ public class IOUsers
 		}
 	}
 }
-
 
 
