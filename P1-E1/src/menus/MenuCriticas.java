@@ -3,9 +3,15 @@ package menus;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
 import gestor.criticas.GestorCriticas;
 
+/**
+ * La clase MenuCriticas comprende la impresion por pantalla de un menu,
+ * que enlaza la interfaz de usuario con las funciones del gestor de
+ * críticas.
+ * @author Valentín Avram
+ *
+ */
 
 public class MenuCriticas {
 
