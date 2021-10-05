@@ -11,7 +11,7 @@ public class Credenciales {
 	/**
 	 * Cadena User para almacenar el usuario registrado
 	 */
-	private String User;
+	private String email;
 	
 	/**
 	 * Cadena password asociada al user, se almacena en texto plano
@@ -23,8 +23,8 @@ public class Credenciales {
 	 * @param User el usuario con el que queremos trabajar 
 	 * @param Passwd la contraseña del usuario
 	 */
-	public Credenciales(String User, String Passwd) {
-		this.User = User;
+	public Credenciales(String email, String Passwd) {
+		this.email= email;
 		this.Passwd = Passwd;
 	}
 	
@@ -39,8 +39,8 @@ public class Credenciales {
 	 * Setter de la cadena del user
 	 * @param User Username
 	 */
-	public void setUser(String User) {
-		this.User = User;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	/**
@@ -55,8 +55,8 @@ public class Credenciales {
 	 * Getter de la cadena del user
 	 * @return Cadena que contiene el username
 	 */
-	public String getUser() {
-		return this.User;
+	public String getEmail() {
+		return this.email;
 	}
 	
 	/**

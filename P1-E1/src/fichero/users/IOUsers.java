@@ -55,24 +55,16 @@ public class IOUsers
 	        br = new BufferedReader(fr);
 	        //lectura
 	        String linea=""; 
-	        int aux=0; 
 	        while((linea=br.readLine())!=null)
 	        { 
-	        	if((aux%3)==0)
-	        	{
-	        		e1.setName(linea);
-	        	}
-	        	else if((aux%3)==1)
-	        	{
-	        		e1.setMail(linea); 
-	        	}
-	        	else if((aux%3)==2)
-	        	{
-	        		e1.setUsername(linea);
+        	    String[] data = linea.split("//");
+        	    for(String s : data) {
+	        		e1.setName(s);
+	        		e1.setMail(s); 
+	        		e1.setUsername(s);
 	        		v.add(e1);
 	        		e1 = new Espectador();
-	        }
-	        	aux++; 
+        	    }
 	        }
 	        
 		}catch(Exception e){

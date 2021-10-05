@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import credenciales.Credenciales;
 
 public class IOCredenciales {
-	public void RegisterUserToFich(String username, String Passwd)
+	public void RegisterUserToFich(String email, String Passwd)
 	{
 		String rutaAbsoluta = new File("").getAbsolutePath();
 		String rutaFichero = rutaAbsoluta + "/credenciales.txt";
@@ -20,7 +20,7 @@ public class IOCredenciales {
 	    {	
 	    	fichero= new FileWriter(rutaFichero, true); 
 	    	pw = new PrintWriter(fichero); 
-	    	pw.println(username+"\n"+ Passwd); 
+	    	pw.println(email+"//"+ Passwd); 
 	    }catch (Exception e) {
 	       e.printStackTrace();
 	    } finally {
@@ -48,18 +48,15 @@ public class IOCredenciales {
 	        br = new BufferedReader(fr);
 	        //lectura
 	        String linea=""; 
-	        int aux=0; 
 	        while((linea=br.readLine())!=null)
 	        {
-	        	if((aux%2)==0)
-	        	c1.setUser(linea);
-	        	if((aux%2)==1)
-	        	{
-	        	c1.setPasswd(linea); 
-	        	cred.add(c1); 
-	        	c1 = new Credenciales(); 
-	        	}
-	        	aux++; 
+        	    String[] data = linea.split("//");
+        	    for(String s : data) {
+    	        	c1.setEmail(s);
+    	        	c1.setPasswd(s); 
+    	        	cred.add(c1); 
+    	        	c1 = new Credenciales(); 
+        	    }
 	        }
 	        
 		}catch(Exception e){
@@ -87,18 +84,18 @@ public class IOCredenciales {
 		v = fichCredToVec(v);
 			for(int i=0; i<v.size(); i++)
 			{
-				if(v.get(i).getUser().equals(User))
+				if(v.get(i).getEmail().equals(User))
 					exists=true;
 			}
 			return exists; 
 	}
 	
-	public boolean comprobarPasswd(String User, String Passwd)
+	public boolean comprobarPasswd(String email, String Passwd)
 	{
 		ArrayList<Credenciales> v = new ArrayList<Credenciales>();
 		v = fichCredToVec(v);
 		for(Credenciales c : v) {
-			if(c.getUser().equals(User)) {
+			if(c.getEmail().equals(email)) {
 				if(c.getPasswd().equals(Passwd))
 					return true;
 			}

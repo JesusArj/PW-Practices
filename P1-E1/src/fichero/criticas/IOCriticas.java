@@ -44,7 +44,7 @@ public class IOCriticas {
 		FileReader fr = null;
 		BufferedReader br = null;
 		Critica c1 = new Critica(); 
-		
+				
 		try {
 			
 			// Apertura del fichero y creacion de BufferedReader para poder hacer una lectura comoda (disponer del metodo readLine()).
@@ -61,6 +61,8 @@ public class IOCriticas {
         	    	c1.setLike(Integer.parseInt(s));
         	    	c1.setDislike(Integer.parseInt(s));
         	    	c1.setUsername(s);
+        	    	v.add(c1);
+        	    	c1 = new Critica();
         	    }
         	}
 	        
@@ -88,7 +90,7 @@ public class IOCriticas {
 		ArrayList<Critica> v = new ArrayList<Critica>();
 		fichToVec(v);
 		for(Critica c : v) {
-			if(c.getTitle()==title)
+			if(c.getTitle().equals(title))
 				return true;
 		}
 		return false;
