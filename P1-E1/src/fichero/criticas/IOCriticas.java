@@ -11,7 +11,7 @@ import critica.Critica;
 
 public class IOCriticas {
 
-	//funcion que añade un usuario al fichero de usuarios
+	//funcion que aï¿½ade un usuario al fichero de usuarios
 	public void criticaToFich(String title, String puntuacion, String resena, String username, int like, int dislike)
 	{		
 		String rutaAbsoluta = new File("").getAbsolutePath();
@@ -61,6 +61,7 @@ public class IOCriticas {
         	    	c1.setLike(Integer.parseInt(s));
         	    	c1.setDislike(Integer.parseInt(s));
         	    	c1.setUsername(s);
+        	    	c1 = new Critica(); 
         	    }
         	}
 	        
@@ -88,7 +89,7 @@ public class IOCriticas {
 		ArrayList<Critica> v = new ArrayList<Critica>();
 		fichToVec(v);
 		for(Critica c : v) {
-			if(c.getTitle()==title)
+			if(c.getTitle().equals(title))
 				return true;
 		}
 		return false;
