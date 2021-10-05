@@ -2,7 +2,7 @@ package main.program;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import fichero.credenciales.IOCredenciales;
+import fichero.users.IOUsers;
 public class mainProgram {
 
 	public static void main(String[] args) throws IOException 
@@ -36,8 +36,8 @@ public class mainProgram {
     				e.printStackTrace();
     			}
             System.out.println("Cargando . . .");
-            IOCredenciales ioc = new IOCredenciales();
-            if(ioc.comprobarUserExist(email)==false) {
+            IOUsers io = new IOUsers();
+            if(io.comprobarUserExist(email)==false) {
             	String opcion = null;
                 System.out.println("email no registrado.");
                 System.out.println("Para registrarse pulse 1. Para salir pulse cualquier otra tecla.");
@@ -65,13 +65,30 @@ public class mainProgram {
     					passwd = Register1.readLine();
     				} catch (IOException e) {
     					e.printStackTrace();
-    				}
-    		        IOCredenciales newUser = new IOCredenciales();
-    		        newUser.RegisterUserToFich(email, passwd);
+					}
+					System.out.println("Introduzca su nombre:");
+    	            BufferedReader Register1 = new BufferedReader(
+    			            new InputStreamReader(System.in));
+    		        try {
+    					String name = Register1.readLine();
+    				} catch (IOException e) {
+    					e.printStackTrace();
+					}
+					System.out.println("Introduzca su username:");
+    	            BufferedReader Register1 = new BufferedReader(
+    			            new InputStreamReader(System.in));
+    		        try {
+    					String username = Register1.readLine();
+    				} catch (IOException e) {
+    					e.printStackTrace();
+					}
+
+    		        IOUsers newUser = new IOUsers();
+    		        newUser.RegisterUserToFich(name,username,email, passwd);
     		        System.out.println("Ha sido registrado correctamente.");
-    		        System.out.println("Bienvenido a nuestro sistema " + email + ".");
+    		        System.out.println("Bienvenido a nuestro sistema " + username + ".");
             		while(opcion!="1" || opcion!= "2" || opcion!="3") {
-    	            	System.out.println("¿Qué desea hacer?");
+    	            	System.out.println("Â¿Que desea hacer?");
     	            	System.out.println("1. Modificar mis datos");
     	            	System.out.println("2. Acceder al sistema de criticas");
     	            	System.out.println("3. Salir");
@@ -92,7 +109,7 @@ public class mainProgram {
     	    				opcion=null;
     	    			}	
     	    			else if("3".equals(opcion)) {
-    			            System.out.println("Gracias por usar nuestro sistema. Hasta la próxima.");
+    			            System.out.println("Gracias por usar nuestro sistema. Hasta la prï¿½xima.");
     			            return;
     	    			}
     	    			else {
@@ -105,11 +122,11 @@ public class mainProgram {
     	            return;
                 }
             }
-            if(ioc.comprobarPasswd(email, Passwd)==false) {
+            if(io.comprobarPasswd(email, Passwd)==false) {
             	int intentos = 1;
     	        String opcion1 = null;
     	        Boolean timeout = true;
-                System.out.println("Contraseña incorrecta. Pulse 1 para volver a intentarlo. Para salir pulse cualquier otra tecla. ");
+                System.out.println("Contrasena incorrecta. Pulse 1 para volver a intentarlo. Para salir pulse cualquier otra tecla. ");
                 BufferedReader readerWrongPasswd = new BufferedReader(
     		            new InputStreamReader(System.in));
     			try {
@@ -122,7 +139,7 @@ public class mainProgram {
     	            return;
     	        }
     	        else {
-    	        	while(!(ioc.comprobarPasswd(email, Passwd)) && timeout) {
+    	        	while(!(io.comprobarPasswd(email, Passwd)) && timeout) {
     	            	System.out.println("Password:");
     		 	        BufferedReader reader = new BufferedReader(
     		 		            new InputStreamReader(System.in));
@@ -141,9 +158,10 @@ public class mainProgram {
     		            return;
     	        	}
     	        	else {
-            			System.out.println("Bienvenido a nuestro sistema " + email + ".");
+						
+            			System.out.println("Bienvenido a nuestro sistema " + io.buscarPorCorreo(email).getUsername() + ".");
     	        		while(opcion1!="1" || opcion1!= "2" || opcion1!="3") {
-    		            	System.out.println("¿Qué desea hacer?");
+    		            	System.out.println("ï¿½Quï¿½ desea hacer?");
     		            	System.out.println("1. Modificar mis datos");
     		            	System.out.println("2. Acceder al sistema de criticas");
     		            	System.out.println("3. Salir");
@@ -164,7 +182,7 @@ public class mainProgram {
     		    				opcion1=null;
     		    			}	
     		    			else if("3".equals(opcion1)) {
-    				            System.out.println("Gracias por usar nuestro sistema. Hasta la próxima.");
+    				            System.out.println("Gracias por usar nuestro sistema. Hasta la prï¿½xima.");
     				            return;
     		    			}
     		    			else {
@@ -177,29 +195,48 @@ public class mainProgram {
      	}
         else if("2".equals(inicial)) {
         	String passwd = null;
-            System.out.println("Introduzca su username:");
-            BufferedReader Register = new BufferedReader(
-		            new InputStreamReader(System.in));
-	        try {
+		   
+			System.out.println("Introduzca su email:");
+			BufferedReader Register = new BufferedReader(
+					new InputStreamReader(System.in));
+			try {
 				email = Register.readLine();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-	        System.out.println("Introduzca su passwd:");
-            BufferedReader Register1 = new BufferedReader(
-		            new InputStreamReader(System.in));
-	        try {
+			System.out.println("Introduzca su passwd:");
+			BufferedReader Register1 = new BufferedReader(
+					new InputStreamReader(System.in));
+			try {
 				passwd = Register1.readLine();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-	        IOCredenciales newUser = new IOCredenciales();
-	        newUser.RegisterUserToFich(email, passwd);
+			System.out.println("Introduzca su nombre:");
+			BufferedReader Register1 = new BufferedReader(
+					new InputStreamReader(System.in));
+			try {
+				String name = Register1.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			System.out.println("Introduzca su username:");
+			BufferedReader Register1 = new BufferedReader(
+					new InputStreamReader(System.in));
+			try {
+				String username = Register1.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			IOUsers newUser = new IOUsers();
+			newUser.RegisterUserToFich(name,username,email, passwd);
+			
 	        System.out.println("Ha sido registrado correctamente.");
 	        System.out.println("Bienvenido a nuestro sistema " + email + ".");
     		String opcion = null;
 			while(opcion !="1" || opcion!= "2" || opcion!="3") {
-            	System.out.println("¿Qué desea hacer?");
+            	System.out.println("ï¿½Quï¿½ desea hacer?");
             	System.out.println("1. Modificar mis datos");
             	System.out.println("2. Acceder al sistema de criticas");
             	System.out.println("3. Salir");
@@ -220,7 +257,7 @@ public class mainProgram {
     				opcion=null;
     			}	
     			else if("3".equals(opcion)) {
-		            System.out.println("Gracias por usar nuestro sistema. Hasta la próxima.");
+		            System.out.println("Gracias por usar nuestro sistema. Hasta la prï¿½xima.");
 		            return;
     			}
     			else {
@@ -229,7 +266,7 @@ public class mainProgram {
     		}
         }
         else {
-        	System.out.println("Gracias por usar nuestro sistema. Hasta la próxima.");
+        	System.out.println("Gracias por usar nuestro sistema. Hasta la prï¿½xima.");
             return;
         }
         
