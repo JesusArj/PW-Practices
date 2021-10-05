@@ -19,6 +19,12 @@ public class MenuCriticas {
 	//Pasarle por args el usuario ¿Debería ser segun mail?
 	public static void reviewMenu(String usuario) 
 	{
+
+	/**
+	 * Setter de la cadena del user
+	 * @param usuario usuario que realiza la gestion.
+	*/
+
 		String opc = null;
 	    System.out.println("Bienvenido a nuestro Menu de gestion de Criticas.");
 	    System.out.println("Para actualizar los datos de su perfil, pulse 1. Para dar de baja su usuario, pulse 2.");
