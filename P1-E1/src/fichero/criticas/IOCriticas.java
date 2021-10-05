@@ -54,16 +54,15 @@ public class IOCriticas {
 	        String linea; 
         	while ((linea = br.readLine()) != null) {
         	    String[] data = linea.split("//");
-        	    for (String s : data) {
-        	    	c1.settitle(s);
-        	    	c1.setPuntuacion(s);
-        	    	c1.setResena(s);
-        	    	c1.setLike(Integer.parseInt(s));
-        	    	c1.setDislike(Integer.parseInt(s));
-        	    	c1.setUsername(s);
-        	    	v.add(c1);
-        	    	c1 = new Critica();
-        	    }
+		    	c1.settitle(data[0]);
+		    	c1.setPuntuacion(data[1]);
+		    	c1.setResena(data[2]);
+		    	c1.setLike(Integer.parseInt(data[3]));
+		    	c1.setDislike(Integer.parseInt(data[4]));
+		    	c1.setUsername(data[5]);
+		    	v.add(c1);
+		    	c1 = new Critica();
+		    
         	}
 	        
 		}catch(Exception e){

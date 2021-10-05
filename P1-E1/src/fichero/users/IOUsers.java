@@ -25,7 +25,7 @@ public class IOUsers
 	    {	
 	    	fichero= new FileWriter(rutaFichero, true); 
 	    	pw = new PrintWriter(fichero); 
-	    	pw.println(name+"\t"+username+"\t"+mail+"\t"+passwd); 
+	    	pw.println(name+"//"+username+"//"+mail+"//"+passwd); 
 	    }catch (Exception e) {
 	       e.printStackTrace();
 	    } finally {
@@ -56,15 +56,14 @@ public class IOUsers
 	        //lectura
 	        String linea=""; 
 	        while((linea=br.readLine())!=null) {
-			String[] data = linea.split("\t");
-        	    for(String s : data) {
-					e1.setName(s);
-					e1.setUsername(s);
-    	        	e1.setMail(s);
-    	        	e1.setPasswd(s); 
-    	        	v.add(e1); 
-    	        	e1 = new Espectador(); 
-        	    }
+			String[] data = linea.split("//");
+			e1.setName(data[0]);
+			e1.setUsername(data[1]);
+        	e1.setMail(data[2]);
+        	e1.setPasswd(data[3]); 
+        	v.add(e1); 
+        	e1 = new Espectador(); 
+    	    
 	        }
 	        
 		}catch(Exception e){

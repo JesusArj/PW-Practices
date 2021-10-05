@@ -1,5 +1,5 @@
 package menus;
-
+/**
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,7 +15,7 @@ public class MenuUsuario {
  * @author Valentín Avram
  *
  */
-
+/**
 	//Pasarle por args el usuario ¿Debería ser segun mail?
 	public static void userMenu(String usuario) 
 	{
@@ -24,7 +24,7 @@ public class MenuUsuario {
 	 * Setter de la cadena del user
 	 * @param usuario usuario que realiza la gestion.
 	*/
-	
+	/**
 		String opc = null;
 	    System.out.println("Bienvenido a nuestro Menu de gestion de usuarios.");
 	    System.out.println("Para actualizar los datos de su perfil, pulse 1. Para dar de baja su usuario, pulse 2.");
@@ -55,3 +55,4 @@ public class MenuUsuario {
 
 	}
 }
+*/
