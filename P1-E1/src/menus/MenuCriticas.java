@@ -18,14 +18,18 @@ public class MenuCriticas {
 
 	//TODO: Esperar a que este hecho el gestor de Criticas y completar restor de opciones.
 	//Pasarle por args el usuario ¿Debería ser segun mail?
+
+/** 
+* Menu que enlaza con las gestiones relacionadas
+* a la gestión de críticas
+* @param usuario usuario que realiza la gestion.
+*
+*/
+
+/** 
 	public static void reviewMenu(String usuario) 
 	{
 
-	/**
-	 * Setter de la cadena del user
-	 * @param usuario usuario que realiza la gestion.
-	*/
-/**
 		String opc = null;
 	    System.out.println("Bienvenido a nuestro Menu de gestion de Criticas.");
 	    System.out.println("Para actualizar los datos de su perfil, pulse 1. Para dar de baja su usuario, pulse 2.");

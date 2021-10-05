@@ -14,7 +14,7 @@ public class Critica extends IOCriticas{
 /**
  * Enumeracion que contiene los valores posibles que puede tener
  * la variable puntuacion.
- * @author Antonio
+ * @author Antonio Lujano Luna
  *
  */
 	public static enum puntuaciones{
@@ -52,7 +52,7 @@ public class Critica extends IOCriticas{
 	 * contadores de likes y dislikes a 0.
 	 * @param title Titulo de la critica
 	 * @param puntuacion Puntuacion dada
-	 * @param resena Reseña
+	 * @param resena Reseï¿½a
 	 */
 	public Critica(String title, String puntuacion, String resena)
 	{
@@ -97,7 +97,7 @@ public class Critica extends IOCriticas{
 	}
 	/**
 	 * Getter del cuerpo de la critica
-	 * @return La reseña en si
+	 * @return La reseï¿½a en si
 	 */
 	public String getResena()
 	{
@@ -149,7 +149,7 @@ public class Critica extends IOCriticas{
 		}
 	}
 	/**
-	 * Setter de la reseña
+	 * Setter de la reseï¿½a
 	 * @param resena Cuerpo de la critica
 	 */
 	public void setResena(String resena)

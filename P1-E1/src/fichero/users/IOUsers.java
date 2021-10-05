@@ -13,10 +13,27 @@ import java.util.ArrayList;
 
 import espectador.*;
 
+/*
+ *
+ * Clase que implementa las funcionalidades relativas 
+ * a la lectura y escritura de usuarios en el fichero 
+ * correspondiente
+ * @author 
+ *
+ */
+
 public class IOUsers 
 {
-	
-	//funcion que a�ade un usuario al fichero de usuarios
+
+/**
+ * Funcion que añade un usuario de nuevo registro al fichero de usuarios.
+ * @param name Nombre del usuario
+ * @param username Nombre de usuario
+ * @param mail Dirección de e-mail del usuario
+ * @param passwd Contraseña del usuario
+ *
+ */
+
 	public void RegisterUserToFich(String name, String username, String mail, String passwd)
 	{
 		if(comprobarUserExist(mail)==true)
@@ -50,6 +67,13 @@ public class IOUsers
 	      }	
 	    }
 	
+/**
+ * Metodo que vuelca el contenido del fichero de usuarios en
+ * un ArrayList de Espectadores para su posterior tratamiento.
+ * @param v Array List de Espectadores (Usuarios)
+ *
+ */
+
 	public ArrayList<Espectador> fichToVec(ArrayList<Espectador> v)
 	{
 		String rutaAbsoluta = new File("").getAbsolutePath();
@@ -94,7 +118,14 @@ public class IOUsers
 		return v; 
 	
 	}
-	
+
+/**
+ * Funcion que comprueba que un usuario exista
+ * en el fichero plano de usuarios, comprobando su e-mail.
+ * @param mail Dirección del e-mail del usuario
+ *
+ */
+
 	public boolean comprobarUserExist(String Mail)
 	{
 		ArrayList<Espectador> v = new ArrayList<Espectador>();
@@ -105,6 +136,14 @@ public class IOUsers
 		}
 		return false;
 	}
+
+/**
+ * Funcion que comprueba que la contraseña sea la correspondiente 
+ * al usuario introducido.
+ * @param mail Dirección del e-mail del usuario
+ * @param Passwd Contraseña del usuario
+ *
+ */
 
 	public boolean comprobarPasswd(String email, String Passwd)
 	{
@@ -119,6 +158,13 @@ public class IOUsers
 		return false;
 	}
 
+/**
+ * Metodo que comprueba que exista un usuario en el fichero
+ * de usuario buscando por email.
+ * @param email Dirección del e-mail del usuario
+ *
+ */
+
 	public Espectador buscarPorCorreo(String email){
 		ArrayList<Espectador> v = new ArrayList<Espectador>();
 		v = fichToVec(v);
@@ -130,6 +176,12 @@ public class IOUsers
 		return null;
 	}
 	
+/**
+ * Funcion que imprime los datos de un usuario.
+ * @param email Dirección del e-mail del usuario
+ *
+ */
+
 	public void imprimirDatosUser(String email)
 	{
 		Espectador e1= new Espectador(); 
@@ -140,6 +192,13 @@ public class IOUsers
 		System.out.println("Usuario: " + e1.getUsername()); 
 	}
 	
+/**
+ * Funcion que borra los datos de un usuario.
+ * del fichero de usuarios, guiandose por un email.
+ * @param email Dirección del e-mail del usuario
+ *
+ */
+
 	public void borrarUser(String mail) {
 		ArrayList<Espectador> v = new ArrayList<Espectador>();
 		v = fichToVec(v);
@@ -163,6 +222,14 @@ public class IOUsers
 		System.out.println("Has sido eliminado correctamente del sistema."); 
 	}
 	
+/**
+ * Funcion que borra los datos de un usuario.
+ * del fichero de usuarios, guiandose por un objeto de 
+ * clase Espectador
+ * @param e Objeto de clase Espectador
+ *
+ */
+
 	public void borrarUser(Espectador e) {
 		ArrayList<Espectador> v = new ArrayList<Espectador>();
 		v = fichToVec(v);

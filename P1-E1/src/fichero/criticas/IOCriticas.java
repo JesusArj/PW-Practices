@@ -11,9 +11,29 @@ import java.util.ArrayList;
 
 import critica.Critica;
 
+/*
+ *
+ * Clase que implementa las funcionalidades relativas 
+ * a la lectura y escritura de criticas en el fichero 
+ * correspondiente
+ * @author 
+ *
+ */
+
 public class IOCriticas {
 
-	//funcion que a�ade un usuario al fichero de usuarios
+
+/**
+ * Funcion que añade una critica al fichero de critica,
+ * con la información respectiva.
+ * @param title Titulo de la critica
+ * @param puntuacion Puntuacion dada
+ * @param resena Rese�a
+ * @param username Nombre de usuario del autor de la crítica
+ * @param like Numero de likes dados a la crítica
+ * @param dislike Numero de dislike dados a la crítica
+ *
+ */
 	public void criticaToFich(String title, String puntuacion, String resena, String username, int like, int dislike)
 	{		
 		String rutaAbsoluta = new File("").getAbsolutePath();
@@ -39,6 +59,13 @@ public class IOCriticas {
 	        }	
 	    }
 	
+/**
+ * Metodo que vuelca el contenido del fichero de críticas en
+ * un ArrayList de críticas para su posterior tratamiento.
+ * @param v Array List de Críticas
+ *
+ */
+
 	public ArrayList<Critica> fichToVec(ArrayList<Critica> v)
 	{
 		String rutaAbsoluta = new File("").getAbsolutePath();
@@ -86,6 +113,13 @@ public class IOCriticas {
 	
 	}
 	
+/**
+ * Funcion que comprueba que el título de crítica exista
+ * en el fichero plano de críticas.
+ * @param title Titulo de la critica
+ *
+ */
+
 	public boolean comprobarCriticaExist(String title)
 	{
 		ArrayList<Critica> v = new ArrayList<Critica>();
@@ -96,7 +130,13 @@ public class IOCriticas {
 		}
 		return false;
 	}
-	
+
+/**
+ * Funcion que elimina una crítica del fichero de críticas.
+ * @param title Titulo de la crítica
+ *
+ */
+
 	public void borrarCritica(Critica c1) {
 		ArrayList<Critica> v = new ArrayList<Critica>();
 		v = fichToVec(v);

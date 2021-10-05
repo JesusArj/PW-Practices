@@ -17,13 +17,17 @@ public class MenuUsuario {
  */
 /**
 	//Pasarle por args el usuario ¿Debería ser segun mail?
+	
+/** 
+* Menu que enlaza con las gestiones relacionadas
+* a la gestión de usuarios
+* @param usuario usuario que realiza la gestion.
+*
+*/
+
 	public static void userMenu(String usuario) 
 	{
 
-	/**
-	 * Setter de la cadena del user
-	 * @param usuario usuario que realiza la gestion.
-	*/
 	/**
 		String opc = null;
 	    System.out.println("Bienvenido a nuestro Menu de gestion de usuarios.");
