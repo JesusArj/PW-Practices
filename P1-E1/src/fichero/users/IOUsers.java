@@ -3,9 +3,11 @@
 
 package fichero.users;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -118,6 +120,50 @@ public class IOUsers
 			}
 		}
 		return null;
+	}
+	
+	public void borrarUser(String mail) {
+		ArrayList<Espectador> v = new ArrayList<Espectador>();
+		v = fichToVec(v);
+		
+		for(Espectador c : v) {
+			if(c.getMail().equals(mail)) {
+				v.remove(c);
+			}
+		}
+		BufferedWriter bw;
+		try {
+			bw = new BufferedWriter(new FileWriter("usuarios.txt"));
+			bw.write("");
+			bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
+		for(Espectador c : v) {
+			c.RegisterUserToFich(c.getName(), c.getUsername(), c.getMail(), c.getPasswd());
+		}
+	}
+	
+	public void borrarUser(Espectador e) {
+		ArrayList<Espectador> v = new ArrayList<Espectador>();
+		v = fichToVec(v);
+		
+		for(Espectador c : v) {
+			if(c.getMail().equals(e.getMail())) {
+				v.remove(c);
+			}
+		}
+		BufferedWriter bw;
+		try {
+			bw = new BufferedWriter(new FileWriter("usuarios.txt"));
+			bw.write("");
+			bw.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}		
+		for(Espectador c : v) {
+			c.RegisterUserToFich(c.getName(), c.getUsername(), c.getMail(), c.getPasswd());
+		}
 	}
 }
 

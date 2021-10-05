@@ -1,9 +1,11 @@
 package fichero.criticas;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -93,6 +95,28 @@ public class IOCriticas {
 				return true;
 		}
 		return false;
+	}
+	
+	public void borrarCritica(Critica c1) {
+		ArrayList<Critica> v = new ArrayList<Critica>();
+		v = fichToVec(v);
+		
+		for(Critica c : v) {
+			if(c1.equals(c)) {
+				v.remove(c);
+			}
+		}
+		BufferedWriter bw;
+		try {
+			bw = new BufferedWriter(new FileWriter("criticas.txt"));
+			bw.write("");
+			bw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
+		for(Critica c : v) {
+			c.criticaToFich(c.getTitle(), c.getPuntuacion(), c.getResena(), c.getUsername(), c.getLike(), c.getDislike());
+		}
 	}
 }
 
