@@ -18,7 +18,7 @@ import espectador.*;
  * Clase que implementa las funcionalidades relativas 
  * a la lectura y escritura de usuarios en el fichero 
  * correspondiente
- * @author 
+ * @author
  *
  */
 

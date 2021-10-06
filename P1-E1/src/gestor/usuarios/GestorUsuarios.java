@@ -17,8 +17,8 @@ public class GestorUsuarios {
 
 	private static GestorUsuarios instance = null;
 			
-	public IOUsers User = new IOUsers();
-	public String Mail;
+	private IOUsers User = new IOUsers();
+	private String Mail;
 
 /**
  * Constructor parametrizado de la clase.
