@@ -88,9 +88,9 @@ public class mainProgram {
     		        System.out.println("Ha sido registrado correctamente.");
     		        System.out.println("Bienvenido a nuestro sistema " + username + ".");
             		while(opcion!="1" || opcion!= "2" || opcion!="3") {
-    	            	System.out.println("Â¿Que desea hacer?");
-    	            	System.out.println("1. Modificar mis datos");
-    	            	System.out.println("2. Acceder al sistema de criticas");
+    	            	System.out.println("¿Que desea hacer?");
+    	            	System.out.println("1. Acceder al menu de usuarios");
+    	            	System.out.println("2. Acceder al menu de criticas");
     	            	System.out.println("3. Salir");
 
     	            	BufferedReader readerGestores = new BufferedReader(
@@ -111,7 +111,7 @@ public class mainProgram {
     	    				opcion=null;
     	    			}	
     	    			else if("3".equals(opcion)) {
-    			            System.out.println("Gracias por usar nuestro sistema. Hasta la prï¿½xima.");
+    			            System.out.println("Gracias por usar nuestro sistema. Hasta la proxima.");
     			            return;
     	    			}
     	    			else {
@@ -161,11 +161,11 @@ public class mainProgram {
     	        	}
     	        	else {
 						
-            			System.out.println("Bienvenido a nuestro sistema " + io.buscarPorCorreo(email).getUsername() + ".");
+            			System.out.println("Bienvenido a nuestro sistema, " + io.buscarPorCorreo(email).getUsername() + ".");
     	        		while(opcion1!="1" || opcion1!= "2" || opcion1!="3") {
-    		            	System.out.println("ï¿½Quï¿½ desea hacer?");
-    		            	System.out.println("1. Modificar mis datos");
-    		            	System.out.println("2. Acceder al sistema de criticas");
+    		            	System.out.println("¿Que desea hacer?");
+    		            	System.out.println("1. Acceder al menu de usuarios");
+    		            	System.out.println("2. Acceder al menu de criticas");
     		            	System.out.println("3. Salir");
 
     		            	BufferedReader readerGestores = new BufferedReader(
@@ -186,7 +186,7 @@ public class mainProgram {
     		    				opcion1=null;
     		    			}	
     		    			else if("3".equals(opcion1)) {
-    				            System.out.println("Gracias por usar nuestro sistema. Hasta la prï¿½xima.");
+    				            System.out.println("Gracias por usar nuestro sistema. Hasta la proxima.");
     				            return;
     		    			}
     		    			else {
@@ -199,9 +199,9 @@ public class mainProgram {
 	        System.out.println("Bienvenido a nuestro sistema " + io.buscarPorCorreo(email).getUsername() + ".");
     		
 			while(opcion !="1" || opcion!= "2" || opcion!="3") {
-            	System.out.println("ï¿½Quï¿½ desea hacer?");
-            	System.out.println("1. Modificar mis datos");
-            	System.out.println("2. Acceder al sistema de criticas");
+            	System.out.println("¿Que desea hacer?");
+            	System.out.println("1. Acceder al menu de usuarios");
+            	System.out.println("2. Acceder al menu de criticas");
             	System.out.println("3. Salir");
 
             	BufferedReader readerGestores = new BufferedReader(
@@ -222,7 +222,7 @@ public class mainProgram {
     				opcion=null;
     			}	
     			else if("3".equals(opcion)) {
-		            System.out.println("Gracias por usar nuestro sistema. Hasta la prï¿½xima.");
+		            System.out.println("Gracias por usar nuestro sistema. Hasta la proxima.");
 		            return;
     			}
     			else {
@@ -273,7 +273,7 @@ public class mainProgram {
 	        System.out.println("Bienvenido a nuestro sistema " + io.buscarPorCorreo(email).getUsername() + ".");
     		
 			while(opcion !="1" || opcion!= "2" || opcion!="3") {
-            	System.out.println("ï¿½Quï¿½ desea hacer?");
+            	System.out.println("¿Que desea hacer?");
             	System.out.println("1. Modificar mis datos");
             	System.out.println("2. Acceder al sistema de criticas");
             	System.out.println("3. Salir");
@@ -296,7 +296,7 @@ public class mainProgram {
     				opcion=null;
     			}	
     			else if("3".equals(opcion)) {
-		            System.out.println("Gracias por usar nuestro sistema. Hasta la prï¿½xima.");
+		            System.out.println("Gracias por usar nuestro sistema. Hasta la proxima.");
 		            return;
     			}
     			else {
@@ -305,7 +305,7 @@ public class mainProgram {
     		}
         }
         else {
-        	System.out.println("Gracias por usar nuestro sistema. Hasta la prï¿½xima.");
+        	System.out.println("Gracias por usar nuestro sistema. Hasta la proxima.");
             return;
         }
 	}

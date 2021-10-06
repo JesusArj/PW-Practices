@@ -1,10 +1,13 @@
 package menus;
 
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 import critica.Critica;
+import fichero.criticas.IOCriticas;
 import gestor.criticas.GestorCriticas;
 
 /**
@@ -32,14 +35,17 @@ public class MenuCriticas {
 	{
 
 		String opc = null;
-		Critica c = new Critica();
+		Critica crit = new Critica();
         GestorCriticas newGestor = GestorCriticas.getInstance(mail);
+        IOCriticas newIOCriticas = new IOCriticas();
         
 	    System.out.println("Bienvenido a nuestro Menu de gestion de usuarios.");
-	    System.out.println("Para crear una critica, pulse 1. Para consultar criticas, pulse 2.");
+	    System.out.println("Para crear una critica, pulse 1.");
+	    System.out.println("Para consultar criticas, pulse 2");
 	    System.out.println("Para borrar una critica, pulse 3.");
-	    System.out.println("Para votar positivamente una critica, pulse 4. Para votar negativamente, pulse 5.");
-	    System.out.println("Para buscar una critica, pulse 6.");
+	    System.out.println("Para votar positivamente una critica, pulse 4.");
+	    System.out.println("Para votar negativamente, pulse 5.");
+	    System.out.println("Para buscar sus criticas, pulse 6.");
 	    System.out.println("Para salir del menu, pulse cualquier otra tecla.");
 	    
         BufferedReader login = new BufferedReader(
@@ -53,28 +59,93 @@ public class MenuCriticas {
         switch(opc)
         {
         	case "1":
-        		//TODO: menu crear critica
-        		newGestor.crearCritica(c);
+        		//TODO: Todo OK. Escribe mal
+                Scanner teclado1 = new Scanner(System.in);              
+                
+               ArrayList<String> votantes = new ArrayList<String>();
+                
+        		System.out.println("CREACION DE CRITICAS");
+        		System.out.println("Introduzca el titulo de la critica");
+        		
+        		String title;
+                title = teclado1.nextLine();
+                crit.settitle(title);
+                
+        		System.out.println("Introduzca la puntuacion dada al espectaculo:");
+        		System.out.println("(MuyBaja, Baja, Normal, Alta, MuyAlta)");
+        		
+        		String puntuacion;     
+                puntuacion = teclado1.nextLine();
+                crit.setPuntuacion(puntuacion);       		
+        		System.out.println("Escriba su reseña");
+        		
+        		String resena;             
+                resena = teclado1.nextLine();
+                crit.setResena(resena);
+        		
+                crit.setMail(mail);
+                crit.setVotantes(votantes);
+                
+                
+        		newGestor.crearCritica(crit);
         		break;
         	
         	case "2":
-        		//TODO: 
+        		//TODO: No funciona por que se escribe mal?
         		newGestor.consultarCriticas();
+        		
         		break;
         	
         	case "3":
         		//TODO:
-        		newGestor.BorrarCritica(c);
+        		
+        		Scanner teclado3 = new Scanner(System.in);  
+        		String titulo = null;
+        		
+        		System.out.println("ELIMINACIÓN DE CRITICAS");
+        		newGestor.consultarCriticas();
+        		
+        		System.out.println("Introduzca el titulo de la critica que desea borrar");
+               
+                titulo = teclado3.nextLine();
+                
+        		newIOCriticas.buscarCritica(mail, titulo);
         		break;
         		
         	case "4":
         		//TODO:
-        		newGestor.votarCriticasPos(c);
+        		int id1 = 0;
+        		
+        		System.out.println("Se mostraran por pantalla las diferentes criticas para que selecciona el ID de la critica que desea puntuar");
+        		BufferedReader reader1 = new BufferedReader(
+    		            new InputStreamReader(System.in));
+    			try {
+    				id1 = Integer.parseInt(reader1.readLine());
+    			} catch (IOException e) {
+    				e.printStackTrace();
+    			}
+        		newGestor.consultarCriticas();
+        		System.out.println("Indique el ID de la critica que desea puntuar");
+        		//System.out.println(id);
+        		newGestor.votarCriticasPos(id1);
         		break;
         	
         	case "5":
         		//TODO:
-        		newGestor.votarCriticasNeg(c);
+        		int id2 = 0;
+        		
+        		System.out.println("Se mostraran por pantalla las diferentes criticas para que selecciona el ID de la critica que desea puntuar");
+        		BufferedReader reader2 = new BufferedReader(
+    		            new InputStreamReader(System.in));
+    			try {
+    				id2 = Integer.parseInt(reader2.readLine());
+    			} catch (IOException e) {
+    				e.printStackTrace();
+    			}
+        		newGestor.consultarCriticas();
+        		System.out.println("Indique el ID de la critica que desea puntuar");
+        		//System.out.println(id);
+        		newGestor.votarCriticasNeg(id2);
         		break;
 
         	case "6":

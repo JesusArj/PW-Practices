@@ -71,9 +71,6 @@ public class GestorUsuarios {
 		}
 	}
 			
-	/*public static String getUser() {
-		//IOUsers -> io.get(this.user);
-	}*/
 
 /**
  * Funcion que muestra los datos del propio usuario
@@ -87,8 +84,12 @@ public class GestorUsuarios {
 			User.imprimirDatosUser(this.Mail);
 		}
 	}
-			
-	//TODO: 
+	
+	/**
+	 * Funcion que actualiza los datos del propio usuario
+	 *
+	 */	
+	
 	public void updateUser() 
 	{
 		if(instance!=null)

@@ -30,13 +30,23 @@ public class GestorCriticas {
 				return instance;
 			}
 			
+			/**
+			 * Funcion que crea una critica
+			 * @param c Objeto de la clase critica
+			 */	
 			public void crearCritica(Critica c)
 			{
 				if(instance!=null)
 				{
-					this.c.criticaToFich(c.getTitle(), c.getPuntuacion(), c.getResena(), c.getMail(), c.getLike(), c.getDislike(), c.getId(), c.getVotantes());
+					this.c.criticaToFich(c.getTitle(),c.getPuntuacion(), c.getResena(), c.getMail(), c.getLike(), c.getDislike(), c.getId(), c.getVotantes());
 				}
 			}
+			
+			/**
+			 * Funcion que imprime por pantalla todas
+			 * las criticas almacenadas
+			 * 
+			 */	
 			
 			public void consultarCriticas()
 			{
@@ -46,6 +56,11 @@ public class GestorCriticas {
 				}
 			}
 			
+			/**
+			 * Funcion que busca una critica concreta
+			 * @param mail Mail del autor
+			 */
+			
 			public void buscarCriticas(String mail)
 			{
 				if(instance!=null)
@@ -53,12 +68,23 @@ public class GestorCriticas {
 					this.c.buscarCriticas(mail);
 				}
 			}
-						
+			
+			/**
+			 * Funcion que busca una critica concreta
+			 * @param c Objeto de la clase critica
+			 */
+			
 			public void BorrarCritica(Critica c)
 			{
 				if(instance!=null)
 					this.c.borrarCritica(c.getId(), this.mail);
 			}
+			
+			/**
+			 * Funcion que anade un voto positivo
+			 * a una critica concreta
+			 * @param c Objeto de la clase critica
+			 */
 			
 			public void votarCriticasPos(Critica c)
 			{
@@ -66,11 +92,23 @@ public class GestorCriticas {
 					this.c.votarCriticaPos(this.mail, c);
 			}
 			
+			/**
+			 * Funcion que anade un voto positivo
+			 * a una critica concreta
+			 * @param id Identificador de la critica
+			 */
+			
 			public void votarCriticasPos(int id)
 			{
 				if(instance!=null)
 					this.c.votarCriticaPos(this.mail, id);
 			}
+			
+			/**
+			 * Funcion que anade un voto negativo
+			 * a una critica concreta
+			 * @param c Objeto de la clase critica
+			 */
 			
 			public void votarCriticasNeg(Critica c)
 			{
@@ -78,6 +116,12 @@ public class GestorCriticas {
 					this.c.votarCriticaNeg(this.mail, c);
 			}
 			
+			/**
+			 * Funcion que anade un voto positivo
+			 * a una critica concreta
+			 * @param id Identificador de la critica
+			 */
+		
 			public void votarCriticasNeg(int id)
 			{
 				if(instance!=null)

@@ -25,14 +25,14 @@ import fichero.users.IOUsers;
 public class IOCriticas extends IOUsers {
 	
 /**
- * Funcion que añade una critica al fichero de critica,
- * con la información respectiva.
+ * Funcion que anade una critica al fichero de critica,
+ * con la informacion respectiva.
  * @param title Titulo de la critica
  * @param puntuacion Puntuacion dada
- * @param resena Rese�a
- * @param username Nombre de usuario del autor de la crítica
- * @param like Numero de likes dados a la crítica
- * @param dislike Numero de dislike dados a la crítica
+ * @param resena Resena
+ * @param username Nombre de usuario del autor de la critica
+ * @param like Numero de likes dados a la critica
+ * @param dislike Numero de dislike dados a la critica
  *
  */
 	public void criticaToFich(String title, String puntuacion, String resena, String mail, int like, int dislike, int id, ArrayList<String> votantes)
@@ -64,9 +64,9 @@ public class IOCriticas extends IOUsers {
 	    }
 	
 /**
- * Metodo que vuelca el contenido del fichero de críticas en
- * un ArrayList de críticas para su posterior tratamiento.
- * @param v Array List de Críticas
+ * Metodo que vuelca el contenido del fichero de criticas en
+ * un ArrayList de criticas para su posterior tratamiento.
+ * @param v Array List de criticas
  *
  */
 
@@ -127,8 +127,8 @@ public class IOCriticas extends IOUsers {
 	}
 	
 /**
- * Funcion que comprueba que el título de crítica exista
- * en el fichero plano de críticas.
+ * Funcion que comprueba que el titulo de critica exista
+ * en el fichero plano de criticas.
  * @param title Titulo de la critica
  *
  */
@@ -145,8 +145,8 @@ public class IOCriticas extends IOUsers {
 	}
 
 /**
- * Funcion que elimina una crítica del fichero de críticas.
- * @param title Titulo de la crítica
+ * Funcion que elimina una critica del fichero de criticas.
+ * @param title Titulo de la critica
  *
  */
 
@@ -171,6 +171,12 @@ public class IOCriticas extends IOUsers {
 			c.criticaToFich(c.getTitle(), c.getPuntuacion(), c.getResena(), c.getMail(), c.getLike(), c.getDislike(), c.getId(), c.getVotantes());
 		}
 	}
+
+	/**
+	 * Funcion que genera un identificador unico para cada critica,
+	 * con valor [1 - 99999].
+	 * @return id Identificador de la critica
+	 */
 	
 	public int generarID()
 	{
@@ -182,7 +188,14 @@ public class IOCriticas extends IOUsers {
 		}
 		return id;
 	}
-	 
+
+	/**
+	 * Funcion que comprueba la existencia del identificador de critica
+	 * en el fichero de criticas
+	 * @param id Identificador a comprobar
+	 * @return true en caso de que se repitan IDs, falso en caso contrario
+	 */
+	
 	public boolean existId(int id)
 	{
 		ArrayList<Critica> v = new ArrayList<Critica>();
@@ -193,6 +206,13 @@ public class IOCriticas extends IOUsers {
 		}
 		return false;
 	}
+	
+	/**
+	 * Funcion que imprime por pantalla todas las criticas
+	 * almacenadas en el fichero de criticas
+	 * 
+	 */
+	
 	public void printAll()
 	{
 		ArrayList<Critica> c = new ArrayList<Critica>(); 
@@ -205,6 +225,12 @@ public class IOCriticas extends IOUsers {
 			System.out.println("Resena: " + c.get(i).getResena());
 		}
 	}
+	
+	/**
+	 * Funcion que muestra por pantalla las criticas escritas por
+	 * un usuario concreto
+	 */
+	
 	public void buscarCriticas(String mail)
 	{
 		ArrayList<Critica> c = new ArrayList<Critica>(); 
@@ -234,6 +260,13 @@ public class IOCriticas extends IOUsers {
 		}
 	}
 	
+	/**
+	 * Funcion que busca una critica concreta a traves de su identificador
+	 * en el fichero de criticas
+	 * @param id identificador de la critica
+	 * @return cr critica concreta en caso de encontrarla
+	 */
+	
 	public Critica buscarCritica(int id) {
 		Critica c = new Critica();
 		ArrayList<Critica> v = new ArrayList<Critica>();
@@ -245,6 +278,15 @@ public class IOCriticas extends IOUsers {
 		return c;
 	}
 	
+	/**
+	/**
+	 * Funcion que busca una critica concreta a traves del mail
+	 * de su autor y su titulo.
+	 * @param mail del autor de la critica
+	 * @param titulo de la critica
+	 * @return cr critica concreta en caso de encontrarla
+	 */
+	
 	public Critica buscarCritica(String mail, String title) {
 		Critica c = new Critica();
 		ArrayList<Critica> v = new ArrayList<Critica>();
@@ -255,6 +297,13 @@ public class IOCriticas extends IOUsers {
 		}
 		return c;
 	}
+	
+	/**
+	 * Funcion que borra una critica buscando por el mail de
+	 * su autor y su id
+	 * @param mail Mail del autor de la critica
+	 * @param id Identificador de la critica
+	 */
 	
 	public void borrarCritica(int id, String mail) {
 		ArrayList<Critica> v = new ArrayList<Critica>();
@@ -277,6 +326,13 @@ public class IOCriticas extends IOUsers {
 		}
 	}
 	
+	/**
+	 * Funcion que aumenta en +1 los likes de una critica concreta
+	 * @param mail Mail del autor de la critica
+	 * @param id Identificador a comprobar
+	 */
+	
+	
 	public void votarCriticaPos(String mail, int id) {
 		Critica c = new Critica();
 		c = c.buscarCritica(id);
@@ -298,6 +354,13 @@ public class IOCriticas extends IOUsers {
 		}
 	}
 	
+	/**
+	 * Funcion que aumenta en +1 los likes de una critica concreta
+	 * @param mail Mail del autor de la critica
+	 * @param c Critica concreta
+	 */
+	
+	
 	public void votarCriticaPos(String mail, Critica c) {
 		if(c.getMail().equals(mail)) {
 			System.err.println("No puede valorar sus propias criticas");
@@ -316,6 +379,12 @@ public class IOCriticas extends IOUsers {
 		this.criticaToFich(cAux.getTitle(), cAux.getPuntuacion(), cAux.getResena(), cAux.getMail(), cAux.getLike(), cAux.getDislike(), cAux.getId(), cAux.getVotantes());
 		}
 	}
+	
+	/**
+	 * Funcion que aumenta en +1 los dislikes de una critica concreta
+	 * @param mail Mail del autor de la critica
+	 * @param id Identificador a comprobar
+	 */
 	
 	public void votarCriticaNeg(String mail, int id) {
 		Critica c = new Critica();
@@ -337,6 +406,12 @@ public class IOCriticas extends IOUsers {
 		this.criticaToFich(cAux.getTitle(), cAux.getPuntuacion(), cAux.getResena(), cAux.getMail(), cAux.getLike(), cAux.getDislike(), cAux.getId(), cAux.getVotantes());
 		}
 	}
+	
+	/**
+	 * Funcion que aumenta en +1 los dislikes de una critica concreta
+	 * @param mail Mail del autor de la critica
+	 * @param c Critica concreta
+	 */
 	
 	public void votarCriticaNeg(String mail, Critica c) {
 		if(c.getMail().equals(mail)) {

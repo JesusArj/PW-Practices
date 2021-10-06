@@ -30,7 +30,7 @@ public class IOUsers
  * Funcion que añade un usuario de nuevo registro al fichero de usuarios.
  * @param name Nombre del usuario
  * @param username Nombre de usuario
- * @param mail Dirección de e-mail del usuario
+ * @param mail direccion de e-mail del usuario
  * @param passwd Contraseña del usuario
  *
  */
@@ -123,7 +123,7 @@ public class IOUsers
 /**
  * Funcion que comprueba que un usuario exista
  * en el fichero plano de usuarios, comprobando su e-mail.
- * @param mail Dirección del e-mail del usuario
+ * @param mail direccion del e-mail del usuario
  *
  */
 
@@ -141,7 +141,7 @@ public class IOUsers
 /**
  * Funcion que comprueba que la contraseña sea la correspondiente 
  * al usuario introducido.
- * @param mail Dirección del e-mail del usuario
+ * @param mail direccion del e-mail del usuario
  * @param Passwd Contraseña del usuario
  *
  */
@@ -162,7 +162,7 @@ public class IOUsers
 /**
  * Metodo que comprueba que exista un usuario en el fichero
  * de usuario buscando por email.
- * @param email Dirección del e-mail del usuario
+ * @param email direccion del e-mail del usuario
  *
  */
 
@@ -179,7 +179,7 @@ public class IOUsers
 	
 /**
  * Funcion que imprime los datos de un usuario.
- * @param email Dirección del e-mail del usuario
+ * @param email direccion del e-mail del usuario
  *
  */
 
@@ -196,7 +196,7 @@ public class IOUsers
 /**
  * Funcion que borra los datos de un usuario.
  * del fichero de usuarios, guiandose por un email.
- * @param email Dirección del e-mail del usuario
+ * @param email Direccion del e-mail del usuario
  *
  */
 
@@ -291,6 +291,13 @@ public class IOUsers
 		Espectador e1 = new Espectador(name,email, username, passwd);
 		return e1;
 	}
+	
+	/**
+	 * Funcion que actualiza los datos de un usuario.
+	 * del fichero de usuarios, guiandose por el mail
+	 * el usuario
+	 * @param mail Mail del usuatio
+	 */
 	
 	public void updateUser(String mail) {
 		this.imprimirDatosUser(mail);
