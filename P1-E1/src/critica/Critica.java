@@ -47,7 +47,7 @@ public class Critica extends IOCriticas{
 	/**
 	 * Autor de la critica
 	 */
-	private String username; 
+	private String mail; 
 	
 	private int id; 
 	
@@ -91,9 +91,9 @@ public class Critica extends IOCriticas{
 	 * Getter del username
 	 * @return Usuario que escribio la critica
 	 */
-	public String getUsername() 
+	public String getMail() 
 	{
-		return this.username;
+		return this.mail;
 	}
 	/**
 	 * Getter de la puntuacion dada en la critica
@@ -151,9 +151,9 @@ public class Critica extends IOCriticas{
 	 * Setter del username que escribe la critica
 	 * @param username Ususario que escribe la critica
 	 */
-	public void setUsername(String username)
+	public void setMail(String mail)
 	{
-		this.username=username;
+		this.mail=mail;
 	}
 	/**
 	 * Setter de la puntuacion. Comprueba que es un elemento
