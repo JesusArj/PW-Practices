@@ -308,7 +308,6 @@ public class mainProgram {
         	System.out.println("Gracias por usar nuestro sistema. Hasta la pr�xima.");
             return;
         }
-        
 	}
 }
 

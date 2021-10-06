@@ -46,17 +46,20 @@ public class GestorCriticas {
 				}
 			}
 			
-			
-			//TODO:
-			
+			public void buscarCriticas(String mail)
+			{
+				if(instance!=null)
+				{
+					this.c.buscarCriticas(mail);
+				}
+			}
+						
 			public void BorrarCritica(Critica c)
 			{
 				if(instance!=null)
 					this.c.borrarCritica(c.getId(), this.mail);
 			}
 			
-			
-			//TODO:
 			public void votarCriticasPos(Critica c)
 			{
 				if(instance!=null)
@@ -81,12 +84,6 @@ public class GestorCriticas {
 					this.c.votarCriticaNeg(this.mail, id);
 			}
 			
-			public void buscarCriticas(String mail)
-			{
-				if(instance!=null)
-				{
-					this.c.buscarCriticas(mail);
-				}
-			}
+			
 			
 }

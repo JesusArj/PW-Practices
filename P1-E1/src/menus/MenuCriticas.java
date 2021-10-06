@@ -53,26 +53,32 @@ public class MenuCriticas {
         switch(opc)
         {
         	case "1":
+        		//TODO: menu crear critica
         		newGestor.crearCritica(c);
         		break;
         	
         	case "2":
+        		//TODO: 
         		newGestor.consultarCriticas();
         		break;
         	
         	case "3":
+        		//TODO:
         		newGestor.BorrarCritica(c);
         		break;
         		
         	case "4":
+        		//TODO:
         		newGestor.votarCriticasPos(c);
         		break;
         	
         	case "5":
+        		//TODO:
         		newGestor.votarCriticasNeg(c);
         		break;
 
         	case "6":
+        		//TODO:
         		newGestor.buscarCriticas(mail);
         		break;
         	

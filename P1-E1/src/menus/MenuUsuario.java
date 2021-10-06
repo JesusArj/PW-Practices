@@ -45,14 +45,17 @@ public class MenuUsuario {
         
         if("1".equals(opc)) 
 		{ // Opcion 1, el usuario visualiza sus datos.
+        	//TODO:
         	newGestor.verDatosUser();
         }
         else if("2".equals(opc))
         { // Opcion 2, el usuario actualiza sus datos.
+        	//TODO:
         	newGestor.updateUser();
         }
         else if("3".equals(opc))
         { // Opciones 3, el usuario se da de baja.
+        	//TODO:
         	newGestor.darBajaUser();
         }
         else

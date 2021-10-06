@@ -276,14 +276,6 @@ public class IOCriticas extends IOUsers {
 			c.criticaToFich(c.getTitle(), c.getPuntuacion(), c.getResena(), c.getMail(), c.getLike(), c.getDislike(), c.getId(), c.getVotantes());
 		}
 	}
-
-	//1.Se comprueba que this.mail no sea == a critica.mail (un usuario no puede votar en su propia critica)
-	//2. Se comprueba que this.mail no este en el vector de votantes de la critica que esta intentando valorar
-	//3 . Si no está en la lista
-	//	3.1 Se le muestra la lista de criticas total, (consultarCriticas), selecciona la que quiera valorar,
-	//	y se le incrementa o decrementa los likes/dislikes de dicha critica.
-	//4.Se añade el this.mail al vector de votantes de la critica votada,
-	//	para que el usuario no pueda votar de nuevo.
 	
 	public void votarCriticaPos(String mail, int id) {
 		Critica c = new Critica();
