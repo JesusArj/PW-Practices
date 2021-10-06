@@ -8,8 +8,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Random;
 
 import critica.Critica;
+import espectador.Espectador;
 
 /*
  *
@@ -34,7 +36,7 @@ public class IOCriticas {
  * @param dislike Numero de dislike dados a la crítica
  *
  */
-	public void criticaToFich(String title, String puntuacion, String resena, String username, int like, int dislike)
+	public void criticaToFich(String title, String puntuacion, String resena, String username, int like, int dislike, int id, ArrayList<String> votantes)
 	{		
 		String rutaAbsoluta = new File("").getAbsolutePath();
 		String rutaFichero = rutaAbsoluta + "/criticas.txt";
@@ -44,7 +46,10 @@ public class IOCriticas {
 	    {	
 	    	fichero= new FileWriter(rutaFichero, true); 
 	    	pw = new PrintWriter(fichero); 
-	    	pw.println(title+"//"+puntuacion +"//" + resena+"//"+ username + "//" + like +"//" + dislike); 
+	    	pw.print(title+"//"+puntuacion +"//" + resena+"//"+ username + "//" + like +"//" + dislike +"//"+ id);
+	    	for(String s : votantes) {
+	    		pw.print("((" + s);
+	    	}
 	    }catch (Exception e) {
 	       e.printStackTrace();
 	    } finally {
@@ -81,6 +86,7 @@ public class IOCriticas {
 	        br = new BufferedReader(fr);
 	        //lectura
 	        String linea; 
+	        ArrayList<String> votantes = new ArrayList<String>(); 
         	while ((linea = br.readLine()) != null) {
         	    String[] data = linea.split("//");
 		    	c1.settitle(data[0]);
@@ -89,8 +95,16 @@ public class IOCriticas {
 		    	c1.setLike(Integer.parseInt(data[3]));
 		    	c1.setDislike(Integer.parseInt(data[4]));
 		    	c1.setUsername(data[5]);
-		    	v.add(c1);
+		    	c1.setId(Integer.parseInt(data[6]));
+		    	String[] data2 = data[7].split("((");
+		    	for(int i=0; i<data2.length; i++) 
+		    	{
+		    		votantes.add(data2[i]);
+		    	} 
+		    	c1.setVotantes(votantes);
+		    	v.add(c1); 
 		    	c1 = new Critica();
+		    	votantes = new ArrayList<String>(); 
 		    
         	}
 	        
@@ -158,5 +172,27 @@ public class IOCriticas {
 			c.criticaToFich(c.getTitle(), c.getPuntuacion(), c.getResena(), c.getUsername(), c.getLike(), c.getDislike());
 		}
 	}
-}
+	
+	public int generarID()
+	{
+		Random r = new Random();
+		int id = r.nextInt(99999)+1; 
+		if (existId(id) == true)
+		{
+			generarID();
+		}
+		return id;
+	}
+	 
+	public boolean existId(int id)
+	{
+		ArrayList<Critica> v = new ArrayList<Critica>();
+		fichToVec(v);
+		for(Critica e : v) {
+			if(e.getId()==id)
+				return true;
+		}
+		return false;
+	}
 
+}

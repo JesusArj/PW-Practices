@@ -2,6 +2,8 @@
 
 package critica;
 
+import java.util.ArrayList;
+
 import fichero.criticas.IOCriticas;
 
 /**
@@ -47,6 +49,10 @@ public class Critica extends IOCriticas{
 	 */
 	private String username; 
 	
+	private int id; 
+	
+	private ArrayList<String> votantes; 
+	
 	/**
 	 * Constructor parametrizado de la clase. Inicializamos los
 	 * contadores de likes y dislikes a 0.
@@ -60,7 +66,9 @@ public class Critica extends IOCriticas{
 		this.puntuacion = puntuacion; 
 		this.resena=resena; 
 		this.like = 0; 
-		this.dislike =0; 
+		this.dislike =0;
+		this.id= generarID();  
+		this.votantes= new ArrayList<String>(); 
 	}
 	
 	/**
@@ -118,6 +126,16 @@ public class Critica extends IOCriticas{
 	public int getDislike()
 	{
 		return this.dislike; 
+	}
+	
+	public int getId()
+	{
+		return this.id; 
+	}
+	
+	public ArrayList<String> getVotantes()
+	{
+		return this.votantes; 
 	}
 	
 	//SETTERS 
@@ -186,6 +204,17 @@ public class Critica extends IOCriticas{
 	{
 		this.dislike ++; 
 	}
+	
+	public void setId(int id)
+	{
+		this.id=id; 
+	}
+	
+	public void setVotantes(ArrayList<String> votantes)
+	{
+		this.votantes = votantes; 
+	}
+	
 	/**
 	 * Metodo para comprobar si una cadena esta presente
 	 * en la enum puntuacion

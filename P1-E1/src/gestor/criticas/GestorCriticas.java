@@ -7,23 +7,59 @@ public class GestorCriticas {
 			private static GestorCriticas instance = null;
 
 			// Other properties
-			private String user = null;
+			private String Mail = null;
 			
 			// 2 - Private constructor
 
-			private GestorCriticas(String user) 
+			private GestorCriticas(String Mail) 
 			{
-				this.user=user; 
+				this.Mail=Mail; 
 			}
 
 			// 3 - Access point to the instance
 
-			public static GestorCriticas getInstance(String user) {
+			public static GestorCriticas getInstance(String Mail) {
 				if(instance == null) {
-					instance = new GestorCriticas(user);
+					instance = new GestorCriticas(Mail);
 					
 				}
 				return instance;
 			}
-	
+			
+			public void crearCritica()
+			{
+				if(instance!=null)
+				{
+					
+				}
+			}
+			public void consultarCriticas()
+			{
+				if(instance!=null)
+				{
+					
+				}
+			}
+			public void BorrarCritica()
+			{
+				if(instance!=null)
+				{
+					
+				}
+			}
+			public void votarCriticas()
+			{
+				if(instance!=null)
+				{
+					
+				}
+			}
+			public void buscarCriticas()
+			{
+				if(instance!=null)
+				{
+					
+				}
+			}
+			
 }
