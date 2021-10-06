@@ -24,7 +24,7 @@ public class MenuUsuario {
 * @param usuario usuario que realiza la gestion.
 *
 */
-
+/**
 	public static void userMenu(String usuario) 
 	{
 

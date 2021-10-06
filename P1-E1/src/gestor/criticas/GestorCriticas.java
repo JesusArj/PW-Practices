@@ -46,35 +46,46 @@ public class GestorCriticas {
 				}
 			}
 			
+			
 			//TODO:
-			public void BorrarCritica()
+			
+			public void BorrarCritica(Critica c)
 			{
 				if(instance!=null)
-				{
-					//Se puede usar la funcion buscarCritica de la clase IOCriticas, 
-					//pasandole this.mail para mostrar al usuario todas sus criticas, 
-					//para que seleccione la critica a borrar.
-				}
+					this.c.borrarCritica(c.getId(), this.mail);
 			}
+			
+			
 			//TODO:
-			public void votarCriticas()
+			public void votarCriticasPos(Critica c)
 			{
 				if(instance!=null)
-				{
-					//1.Se comprueba que this.mail no sea == a critica.mail (un usuario no puede votar en su propia critica)
-					//2. Se comprueba que this.mail no este en el vector de votantes de la critica que esta intentando valorar
-					//3 . Si no está en la lista
-					//	3.1 Se le muestra la lista de criticas total, (consultarCriticas), selecciona la que quiera valorar,
-					//	y se le incrementa o decrementa los likes/dislikes de dicha critica.
-					//4.Se añade el this.mail al vector de votantes de la critica votada,
-					//	para que el usuario no pueda votar de nuevo.
-				}
+					this.c.votarCriticaPos(this.mail, c);
 			}
+			
+			public void votarCriticasPos(int id)
+			{
+				if(instance!=null)
+					this.c.votarCriticaPos(this.mail, id);
+			}
+			
+			public void votarCriticasNeg(Critica c)
+			{
+				if(instance!=null)
+					this.c.votarCriticaNeg(this.mail, c);
+			}
+			
+			public void votarCriticasNeg(int id)
+			{
+				if(instance!=null)
+					this.c.votarCriticaNeg(this.mail, id);
+			}
+			
 			public void buscarCriticas(String mail)
 			{
 				if(instance!=null)
 				{
-					this.c.buscarCritica(mail);
+					this.c.buscarCriticas(mail);
 				}
 			}
 			

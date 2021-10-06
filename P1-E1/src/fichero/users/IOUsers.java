@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -251,6 +252,54 @@ public class IOUsers
 			c.RegisterUserToFich(c.getName(), c.getUsername(), c.getMail(), c.getPasswd());
 		}
 	}
+	
+	public Espectador proveerDatos() {
+		String email = null, passwd=null, name=null, username=null;
+		System.out.println("PROCEDA A INTRODUCIR SUS DATOS: ");
+		System.out.println("Introduzca su email:");
+		BufferedReader Register = new BufferedReader(
+				new InputStreamReader(System.in));
+		try {
+			email = Register.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Introduzca su passwd:");
+		BufferedReader Register1 = new BufferedReader(
+				new InputStreamReader(System.in));
+		try {
+			passwd = Register1.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Introduzca su nombre:");
+		BufferedReader Register11 = new BufferedReader(
+				new InputStreamReader(System.in));
+		try {
+			name = Register11.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Introduzca su username:");
+		BufferedReader Register111 = new BufferedReader(
+				new InputStreamReader(System.in));
+		try {
+			username = Register111.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Espectador e1 = new Espectador(name,email, username, passwd);
+		return e1;
+	}
+	
+	public void updateUser(String mail) {
+		this.imprimirDatosUser(mail);
+		this.borrarUser(mail);
+		Espectador e = this.proveerDatos();
+		this.comprobarUserExist(e.getMail());
+		this.RegisterUserToFich(e.getName(), e.getUsername(), e.getMail(), e.getPasswd());
+	}
+	
 }
 
 

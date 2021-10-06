@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import critica.Critica;
-import espectador.Espectador;
 import fichero.users.IOUsers;
 
 /*
@@ -206,7 +205,7 @@ public class IOCriticas extends IOUsers {
 			System.out.println("Resena: " + c.get(i).getResena());
 		}
 	}
-	public void buscarCritica(String mail)
+	public void buscarCriticas(String mail)
 	{
 		ArrayList<Critica> c = new ArrayList<Critica>(); 
 		c = fichCriticaToVec(c);
@@ -218,10 +217,12 @@ public class IOCriticas extends IOUsers {
 				if(c.get(i).getMail().equals(mail))
 				{
 					System.out.println("CRITICA/s DEL USUARIO CON MAIL: "+ mail);
-					System.out.println("CRITICA "+ count);
 					System.out.println("-------------------");
+					System.out.println("CRITICA "+ count);
 					System.out.println("Titulo: " + c.get(i).getTitle());
 					System.out.println("Resena: " + c.get(i).getResena());
+					System.out.println("-------------------");
+
 					count++; 
 				}
 			}
@@ -232,5 +233,137 @@ public class IOCriticas extends IOUsers {
 			System.exit(-1); 
 		}
 	}
+	
+	public Critica buscarCritica(int id) {
+		Critica c = new Critica();
+		ArrayList<Critica> v = new ArrayList<Critica>();
+		v = this.fichCriticaToVec(v);
+		for(Critica cr : v) {
+			if(cr.getId() == id)
+				return cr;
+		}
+		return c;
+	}
+	
+	public Critica buscarCritica(String mail, String title) {
+		Critica c = new Critica();
+		ArrayList<Critica> v = new ArrayList<Critica>();
+		v = this.fichCriticaToVec(v);
+		for(Critica cr : v) {
+			if(cr.getMail().equals(mail) && cr.getTitle().equals(title) )
+				return cr;
+		}
+		return c;
+	}
+	
+	public void borrarCritica(int id, String mail) {
+		ArrayList<Critica> v = new ArrayList<Critica>();
+		v = this.fichCriticaToVec(v);
+		for(Critica c : v) {
+			if(c.getMail().equals(mail) && c.getId() == id ) {
+				v.remove(c);
+			}
+		}
+		BufferedWriter bw;
+		try {
+			bw = new BufferedWriter(new FileWriter("criticas.txt"));
+			bw.write("");
+			bw.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}		
+		for(Critica c : v) {
+			c.criticaToFich(c.getTitle(), c.getPuntuacion(), c.getResena(), c.getMail(), c.getLike(), c.getDislike(), c.getId(), c.getVotantes());
+		}
+	}
 
+	//1.Se comprueba que this.mail no sea == a critica.mail (un usuario no puede votar en su propia critica)
+	//2. Se comprueba que this.mail no este en el vector de votantes de la critica que esta intentando valorar
+	//3 . Si no está en la lista
+	//	3.1 Se le muestra la lista de criticas total, (consultarCriticas), selecciona la que quiera valorar,
+	//	y se le incrementa o decrementa los likes/dislikes de dicha critica.
+	//4.Se añade el this.mail al vector de votantes de la critica votada,
+	//	para que el usuario no pueda votar de nuevo.
+	
+	public void votarCriticaPos(String mail, int id) {
+		Critica c = new Critica();
+		c = c.buscarCritica(id);
+		if(c.getMail().equals(mail)) {
+			System.err.println("No puede valorar sus propias criticas");
+			return;
+		}
+		else {
+			for(String correos : c.getVotantes()) {
+				if(correos.equals(mail)) {
+					System.err.println("Ya ha valorado esta critica");
+					return;
+				}
+			}
+		Critica cAux = c;
+		cAux.addLike();
+		this.borrarCritica(c);
+		this.criticaToFich(cAux.getTitle(), cAux.getPuntuacion(), cAux.getResena(), cAux.getMail(), cAux.getLike(), cAux.getDislike(), cAux.getId(), cAux.getVotantes());
+		}
+	}
+	
+	public void votarCriticaPos(String mail, Critica c) {
+		if(c.getMail().equals(mail)) {
+			System.err.println("No puede valorar sus propias criticas");
+			return;
+		}
+		else {
+			for(String correos : c.getVotantes()) {
+				if(correos.equals(mail)) {
+					System.err.println("Ya ha valorado esta critica");
+					return;
+				}
+			}
+		Critica cAux = c;
+		cAux.addLike();
+		this.borrarCritica(c);
+		this.criticaToFich(cAux.getTitle(), cAux.getPuntuacion(), cAux.getResena(), cAux.getMail(), cAux.getLike(), cAux.getDislike(), cAux.getId(), cAux.getVotantes());
+		}
+	}
+	
+	public void votarCriticaNeg(String mail, int id) {
+		Critica c = new Critica();
+		c = c.buscarCritica(id);
+		if(c.getMail().equals(mail)) {
+			System.err.println("No puede valorar sus propias criticas");
+			return;
+		}
+		else {
+			for(String correos : c.getVotantes()) {
+				if(correos.equals(mail)) {
+					System.err.println("Ya ha valorado esta critica");
+					return;
+				}
+			}
+		Critica cAux = c;
+		cAux.addDislike();
+		this.borrarCritica(c);
+		this.criticaToFich(cAux.getTitle(), cAux.getPuntuacion(), cAux.getResena(), cAux.getMail(), cAux.getLike(), cAux.getDislike(), cAux.getId(), cAux.getVotantes());
+		}
+	}
+	
+	public void votarCriticaNeg(String mail, Critica c) {
+		if(c.getMail().equals(mail)) {
+			System.err.println("No puede valorar sus propias criticas");
+			return;
+		}
+		else {
+			for(String correos : c.getVotantes()) {
+				if(correos.equals(mail)) {
+					System.err.println("Ya ha valorado esta critica");
+					return;
+				}
+			}
+		Critica cAux = c;
+		cAux.addDislike();
+		this.borrarCritica(c);
+		this.criticaToFich(cAux.getTitle(), cAux.getPuntuacion(), cAux.getResena(), cAux.getMail(), cAux.getLike(), cAux.getDislike(), cAux.getId(), cAux.getVotantes());
+		}
+	}
+	
+	
 }

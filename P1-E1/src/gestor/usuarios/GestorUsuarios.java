@@ -89,11 +89,13 @@ public class GestorUsuarios {
 	}
 			
 	//TODO: 
-	/*
-	public static void updateUser(String Mail) 
+	public void updateUser() 
 	{
-				
+		if(instance!=null)
+		{
+			User.updateUser(this.Mail);
+		}	
 	}
-	*/
+
 		
 	}
