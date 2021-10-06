@@ -3,6 +3,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import fichero.users.IOUsers;
+import menus.MenuCriticas;
+import menus.MenuUsuario;
 public class mainProgram {
 
 	public static void main(String[] args) throws IOException 
@@ -99,11 +101,13 @@ public class mainProgram {
     	    				e.printStackTrace();
     	    			}
     	    			if("1".equals(opcion)) {
-    	    				//gestorUsers TODO
+    	    				MenuUsuario menu = new MenuUsuario();
+    	    				menu.userMenu(email);
     	    				opcion=null;
     	    			}
     	    			else if("2".equals(opcion)) {
-    	    				//gestorCriticas TODO
+    	    				MenuCriticas menu = new MenuCriticas();
+    	    				menu.reviewMenu(email);
     	    				opcion=null;
     	    			}	
     	    			else if("3".equals(opcion)) {
@@ -172,11 +176,13 @@ public class mainProgram {
     		    				e.printStackTrace();
     		    			}
     		    			if("1".equals(opcion1)) {
-    		    				//gestorUsers TODO
+        	    				MenuUsuario menu = new MenuUsuario();
+        	    				menu.userMenu(email);
     		    				opcion1=null;
     		    			}
     		    			else if("2".equals(opcion1)) {
-    		    				//gestorCriticas TODO
+    		    				MenuCriticas menu = new MenuCriticas();
+        	    				menu.reviewMenu(email);
     		    				opcion1=null;
     		    			}	
     		    			else if("3".equals(opcion1)) {
@@ -190,7 +196,40 @@ public class mainProgram {
     	        	}
     	        }     
             }
-     	}
+	        System.out.println("Bienvenido a nuestro sistema " + io.buscarPorCorreo(email).getUsername() + ".");
+    		
+			while(opcion !="1" || opcion!= "2" || opcion!="3") {
+            	System.out.println("�Qu� desea hacer?");
+            	System.out.println("1. Modificar mis datos");
+            	System.out.println("2. Acceder al sistema de criticas");
+            	System.out.println("3. Salir");
+
+            	BufferedReader readerGestores = new BufferedReader(
+    		            new InputStreamReader(System.in));
+    			try {
+    				opcion = readerGestores.readLine();
+    			} catch (IOException e) {
+    				e.printStackTrace();
+    			}
+    			if("1".equals(opcion)) {
+    				MenuUsuario menu = new MenuUsuario();
+    				menu.userMenu(email);
+    				opcion=null;
+    			}
+    			else if("2".equals(opcion)) {
+    				MenuCriticas menu = new MenuCriticas();
+    				menu.reviewMenu(email);
+    				opcion=null;
+    			}	
+    			else if("3".equals(opcion)) {
+		            System.out.println("Gracias por usar nuestro sistema. Hasta la pr�xima.");
+		            return;
+    			}
+    			else {
+		            System.out.println("Opcion no permitida.");
+    			}
+    		}
+        }
         else if("2".equals(opcion)) {
         	passwd = null;
 		   
@@ -247,11 +286,13 @@ public class mainProgram {
     				e.printStackTrace();
     			}
     			if("1".equals(opcion)) {
-    				//gestorUsers TODO
+    				MenuUsuario menu = new MenuUsuario();
+    				menu.userMenu(email);
     				opcion=null;
     			}
     			else if("2".equals(opcion)) {
-    				//gestorCriticas TODO
+    				MenuCriticas menu = new MenuCriticas();
+    				menu.reviewMenu(email);
     				opcion=null;
     			}	
     			else if("3".equals(opcion)) {

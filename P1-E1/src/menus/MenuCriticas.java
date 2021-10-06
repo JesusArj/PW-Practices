@@ -4,10 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import fichero.criticas.IOCriticas;
+import critica.Critica;
 import gestor.criticas.GestorCriticas;
-import gestor.usuarios.GestorUsuarios;
-import sun.security.jca.GetInstance;
 
 /**
  * La clase MenuCriticas comprende la impresion por pantalla de un menu,
@@ -30,12 +28,12 @@ public class MenuCriticas {
 */
 
 
-	public static void reviewMenu(String mail) 
+	public void reviewMenu(String mail) 
 	{
 
 		String opc = null;
-		IOCriticas c = new IOCriticas();
-        GestorCriticas newGestor = new GestorCriticas(mail);
+		Critica c = new Critica();
+        GestorCriticas newGestor = GestorCriticas.getInstance(mail);
         
 	    System.out.println("Bienvenido a nuestro Menu de gestion de usuarios.");
 	    System.out.println("Para crear una critica, pulse 1. Para consultar criticas, pulse 2.");

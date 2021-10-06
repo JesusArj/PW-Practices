@@ -3,8 +3,6 @@ package menus;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
-import fichero.users.IOUsers;
 import gestor.usuarios.GestorUsuarios;
 
 public class MenuUsuario {
@@ -25,11 +23,11 @@ public class MenuUsuario {
 *
 */
 
-	public static void userMenu(String mail) 
+	public void userMenu(String mail) 
 	{
 
 		String opc = null;
-        IOUsers newUser = new IOUsers();
+        GestorUsuarios newGestor = GestorUsuarios.getInstance(mail);
        
 		
 	    System.out.println("Bienvenido a nuestro Menu de gestion de usuarios.");
