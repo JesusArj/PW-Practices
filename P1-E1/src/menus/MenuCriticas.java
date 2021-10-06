@@ -1,10 +1,13 @@
 package menus;
-/**
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import fichero.criticas.IOCriticas;
 import gestor.criticas.GestorCriticas;
+import gestor.usuarios.GestorUsuarios;
+import sun.security.jca.GetInstance;
 
 /**
  * La clase MenuCriticas comprende la impresion por pantalla de un menu,
@@ -13,7 +16,7 @@ import gestor.criticas.GestorCriticas;
  * @author Valentín Avram
  *
  */
-/**
+
 public class MenuCriticas {
 
 	//TODO: Esperar a que este hecho el gestor de Criticas y completar restor de opciones.
@@ -26,13 +29,19 @@ public class MenuCriticas {
 *
 */
 
-/** 
-	public static void reviewMenu(String usuario) 
+
+	public static void reviewMenu(String mail) 
 	{
 
 		String opc = null;
-	    System.out.println("Bienvenido a nuestro Menu de gestion de Criticas.");
-	    System.out.println("Para actualizar los datos de su perfil, pulse 1. Para dar de baja su usuario, pulse 2.");
+		IOCriticas c = new IOCriticas();
+        GestorCriticas newGestor = new GestorCriticas(mail);
+        
+	    System.out.println("Bienvenido a nuestro Menu de gestion de usuarios.");
+	    System.out.println("Para crear una critica, pulse 1. Para consultar criticas, pulse 2.");
+	    System.out.println("Para borrar una critica, pulse 3.");
+	    System.out.println("Para votar positivamente una critica, pulse 4. Para votar negativamente, pulse 5.");
+	    System.out.println("Para buscar una critica, pulse 6.");
 	    System.out.println("Para salir del menu, pulse cualquier otra tecla.");
 	    
         BufferedReader login = new BufferedReader(
@@ -42,21 +51,37 @@ public class MenuCriticas {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-         
-        GestorCriticas gestor = new GestorCriticas(usuario);
         
-        if("1".equals(opc)) {
-        	gestor.(usuario);
-        }
-        else if("2".equals(opc))
+        switch(opc)
         {
-        	gestor.(usuario);
-        }
-        else
-        {
-        	System.out.println("Gracias por usar el menu");
-        }
+        	case "1":
+        		newGestor.crearCritica(c);
+        		break;
+        	
+        	case "2":
+        		newGestor.consultarCriticas();
+        		break;
+        	
+        	case "3":
+        		newGestor.BorrarCritica(c);
+        		break;
+        		
+        	case "4":
+        		newGestor.votarCriticasPos(c);
+        		break;
+        	
+        	case "5":
+        		newGestor.votarCriticasNeg(c);
+        		break;
 
+        	case "6":
+        		newGestor.buscarCriticas(mail);
+        		break;
+        	
+        	default:
+        		System.out.println("Gracias por usar este menu");
+        
+        }
+        
 	}
 }
-**/

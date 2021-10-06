@@ -1,9 +1,10 @@
 package menus;
-/**
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import fichero.users.IOUsers;
 import gestor.usuarios.GestorUsuarios;
 
 public class MenuUsuario {
@@ -15,8 +16,7 @@ public class MenuUsuario {
  * @author Valentín Avram
  *
  */
-/**
-	//Pasarle por args el usuario ¿Debería ser segun mail?
+
 	
 /** 
 * Menu que enlaza con las gestiones relacionadas
@@ -24,14 +24,17 @@ public class MenuUsuario {
 * @param usuario usuario que realiza la gestion.
 *
 */
-/**
-	public static void userMenu(String usuario) 
+
+	public static void userMenu(String mail) 
 	{
 
-	/**
 		String opc = null;
+        IOUsers newUser = new IOUsers();
+       
+		
 	    System.out.println("Bienvenido a nuestro Menu de gestion de usuarios.");
-	    System.out.println("Para actualizar los datos de su perfil, pulse 1. Para dar de baja su usuario, pulse 2.");
+	    System.out.println("Para ver los datos de su perfil, pulse 1. Para actualizar sus datos de usuario, pulse 2.");
+	    System.out.println("Para dar de baja su usuario, pulse 3.");	    
 	    System.out.println("Para salir del menu, pulse cualquier otra tecla.");
 	    
         BufferedReader login = new BufferedReader(
@@ -41,16 +44,18 @@ public class MenuUsuario {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-         
-        GestorUsuarios gestor = new GestorUsuarios(usuario);
         
         if("1".equals(opc)) 
-		{ // Opcion 1, el usuario actualiza sus datos.
-        	gestor.updateUser(usuario);
+		{ // Opcion 1, el usuario visualiza sus datos.
+        	newGestor.verDatosUser();
         }
         else if("2".equals(opc))
-        { // Opcion 2, el usuario se da de baja.
-        	gestor.darBajaUser(usuario);
+        { // Opcion 2, el usuario actualiza sus datos.
+        	newGestor.updateUser();
+        }
+        else if("3".equals(opc))
+        { // Opciones 3, el usuario se da de baja.
+        	newGestor.darBajaUser();
         }
         else
         { 
@@ -59,4 +64,3 @@ public class MenuUsuario {
 
 	}
 }
-*/
