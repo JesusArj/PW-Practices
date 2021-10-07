@@ -33,6 +33,7 @@ public class GestorCriticas {
 			/**
 			 * Funcion que crea una critica
 			 * @param c Objeto de la clase critica
+			 * @author Developers
 			 */	
 			public void crearCritica(Critica c)
 			{
@@ -45,6 +46,7 @@ public class GestorCriticas {
 			/**
 			 * Funcion que imprime por pantalla todas
 			 * las criticas almacenadas
+			 * @author Developers
 			 * 
 			 */	
 			
@@ -59,6 +61,7 @@ public class GestorCriticas {
 			/**
 			 * Funcion que busca una critica concreta
 			 * @param mail Mail del autor
+			 * @author Developers
 			 */
 			
 			public void buscarCriticas(String mail)
@@ -72,6 +75,7 @@ public class GestorCriticas {
 			/**
 			 * Funcion que busca una critica concreta
 			 * @param c Objeto de la clase critica
+			 * @author Developers
 			 */
 			
 			public void BorrarCritica(Critica c)
@@ -84,6 +88,7 @@ public class GestorCriticas {
 			 * Funcion que anade un voto positivo
 			 * a una critica concreta
 			 * @param c Objeto de la clase critica
+			 * @author Developers
 			 */
 			
 			public void votarCriticasPos(Critica c)
@@ -96,6 +101,7 @@ public class GestorCriticas {
 			 * Funcion que anade un voto positivo
 			 * a una critica concreta
 			 * @param id Identificador de la critica
+			 * @author Developers
 			 */
 			
 			public void votarCriticasPos(int id)
@@ -108,6 +114,7 @@ public class GestorCriticas {
 			 * Funcion que anade un voto negativo
 			 * a una critica concreta
 			 * @param c Objeto de la clase critica
+			 * @author Developers
 			 */
 			
 			public void votarCriticasNeg(Critica c)
@@ -120,6 +127,7 @@ public class GestorCriticas {
 			 * Funcion que anade un voto positivo
 			 * a una critica concreta
 			 * @param id Identificador de la critica
+			 * @author Developers
 			 */
 		
 			public void votarCriticasNeg(int id)

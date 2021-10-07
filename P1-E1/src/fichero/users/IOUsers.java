@@ -1,5 +1,3 @@
-//TODO: En el constructor hay que inicializar un vector de espectadores que vuelque todos los datos del fichero
-//en dicho vector. Luego se obtendr� el tama�o del vector para poder seguir escribiendo en el fichero de datos.
 
 package fichero.users;
 import java.io.BufferedReader;
@@ -19,7 +17,7 @@ import espectador.*;
  * Clase que implementa las funcionalidades relativas 
  * a la lectura y escritura de usuarios en el fichero 
  * correspondiente
- * @author
+ * @author Developers
  *
  */
 
@@ -32,6 +30,7 @@ public class IOUsers
  * @param username Nombre de usuario
  * @param mail direccion de e-mail del usuario
  * @param passwd Contraseña del usuario
+ * @author Developers
  *
  */
 
@@ -72,6 +71,7 @@ public class IOUsers
  * Metodo que vuelca el contenido del fichero de usuarios en
  * un ArrayList de Espectadores para su posterior tratamiento.
  * @param v Array List de Espectadores (Usuarios)
+ * @author Developers
  *
  */
 
@@ -124,6 +124,8 @@ public class IOUsers
  * Funcion que comprueba que un usuario exista
  * en el fichero plano de usuarios, comprobando su e-mail.
  * @param mail direccion del e-mail del usuario
+ * @return true si el email existe, falso en caso contrario
+ * @author Developers
  *
  */
 
@@ -143,6 +145,8 @@ public class IOUsers
  * al usuario introducido.
  * @param mail direccion del e-mail del usuario
  * @param Passwd Contraseña del usuario
+ * @return true si la contrasena es correcta, false en caso contrario
+ * @author Developers
  *
  */
 
@@ -163,6 +167,8 @@ public class IOUsers
  * Metodo que comprueba que exista un usuario en el fichero
  * de usuario buscando por email.
  * @param email direccion del e-mail del usuario
+ * @return c Elemento de la clase espectador, usuario que se busca
+ * @author Developers
  *
  */
 
@@ -180,6 +186,7 @@ public class IOUsers
 /**
  * Funcion que imprime los datos de un usuario.
  * @param email direccion del e-mail del usuario
+ * @author Developers
  *
  */
 
@@ -197,6 +204,7 @@ public class IOUsers
  * Funcion que borra los datos de un usuario.
  * del fichero de usuarios, guiandose por un email.
  * @param email Direccion del e-mail del usuario
+ * @author Developers
  *
  */
 
@@ -229,6 +237,7 @@ public class IOUsers
  * del fichero de usuarios, guiandose por un objeto de 
  * clase Espectador
  * @param e Objeto de clase Espectador
+ * @author Developers
  *
  */
 
@@ -254,6 +263,12 @@ public class IOUsers
 		}
 	}
 	
+	/**
+	 * Funcion que guarda los datos de un usuario en un
+	 * nuevo objeto de la clase Espectador
+	 * @author Developers
+	 */
+		
 	public Espectador proveerDatos() {
 		String email = null, passwd=null, name=null, username=null;
 		System.out.println("PROCEDA A INTRODUCIR SUS DATOS: ");
@@ -298,6 +313,7 @@ public class IOUsers
 	 * del fichero de usuarios, guiandose por el mail
 	 * el usuario
 	 * @param mail Mail del usuatio
+	 * @author Developers
 	 */
 	
 	public void updateUser(String mail) {

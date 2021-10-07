@@ -47,6 +47,7 @@ public class Espectador extends IOUsers{
 	 * @param mail Mail del usuario
 	 * @param username Username del usuario
 	 * @param passwd Contraseña del usuario
+	 * @author Developers
 	 */
 	
 	public Espectador(String name, String mail, String username, String passwd)
@@ -63,6 +64,7 @@ public class Espectador extends IOUsers{
 	/**
 	 * Getter del nombre del usuario
 	 * @return Cadena con el nombre del usuario
+	 * @author Developers
 	 */
 	
 	public String getName()
@@ -73,6 +75,7 @@ public class Espectador extends IOUsers{
 	/**
 	 * Getter del mail del usuario
 	 * @return Cadena con el mail del usuario
+	 * @author Developers
 	 */
 	
 	public String getMail()
@@ -83,6 +86,7 @@ public class Espectador extends IOUsers{
 	/**
 	 * Getter del username del usuario
 	 * @return Cadena con el username del usuario
+	 * @author Developers
 	 */
 	
 	public String getUsername()
@@ -95,6 +99,7 @@ public class Espectador extends IOUsers{
 	 * No es seguro que sea public y la contrasena 
 	 * esta almacenada en texto plano.
 	 * @return Cadena que contiene la contrasena
+	 * @author Developers
 	 */
 	
 	public String getPasswd() {
@@ -106,6 +111,7 @@ public class Espectador extends IOUsers{
 	/**
 	 * Setter del nombre del usuario
 	 * @param name Nombre del usuario
+	 * @author Developers
 	 */
 	
 	public void setName(String name)
@@ -116,6 +122,7 @@ public class Espectador extends IOUsers{
 	/**
 	 * Setter del mail del usuario
 	 * @param mail Mail del usuario
+	 * @author Developers
 	 */
 	
 	public void setMail(String mail)
@@ -126,6 +133,7 @@ public class Espectador extends IOUsers{
 	/**
 	 * Setter del username del usuario
 	 * @param username Username del usuario
+	 * @author Developers
 	 */
 	
 	public void setUsername(String username)
@@ -136,6 +144,7 @@ public class Espectador extends IOUsers{
 	/**
 	 * Setter de la contrasenaa
 	 * @param Passwd Contrasena del user
+	 * @author Developers
 	 */
 	
 	public void setPasswd(String Passwd) {

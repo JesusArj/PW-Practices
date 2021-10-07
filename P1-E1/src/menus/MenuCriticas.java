@@ -15,18 +15,16 @@ import gestor.criticas.GestorCriticas;
  * La clase MenuCriticas comprende la impresion por pantalla de un menu,
  * que enlaza la interfaz de usuario con las funciones del gestor de
  * críticas.
- * @author Valentín Avram
+ * @author Valentin Avram
  *
  */
 public class MenuCriticas {
-
-	//TODO: Esperar a que este hecho el gestor de Criticas y completar restor de opciones.
-	//Pasarle por args el usuario ¿Debería ser segun mail?
 
 /** 
 * Menu que enlaza con las gestiones relacionadas
 * a la gestión de críticas
 * @param usuario usuario que realiza la gestion.
+* @author Developers
 *
 */
 
@@ -58,7 +56,7 @@ public class MenuCriticas {
                 switch(opc)
                 {
                 	case "1":
-                		//TODO: Todo OK. Escribe mal
+                		
                         Scanner teclado1 = new Scanner(System.in);              
                         
                        ArrayList<String> votantes = new ArrayList<String>();
@@ -90,12 +88,12 @@ public class MenuCriticas {
                 		break;
                 	
                 	case "2":
-                		//TODO: No funciona por que se escribe mal?
+                		
                 		newGestor.consultarCriticas();
                 		break;
                 		                	
                 	case "3":
-                		//TODO:
+                		
                 		
                 		Scanner teclado3 = new Scanner(System.in);  
                 		int id;
@@ -147,7 +145,7 @@ public class MenuCriticas {
                 		break;
 
                 	case "6":
-                		//TODO:
+                		
                 		newGestor.buscarCriticas(mail);
                 		break;
                 	

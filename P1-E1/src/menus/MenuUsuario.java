@@ -22,6 +22,7 @@ public class MenuUsuario {
 * Menu que enlaza con las gestiones relacionadas
 * a la gestion de usuarios
 * @param usuario usuario que realiza la gestion.
+* @author Developers
 *
 */
 
@@ -52,15 +53,12 @@ public class MenuUsuario {
         }
         else if("2".equals(opc))
         { // Opcion 2, el usuario actualiza sus datos.
-        	//TODO:
-        	
+			
         	newGestor.updateUser();
         	
         }
         else if("3".equals(opc))
         { // Opciones 3, el usuario se da de baja.
-        	//TODO:
-        	//System.out.println(mail);
         	newGestor.darBajaUser();
         	System.out.println("Ha sido dado de baja. Gracias por usar nuestro sistema.");
         	return;

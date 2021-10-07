@@ -23,6 +23,7 @@ public class GestorUsuarios {
 /**
  * Constructor parametrizado de la clase.
  * @param mail Dirección del e-mail del usuario
+ * @author Developers
  *
  */
 
@@ -46,6 +47,7 @@ public class GestorUsuarios {
 /**
  * Funcion que da de alta un usuario en el sistema
  * @param e1 Objeta de clase Espectador
+ * @author Developers
  *
  */	
 			
@@ -59,6 +61,7 @@ public class GestorUsuarios {
 
 /**
  * Funcion que da de baja al propio usuario del sistema
+ * @author Developers
  *
  */	
 
@@ -74,6 +77,7 @@ public class GestorUsuarios {
 
 /**
  * Funcion que muestra los datos del propio usuario
+ * @author Developers
  *
  */	
 
@@ -87,6 +91,7 @@ public class GestorUsuarios {
 	
 	/**
 	 * Funcion que actualiza los datos del propio usuario
+	 * @author Developers
 	 *
 	 */	
 	

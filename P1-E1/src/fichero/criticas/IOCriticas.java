@@ -33,6 +33,7 @@ public class IOCriticas extends IOUsers {
  * @param username Nombre de usuario del autor de la critica
  * @param like Numero de likes dados a la critica
  * @param dislike Numero de dislike dados a la critica
+ * @author Developers
  *
  */
 	public void criticaToFich(String title, float puntuacion, String resena, String mail, int like, int dislike, int id, ArrayList<String> votantes)
@@ -74,6 +75,7 @@ public class IOCriticas extends IOUsers {
  * Metodo que vuelca el contenido del fichero de criticas en
  * un ArrayList de criticas para su posterior tratamiento.
  * @param v Array List de criticas
+ * @author Developers
  *
  */
 
@@ -141,6 +143,8 @@ public class IOCriticas extends IOUsers {
  * Funcion que comprueba que el titulo de critica exista
  * en el fichero plano de criticas.
  * @param title Titulo de la critica
+ * @return true en caso de que la critica exista, falso en caso contario
+ * @author Developers
  *
  */
 
@@ -158,6 +162,7 @@ public class IOCriticas extends IOUsers {
 /**
  * Funcion que elimina una critica del fichero de criticas.
  * @param title Titulo de la critica
+ * @author Developers
  *
  */
 
@@ -188,6 +193,7 @@ public class IOCriticas extends IOUsers {
 	 * Funcion que genera un identificador unico para cada critica,
 	 * con valor [1 - 99999].
 	 * @return id Identificador de la critica
+	 * @author Developers
 	 */
 	
 	public int generarID()
@@ -206,6 +212,7 @@ public class IOCriticas extends IOUsers {
 	 * en el fichero de criticas
 	 * @param id Identificador a comprobar
 	 * @return true en caso de que se repitan IDs, falso en caso contrario
+	 * @author Developers
 	 */
 	
 	public boolean existId(int id)
@@ -222,6 +229,7 @@ public class IOCriticas extends IOUsers {
 	/**
 	 * Funcion que imprime por pantalla todas las criticas
 	 * almacenadas en el fichero de criticas
+	 * @author Developers
 	 * 
 	 */
 	
@@ -247,6 +255,8 @@ public class IOCriticas extends IOUsers {
 	/**
 	 * Funcion que muestra por pantalla las criticas escritas por
 	 * un usuario concreto
+	 * @param mail Direccion de email del usuario
+	 * @author Developers
 	 */
 	
 	public void buscarCriticas(String mail)
@@ -286,6 +296,7 @@ public class IOCriticas extends IOUsers {
 	 * en el fichero de criticas
 	 * @param id identificador de la critica
 	 * @return cr critica concreta en caso de encontrarla
+	 * @author Developers
 	 */
 	
 	public Critica buscarCritica(int id) {
@@ -306,6 +317,7 @@ public class IOCriticas extends IOUsers {
 	 * @param mail del autor de la critica
 	 * @param titulo de la critica
 	 * @return cr critica concreta en caso de encontrarla
+	 * @author Developers
 	 */
 	
 	public Critica buscarCritica(String mail, String title) {
@@ -324,6 +336,7 @@ public class IOCriticas extends IOUsers {
 	 * su autor y su id
 	 * @param mail Mail del autor de la critica
 	 * @param id Identificador de la critica
+	 * @author Developers
 	 */
 	
 	public void borrarCritica(int id, String mail) {
@@ -352,6 +365,7 @@ public class IOCriticas extends IOUsers {
 	 * Funcion que aumenta en +1 los likes de una critica concreta
 	 * @param mail Mail del autor de la critica
 	 * @param id Identificador a comprobar
+	 * @author Developers
 	 */
 	
 	
@@ -384,6 +398,7 @@ public class IOCriticas extends IOUsers {
 	 * Funcion que aumenta en +1 los likes de una critica concreta
 	 * @param mail Mail del autor de la critica
 	 * @param c Critica concreta
+	 * @author Developers
 	 */
 	
 	
@@ -410,6 +425,7 @@ public class IOCriticas extends IOUsers {
 	 * Funcion que aumenta en +1 los dislikes de una critica concreta
 	 * @param mail Mail del autor de la critica
 	 * @param id Identificador a comprobar
+	 * @author Developers
 	 */
 	
 	public void votarCriticaNeg(String mail, int id) {
@@ -437,6 +453,7 @@ public class IOCriticas extends IOUsers {
 	 * Funcion que aumenta en +1 los dislikes de una critica concreta
 	 * @param mail Mail del autor de la critica
 	 * @param c Critica concreta
+	 * @author Developers
 	 */
 	
 	public void votarCriticaNeg(String mail, Critica c) {

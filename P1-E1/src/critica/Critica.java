@@ -1,4 +1,3 @@
-//TODO: RELACIONAR USERNAME ESPECTADOR/CRITICA
 
 package critica;
 
@@ -69,7 +68,8 @@ public class Critica extends IOCriticas{
 	 * contadores de likes y dislikes a 0.
 	 * @param title Titulo de la critica
 	 * @param puntuacion Puntuacion dada
-	 * @param resena Rese�a
+	 * @param resena Resena
+	 * @author Developers
 	 */
 	public Critica(String title, float puntuacion, String resena)
 	{
@@ -94,6 +94,7 @@ public class Critica extends IOCriticas{
 	/**
 	 * Getter del titulo.
 	 * @return Titulo de la critica
+	 * @author Developers
 	 */
 	
 	public String getTitle()
@@ -104,6 +105,7 @@ public class Critica extends IOCriticas{
 	/**
 	 * Getter del username
 	 * @return Usuario que escribio la critica
+	 * @author Developers	 
 	 */
 	
 	public String getMail() 
@@ -114,6 +116,7 @@ public class Critica extends IOCriticas{
 	/**
 	 * Getter de la puntuacion dada en la critica
 	 * @return Puntuacion
+	 * @author Developers
 	 */
 	
 	public float getPuntuacion()
@@ -123,7 +126,8 @@ public class Critica extends IOCriticas{
 	
 	/**
 	 * Getter del cuerpo de la critica
-	 * @return La rese�a en si
+	 * @return La resena en si
+	 * @author Developers
 	 */
 	
 	public String getResena()
@@ -134,6 +138,7 @@ public class Critica extends IOCriticas{
 	/**
 	 * Getter del numero de likes de la critica
 	 * @return Numero de likes
+	 * @author Developers
 	 */
 	
 	public int getLike()
@@ -144,6 +149,7 @@ public class Critica extends IOCriticas{
 	/**
 	 * Getter del numero de dislikes de la critica
 	 * @return Numero de dislikes
+	 * @author Developers
 	 */
 	
 	public int getDislike()
@@ -154,6 +160,7 @@ public class Critica extends IOCriticas{
 	/**
 	 * Getter del identificador unico de la critica
 	 * @return Identificador de la critica
+	 * @author Developers
 	 */
 	
 	public int getId()
@@ -164,6 +171,7 @@ public class Critica extends IOCriticas{
 	/**
 	 * Getter del Array List de emails de usuarios que puntuan una critica
 	 * @return Emails almacenados en el Array List
+	 * @author Developers
 	 */
 	
 	public ArrayList<String> getVotantes()
@@ -176,6 +184,7 @@ public class Critica extends IOCriticas{
 	/**
 	 * Setter del titulo de la critica
 	 * @param title Titulo de la critica
+	 * @author Developers
 	 */
 	
 	public void settitle(String title)
@@ -186,6 +195,7 @@ public class Critica extends IOCriticas{
 	/**
 	 * Setter del username que escribe la critica
 	 * @param username Ususario que escribe la critica
+	 * @author Developers
 	 */
 	
 	public void setMail(String mail)
@@ -197,6 +207,7 @@ public class Critica extends IOCriticas{
 	 * Setter de la puntuacion. Comprueba que es un elemento
 	 * de la enum puntuacion
 	 * @param puntuacion Puntuacion del espectaculo
+	 * @author Developers
 	 */
 	
 	public void setPuntuacion(float puntuacion)
@@ -205,8 +216,9 @@ public class Critica extends IOCriticas{
 	}
 	
 	/**
-	 * Setter de la rese�a
+	 * Setter de la resena
 	 * @param resena Cuerpo de la critica
+	 * @author Developers
 	 */
 	
 	public void setResena(String resena)
@@ -217,6 +229,7 @@ public class Critica extends IOCriticas{
 	/**
 	 * Setter del numero de likes de la critica
 	 * @param Like Numero de likes
+	 * @author Developers
 	 */
 	
 	public void setLike(int Like)
@@ -227,6 +240,7 @@ public class Critica extends IOCriticas{
 	/**
 	 * Setter del numero de dislikes de la critica
 	 * @param Dislike Numero de dislikes
+	 * @author Developers
 	 */
 	
 	public void setDislike(int Dislike)
@@ -236,6 +250,7 @@ public class Critica extends IOCriticas{
 	
 	/**
 	 * Metodo para incrementar en 1 el numero de likes
+	 * @author Developers
 	 */
 	
 	public void addLike()
@@ -245,6 +260,7 @@ public class Critica extends IOCriticas{
 	
 	/**
 	 * Metodo para decrementar en 1 el numero de dislikes
+	 * @author Developers
 	 */
 	
 	public void addDislike()
@@ -255,6 +271,7 @@ public class Critica extends IOCriticas{
 	/**
 	 * Setter del identificador unico de la critica
 	 * @param id Identificador de la critica
+	 * @author Developers
 	 */
 	
 	public void setId(int id)
@@ -265,6 +282,7 @@ public class Critica extends IOCriticas{
 	/**
 	 * Setter del valor de cada posicion del Array list votantes
 	 * @param votantes Array List de votantes
+	 * @author Developers
 	 */
 	
 	public void setVotantes(ArrayList<String> votantes)
@@ -272,19 +290,4 @@ public class Critica extends IOCriticas{
 		this.votantes = votantes; 
 	}
 	
-	/**
-	 * Metodo para comprobar si una cadena esta presente
-	 * en la enum puntuacion
-	 * @param punt Puntuacion que se quiere dar
-	 * @return true si la cadena esta permitida, false si no lo esta
-	 */
-	/*
-	public static boolean contains(String punt) {
-		for(puntuaciones p : puntuaciones.values()) {
-			if(punt.equals(p.name()))
-				return true;
-		}
-		return false;
-	}
-	*/
 }
