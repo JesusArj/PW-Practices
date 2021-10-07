@@ -83,7 +83,9 @@ public class MenuCriticas {
                         crit.setId(newIOCriticas.generarID()); 
                         crit.setResena(resena);
                         crit.setMail(mail);
+                        votantes.add(mail); 
                         crit.setVotantes(votantes);
+                        
                 		newGestor.crearCritica(crit);
                 		break;
                 	
@@ -96,16 +98,16 @@ public class MenuCriticas {
                 		//TODO:
                 		
                 		Scanner teclado3 = new Scanner(System.in);  
-                		String titulo = null;
+                		int id;
                 		
                 		System.out.println("ELIMINACI�N DE CRITICAS");
-                		newGestor.consultarCriticas();
+                		newGestor.buscarCriticas(mail);
                 		
-                		System.out.println("Introduzca el titulo de la critica que desea borrar");
+                		System.out.println("Introduzca el id de la critica que desea borrar");
                        
-                        titulo = teclado3.nextLine();
+                        id = Integer.parseInt(teclado3.nextLine());
                         
-                		newIOCriticas.buscarCritica(mail, titulo);
+                		newIOCriticas.borrarCritica(id, mail);
                 		break;
                 		
                 	case "4":
@@ -113,6 +115,8 @@ public class MenuCriticas {
                 		int id1 = 0;
                 		
                 		System.out.println("Se mostraran por pantalla las diferentes criticas para que selecciona el ID de la critica que desea puntuar");
+                		newGestor.consultarCriticas();
+                		System.out.println("Indique el ID de la critica que desea puntuar");
                 		BufferedReader reader1 = new BufferedReader(
             		            new InputStreamReader(System.in));
             			try {
@@ -120,8 +124,6 @@ public class MenuCriticas {
             			} catch (IOException e) {
             				e.printStackTrace();
             			}
-                		newGestor.consultarCriticas();
-                		System.out.println("Indique el ID de la critica que desea puntuar");
                 		//System.out.println(id);
                 		newGestor.votarCriticasPos(id1);
                 		break;

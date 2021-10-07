@@ -46,7 +46,7 @@ public class IOCriticas extends IOUsers {
 	    	fichero= new FileWriter(rutaFichero, true); 
 	    	pw = new PrintWriter(fichero); 
 	    	pw.print(title+"//"+puntuacion +"//" + resena+"//"+ mail + "//" + like +"//" + dislike +"//"+ id + "//");
-	    	if(votantes != null) {
+	    	if(!votantes.isEmpty()) {
 	    		for(String s : votantes) {
 		    		pw.print(s+"::");
 		    	}
@@ -164,10 +164,11 @@ public class IOCriticas extends IOUsers {
 	public void borrarCritica(Critica c1) {
 		ArrayList<Critica> v = new ArrayList<Critica>();
 		v = fichCriticaToVec(v);
-		
+		ArrayList<Critica> aux = new ArrayList<Critica>();
 		for(Critica c : v) {
-			if(c1.equals(c)) {
-				v.remove(c);
+			if(!(c.getId() == c.getId() )) 
+			{
+				aux.add(c);
 			}
 		}
 		BufferedWriter bw;
@@ -178,7 +179,7 @@ public class IOCriticas extends IOUsers {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}		
-		for(Critica c : v) {
+		for(Critica c : aux) {
 			c.criticaToFich(c.getTitle(), c.getPuntuacion(), c.getResena(), c.getMail(), c.getLike(), c.getDislike(), c.getId(), c.getVotantes());
 		}
 	}
@@ -235,6 +236,9 @@ public class IOCriticas extends IOUsers {
 			System.out.println("-------------------");
 			System.out.println("Titulo: " + cs.getTitle());
 			System.out.println("Resena: " + cs.getResena());
+			System.out.println("ID: "+ cs.getId());
+			System.out.println("Likes: " + cs.getLike()); 
+			System.out.println("Dislikes: " + cs.getDislike()); 
 			System.out.println("-------------------");
 			aux++;
 		}
@@ -261,6 +265,9 @@ public class IOCriticas extends IOUsers {
 					System.out.println("CRITICA "+ count);
 					System.out.println("Titulo: " + c.get(i).getTitle());
 					System.out.println("Resena: " + c.get(i).getResena());
+					System.out.println("ID: "+ c.get(i).getId()); 
+					System.out.println("Likes: " + c.get(i).getLike()); 
+					System.out.println("Dislikes: " + c.get(i).getDislike()); 
 					System.out.println("-------------------");
 
 					count++; 
@@ -269,7 +276,7 @@ public class IOCriticas extends IOUsers {
 		}
 		else
 		{
-			System.err.println("El usuario no está registrado en nuestro sistema."); 
+			System.err.println("El usuario no esta registrado en nuestro sistema."); 
 			System.exit(-1); 
 		}
 	}
@@ -322,9 +329,10 @@ public class IOCriticas extends IOUsers {
 	public void borrarCritica(int id, String mail) {
 		ArrayList<Critica> v = new ArrayList<Critica>();
 		v = this.fichCriticaToVec(v);
+		ArrayList<Critica> aux = new ArrayList<Critica>(); 
 		for(Critica c : v) {
-			if(c.getMail().equals(mail) && c.getId() == id ) {
-				v.remove(c);
+			if(!(c.getMail().equals(mail) && c.getId() == id )) {
+				aux.add(c);
 			}
 		}
 		BufferedWriter bw;
@@ -335,7 +343,7 @@ public class IOCriticas extends IOUsers {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}		
-		for(Critica c : v) {
+		for(Critica c : aux) {
 			c.criticaToFich(c.getTitle(), c.getPuntuacion(), c.getResena(), c.getMail(), c.getLike(), c.getDislike(), c.getId(), c.getVotantes());
 		}
 	}
@@ -350,6 +358,7 @@ public class IOCriticas extends IOUsers {
 	public void votarCriticaPos(String mail, int id) {
 		Critica c = new Critica();
 		c = c.buscarCritica(id);
+		ArrayList<String> votantes = new ArrayList<String>(); 
 		if(c.getMail().equals(mail)) {
 			System.err.println("No puede valorar sus propias criticas");
 			return;
@@ -363,7 +372,10 @@ public class IOCriticas extends IOUsers {
 			}
 		Critica cAux = c;
 		cAux.addLike();
-		this.borrarCritica(c);
+		votantes = c.getVotantes(); 
+		votantes.add(mail); 
+		cAux.setVotantes(votantes);
+		this.borrarCritica(c.getId(), mail);
 		this.criticaToFich(cAux.getTitle(), cAux.getPuntuacion(), cAux.getResena(), cAux.getMail(), cAux.getLike(), cAux.getDislike(), cAux.getId(), cAux.getVotantes());
 		}
 	}
