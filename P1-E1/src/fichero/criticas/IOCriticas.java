@@ -35,7 +35,7 @@ public class IOCriticas extends IOUsers {
  * @param dislike Numero de dislike dados a la critica
  *
  */
-	public void criticaToFich(String title, String puntuacion, String resena, String mail, int like, int dislike, int id, ArrayList<String> votantes)
+	public void criticaToFich(String title, float puntuacion, String resena, String mail, int like, int dislike, int id, ArrayList<String> votantes)
 	{		
 		String rutaAbsoluta = new File("").getAbsolutePath();
 		String rutaFichero = rutaAbsoluta + "/criticas.txt";
@@ -45,10 +45,11 @@ public class IOCriticas extends IOUsers {
 	    {	
 	    	fichero= new FileWriter(rutaFichero, true); 
 	    	pw = new PrintWriter(fichero); 
-	    	pw.print(title+"//"+puntuacion +"//" + resena+"//"+ mail + "//" + like +"//" + dislike +"//"+ id);
+	    	pw.print(title+"//"+puntuacion +"//" + resena+"//"+ mail + "//" + like +"//" + dislike +"//"+ id + "//");
 	    	for(String s : votantes) {
-	    		pw.print("((" + s);
+	    		pw.print("__" + s);
 	    	}
+	    	pw.println("");
 	    }catch (Exception e) {
 	       e.printStackTrace();
 	    } finally {
@@ -89,14 +90,14 @@ public class IOCriticas extends IOUsers {
         	while ((linea = br.readLine()) != null) {
         	    String[] data = linea.split("//");
 		    	c1.settitle(data[0]);
-		    	c1.setPuntuacion(data[1]);
+		    	c1.setPuntuacion(Float.parseFloat(data[1]));
 		    	c1.setResena(data[2]);
-		    	c1.setLike(Integer.parseInt(data[3]));
-		    	c1.setDislike(Integer.parseInt(data[4]));
-		    	c1.setMail(data[5]);
+		    	c1.setMail(data[3]);
+		    	c1.setLike(Integer.parseInt(data[4]));
+		    	c1.setDislike(Integer.parseInt(data[5]));
 		    	c1.setId(Integer.parseInt(data[6]));
-		    	String[] data2 = data[7].split("((");
-		    	for(int i=0; i<data2.length; i++) 
+		    	String[] data2 = data[7].split("__");
+		    	for(int i=1; i<data2.length; i++) 
 		    	{
 		    		votantes.add(data2[i]);
 		    	} 

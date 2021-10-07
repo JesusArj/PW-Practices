@@ -13,15 +13,6 @@ import fichero.criticas.IOCriticas;
  *
  */
 public class Critica extends IOCriticas{
-/**
- * Enumeracion que contiene los valores posibles que puede tener
- * la variable puntuacion.
- * @author Antonio Lujano Luna
- *
- */
-	public static enum puntuaciones{
-		MuyBaja, Baja, Normal, Alta, MuyAlta
-	}
 	
 	/**
 	 * Cadena para almacenar el titulo del espectaculo
@@ -34,7 +25,7 @@ public class Critica extends IOCriticas{
 	 * los valores de la enumeracion puntuacion.
 	 */
 	
-	private String puntuacion; 
+	private float puntuacion; 
 	
 	/*
 	 *  Int con el valor del identificador unico de cada critica
@@ -71,6 +62,8 @@ public class Critica extends IOCriticas{
 	
 	private ArrayList<String> votantes; 
 	
+	private IOCriticas ioc = new IOCriticas(); 
+	
 	/**
 	 * Constructor parametrizado de la clase. Inicializamos los
 	 * contadores de likes y dislikes a 0.
@@ -78,14 +71,14 @@ public class Critica extends IOCriticas{
 	 * @param puntuacion Puntuacion dada
 	 * @param resena Rese�a
 	 */
-	public Critica(String title, String puntuacion, String resena)
+	public Critica(String title, float puntuacion, String resena)
 	{
 		this.title = title; 
 		this.puntuacion = puntuacion; 
 		this.resena=resena; 
 		this.like = 0; 
 		this.dislike =0;
-		this.id= generarID();  
+		this.id = ioc.generarID();  
 		this.votantes= new ArrayList<String>(); 
 	}
 	
@@ -123,7 +116,7 @@ public class Critica extends IOCriticas{
 	 * @return Puntuacion
 	 */
 	
-	public String getPuntuacion()
+	public float getPuntuacion()
 	{
 		return this.puntuacion; 
 	}
@@ -206,11 +199,9 @@ public class Critica extends IOCriticas{
 	 * @param puntuacion Puntuacion del espectaculo
 	 */
 	
-	public void setPuntuacion(String puntuacion)
+	public void setPuntuacion(float puntuacion)
 	{
-		if(Critica.contains(puntuacion)) {
 			this.puntuacion=puntuacion; 
-		}
 	}
 	
 	/**
@@ -287,7 +278,7 @@ public class Critica extends IOCriticas{
 	 * @param punt Puntuacion que se quiere dar
 	 * @return true si la cadena esta permitida, false si no lo esta
 	 */
-	
+	/*
 	public static boolean contains(String punt) {
 		for(puntuaciones p : puntuaciones.values()) {
 			if(punt.equals(p.name()))
@@ -295,5 +286,5 @@ public class Critica extends IOCriticas{
 		}
 		return false;
 	}
-	
+	*/
 }

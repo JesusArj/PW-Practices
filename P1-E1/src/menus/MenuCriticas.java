@@ -1,3 +1,4 @@
+
 package menus;
 
 import java.util.ArrayList;
@@ -17,7 +18,6 @@ import gestor.criticas.GestorCriticas;
  * @author ValentÃ­n Avram
  *
  */
-
 public class MenuCriticas {
 
 	//TODO: Esperar a que este hecho el gestor de Criticas y completar restor de opciones.
@@ -29,7 +29,6 @@ public class MenuCriticas {
 * @param usuario usuario que realiza la gestion.
 *
 */
-
 
 	public void reviewMenu(String mail) 
 	{
@@ -65,28 +64,26 @@ public class MenuCriticas {
                ArrayList<String> votantes = new ArrayList<String>();
                 
         		System.out.println("CREACION DE CRITICAS");
-        		System.out.println("Introduzca el titulo de la critica");
+        		System.out.println("Introduzca el nombre del espectaculo.");
         		
         		String title;
                 title = teclado1.nextLine();
                 crit.settitle(title);
                 
-        		System.out.println("Introduzca la puntuacion dada al espectaculo:");
-        		System.out.println("(MuyBaja, Baja, Normal, Alta, MuyAlta)");
+        		System.out.println("Puntua el espectaculo del 1 al 10:");
+        		System.out.println("(Ejemplo: 6.5)");
         		
-        		String puntuacion;     
-                puntuacion = teclado1.nextLine();
+        		float puntuacion;     
+                puntuacion = Float.parseFloat(teclado1.nextLine()); 
                 crit.setPuntuacion(puntuacion);       		
-        		System.out.println("Escriba su reseña");
+        		System.out.println("Escriba su reseï¿½a");
         		
         		String resena;             
                 resena = teclado1.nextLine();
+                crit.setId(newIOCriticas.generarID()); 
                 crit.setResena(resena);
-        		
                 crit.setMail(mail);
                 crit.setVotantes(votantes);
-                
-                
         		newGestor.crearCritica(crit);
         		break;
         	
@@ -102,7 +99,7 @@ public class MenuCriticas {
         		Scanner teclado3 = new Scanner(System.in);  
         		String titulo = null;
         		
-        		System.out.println("ELIMINACIÓN DE CRITICAS");
+        		System.out.println("ELIMINACIï¿½N DE CRITICAS");
         		newGestor.consultarCriticas();
         		
         		System.out.println("Introduzca el titulo de la critica que desea borrar");
