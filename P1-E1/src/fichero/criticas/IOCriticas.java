@@ -46,8 +46,14 @@ public class IOCriticas extends IOUsers {
 	    	fichero= new FileWriter(rutaFichero, true); 
 	    	pw = new PrintWriter(fichero); 
 	    	pw.print(title+"//"+puntuacion +"//" + resena+"//"+ mail + "//" + like +"//" + dislike +"//"+ id + "//");
-	    	for(String s : votantes) {
-	    		pw.print("__" + s);
+	    	if(votantes != null) {
+	    		for(String s : votantes) {
+		    		pw.print(s+"::");
+		    	}
+		    	pw.print("//");
+	    	}
+	    	else {
+	    		pw.print("void//");
 	    	}
 	    	pw.println("");
 	    }catch (Exception e) {
@@ -96,16 +102,20 @@ public class IOCriticas extends IOUsers {
 		    	c1.setLike(Integer.parseInt(data[4]));
 		    	c1.setDislike(Integer.parseInt(data[5]));
 		    	c1.setId(Integer.parseInt(data[6]));
-		    	String[] data2 = data[7].split("__");
-		    	for(int i=1; i<data2.length; i++) 
-		    	{
-		    		votantes.add(data2[i]);
-		    	} 
-		    	c1.setVotantes(votantes);
+		    	if(!("void".equals(data[7]))) {
+		    		String[] data2 = data[7].split("::");
+			    	for(int i=1; i<data2.length; i++) 
+			    	{
+			    		votantes.add(data2[i]);
+			    	} 
+			    	c1.setVotantes(votantes);
+		    	}
+		    	else {
+		    		c1.setVotantes(new ArrayList<String>());
+		    	}
 		    	v.add(c1); 
 		    	c1 = new Critica();
 		    	votantes = new ArrayList<String>(); 
-		    
         	}
 	        
 		}catch(Exception e){
@@ -218,12 +228,15 @@ public class IOCriticas extends IOUsers {
 	{
 		ArrayList<Critica> c = new ArrayList<Critica>(); 
 		c = fichCriticaToVec(c);
-		for(int i=0; i<c.size(); i++)
+		int aux = 1;
+		for(Critica cs : c)
 		{
-			System.out.println("CRITICA "+ i+1);
+			System.out.println("CRITICA "+ aux);
 			System.out.println("-------------------");
-			System.out.println("Titulo: " + c.get(i).getTitle());
-			System.out.println("Resena: " + c.get(i).getResena());
+			System.out.println("Titulo: " + cs.getTitle());
+			System.out.println("Resena: " + cs.getResena());
+			System.out.println("-------------------");
+			aux++;
 		}
 	}
 	

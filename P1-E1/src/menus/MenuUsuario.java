@@ -61,7 +61,9 @@ public class MenuUsuario {
         { // Opciones 3, el usuario se da de baja.
         	//TODO:
         	//System.out.println(mail);
-        	newGestor.updateUser();
+        	newGestor.darBajaUser();
+        	System.out.println("Ha sido dado de baja. Gracias por usar nuestro sistema.");
+        	return;
         }
         else
         { 
