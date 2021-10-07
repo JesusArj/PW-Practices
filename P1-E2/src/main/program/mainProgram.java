@@ -2,11 +2,15 @@ package main.program;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+
+import critica.Critica;
+import fichero.criticas.IOCriticas;
 import fichero.users.IOUsers;
 import menus.MenuCriticas;
 import menus.MenuUsuario;
 public class mainProgram {
-
+	
 	public static void main(String[] args) throws IOException 
 	{
         String email = null, passwd = null, opcion = null, name = null, username = null;
@@ -88,7 +92,7 @@ public class mainProgram {
     		        System.out.println("Ha sido registrado correctamente.");
     		        System.out.println("Bienvenido a nuestro sistema " + username + ".");
             		while(opcion!="1" || opcion!= "2" || opcion!="3") {
-    	            	System.out.println("¿Que desea hacer?");
+    	            	System.out.println("ï¿½Que desea hacer?");
     	            	System.out.println("1. Acceder al menu de usuarios");
     	            	System.out.println("2. Acceder al menu de criticas");
     	            	System.out.println("3. Salir");
@@ -163,7 +167,7 @@ public class mainProgram {
 						
             			System.out.println("Bienvenido a nuestro sistema, " + io.buscarPorCorreo(email).getUsername() + ".");
     	        		while(opcion1!="1" || opcion1!= "2" || opcion1!="3") {
-    		            	System.out.println("¿Que desea hacer?");
+    		            	System.out.println("ï¿½Que desea hacer?");
     		            	System.out.println("1. Acceder al menu de usuarios");
     		            	System.out.println("2. Acceder al menu de criticas");
     		            	System.out.println("3. Salir");
@@ -199,7 +203,7 @@ public class mainProgram {
 	        System.out.println("Bienvenido a nuestro sistema " + io.buscarPorCorreo(email).getUsername() + ".");
     		
 			while(opcion !="1" || opcion!= "2" || opcion!="3") {
-            	System.out.println("¿Que desea hacer?");
+            	System.out.println("ï¿½Que desea hacer?");
             	System.out.println("1. Acceder al menu de usuarios");
             	System.out.println("2. Acceder al menu de criticas");
             	System.out.println("3. Salir");
@@ -273,7 +277,7 @@ public class mainProgram {
 	        System.out.println("Bienvenido a nuestro sistema " + io.buscarPorCorreo(email).getUsername() + ".");
     		
 			while(opcion !="1" || opcion!= "2" || opcion!="3") {
-            	System.out.println("¿Que desea hacer?");
+            	System.out.println("ï¿½Que desea hacer?");
             	System.out.println("1. Modificar mis datos");
             	System.out.println("2. Acceder al sistema de criticas");
             	System.out.println("3. Salir");

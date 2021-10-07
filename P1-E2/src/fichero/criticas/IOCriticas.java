@@ -35,7 +35,7 @@ public class IOCriticas extends IOUsers {
  * @param dislike Numero de dislike dados a la critica
  *
  */
-	public void criticaToFich(String title, String puntuacion, String resena, String mail, int like, int dislike, int id, ArrayList<String> votantes)
+	public void criticaToFich(String title, float puntuacion, String resena, String mail, int like, int dislike, int id, ArrayList<String> votantes)
 	{		
 		String rutaAbsoluta = new File("").getAbsolutePath();
 		String rutaFichero = rutaAbsoluta + "/criticas.txt";
@@ -45,10 +45,17 @@ public class IOCriticas extends IOUsers {
 	    {	
 	    	fichero= new FileWriter(rutaFichero, true); 
 	    	pw = new PrintWriter(fichero); 
-	    	pw.print(title+"//"+puntuacion +"//" + resena+"//"+ mail + "//" + like +"//" + dislike +"//"+ id);
-	    	for(String s : votantes) {
-	    		pw.print("((" + s);
+	    	pw.print(title+"//"+puntuacion +"//" + resena+"//"+ mail + "//" + like +"//" + dislike +"//"+ id + "//");
+	    	if(votantes != null) {
+	    		for(String s : votantes) {
+		    		pw.print(s+"::");
+		    	}
+		    	pw.print("//");
 	    	}
+	    	else {
+	    		pw.print("void//");
+	    	}
+	    	pw.println("");
 	    }catch (Exception e) {
 	       e.printStackTrace();
 	    } finally {
@@ -89,22 +96,26 @@ public class IOCriticas extends IOUsers {
         	while ((linea = br.readLine()) != null) {
         	    String[] data = linea.split("//");
 		    	c1.settitle(data[0]);
-		    	c1.setPuntuacion(data[1]);
+		    	c1.setPuntuacion(Float.parseFloat(data[1]));
 		    	c1.setResena(data[2]);
-		    	c1.setLike(Integer.parseInt(data[3]));
-		    	c1.setDislike(Integer.parseInt(data[4]));
-		    	c1.setMail(data[5]);
+		    	c1.setMail(data[3]);
+		    	c1.setLike(Integer.parseInt(data[4]));
+		    	c1.setDislike(Integer.parseInt(data[5]));
 		    	c1.setId(Integer.parseInt(data[6]));
-		    	String[] data2 = data[7].split("((");
-		    	for(int i=0; i<data2.length; i++) 
-		    	{
-		    		votantes.add(data2[i]);
-		    	} 
-		    	c1.setVotantes(votantes);
+		    	if(!("void".equals(data[7]))) {
+		    		String[] data2 = data[7].split("::");
+			    	for(int i=1; i<data2.length; i++) 
+			    	{
+			    		votantes.add(data2[i]);
+			    	} 
+			    	c1.setVotantes(votantes);
+		    	}
+		    	else {
+		    		c1.setVotantes(new ArrayList<String>());
+		    	}
 		    	v.add(c1); 
 		    	c1 = new Critica();
 		    	votantes = new ArrayList<String>(); 
-		    
         	}
 	        
 		}catch(Exception e){
@@ -217,12 +228,15 @@ public class IOCriticas extends IOUsers {
 	{
 		ArrayList<Critica> c = new ArrayList<Critica>(); 
 		c = fichCriticaToVec(c);
-		for(int i=0; i<c.size(); i++)
+		int aux = 1;
+		for(Critica cs : c)
 		{
-			System.out.println("CRITICA "+ i+1);
+			System.out.println("CRITICA "+ aux);
 			System.out.println("-------------------");
-			System.out.println("Titulo: " + c.get(i).getTitle());
-			System.out.println("Resena: " + c.get(i).getResena());
+			System.out.println("Titulo: " + cs.getTitle());
+			System.out.println("Resena: " + cs.getResena());
+			System.out.println("-------------------");
+			aux++;
 		}
 	}
 	

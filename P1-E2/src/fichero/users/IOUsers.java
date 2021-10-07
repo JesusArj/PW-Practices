@@ -81,7 +81,7 @@ public class IOUsers
 		String rutaFichero = rutaAbsoluta + "/usuarios.txt";
 		FileReader fr = null;
 		BufferedReader br = null;
-		 Espectador e1 = new Espectador();
+		Espectador e1 = new Espectador();
 		
 		try {
 			
@@ -203,10 +203,11 @@ public class IOUsers
 	public void borrarUser(String mail) {
 		ArrayList<Espectador> v = new ArrayList<Espectador>();
 		v = fichToVec(v);
-		
+		ArrayList<Espectador> v2 = new ArrayList<Espectador>();
+		v2.clear();
 		for(Espectador c : v) {
-			if(c.getMail().equals(mail)) {
-				v.remove(c);
+			if(!(c.getMail().equals(mail))) {
+				v2.add(c);
 			}
 		}
 		BufferedWriter bw;
@@ -217,7 +218,7 @@ public class IOUsers
 		} catch (IOException e) {
 			e.printStackTrace();
 		}		
-		for(Espectador c : v) {
+		for(Espectador c : v2) {
 			c.RegisterUserToFich(c.getName(), c.getUsername(), c.getMail(), c.getPasswd());
 		}
 		System.out.println("Has sido eliminado correctamente del sistema."); 
