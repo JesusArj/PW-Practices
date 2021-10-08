@@ -462,6 +462,7 @@ public class IOCriticas extends IOUsers {
 	public void votarCriticaNeg(String mail, int id) {
 		Critica c = new Critica();
 		c = c.buscarCritica(id);
+		ArrayList<String> votantes = new ArrayList<String>(); 
 		if(c.getMail().equals(mail)) {
 			System.err.println("No puede valorar sus propias criticas");
 			return;
@@ -475,6 +476,9 @@ public class IOCriticas extends IOUsers {
 			}
 		Critica cAux = c;
 		cAux.addDislike();
+		votantes = c.getVotantes(); 
+		votantes.add(mail); 
+		cAux.setVotantes(votantes);
 		this.borrarCriticaParaUpdates(id);
 		this.criticaToFich(cAux.getTitle(), cAux.getPuntuacion(), cAux.getResena(), cAux.getMail(), cAux.getLike(), cAux.getDislike(), cAux.getId(), cAux.getVotantes());
 		}
