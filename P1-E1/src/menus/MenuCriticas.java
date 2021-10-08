@@ -4,6 +4,8 @@ package menus;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -89,7 +91,42 @@ public class MenuCriticas {
                 	
                 	case "2":
                 		
-                		newGestor.consultarCriticas();
+                		String rutaAbsoluta = new File("").getAbsolutePath();
+                		String rutaFichero = rutaAbsoluta + "/criticas.txt";
+                		
+                		FileReader fr = null;
+                		BufferedReader br = null;
+                		try
+                		{
+                	        fr = new FileReader (rutaFichero);
+                	        br = new BufferedReader(fr);	
+                	        newGestor.consultarCriticas();
+                	        
+	                		if (( br.readLine()) == null) 
+	                		{
+	                			System.out.println("No hay ninguna critica registrada en el sistema !");
+	                			System.out.println("");
+	                		}
+                		}
+                		
+                		catch(Exception e)
+                		{
+                			e.printStackTrace();
+                		}
+                		finally
+                		{
+                			try
+                			{                    
+                				if( null != fr )
+                				{   
+                					fr.close();     
+                				}                  
+                			}
+                			catch (Exception e2)
+                			{ 
+                				e2.printStackTrace();
+                			}
+                		}
                 		break;
                 		                	
                 	case "3":
@@ -105,50 +142,187 @@ public class MenuCriticas {
                        
                         id = Integer.parseInt(teclado3.nextLine());
                         
-                		newIOCriticas.borrarCritica(id, mail);
+                        if(newIOCriticas.existId(id) == true)
+                        {
+                        	newIOCriticas.borrarCritica(id, mail);
+                        }
+                        else 
+                        {
+                        System.out.println("El ID indicado no existe. Intentelo de nuevo.");	
+                        }
+                        
                 		break;
                 		
                 	case "4":
                 		//TODO:
                 		int id1 = 0;
                 		
-                		System.out.println("Se mostraran por pantalla las diferentes criticas para que selecciona el ID de la critica que desea puntuar");
-                		newGestor.consultarCriticas();
-                		System.out.println("Indique el ID de la critica que desea puntuar");
-                		BufferedReader reader1 = new BufferedReader(
-            		            new InputStreamReader(System.in));
-            			try {
-            				id1 = Integer.parseInt(reader1.readLine());
-            			} catch (IOException e) {
-            				e.printStackTrace();
-            			}
-                		//System.out.println(id);
-                		newGestor.votarCriticasPos(id1);
+                		System.out.println("Se mostraran por pantalla las diferentes criticas para que selecciona el ID de la critica que desea puntuar:");
+                		System.out.println("");
+                		String rutaAbsoluta1 = new File("").getAbsolutePath();
+                		String rutaFichero1 = rutaAbsoluta1 + "/criticas.txt";
+                		
+                		FileReader fr1 = null;
+                		BufferedReader br1 = null;
+                		try
+                		{
+                	        fr1 = new FileReader (rutaFichero1);
+                	        br1 = new BufferedReader(fr1);	
+                	        newGestor.consultarCriticas();
+                	        
+	                		if (( br1.readLine()) == null) 
+	                		{
+	                			System.out.println("No hay ninguna critica registrada en el sistema !");
+	                			System.out.println("");
+	                		}
+	                		else
+	                		{
+	                    		System.out.println("Indique el ID de la critica que desea puntuar");
+	                    		BufferedReader reader1 = new BufferedReader(
+	                		            new InputStreamReader(System.in));
+	                			try {
+	                				id1 = Integer.parseInt(reader1.readLine());
+	                			} catch (IOException e) {
+	                				e.printStackTrace();
+	                			}
+	                			if(newIOCriticas.existId(id1))
+	                			{
+	                				newGestor.votarCriticasPos(id1);
+	                			}
+	                            else 
+	                            {
+	                            System.out.println("El ID indicado no existe. Intentelo de nuevo.");	
+	                            }
+	                            
+	                		}
+                		}
+                		
+                		catch(Exception e)
+                		{
+                			e.printStackTrace();
+                		}
+                		finally
+                		{
+                			try
+                			{                    
+                				if( null != fr1 )
+                				{   
+                					fr1.close();     
+                				}                  
+                			}
+                			catch (Exception e2)
+                			{ 
+                				e2.printStackTrace();
+                			}
+                		}                		
+                		
                 		break;
                 	
                 	case "5":
                 		//TODO:
                 		int id2 = 0;
                 		
-                		System.out.println("Se mostraran por pantalla las diferentes criticas para que selecciona el ID de la critica que desea puntuar");
-                		newGestor.consultarCriticas();
-                		System.out.println("Indique el ID de la critica que desea puntuar");
-
-                		BufferedReader reader2 = new BufferedReader(
-            		            new InputStreamReader(System.in));
-            			try {
-            				id2 = Integer.parseInt(reader2.readLine());
-            			} catch (IOException e) {
-            				e.printStackTrace();
-            			}
-                		//System.out.println(id);
-                		newGestor.votarCriticasNeg(id2);
+                		System.out.println("Se mostraran por pantalla las diferentes criticas para que selecciona el ID de la critica que desea puntuar:");
+                		System.out.println("");
+                		String rutaAbsoluta2 = new File("").getAbsolutePath();
+                		String rutaFichero2 = rutaAbsoluta2 + "/criticas.txt";
+                		
+                		FileReader fr2 = null;
+                		BufferedReader br2 = null;
+                		try
+                		{
+                	        fr2 = new FileReader (rutaFichero2);
+                	        br2 = new BufferedReader(fr2);	
+                	        newGestor.consultarCriticas();
+                	        
+	                		if (( br2.readLine()) == null) 
+	                		{
+	                			System.out.println("No hay ninguna critica registrada en el sistema !");
+	                			System.out.println("");
+	                		}
+	                		else
+	                		{
+	                    		System.out.println("Indique el ID de la critica que desea puntuar");
+	                    		BufferedReader reader1 = new BufferedReader(
+	                		            new InputStreamReader(System.in));
+	                			try {
+	                				id1 = Integer.parseInt(reader1.readLine());
+	                			} catch (IOException e) {
+	                				e.printStackTrace();
+	                			}
+	                			
+	                			if(newIOCriticas.existId(id2))
+	                			{
+	                				newGestor.votarCriticasNeg(id2);	                			
+	                			}
+	                            else 
+	                            {
+	                            System.out.println("El ID indicado no existe. Intentelo de nuevo.");	
+	                            }
+	                            
+	                		}
+                		}
+                		
+                		catch(Exception e)
+                		{
+                			e.printStackTrace();
+                		}
+                		finally
+                		{
+                			try
+                			{                    
+                				if( null != fr2 )
+                				{   
+                					fr2.close();     
+                				}                  
+                			}
+                			catch (Exception e2)
+                			{ 
+                				e2.printStackTrace();
+                			}
+                		}
                 		break;
 
                 	case "6":
+                	
+                		String rutaAbsoluta3 = new File("").getAbsolutePath();
+                		String rutaFichero3 = rutaAbsoluta3 + "/criticas.txt";
                 		
-                		newGestor.buscarCriticas(mail);
-                		break;
+                		FileReader fr3 = null;
+                		BufferedReader br3 = null;
+                		try
+                		{
+                	        fr3 = new FileReader (rutaFichero3);
+                	        br3 = new BufferedReader(fr3);	
+                	        newGestor.buscarCriticas(mail);
+                	        
+	                		if (( br3.readLine()) == null) 
+	                		{
+	                			System.out.println("No hay ninguna critica registrada en el sistema !");
+	                			System.out.println("");
+	                		}
+                		}
+                		
+                		catch(Exception e)
+                		{
+                			e.printStackTrace();
+                		}
+                		finally
+                		{
+                			try
+                			{                    
+                				if( null != fr3 )
+                				{   
+                					fr3.close();     
+                				}                  
+                			}
+                			catch (Exception e2)
+                			{ 
+                				e2.printStackTrace();
+                			}
+                		}
+                		break;                		
+
                 	
                 	default:
                 		System.out.println("Gracias por usar este menu");
