@@ -257,7 +257,7 @@ public class MenuCriticas {
 	                				id1 = Integer.parseInt(reader1.readLine());
 	                				if(newIOCriticas.existId(id1))
 		                			{
-		                				newGestor.votarCriticasNeg(id2);
+		                				newGestor.votarCriticasNeg(id1);
 		                				System.out.println("Dislike añadido correctamente.");
 		                			}
 	                				else 
