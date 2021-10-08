@@ -131,6 +131,9 @@ public class MenuCriticas {
                 		int id2 = 0;
                 		
                 		System.out.println("Se mostraran por pantalla las diferentes criticas para que selecciona el ID de la critica que desea puntuar");
+                		newGestor.consultarCriticas();
+                		System.out.println("Indique el ID de la critica que desea puntuar");
+
                 		BufferedReader reader2 = new BufferedReader(
             		            new InputStreamReader(System.in));
             			try {
@@ -138,8 +141,6 @@ public class MenuCriticas {
             			} catch (IOException e) {
             				e.printStackTrace();
             			}
-                		newGestor.consultarCriticas();
-                		System.out.println("Indique el ID de la critica que desea puntuar");
                 		//System.out.println(id);
                 		newGestor.votarCriticasNeg(id2);
                 		break;

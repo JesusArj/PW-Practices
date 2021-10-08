@@ -90,13 +90,13 @@ public class GestorCriticas {
 			 * @param c Objeto de la clase critica
 			 * @author Developers
 			 */
-			
+			/**
 			public void votarCriticasPos(Critica c)
 			{
 				if(instance!=null)
 					this.c.votarCriticaPos(this.mail, c);
 			}
-			
+			*/
 			/**
 			 * Funcion que anade un voto positivo
 			 * a una critica concreta
@@ -109,20 +109,20 @@ public class GestorCriticas {
 				if(instance!=null)
 					this.c.votarCriticaPos(this.mail, id);
 			}
-			
 			/**
 			 * Funcion que anade un voto negativo
 			 * a una critica concreta
 			 * @param c Objeto de la clase critica
 			 * @author Developers
 			 */
-			
+			/**
+
 			public void votarCriticasNeg(Critica c)
 			{
 				if(instance!=null)
 					this.c.votarCriticaNeg(this.mail, c);
 			}
-			
+			*/
 			/**
 			 * Funcion que anade un voto positivo
 			 * a una critica concreta

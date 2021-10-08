@@ -106,7 +106,7 @@ public class IOCriticas extends IOUsers {
 		    	c1.setId(Integer.parseInt(data[6]));
 		    	if(!("void".equals(data[7]))) {
 		    		String[] data2 = data[7].split("::");
-			    	for(int i=1; i<data2.length; i++) 
+			    	for(int i=0; i<data2.length; i++) 
 			    	{
 			    		votantes.add(data2[i]);
 			    	} 
@@ -183,6 +183,66 @@ public class IOCriticas extends IOUsers {
 			bw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+		}		
+		for(Critica c : aux) {
+			c.criticaToFich(c.getTitle(), c.getPuntuacion(), c.getResena(), c.getMail(), c.getLike(), c.getDislike(), c.getId(), c.getVotantes());
+		}
+	}
+
+	/**
+	 * Funcion que elimina una critica del fichero de criticas cuando va a ser actualizada.
+	 * @param id de la Critica a borrar
+	 * @author Developers
+	 *
+	 */
+
+		public void borrarCriticaParaUpdates(int id) {
+			ArrayList<Critica> v = new ArrayList<Critica>();
+			v = fichCriticaToVec(v);
+			ArrayList<Critica> aux = new ArrayList<Critica>();
+			for(Critica c : v) {
+				if(!(c.getId() == id )) 
+				{
+					aux.add(c);
+				}
+			}
+			BufferedWriter bw;
+			try {
+				bw = new BufferedWriter(new FileWriter("criticas.txt"));
+				bw.write("");
+				bw.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}		
+			for(Critica c : aux) {
+				c.criticaToFich(c.getTitle(), c.getPuntuacion(), c.getResena(), c.getMail(), c.getLike(), c.getDislike(), c.getId(), c.getVotantes());
+			}
+		}
+	
+	/**
+	 * Funcion que borra una critica buscando por el mail de
+	 * su autor y su id
+	 * @param mail Mail del autor de la critica
+	 * @param id Identificador de la critica
+	 * @author Developers
+	 */
+	
+	public void borrarCritica(int id, String mail) {
+		ArrayList<Critica> v = new ArrayList<Critica>();
+		v = this.fichCriticaToVec(v);
+		ArrayList<Critica> aux = new ArrayList<Critica>(); 
+		for(Critica c : v) {
+			if(!(c.getMail().equals(mail) && c.getId() == id )) {
+				aux.add(c);
+			}
+		}
+		BufferedWriter bw;
+		try {
+			bw = new BufferedWriter(new FileWriter("criticas.txt"));
+			bw.write("");
+			bw.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
 		}		
 		for(Critica c : aux) {
 			c.criticaToFich(c.getTitle(), c.getPuntuacion(), c.getResena(), c.getMail(), c.getLike(), c.getDislike(), c.getId(), c.getVotantes());
@@ -332,36 +392,6 @@ public class IOCriticas extends IOUsers {
 	}
 	
 	/**
-	 * Funcion que borra una critica buscando por el mail de
-	 * su autor y su id
-	 * @param mail Mail del autor de la critica
-	 * @param id Identificador de la critica
-	 * @author Developers
-	 */
-	
-	public void borrarCritica(int id, String mail) {
-		ArrayList<Critica> v = new ArrayList<Critica>();
-		v = this.fichCriticaToVec(v);
-		ArrayList<Critica> aux = new ArrayList<Critica>(); 
-		for(Critica c : v) {
-			if(!(c.getMail().equals(mail) && c.getId() == id )) {
-				aux.add(c);
-			}
-		}
-		BufferedWriter bw;
-		try {
-			bw = new BufferedWriter(new FileWriter("criticas.txt"));
-			bw.write("");
-			bw.close();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}		
-		for(Critica c : aux) {
-			c.criticaToFich(c.getTitle(), c.getPuntuacion(), c.getResena(), c.getMail(), c.getLike(), c.getDislike(), c.getId(), c.getVotantes());
-		}
-	}
-	
-	/**
 	 * Funcion que aumenta en +1 los likes de una critica concreta
 	 * @param mail Mail del autor de la critica
 	 * @param id Identificador a comprobar
@@ -389,7 +419,7 @@ public class IOCriticas extends IOUsers {
 		votantes = c.getVotantes(); 
 		votantes.add(mail); 
 		cAux.setVotantes(votantes);
-		this.borrarCritica(c.getId(), mail);
+		this.borrarCriticaParaUpdates(id);
 		this.criticaToFich(cAux.getTitle(), cAux.getPuntuacion(), cAux.getResena(), cAux.getMail(), cAux.getLike(), cAux.getDislike(), cAux.getId(), cAux.getVotantes());
 		}
 	}
@@ -400,7 +430,7 @@ public class IOCriticas extends IOUsers {
 	 * @param c Critica concreta
 	 * @author Developers
 	 */
-	
+	/**
 	
 	public void votarCriticaPos(String mail, Critica c) {
 		if(c.getMail().equals(mail)) {
@@ -420,6 +450,7 @@ public class IOCriticas extends IOUsers {
 		this.criticaToFich(cAux.getTitle(), cAux.getPuntuacion(), cAux.getResena(), cAux.getMail(), cAux.getLike(), cAux.getDislike(), cAux.getId(), cAux.getVotantes());
 		}
 	}
+	*/
 	
 	/**
 	 * Funcion que aumenta en +1 los dislikes de una critica concreta
@@ -444,7 +475,7 @@ public class IOCriticas extends IOUsers {
 			}
 		Critica cAux = c;
 		cAux.addDislike();
-		this.borrarCritica(c);
+		this.borrarCriticaParaUpdates(id);
 		this.criticaToFich(cAux.getTitle(), cAux.getPuntuacion(), cAux.getResena(), cAux.getMail(), cAux.getLike(), cAux.getDislike(), cAux.getId(), cAux.getVotantes());
 		}
 	}
@@ -455,7 +486,7 @@ public class IOCriticas extends IOUsers {
 	 * @param c Critica concreta
 	 * @author Developers
 	 */
-	
+	/**
 	public void votarCriticaNeg(String mail, Critica c) {
 		if(c.getMail().equals(mail)) {
 			System.err.println("No puede valorar sus propias criticas");
@@ -474,6 +505,6 @@ public class IOCriticas extends IOUsers {
 		this.criticaToFich(cAux.getTitle(), cAux.getPuntuacion(), cAux.getResena(), cAux.getMail(), cAux.getLike(), cAux.getDislike(), cAux.getId(), cAux.getVotantes());
 		}
 	}
-	
+	*/
 	
 }
