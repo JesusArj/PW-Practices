@@ -38,6 +38,7 @@ public class MenuCriticas {
         GestorCriticas newGestor = GestorCriticas.getInstance(mail);
         IOCriticas newIOCriticas = new IOCriticas();
         	while(true) {
+        		System.out.println(""); 
         		System.out.println("Bienvenido a nuestro Menu de gestion de usuarios.");
         	    System.out.println("Para crear una critica, pulse 1.");
         	    System.out.println("Para consultar criticas, pulse 2");
@@ -70,11 +71,18 @@ public class MenuCriticas {
                         title = teclado1.nextLine();
                         crit.settitle(title);
                         
+
                 		System.out.println("Puntua el espectaculo del 1 al 10:");
                 		System.out.println("(Ejemplo: 6.5)");
                 		
                 		float puntuacion;     
                         puntuacion = Float.parseFloat(teclado1.nextLine()); 
+                        while(puntuacion<0 || puntuacion>10)
+                        {
+	                        System.out.println("Puntua el espectaculo del 1 al 10:");
+	                    	System.out.println("(Ejemplo: 6.5)");
+	                    	puntuacion = Float.parseFloat(teclado1.nextLine()); 
+                        }
                         crit.setPuntuacion(puntuacion);       		
                 		System.out.println("Escriba su rese�a");
                 		
@@ -83,7 +91,6 @@ public class MenuCriticas {
                         crit.setId(newIOCriticas.generarID()); 
                         crit.setResena(resena);
                         crit.setMail(mail);
-                        votantes.add(mail); 
                         crit.setVotantes(votantes);
                         
                 		newGestor.crearCritica(crit);
@@ -325,7 +332,7 @@ public class MenuCriticas {
 
                 	
                 	default:
-                		System.out.println("Gracias por usar este menu");
+                		System.out.println("Saliendo...\n\n");
                 		return;
                 
                 }

@@ -65,7 +65,7 @@ public class MenuUsuario {
         }
         else
         { 
-        	System.out.println("Gracias por usar el menu");
+        	System.out.println("Saliendo...\n\n");
         }
 
 	}

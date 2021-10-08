@@ -24,6 +24,8 @@ import fichero.users.IOUsers;
 
 public class IOCriticas extends IOUsers {
 	
+	
+	public IOCriticas() {}
 /**
  * Funcion que anade una critica al fichero de critica,
  * con la informacion respectiva.
@@ -324,7 +326,7 @@ public class IOCriticas extends IOUsers {
 		ArrayList<Critica> c = new ArrayList<Critica>(); 
 		c = fichCriticaToVec(c);
 		int count = 1; 
-		if(comprobarUserExist(mail)==true)
+		if(comprobarUserExist(mail)==true && !c.isEmpty())
 		{
 			for(int i=0; i<c.size(); i++)
 			{
@@ -342,12 +344,15 @@ public class IOCriticas extends IOUsers {
 
 					count++; 
 				}
+				else
+				{
+					System.err.println("El usuario no tiene ninguna crítica asociada");
+				}
 			}
 		}
 		else
 		{
-			System.err.println("El usuario no esta registrado en nuestro sistema."); 
-			System.exit(-1); 
+			System.err.println("El usuario no esta registrado en nuestro sistema.");
 		}
 	}
 	
@@ -481,6 +486,38 @@ public class IOCriticas extends IOUsers {
 		cAux.setVotantes(votantes);
 		this.borrarCriticaParaUpdates(id);
 		this.criticaToFich(cAux.getTitle(), cAux.getPuntuacion(), cAux.getResena(), cAux.getMail(), cAux.getLike(), cAux.getDislike(), cAux.getId(), cAux.getVotantes());
+		}
+	}
+	
+	public void updateUserCriticas(String Mail, String newMail)
+	{
+		ArrayList<Critica> v = new ArrayList<Critica>(); 
+		v=fichCriticaToVec(v); 
+		for (Critica c : v)
+		{
+			if(c.getMail().equals(Mail))
+			{
+				c.setMail( Mail.replaceAll(Mail, newMail));
+			}
+			
+			for(int i =0; i<c.getVotantes().size(); i++)
+			{
+				if(c.getVotantes().get(i).equals(Mail))
+				{
+				 c.getVotantes().set(i,c.getVotantes().get(i).replaceAll(Mail, newMail) );
+				}
+			}
+		}
+		BufferedWriter bw;
+		try {
+			bw = new BufferedWriter(new FileWriter("criticas.txt"));
+			bw.write("");
+			bw.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}		
+		for(Critica c : v) {
+			c.criticaToFich(c.getTitle(), c.getPuntuacion(), c.getResena(), c.getMail(), c.getLike(), c.getDislike(), c.getId(), c.getVotantes());
 		}
 	}
 	

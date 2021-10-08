@@ -100,6 +100,7 @@ public class GestorUsuarios {
 		if(instance!=null)
 		{
 			User.updateUser(this.Mail);
+			System.exit(1);
 		}	
 	}
 

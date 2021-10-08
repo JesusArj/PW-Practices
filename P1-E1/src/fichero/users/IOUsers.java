@@ -9,8 +9,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import espectador.*;
+import fichero.criticas.IOCriticas;
 
 /*
  *
@@ -23,7 +25,6 @@ import espectador.*;
 
 public class IOUsers 
 {
-
 /**
  * Funcion que añade un usuario de nuevo registro al fichero de usuarios.
  * @param name Nombre del usuario
@@ -212,7 +213,6 @@ public class IOUsers
 		ArrayList<Espectador> v = new ArrayList<Espectador>();
 		v = fichToVec(v);
 		ArrayList<Espectador> v2 = new ArrayList<Espectador>();
-		v2.clear();
 		for(Espectador c : v) {
 			if(!(c.getMail().equals(mail))) {
 				v2.add(c);
@@ -229,7 +229,6 @@ public class IOUsers
 		for(Espectador c : v2) {
 			c.RegisterUserToFich(c.getName(), c.getUsername(), c.getMail(), c.getPasswd());
 		}
-		System.out.println("Has sido eliminado correctamente del sistema."); 
 	}
 	
 /**
@@ -305,6 +304,7 @@ public class IOUsers
 			e.printStackTrace();
 		}
 		Espectador e1 = new Espectador(name,email, username, passwd);
+		
 		return e1;
 	}
 	
@@ -317,11 +317,24 @@ public class IOUsers
 	 */
 	
 	public void updateUser(String mail) {
+		IOCriticas ioc = new IOCriticas(); 
+		String correo = null; 
+		Scanner correo_scan = new Scanner(System.in); 
 		this.imprimirDatosUser(mail);
-		this.borrarUser(mail);
 		Espectador e = this.proveerDatos();
-		this.comprobarUserExist(e.getMail());
+		while(comprobarUserExist(e.getMail())==true)
+		{
+			System.out.println("Ese correo electronico ya pertenece a un usuario. Porfavor, indique otro correo electronico.");
+			correo = correo_scan.nextLine(); 
+			e.setMail(correo);
+			if(comprobarUserExist(e.getMail())==false)
+				break; 
+		}
+		this.borrarUser(mail);
 		this.RegisterUserToFich(e.getName(), e.getUsername(), e.getMail(), e.getPasswd());
+		System.out.println("Sus credenciales han sido actualizadas. Por favor, acceda al sistema con sus nuevas credenciales.");
+		ioc.updateUserCriticas(mail, e.getMail());
+		correo_scan.close(); 
 	}
 	
 }

@@ -56,7 +56,6 @@ public class Espectador extends IOUsers{
 		this.mail=mail;
 		this.username = username;
 		this.passwd = passwd;
-		RegisterUserToFich(this.name, this.mail, this.username, this.passwd); 
 	}
 	
 	//OBSERVADORES
