@@ -1,16 +1,18 @@
 package espectaculo;
 
+import java.time.LocalDate;
+
 public class EspectaculoPuntual extends AbstractEspectaculo {
-	private Pair horaFecha;
+	private LocalDate horaFecha;
 	
 	public EspectaculoPuntual() {
 		
 	}
 	
-	public Pair getHoraFecha() {
+	public LocalDate getHoraFecha() {
 		return this.horaFecha;
 	}
-	public void setHoraFecha(Pair horaFecha) {
+	public void setHoraFecha(LocalDate horaFecha) {
 		this.horaFecha = horaFecha;
 	}
 }

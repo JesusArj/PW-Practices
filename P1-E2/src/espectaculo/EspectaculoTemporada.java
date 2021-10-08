@@ -1,32 +1,33 @@
 package espectaculo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class EspectaculoTemporada extends AbstractEspectaculo{
-	private Pair fechaInicio;
-	private Pair fechaFinal;
-	private ArrayList<Pair> fechas;
+	private LocalDate fechaInicio;
+	private LocalDate fechaFinal;
+	private ArrayList<LocalDate> fechas;
 	
 	public EspectaculoTemporada() {
 		
 	}
 	
-	public Pair getFechaInicio() {
+	public LocalDate getFechaInicio() {
 		return this.fechaInicio;
 	}
-	public void setFechaInicio(Pair inicio) {
+	public void setFechaInicio(LocalDate inicio) {
 		this.fechaInicio = inicio;
 	}
-	public Pair getFechaFinal() {
+	public LocalDate getFechaFinal() {
 		return this.fechaFinal;
 	}
-	public void setFechaFinal(Pair fechaFin) {
+	public void setFechaFinal(LocalDate fechaFin) {
 		this.fechaFinal = fechaFin;
 	}
-	public ArrayList<Pair> getFechas() {
+	public ArrayList<LocalDate> getFechas() {
 		return this.fechas;
 	}
-	public void setPases(ArrayList<Pair> fechas) {
+	public void setPases(ArrayList<LocalDate> fechas) {
 		this.fechas = fechas;
 	}
 }

@@ -1,53 +1,86 @@
 package espectaculo;
 
-import critica.Critica;
+import java.util.ArrayList;
+
+enum categoria
+{
+    concierto, obra, monologo;
+}
 
 public class AbstractEspectaculo {
-	protected String title;
-	protected String descripcion;
-	protected String categoria;
-	protected int aforo;
-	protected int localidadesVendidas;
-	protected Critica critic;
+	public enum categoria
+	{
+	    concierto, obra, monologo;
+	}
+	private categoria categoria; 
+	private String titulo;  
+	private String descripcion; 
+	private int localidades_venta; 
+	private int localidades_vendidas; 
+	private ArrayList<Integer> criticas;
 	
-	public String getTitle() {
-		return this.title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getDesc() {
-		return this.descripcion;
-	}
-	public void setDesc(String desc) {
-		this.descripcion = desc;
-	}
-	public String getCategoria() {
-		return this.categoria;
-	}
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
-	}
-	public int getAforo() {
-		return this.aforo;
-	}
-	public void setAforo(int aforo) {
-		this.aforo = aforo;
-	}
-	public int getLoc() {
-		return this.localidadesVendidas;
-	}
-	public void setLoc(int loc) {
-		this.localidadesVendidas = loc;
-	}
-	public void venderLoc() {
-		this.localidadesVendidas++;
-	}
-	public Critica getCritica() {
-		return this.critic;
-	}
-	public void setCritica(Critica c) {
-		this.critic = c;
-	}
-	
+	//CONSTRUCTOR VACO
+		public AbstractEspectaculo(){};
+		
+		//CONSTRUCTOR PARAMETRIZADO
+		public AbstractEspectaculo(String titulo, categoria categoria, String descripcion) 
+		{
+			this.titulo = titulo; 
+			this.descripcion = descripcion;
+			this.categoria=categoria; 
+		}
+		
+		//OBSERVADORES
+		
+		public categoria getCategoria()
+		{
+			return this.categoria; 
+		}
+		public String getTitulo()
+		{
+			return this.titulo; 
+		}
+		public String getDescripcion()
+		{
+			return descripcion; 
+		}
+		
+		public int getLocalidadesVenta()
+		{
+			return this.localidades_venta; 
+		}
+		public int getLocalidadesVendidas()
+		{
+			return this.localidades_vendidas; 
+		}
+		public ArrayList<Integer> getCritica() {
+			return this.criticas;
+		}
+		
+		//MODIFICADORES
+		
+		public void setCategoria(categoria categoria)
+		{
+			this.categoria=categoria; 
+		}
+		public void setTitulo(String titulo)
+		{
+			this.titulo = titulo; 
+		}
+		public void setDescripcion(String descripcion)
+		{
+			this.descripcion=descripcion; 
+		}
+		public void setLocalidadesVenta(int localidades_venta)
+		{
+			this.localidades_venta=localidades_venta;
+		}
+		public void setLocalidadesVendidas(int localidades_vendidas)
+		{
+			this.localidades_vendidas=localidades_vendidas; 
+		}
+		public void setCritica(ArrayList<Integer> c) {
+			this.criticas = c;
+		}
+		
 }
