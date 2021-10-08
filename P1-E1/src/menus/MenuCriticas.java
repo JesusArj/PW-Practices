@@ -247,18 +247,18 @@ public class MenuCriticas {
 	                		            new InputStreamReader(System.in));
 	                			try {
 	                				id1 = Integer.parseInt(reader1.readLine());
+	                				if(newIOCriticas.existId(id1))
+		                			{
+		                				newGestor.votarCriticasNeg(id1);
+		                				System.out.println("Dislike añadido correctamente.");
+		                			}
+	                				else 
+	  	                            {
+	  	                            System.out.println("El ID indicado no existe. Intentelo de nuevo.");	
+	  	                            }
 	                			} catch (IOException e) {
 	                				e.printStackTrace();
 	                			}
-	                			
-	                			if(newIOCriticas.existId(id2))
-	                			{
-	                				newGestor.votarCriticasNeg(id2);	                			
-	                			}
-	                            else 
-	                            {
-	                            System.out.println("El ID indicado no existe. Intentelo de nuevo.");	
-	                            }
 	                            
 	                		}
                 		}
