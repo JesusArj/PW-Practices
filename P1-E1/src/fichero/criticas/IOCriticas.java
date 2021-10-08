@@ -326,27 +326,32 @@ public class IOCriticas extends IOUsers {
 		ArrayList<Critica> c = new ArrayList<Critica>(); 
 		c = fichCriticaToVec(c);
 		int count = 1; 
-		if(comprobarUserExist(mail)==true && !c.isEmpty())
+		if(comprobarUserExist(mail)==true)
 		{
-			for(int i=0; i<c.size(); i++)
+			if(!c.isEmpty())
 			{
-				if(c.get(i).getMail().equals(mail))
 				{
-					System.out.println("CRITICA/s DEL USUARIO CON MAIL: "+ mail);
-					System.out.println("-------------------");
-					System.out.println("CRITICA "+ count);
-					System.out.println("Titulo: " + c.get(i).getTitle());
-					System.out.println("Resena: " + c.get(i).getResena());
-					System.out.println("ID: "+ c.get(i).getId()); 
-					System.out.println("Likes: " + c.get(i).getLike()); 
-					System.out.println("Dislikes: " + c.get(i).getDislike()); 
-					System.out.println("-------------------");
-
-					count++; 
-				}
-				else
-				{
-					System.err.println("El usuario no tiene ninguna crítica asociada");
+					for(int i=0; i<c.size(); i++)
+					{
+						if(c.get(i).getMail().equals(mail))
+						{
+							System.out.println("CRITICA/s DEL USUARIO CON MAIL: "+ mail);
+							System.out.println("-------------------");
+							System.out.println("CRITICA "+ count);
+							System.out.println("Titulo: " + c.get(i).getTitle());
+							System.out.println("Resena: " + c.get(i).getResena());
+							System.out.println("ID: "+ c.get(i).getId()); 
+							System.out.println("Likes: " + c.get(i).getLike()); 
+							System.out.println("Dislikes: " + c.get(i).getDislike()); 
+							System.out.println("-------------------");
+		
+							count++; 
+						}
+						else
+						{
+							//System.err.println("El usuario no tiene ninguna critica asociada");
+						}
+					}
 				}
 			}
 		}

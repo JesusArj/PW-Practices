@@ -46,6 +46,7 @@ public class MenuCriticas {
         	    System.out.println("Para votar positivamente una critica, pulse 4.");
         	    System.out.println("Para votar negativamente, pulse 5.");
         	    System.out.println("Para buscar sus criticas, pulse 6.");
+        	    System.out.println("Para ver las criticas de un usuario concreto, pulse 7.");
         	    System.out.println("Para salir del menu, pulse cualquier otra tecla.");
         	    
                 BufferedReader login = new BufferedReader(
@@ -161,7 +162,7 @@ public class MenuCriticas {
                 		break;
                 		
                 	case "4":
-                		//TODO:
+                
                 		int id1 = 0;
                 		
                 		System.out.println("Se mostraran por pantalla las diferentes criticas para que selecciona el ID de la critica que desea puntuar:");
@@ -226,7 +227,7 @@ public class MenuCriticas {
                 		break;
                 	
                 	case "5":
-                		//TODO:
+                		
                 		int id2 = 0;
                 		
                 		System.out.println("Se mostraran por pantalla las diferentes criticas para que selecciona el ID de la critica que desea puntuar:");
@@ -256,7 +257,7 @@ public class MenuCriticas {
 	                				id1 = Integer.parseInt(reader1.readLine());
 	                				if(newIOCriticas.existId(id1))
 		                			{
-		                				newGestor.votarCriticasNeg(id1);
+		                				newGestor.votarCriticasNeg(id2);
 		                				System.out.println("Dislike añadido correctamente.");
 		                			}
 	                				else 
@@ -330,7 +331,16 @@ public class MenuCriticas {
                 		}
                 		break;                		
 
-                	
+                	case "7":
+                		String email = null;
+                		Scanner teclado4 = new Scanner(System.in);  
+	
+                		System.out.println("Introduzca el mail del usuario cuyas criticas quiere ver");
+                       
+                        email = (teclado4.nextLine());
+            	        newGestor.buscarCriticas(email);
+                		break;
+                		
                 	default:
                 		System.out.println("Saliendo...\n\n");
                 		return;
