@@ -99,9 +99,9 @@ public class MenuAdmin {
             		ep.setLocalidadesVendidas(soldloc);
             		
             		System.out.println("Introduzca la fecha y hora del espectaculo");
-            		System.out.println("Formato de fecha : 2016-03-04 11:30:\");
-            		String datetime = "2016-03-04 11:30";
-            		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            		System.out.println("Formato de fecha : YEAR-MES-DIA HORA:MIN:SEC");
+            		String datetime = teclado1.nextLine();
+            		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             		LocalDateTime dateTime = LocalDateTime.parse(datetime, formatter);
             		ep.setHoraFecha(dateTime);
             		

@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import espectaculo.EspectaculoMultiple;
@@ -18,7 +18,7 @@ import espectaculo.EspectaculoTemporada;
 public class IOEspectaculos {
 
 	
-	public void EspectaculoPuntToFich(String title, String categoria, String descripcion, int localidades_venta, int localidades_vendidas, LocalDate horaFecha, ArrayList<Integer> ids)
+	public void EspectaculoPuntToFich(String title, String categoria, String descripcion, int localidades_venta, int localidades_vendidas, LocalDateTime horaFecha, ArrayList<Integer> ids)
 	{		
 		String rutaAbsoluta = new File("").getAbsolutePath();
 		String rutaFichero = rutaAbsoluta + "/espectaculos.txt";
@@ -52,7 +52,7 @@ public class IOEspectaculos {
 	        }	
 	    }
 	
-	public void EspectaculoMultToFich(String title, String categoria, String descripcion, int localidades_venta, int localidades_vendidas, ArrayList<LocalDate> pases, ArrayList<Integer> ids)
+	public void EspectaculoMultToFich(String title, String categoria, String descripcion, int localidades_venta, int localidades_vendidas, ArrayList<LocalDateTime> pases, ArrayList<Integer> ids)
 	{		
 		String rutaAbsoluta = new File("").getAbsolutePath();
 		String rutaFichero = rutaAbsoluta + "/espectaculos.txt";
@@ -64,7 +64,7 @@ public class IOEspectaculos {
 	    	pw = new PrintWriter(fichero); 
 	    	pw.print(title+"//"+categoria+"//" +descripcion+"//"+localidades_venta+ "//" +localidades_vendidas+ "//");
 	    	if(pases != null) {
-	    		for(LocalDate d : pases) {
+	    		for(LocalDateTime d : pases) {
 		    		pw.print(d+"::");
 		    	}
 		    	pw.print("//");
@@ -92,7 +92,7 @@ public class IOEspectaculos {
 	        }	
 	    }
 	
-	public void EspectaculoTempToFich(String title, String categoria, String descripcion, int localidades_venta, int localidades_vendidas, LocalDate inicio, LocalDate fin, ArrayList<LocalDate>fechas, ArrayList<Integer> ids)
+	public void EspectaculoTempToFich(String title, String categoria, String descripcion, int localidades_venta, int localidades_vendidas, LocalDateTime inicio, LocalDateTime fin, ArrayList<LocalDateTime>fechas, ArrayList<Integer> ids)
 	{		
 		String rutaAbsoluta = new File("").getAbsolutePath();
 		String rutaFichero = rutaAbsoluta + "/espectaculos.txt";
@@ -104,7 +104,7 @@ public class IOEspectaculos {
 	    	pw = new PrintWriter(fichero); 
 	    	pw.print(title+"//"+categoria+"//" +descripcion+"//"+localidades_venta+ "//" +localidades_vendidas+ "//" +inicio+ "//" +fin+ "//");
 	    	if(fechas != null) {
-	    		for(LocalDate f : fechas) {
+	    		for(LocalDateTime f : fechas) {
 		    		pw.print(f+"::");
 		    	}
 		    	pw.print("//");
@@ -154,7 +154,7 @@ public class IOEspectaculos {
 		    	espp.setDescripcion(data[2]);
 		    	espp.setLocalidadesVenta(Integer.parseInt(data[3]));
 		    	espp.setLocalidadesVendidas(Integer.parseInt(data[4]));
-		    	espp.setHoraFecha(LocalDate.parse(data[5]));
+		    	espp.setHoraFecha(LocalDateTime.parse(data[5]));
 		    	//TODO: Posible fallo a la hora de guardar IDs. Comprobar
 		    	if(!("void".equals(data[6]))) {
 		    		String[] data2 = data[6].split("::");
@@ -202,7 +202,7 @@ public class IOEspectaculos {
 	       
 	        String linea; 
 	        ArrayList<Integer> ids = new ArrayList<Integer>();
-	        ArrayList<LocalDate> dates = new ArrayList<LocalDate>();
+	        ArrayList<LocalDateTime> dates = new ArrayList<LocalDateTime>();
         	while ((linea = br.readLine()) != null) {
         	    String[] data = linea.split("//");
 		    	espm.setTitulo(data[0]);
@@ -215,12 +215,12 @@ public class IOEspectaculos {
 		    		String[] data2 = data[5].split("::");
 			    	for(int i=1; i<data2.length; i++) 
 			    	{
-			    		dates.add(LocalDate.parse(data2[i]));
+			    		dates.add(LocalDateTime.parse(data2[i]));
 			    	} 
 
 		    	}
 		    	else {
-		    		espm.setPases(new ArrayList<LocalDate>());
+		    		espm.setPases(new ArrayList<LocalDateTime>());
 		    	}
 		    	//TODO: Posible fallo a la hora de guardar IDs. Comprobar
 		    	if(!("void".equals(data[6]))) {
@@ -237,7 +237,7 @@ public class IOEspectaculos {
 		    	v.add(espm); 
 		    	espm = new EspectaculoMultiple();
 		    	ids = new ArrayList<Integer>(); 
-		    	dates = new ArrayList<LocalDate>();
+		    	dates = new ArrayList<LocalDateTime>();
         	}
 	        
 		}catch(Exception e){
@@ -270,7 +270,7 @@ public class IOEspectaculos {
 	       
 	        String linea; 
 	        ArrayList<Integer> ids = new ArrayList<Integer>();
-	        ArrayList<LocalDate> dates = new ArrayList<LocalDate>();
+	        ArrayList<LocalDateTime> dates = new ArrayList<LocalDateTime>();
         	while ((linea = br.readLine()) != null) {
         	    String[] data = linea.split("//");
 		    	espt.setTitulo(data[0]);
@@ -285,12 +285,12 @@ public class IOEspectaculos {
 		    		String[] data2 = data[7].split("::");
 			    	for(int i=1; i<data2.length; i++) 
 			    	{
-			    		dates.add(LocalDate.parse(data2[i]));
+			    		dates.add(LocalDateTime.parse(data2[i]));
 			    	} 
 
 		    	}
 		    	else {
-		    		espt.setFechas(new ArrayList<LocalDate>());
+		    		espt.setFechas(new ArrayList<LocalDateTime>());
 		    	}
 		    	//TODO: Posible fallo a la hora de guardar IDs. Comprobar
 		    	if(!("void".equals(data[8]))) {
@@ -307,7 +307,7 @@ public class IOEspectaculos {
 		    	v.add(espt); 
 		    	espt = new EspectaculoTemporada();
 		    	ids = new ArrayList<Integer>(); 
-		    	dates = new ArrayList<LocalDate>();
+		    	dates = new ArrayList<LocalDateTime>();
         	}
 	        
 		}catch(Exception e){
