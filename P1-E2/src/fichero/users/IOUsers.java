@@ -1,5 +1,4 @@
 
-
 package fichero.users;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -10,27 +9,29 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import espectador.*;
+import fichero.criticas.IOCriticas;
 
-/*
+/**
  *
  * Clase que implementa las funcionalidades relativas 
  * a la lectura y escritura de usuarios en el fichero 
  * correspondiente
- * @author
+ * @author Developers
  *
  */
 
 public class IOUsers 
 {
-
 /**
- * Funcion que añade un usuario de nuevo registro al fichero de usuarios.
+ * Funcion que anade un usuario de nuevo registro al fichero de usuarios.
  * @param name Nombre del usuario
  * @param username Nombre de usuario
  * @param mail direccion de e-mail del usuario
- * @param passwd Contraseña del usuario
+ * @param passwd Contrasena del usuario
+ * @author Developers
  *
  */
 
@@ -39,9 +40,8 @@ public class IOUsers
 		if(comprobarUserExist(mail)==true)
 		{
 			System.err.println("No ha sido posible realizar el registro, el email ya esta registrado en nuestro sistema");
-			System.exit(1);
+			System.exit(1);;
 		}
-
 		else
 		{
 			String rutaAbsoluta = new File("").getAbsolutePath();
@@ -52,12 +52,11 @@ public class IOUsers
 		    {	
 		    	fichero= new FileWriter(rutaFichero, true); 
 		    	pw = new PrintWriter(fichero); 
-		    	pw.println(name+"//"+username+"//"+mail+"//"+passwd); 
+		    	pw.println(name+"//"+username+"//"+mail+"//"+passwd);
 		    }catch (Exception e) {
 		       e.printStackTrace();
 		    } finally {
 		           try {
-		        	   // Aprovechamos el finally para asegurarnos que se cierra el fichero.
 		           if (fichero != null)
 		              fichero.close();
 		           
@@ -72,6 +71,7 @@ public class IOUsers
  * Metodo que vuelca el contenido del fichero de usuarios en
  * un ArrayList de Espectadores para su posterior tratamiento.
  * @param v Array List de Espectadores (Usuarios)
+ * @author Developers
  *
  */
 
@@ -84,11 +84,8 @@ public class IOUsers
 		Espectador e1 = new Espectador();
 		
 		try {
-			
-			// Apertura del fichero y creacion de BufferedReader para poder hacer una lectura comoda (disponer del metodo readLine()).
 	        fr = new FileReader (rutaFichero);
 	        br = new BufferedReader(fr);
-	        //lectura
 	        String linea=""; 
 	        while((linea=br.readLine())!=null) {
 			String[] data = linea.split("//");
@@ -104,9 +101,6 @@ public class IOUsers
 		}catch(Exception e){
 	         e.printStackTrace();
 	      }finally{
-	         // En el finally cerramos el fichero, para asegurarnos
-	         // que se cierra tanto si todo va bien como si salta 
-	         // una excepcion.
 	         try{                    
 	            if( null != fr ){   
 	               fr.close();     
@@ -124,6 +118,8 @@ public class IOUsers
  * Funcion que comprueba que un usuario exista
  * en el fichero plano de usuarios, comprobando su e-mail.
  * @param mail direccion del e-mail del usuario
+ * @return true si el email existe, falso en caso contrario
+ * @author Developers
  *
  */
 
@@ -138,12 +134,13 @@ public class IOUsers
 		return false;
 	}
 
-	
 /**
  * Funcion que comprueba que la contraseña sea la correspondiente 
  * al usuario introducido.
  * @param mail direccion del e-mail del usuario
  * @param Passwd Contraseña del usuario
+ * @return true si la contrasena es correcta, false en caso contrario
+ * @author Developers
  *
  */
 
@@ -164,6 +161,8 @@ public class IOUsers
  * Metodo que comprueba que exista un usuario en el fichero
  * de usuario buscando por email.
  * @param email direccion del e-mail del usuario
+ * @return c Elemento de la clase espectador, usuario que se busca
+ * @author Developers
  *
  */
 
@@ -181,6 +180,7 @@ public class IOUsers
 /**
  * Funcion que imprime los datos de un usuario.
  * @param email direccion del e-mail del usuario
+ * @author Developers
  *
  */
 
@@ -198,6 +198,7 @@ public class IOUsers
  * Funcion que borra los datos de un usuario.
  * del fichero de usuarios, guiandose por un email.
  * @param email Direccion del e-mail del usuario
+ * @author Developers
  *
  */
 
@@ -205,7 +206,6 @@ public class IOUsers
 		ArrayList<Espectador> v = new ArrayList<Espectador>();
 		v = fichToVec(v);
 		ArrayList<Espectador> v2 = new ArrayList<Espectador>();
-		v2.clear();
 		for(Espectador c : v) {
 			if(!(c.getMail().equals(mail))) {
 				v2.add(c);
@@ -222,7 +222,6 @@ public class IOUsers
 		for(Espectador c : v2) {
 			c.RegisterUserToFich(c.getName(), c.getUsername(), c.getMail(), c.getPasswd());
 		}
-		System.out.println("Has sido eliminado correctamente del sistema."); 
 	}
 	
 /**
@@ -230,6 +229,7 @@ public class IOUsers
  * del fichero de usuarios, guiandose por un objeto de 
  * clase Espectador
  * @param e Objeto de clase Espectador
+ * @author Developers
  *
  */
 
@@ -255,6 +255,12 @@ public class IOUsers
 		}
 	}
 	
+	/**
+	 * Funcion que guarda los datos de un usuario en un
+	 * nuevo objeto de la clase Espectador
+	 * @author Developers
+	 */
+		
 	public Espectador proveerDatos() {
 		String email = null, passwd=null, name=null, username=null;
 		System.out.println("PROCEDA A INTRODUCIR SUS DATOS: ");
@@ -291,6 +297,7 @@ public class IOUsers
 			e.printStackTrace();
 		}
 		Espectador e1 = new Espectador(name,email, username, passwd);
+		
 		return e1;
 	}
 	
@@ -298,15 +305,92 @@ public class IOUsers
 	 * Funcion que actualiza los datos de un usuario.
 	 * del fichero de usuarios, guiandose por el mail
 	 * el usuario
-	 * @param mail Mail del usuatio
+	 * @param mail Mail del usuario
+	 * @author Developers
 	 */
 	
 	public void updateUser(String mail) {
+		IOCriticas ioc = new IOCriticas(); 
+		String correo = null; 
+		Scanner correo_scan = new Scanner(System.in);
+		String nombre = null; 
+		Scanner nombre_scan = new Scanner(System.in); 
+		String contrasena = null; 
+		Scanner contrasena_scan = new Scanner(System.in);
+		String username = null; 
+		Scanner username_scan = new Scanner(System.in);
 		this.imprimirDatosUser(mail);
-		this.borrarUser(mail);
 		Espectador e = this.proveerDatos();
-		this.comprobarUserExist(e.getMail());
+		correo= e.getMail(); 
+    			while(correo.equals("") || correo.trim().isEmpty() || comprobarUserExist(correo)==true)
+    			{
+    				if(comprobarUserExist(e.getMail())==true)
+    				{
+    					System.err.println("Ese correo electronico ya pertenece a un usuario. Por favor, indique otro correo electronico.");
+    					correo = correo_scan.nextLine();
+    				}
+    				else if(correo.trim().isEmpty() || comprobarUserExist(e.getMail())==true)
+    				{
+    					System.err.println("No puede dejar vacio el campo correo electronico. Por favor, indique otro correo electronico."); 
+            			correo = correo_scan.nextLine();
+    				}
+    				else
+        			{
+        				break; 
+        			}
+    			}
+    	nombre = e.getName(); 
+    			while(nombre.equals("") || nombre.trim().isEmpty())
+    			{
+    				if(nombre.equals("") || nombre.trim().isEmpty())
+    				{
+    					System.err.println("No puede dejar vacio el campo nombre. Por favor, indique otro nombre.");
+    					nombre=nombre_scan.nextLine(); 
+    				}
+    				else
+    				{
+    					break; 
+    				}
+    			}
+    	contrasena = e.getPasswd(); 
+    			while(contrasena.equals("") || contrasena.trim().isEmpty())
+    			{
+    				if( contrasena.equals("") || contrasena.trim().isEmpty() )
+    				{
+    					System.err.println("No puede dejar vacio el campo contrasena. Por favor, indique otra contrasena.");
+    					contrasena=contrasena_scan.nextLine(); 
+    				}
+    				else
+    				{
+    					break; 
+    				}
+    			}
+    	username= e.getUsername(); 
+    			while(username.equals("") || username.trim().isEmpty())
+    			{
+    				if(username.equals("") || username.trim().isEmpty())
+    				{
+    					System.err.println("No puede dejar vacio el campo username. Por favor, indique otro username.");
+    					username=username_scan.nextLine(); 
+    				}
+    				else
+    				{
+    					break; 
+    				}
+    			}
+		e.setUsername(username);
+    	e.setMail(correo);
+    	e.setName(nombre);
+    	e.setPasswd(contrasena);
+		this.borrarUser(mail);
 		this.RegisterUserToFich(e.getName(), e.getUsername(), e.getMail(), e.getPasswd());
+		System.out.println("Sus credenciales han sido actualizadas. Por favor, acceda al sistema con sus nuevas credenciales.");
+		ioc.updateUserCriticas(mail, e.getMail());
+		correo_scan.close();
+		nombre_scan.close(); 
+		contrasena_scan.close();
+		username_scan.close(); 
+		
 	}
 	
 }

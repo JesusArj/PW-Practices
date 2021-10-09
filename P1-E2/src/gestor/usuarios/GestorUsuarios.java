@@ -2,18 +2,14 @@ package gestor.usuarios;
 import espectador.Espectador;
 import fichero.users.IOUsers;
 
-/*
- *
+/**
  * Clase que implementa las funcionalidades relativas 
  * a la gestion de datos de los usuarios.
- * @author 
- *
+ * @author Developers
  */
 
 
 public class GestorUsuarios {
-
-	// 1 - The singleton
 
 	private static GestorUsuarios instance = null;
 			
@@ -23,16 +19,14 @@ public class GestorUsuarios {
 /**
  * Constructor parametrizado de la clase.
  * @param mail Dirección del e-mail del usuario
+ * @author Developers
  *
  */
 
 	private GestorUsuarios(String Mail) 
 	{
-		//RELLENAMOS ESPECTADORES
 		this.Mail = Mail; 
 	}
-
-	// 3 - Access point to the instance
 
 	public static GestorUsuarios getInstance(String Mail)
 	{
@@ -46,6 +40,7 @@ public class GestorUsuarios {
 /**
  * Funcion que da de alta un usuario en el sistema
  * @param e1 Objeta de clase Espectador
+ * @author Developers
  *
  */	
 			
@@ -59,6 +54,7 @@ public class GestorUsuarios {
 
 /**
  * Funcion que da de baja al propio usuario del sistema
+ * @author Developers
  *
  */	
 
@@ -74,6 +70,7 @@ public class GestorUsuarios {
 
 /**
  * Funcion que muestra los datos del propio usuario
+ * @author Developers
  *
  */	
 
@@ -87,6 +84,7 @@ public class GestorUsuarios {
 	
 	/**
 	 * Funcion que actualiza los datos del propio usuario
+	 * @author Developers
 	 *
 	 */	
 	
@@ -95,6 +93,7 @@ public class GestorUsuarios {
 		if(instance!=null)
 		{
 			User.updateUser(this.Mail);
+			System.exit(1);
 		}	
 	}
 
