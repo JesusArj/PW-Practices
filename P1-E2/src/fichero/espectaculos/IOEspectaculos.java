@@ -421,7 +421,7 @@ public class IOEspectaculos {
 			e.printStackTrace();
 		}		
 		for(EspectaculoTemporada et : v) {
-			et.EspectaculoMultToFich(et.getTitulo(), et.getCategoria(), et.getDescripcion(), et.getLocalidadesVenta(), et.getLocalidadesVendidas(), et.getFechaInicio(),et.getFechaFinal(),et.getFechas(), et.getCritica());
+			et.EspectaculoTempToFich(et.getTitulo(), et.getCategoria(), et.getDescripcion(), et.getLocalidadesVenta(), et.getLocalidadesVendidas(), et.getFechaInicio(),et.getFechaFinal(),et.getFechas(), et.getCritica());
 		}
 	}
 

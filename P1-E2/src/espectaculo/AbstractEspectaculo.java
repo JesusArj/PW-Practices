@@ -2,12 +2,14 @@ package espectaculo;
 
 import java.util.ArrayList;
 
+import fichero.espectaculos.IOEspectaculos;
+
 enum categoria
 {
     concierto, obra, monologo;
 }
 
-public class AbstractEspectaculo {
+public class AbstractEspectaculo extends IOEspectaculos{
 
 	private String categoria; 
 	private String titulo;  
