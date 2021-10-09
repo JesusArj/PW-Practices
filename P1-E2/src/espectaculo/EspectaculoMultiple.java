@@ -1,4 +1,4 @@
-package espectaculo;
+00package espectaculo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

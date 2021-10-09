@@ -14,6 +14,7 @@ import critica.Critica;
 import espectaculo.EspectaculoMultiple;
 import espectaculo.EspectaculoPuntual;
 import espectaculo.EspectaculoTemporada;
+import espectador.Espectador;
 
 
 public class IOEspectaculos {
@@ -424,12 +425,210 @@ public class IOEspectaculos {
 			et.EspectaculoTempToFich(et.getTitulo(), et.getCategoria(), et.getDescripcion(), et.getLocalidadesVenta(), et.getLocalidadesVendidas(), et.getFechaInicio(),et.getFechaFinal(),et.getFechas(), et.getCritica());
 		}
 	}
+	
+	public void printAllEspectaculosPunt()
+	{
+		ArrayList<EspectaculoPuntual> c = new ArrayList<EspectaculoPuntual>(); 
+		c = fichEspectaculoPuntToVec(c);
+		int aux = 1;
+		for(EspectaculoPuntual ep : c)
+		{
+			System.out.println("ESPECTACULO "+ aux);
+			System.out.println("-------------------");
+			System.out.println("Titulo: " + ep.getTitulo());
+			System.out.println("Fecha: " + ep.getHoraFecha());
+			System.out.println("Descripcion: " + ep.getDescripcion());
+			System.out.println("Localidades disponibles" ); //TODO:.LocalidadesDisponibles() CREARLA, SEGUN TITULO 
+			System.out.println("-------------------");
+			aux++;
+		}
+	}
+	
+	public void printAllEspectaculosMult()
+	{
+		ArrayList<EspectaculoMultiple> c = new ArrayList<EspectaculoMultiple>(); 
+		c = fichEspectaculoMultToVec(c);
+		int aux = 1;
+		for(EspectaculoMultiple em : c)
+		{
+			System.out.println("ESPECTACULO "+ aux);
+			System.out.println("-------------------");
+			System.out.println("Titulo: " + em.getTitulo());
+			
+			for(int i = 0; i < em.getPases().size(); i++) 
+			{
+				System.out.println("Fecha "+ (i+1) + "º :"  + em.getPases().get(i));
+			}
 
+			System.out.println("Descripcion: " + em.getDescripcion());
+			System.out.println("Localidades disponibles" ); //TODO:.LocalidadesDisponibles() CREARLA, SEGUN TITULO 
+			System.out.println("-------------------");
+			aux++;
+		}
+	}
+	
+	public void printAllEspectaculosTemp()
+	{
+		ArrayList<EspectaculoTemporada> c = new ArrayList<EspectaculoTemporada>(); 
+		c = fichEspectaculoTempToVec(c);
+		int aux = 1;
+		for(EspectaculoTemporada et: c)
+		{
+			System.out.println("ESPECTACULO "+ aux);
+			System.out.println("-------------------");
+			System.out.println("Titulo: " + et.getTitulo());
+			System.out.println("Titulo: " + et.getFechaInicio());
+
+			for(int i = 0; i < et.getFechas().size(); i++) 
+			{
+				System.out.println("Fecha "+ (i+1) + "º :"  + et.getFechas().get(i));
+			}
+			System.out.println("Titulo: " + et.getFechaFinal());
+			System.out.println("Descripcion: " + et.getDescripcion());
+			System.out.println("Localidades disponibles: " ); //TODO:.LocalidadesDisponibles() CREARLA, SEGUN TITULO 
+			System.out.println("-------------------");
+			aux++;
+		}
+	}
+	
+	public boolean existEspectaculoPunt(String title)
+	{
+		ArrayList<EspectaculoPuntual> v = new ArrayList<EspectaculoPuntual>();
+		fichEspectaculoPuntToVec(v);
+		for(EspectaculoPuntual ep : v) {
+			if(ep.getTitulo().equals(title));
+				return true;
+		}
+		return false;
+	}
+	
+	public boolean existEspectaculoTemp(String title)
+	{
+		ArrayList<EspectaculoTemporada> v = new ArrayList<EspectaculoTemporada>();
+		fichEspectaculoTempToVec(v);
+		for(EspectaculoTemporada et : v) {
+			if(et.getTitulo().equals(title));
+				return true;
+		}
+		return false;
+	}
+	
+	public boolean existEspectaculoMult(String title)
+	{
+		ArrayList<EspectaculoMultiple> v = new ArrayList<EspectaculoMultiple>();
+		fichEspectaculoMultToVec(v);
+		for(EspectaculoMultiple em : v) {
+			if(em.getTitulo().equals(title));
+				return true;
+		}
+		return false;
+	}
+	
+	
+	public void buscarEspectaculosPunt(String title)
+	{
+		ArrayList<EspectaculoPuntual> c = new ArrayList<EspectaculoPuntual>(); 
+		c = fichEspectaculoPuntToVec(c);
+
+		if(existEspectaculoPunt(title)==true)
+		{
+			for(int i=0; i<c.size(); i++)
+			{
+				if(c.get(i).getTitulo().equals(title))
+				{//TODO: Se puede mejorar sin el for??
+					System.out.println((i+1) + "º ESPECTACULO PUNTUAL ");
+					System.out.println("-------------------");
+					System.out.println("Titulo: " + c.get(i).getTitulo());
+					System.out.println("Fecha: " + c.get(i).getHoraFecha());
+					System.out.println("Descripcion: " + c.get(i).getDescripcion());
+					System.out.println("Localidades disponibles" ); //TODO:.LocalidadesDisponibles() CREARLA, SEGUN TITULO 
+
+				}
+			}
+		}
+		else
+		{
+			System.err.println("El usuario no estÃ¡ registrado en nuestro sistema."); 
+			System.exit(-1); 
+		}
+	}
+	
+	public void buscarEspectaculosMult(String title)
+	{
+		ArrayList<EspectaculoMultiple> c = new ArrayList<EspectaculoMultiple>(); 
+		c = fichEspectaculoMultToVec(c);
+
+		if(existEspectaculoMult(title)==true)
+		{
+			for(int i=0; i<c.size(); i++)
+			{
+				if(c.get(i).getTitulo().equals(title))
+				{//TODO: Se puede mejorar sin el for??
+					System.out.println((i+1) + "º ESPECTACULO MULTIPLE ");
+					System.out.println("-------------------");
+					System.out.println("Titulo: " + c.get(i).getTitulo());
+					for(int j = 0; j < c.get(i).getPases().size(); j++) 
+					{
+						System.out.println("Fecha "+ (j+1) + "º :"  + c.get(j).getPases());
+					}
+					System.out.println("Descripcion: " + c.get(i).getDescripcion());
+					System.out.println("Localidades disponibles" ); //TODO:.LocalidadesDisponibles() CREARLA, SEGUN TITULO 
+
+				}
+			}
+		}
+		else
+		{
+			System.err.println("El usuario no estÃ¡ registrado en nuestro sistema."); 
+			System.exit(-1); 
+		}
+	}
+	
+	public void buscarEspectaculosTemp(String title)
+	{
+		ArrayList<EspectaculoTemporada> c = new ArrayList<EspectaculoTemporada>(); 
+		c = fichEspectaculoTempToVec(c);
+
+		if(existEspectaculoTemp(title)==true)
+		{
+			for(int i=0; i<c.size(); i++)
+			{
+				if(c.get(i).getTitulo().equals(title))
+				{//TODO: Se puede mejorar sin el for??
+					System.out.println((i+1) + "º ESPECTACULO DE TEMPORADA ");
+					System.out.println("-------------------");
+					System.out.println("Titulo: " + c.get(i).getTitulo());
+					System.out.println("Descripcion: " + c.get(i).getDescripcion());
+					System.out.println("Titulo: " + c.get(i).getFechaInicio());
+
+					for(int j = 0; j < c.get(i).getFechas().size(); j++) 
+					{
+						System.out.println("Fecha "+ (j+1) + "º :"  + c.get(j).getFechas());
+					}
+					System.out.println("Titulo: " + c.get(i).getFechaFinal());
+					System.out.println("Localidades disponibles" ); //TODO:.LocalidadesDisponibles() CREARLA, SEGUN TITULO 
+
+				}
+			}
+		}
+		else
+		{
+			System.err.println("El usuario no estÃ¡ registrado en nuestro sistema."); 
+			System.exit(-1); 
+		}
+	}
+	
+	/*public void updateEspectaculo(String title) {
+		this.imprimirDatosUser(mail);
+		this.borrarUser(mail);
+		Espectador e = this.proveerDatos();
+		this.comprobarUserExist(e.getMail());
+		this.RegisterUserToFich(e.getName(), e.getUsername(), e.getMail(), e.getPasswd());
+	}
+	*/
 	
 	//TODO: Comprobar que los IDs del vector Criticas existan y no se repitan
-	//TODO: PrintAll Espectaculos
-	//TODO: Buscar por titulos
-	//TODO: Buscar por categorias
+	//TODO: Buscar por categorias SE HACE DESDE EL MENU
 	//TODO: Update Datos
 	//TODO: Contabilizar las entradas disponibles para un espectaculo
 	//TODO: Contabilizar entradas vendidas para un especaculo
