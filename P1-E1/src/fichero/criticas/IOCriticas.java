@@ -13,13 +13,11 @@ import java.util.Random;
 import critica.Critica;
 import fichero.users.IOUsers;
 
-/*
- *
+/**
  * Clase que implementa las funcionalidades relativas 
  * a la lectura y escritura de criticas en el fichero 
  * correspondiente
- * @author 
- *
+ * @author Developers
  */
 
 public class IOCriticas extends IOUsers {
@@ -63,7 +61,6 @@ public class IOCriticas extends IOUsers {
 	       e.printStackTrace();
 	    } finally {
 	           try {
-	        	   // Aprovechamos el finally para asegurarnos que se cierra el fichero.
 	           if (fichero != null)
 	              fichero.close();
 	           
@@ -76,7 +73,8 @@ public class IOCriticas extends IOUsers {
 /**
  * Metodo que vuelca el contenido del fichero de criticas en
  * un ArrayList de criticas para su posterior tratamiento.
- * @param v Array List de criticas
+ * @param v ArrayList de criticas donde se volcaran los datos del fichero
+ * @return Vector con los datos ya volcados
  * @author Developers
  *
  */
@@ -90,11 +88,8 @@ public class IOCriticas extends IOUsers {
 		Critica c1 = new Critica(); 
 				
 		try {
-			
-			// Apertura del fichero y creacion de BufferedReader para poder hacer una lectura comoda (disponer del metodo readLine()).
 	        fr = new FileReader (rutaFichero);
 	        br = new BufferedReader(fr);
-	        //lectura
 	        String linea; 
 	        ArrayList<String> votantes = new ArrayList<String>(); 
         	while ((linea = br.readLine()) != null) {
@@ -125,9 +120,6 @@ public class IOCriticas extends IOUsers {
 		}catch(Exception e){
 	         e.printStackTrace();
 	      }finally{
-	         // En el finally cerramos el fichero, para asegurarnos
-	         // que se cierra tanto si todo va bien como si salta 
-	         // una excepcion.
 	         try{                    
 	            if( null != fr ){   
 	               fr.close();     
@@ -141,61 +133,10 @@ public class IOCriticas extends IOUsers {
 	
 	}
 	
-/**
- * Funcion que comprueba que el titulo de critica exista
- * en el fichero plano de criticas.
- * @param title Titulo de la critica
- * @return true en caso de que la critica exista, falso en caso contario
- * @author Developers
- *
- */
-
-	public boolean comprobarCriticaExist(String title)
-	{
-		ArrayList<Critica> v = new ArrayList<Critica>();
-		fichCriticaToVec(v);
-		for(Critica c : v) {
-			if(c.getTitle().equals(title))
-				return true;
-		}
-		return false;
-	}
-
-/**
- * Funcion que elimina una critica del fichero de criticas.
- * @param title Titulo de la critica
- * @author Developers
- *
- */
-
-	public void borrarCritica(Critica c1) {
-		ArrayList<Critica> v = new ArrayList<Critica>();
-		v = fichCriticaToVec(v);
-		ArrayList<Critica> aux = new ArrayList<Critica>();
-		for(Critica c : v) {
-			if(!(c.getId() == c.getId() )) 
-			{
-				aux.add(c);
-			}
-		}
-		BufferedWriter bw;
-		try {
-			bw = new BufferedWriter(new FileWriter("criticas.txt"));
-			bw.write("");
-			bw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}		
-		for(Critica c : aux) {
-			c.criticaToFich(c.getTitle(), c.getPuntuacion(), c.getResena(), c.getMail(), c.getLike(), c.getDislike(), c.getId(), c.getVotantes());
-		}
-	}
-
 	/**
 	 * Funcion que elimina una critica del fichero de criticas cuando va a ser actualizada.
 	 * @param id de la Critica a borrar
 	 * @author Developers
-	 *
 	 */
 
 		public void borrarCriticaParaUpdates(int id) {
@@ -222,8 +163,8 @@ public class IOCriticas extends IOUsers {
 		}
 	
 	/**
-	 * Funcion que borra una critica buscando por el mail de
-	 * su autor y su id
+	 * Funcion que borra una critica del sistema buscando por el mail de
+	 * su autor y el id de la critica
 	 * @param mail Mail del autor de la critica
 	 * @param id Identificador de la critica
 	 * @author Developers
@@ -273,7 +214,7 @@ public class IOCriticas extends IOUsers {
 	 * Funcion que comprueba la existencia del identificador de critica
 	 * en el fichero de criticas
 	 * @param id Identificador a comprobar
-	 * @return true en caso de que se repitan IDs, falso en caso contrario
+	 * @return true en caso de el ID este ya registrado el id introducido, falso en caso contrario
 	 * @author Developers
 	 */
 	
@@ -381,30 +322,9 @@ public class IOCriticas extends IOUsers {
 	}
 	
 	/**
-	/**
-	 * Funcion que busca una critica concreta a traves del mail
-	 * de su autor y su titulo.
-	 * @param mail del autor de la critica
-	 * @param titulo de la critica
-	 * @return cr critica concreta en caso de encontrarla
-	 * @author Developers
-	 */
-	
-	public Critica buscarCritica(String mail, String title) {
-		Critica c = new Critica();
-		ArrayList<Critica> v = new ArrayList<Critica>();
-		v = this.fichCriticaToVec(v);
-		for(Critica cr : v) {
-			if(cr.getMail().equals(mail) && cr.getTitle().equals(title) )
-				return cr;
-		}
-		return c;
-	}
-	
-	/**
 	 * Funcion que aumenta en +1 los likes de una critica concreta
 	 * @param mail Mail del autor de la critica
-	 * @param id Identificador a comprobar
+	 * @param id Identificador a de la critica a puntuar
 	 * @author Developers
 	 */
 	
@@ -431,41 +351,14 @@ public class IOCriticas extends IOUsers {
 		cAux.setVotantes(votantes);
 		this.borrarCriticaParaUpdates(id);
 		this.criticaToFich(cAux.getTitle(), cAux.getPuntuacion(), cAux.getResena(), cAux.getMail(), cAux.getLike(), cAux.getDislike(), cAux.getId(), cAux.getVotantes());
+		System.out.println("La critica ha sido valorada.");
 		}
 	}
-	
-	/**
-	 * Funcion que aumenta en +1 los likes de una critica concreta
-	 * @param mail Mail del autor de la critica
-	 * @param c Critica concreta
-	 * @author Developers
-	 */
-	/**
-	
-	public void votarCriticaPos(String mail, Critica c) {
-		if(c.getMail().equals(mail)) {
-			System.err.println("No puede valorar sus propias criticas");
-			return;
-		}
-		else {
-			for(String correos : c.getVotantes()) {
-				if(correos.equals(mail)) {
-					System.err.println("Ya ha valorado esta critica");
-					return;
-				}
-			}
-		Critica cAux = c;
-		cAux.addLike();
-		this.borrarCritica(c);
-		this.criticaToFich(cAux.getTitle(), cAux.getPuntuacion(), cAux.getResena(), cAux.getMail(), cAux.getLike(), cAux.getDislike(), cAux.getId(), cAux.getVotantes());
-		}
-	}
-	*/
 	
 	/**
 	 * Funcion que aumenta en +1 los dislikes de una critica concreta
 	 * @param mail Mail del autor de la critica
-	 * @param id Identificador a comprobar
+	 * @param id Identificador a de la critica a puntuar
 	 * @author Developers
 	 */
 	
@@ -491,8 +384,17 @@ public class IOCriticas extends IOUsers {
 		cAux.setVotantes(votantes);
 		this.borrarCriticaParaUpdates(id);
 		this.criticaToFich(cAux.getTitle(), cAux.getPuntuacion(), cAux.getResena(), cAux.getMail(), cAux.getLike(), cAux.getDislike(), cAux.getId(), cAux.getVotantes());
+		System.out.println("La critica ha sido valorada.");
 		}
 	}
+	/**
+	 * Funcion que usa el updateUser de IOUSers. Actualiza todas las criticas con el nuevo email del usuario. 
+	 * Internamente, actualiza el vector de votantes de cada critica para que el usuario no pueda puntuar de nuevo las 
+	 * criticas anteriormente puntuadas con las antiguas credenciales.
+	 * @param Mail Mail a actualizar
+	 * @param newMail Nuevo mail del usuario
+	 * @author Developers
+	 */
 	
 	public void updateUserCriticas(String Mail, String newMail)
 	{
@@ -525,32 +427,4 @@ public class IOCriticas extends IOUsers {
 			c.criticaToFich(c.getTitle(), c.getPuntuacion(), c.getResena(), c.getMail(), c.getLike(), c.getDislike(), c.getId(), c.getVotantes());
 		}
 	}
-	
-	/**
-	 * Funcion que aumenta en +1 los dislikes de una critica concreta
-	 * @param mail Mail del autor de la critica
-	 * @param c Critica concreta
-	 * @author Developers
-	 */
-	/**
-	public void votarCriticaNeg(String mail, Critica c) {
-		if(c.getMail().equals(mail)) {
-			System.err.println("No puede valorar sus propias criticas");
-			return;
-		}
-		else {
-			for(String correos : c.getVotantes()) {
-				if(correos.equals(mail)) {
-					System.err.println("Ya ha valorado esta critica");
-					return;
-				}
-			}
-		Critica cAux = c;
-		cAux.addDislike();
-		this.borrarCritica(c);
-		this.criticaToFich(cAux.getTitle(), cAux.getPuntuacion(), cAux.getResena(), cAux.getMail(), cAux.getLike(), cAux.getDislike(), cAux.getId(), cAux.getVotantes());
-		}
-	}
-	*/
-	
 }

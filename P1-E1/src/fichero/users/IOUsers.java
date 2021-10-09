@@ -14,7 +14,7 @@ import java.util.Scanner;
 import espectador.*;
 import fichero.criticas.IOCriticas;
 
-/*
+/**
  *
  * Clase que implementa las funcionalidades relativas 
  * a la lectura y escritura de usuarios en el fichero 
@@ -26,11 +26,11 @@ import fichero.criticas.IOCriticas;
 public class IOUsers 
 {
 /**
- * Funcion que añade un usuario de nuevo registro al fichero de usuarios.
+ * Funcion que anade un usuario de nuevo registro al fichero de usuarios.
  * @param name Nombre del usuario
  * @param username Nombre de usuario
  * @param mail direccion de e-mail del usuario
- * @param passwd Contraseña del usuario
+ * @param passwd Contrasena del usuario
  * @author Developers
  *
  */
@@ -40,7 +40,7 @@ public class IOUsers
 		if(comprobarUserExist(mail)==true)
 		{
 			System.err.println("No ha sido posible realizar el registro, el email ya esta registrado en nuestro sistema");
-			return;
+			System.exit(1);;
 		}
 		else
 		{
@@ -52,12 +52,11 @@ public class IOUsers
 		    {	
 		    	fichero= new FileWriter(rutaFichero, true); 
 		    	pw = new PrintWriter(fichero); 
-		    	pw.println(name+"//"+username+"//"+mail+"//"+passwd); 
+		    	pw.println(name+"//"+username+"//"+mail+"//"+passwd);
 		    }catch (Exception e) {
 		       e.printStackTrace();
 		    } finally {
 		           try {
-		        	   // Aprovechamos el finally para asegurarnos que se cierra el fichero.
 		           if (fichero != null)
 		              fichero.close();
 		           
@@ -85,11 +84,8 @@ public class IOUsers
 		Espectador e1 = new Espectador();
 		
 		try {
-			
-			// Apertura del fichero y creacion de BufferedReader para poder hacer una lectura comoda (disponer del metodo readLine()).
 	        fr = new FileReader (rutaFichero);
 	        br = new BufferedReader(fr);
-	        //lectura
 	        String linea=""; 
 	        while((linea=br.readLine())!=null) {
 			String[] data = linea.split("//");
@@ -105,9 +101,6 @@ public class IOUsers
 		}catch(Exception e){
 	         e.printStackTrace();
 	      }finally{
-	         // En el finally cerramos el fichero, para asegurarnos
-	         // que se cierra tanto si todo va bien como si salta 
-	         // una excepcion.
 	         try{                    
 	            if( null != fr ){   
 	               fr.close();     
@@ -312,29 +305,92 @@ public class IOUsers
 	 * Funcion que actualiza los datos de un usuario.
 	 * del fichero de usuarios, guiandose por el mail
 	 * el usuario
-	 * @param mail Mail del usuatio
+	 * @param mail Mail del usuario
 	 * @author Developers
 	 */
 	
 	public void updateUser(String mail) {
 		IOCriticas ioc = new IOCriticas(); 
 		String correo = null; 
-		Scanner correo_scan = new Scanner(System.in); 
+		Scanner correo_scan = new Scanner(System.in);
+		String nombre = null; 
+		Scanner nombre_scan = new Scanner(System.in); 
+		String contrasena = null; 
+		Scanner contrasena_scan = new Scanner(System.in);
+		String username = null; 
+		Scanner username_scan = new Scanner(System.in);
 		this.imprimirDatosUser(mail);
 		Espectador e = this.proveerDatos();
-		while(comprobarUserExist(e.getMail())==true)
-		{
-			System.out.println("Ese correo electronico ya pertenece a un usuario. Porfavor, indique otro correo electronico.");
-			correo = correo_scan.nextLine(); 
-			e.setMail(correo);
-			if(comprobarUserExist(e.getMail())==false)
-				break; 
-		}
+		correo= e.getMail(); 
+    			while(correo.equals("") || correo.trim().isEmpty() || comprobarUserExist(correo)==true)
+    			{
+    				if(comprobarUserExist(e.getMail())==true)
+    				{
+    					System.err.println("Ese correo electronico ya pertenece a un usuario. Por favor, indique otro correo electronico.");
+    					correo = correo_scan.nextLine();
+    				}
+    				else if(correo.trim().isEmpty() || comprobarUserExist(e.getMail())==true)
+    				{
+    					System.err.println("No puede dejar vacio el campo correo electronico. Por favor, indique otro correo electronico."); 
+            			correo = correo_scan.nextLine();
+    				}
+    				else
+        			{
+        				break; 
+        			}
+    			}
+    	nombre = e.getName(); 
+    			while(nombre.equals("") || nombre.trim().isEmpty())
+    			{
+    				if(nombre.equals("") || nombre.trim().isEmpty())
+    				{
+    					System.err.println("No puede dejar vacio el campo nombre. Por favor, indique otro nombre.");
+    					nombre=nombre_scan.nextLine(); 
+    				}
+    				else
+    				{
+    					break; 
+    				}
+    			}
+    	contrasena = e.getPasswd(); 
+    			while(contrasena.equals("") || contrasena.trim().isEmpty())
+    			{
+    				if( contrasena.equals("") || contrasena.trim().isEmpty() )
+    				{
+    					System.err.println("No puede dejar vacio el campo contrasena. Por favor, indique otra contrasena.");
+    					contrasena=contrasena_scan.nextLine(); 
+    				}
+    				else
+    				{
+    					break; 
+    				}
+    			}
+    	username= e.getUsername(); 
+    			while(username.equals("") || username.trim().isEmpty())
+    			{
+    				if(username.equals("") || username.trim().isEmpty())
+    				{
+    					System.err.println("No puede dejar vacio el campo username. Por favor, indique otro username.");
+    					username=username_scan.nextLine(); 
+    				}
+    				else
+    				{
+    					break; 
+    				}
+    			}
+		e.setUsername(username);
+    	e.setMail(correo);
+    	e.setName(nombre);
+    	e.setPasswd(contrasena);
 		this.borrarUser(mail);
 		this.RegisterUserToFich(e.getName(), e.getUsername(), e.getMail(), e.getPasswd());
 		System.out.println("Sus credenciales han sido actualizadas. Por favor, acceda al sistema con sus nuevas credenciales.");
 		ioc.updateUserCriticas(mail, e.getMail());
-		correo_scan.close(); 
+		correo_scan.close();
+		nombre_scan.close(); 
+		contrasena_scan.close();
+		username_scan.close(); 
+		
 	}
 	
 }

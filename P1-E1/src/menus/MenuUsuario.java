@@ -1,26 +1,18 @@
 package menus;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
-
 import gestor.usuarios.GestorUsuarios;
+/**
+ * La clase MenuUsuario contiene la funcion UserMenu al usuario.
+ * @author Developers
+ */
 
 public class MenuUsuario {
 
-/**
- * La clase MenuCriticas comprende la impresion por pantalla de un menu,
- * que enlaza la interfaz de usuario con las funciones del gestor de
- * críticas.
- * @author Valentin Avram
- *
- */
-
 	
 /** 
-* Menu que enlaza con las gestiones relacionadas
-* a la gestion de usuarios
+* Menu que enlaza con las gestiones relacionadas con la gestion de usuarios
 * @param usuario usuario que realiza la gestion.
 * @author Developers
 *
@@ -47,18 +39,18 @@ public class MenuUsuario {
 		}
         
         if("1".equals(opc)) 
-		{ // Opcion 1, el usuario visualiza sus datos. FUNCIONA BIEN
+		{ 
         	
         	newGestor.verDatosUser();
         }
         else if("2".equals(opc))
-        { // Opcion 2, el usuario actualiza sus datos.
+        { 
 			
         	newGestor.updateUser();
         	
         }
         else if("3".equals(opc))
-        { // Opciones 3, el usuario se da de baja.
+        { 
         	newGestor.darBajaUser();
         	System.out.println("Ha sido dado de baja. Gracias por usar nuestro sistema.");
         	return;

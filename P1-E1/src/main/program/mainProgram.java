@@ -2,17 +2,19 @@ package main.program;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-
-import critica.Critica;
-import fichero.criticas.IOCriticas;
 import fichero.users.IOUsers;
 import menus.MenuCriticas;
 import menus.MenuUsuario;
+/**
+ * Main program
+ * @author Developers
+ *
+ */
 public class mainProgram {
 	
-	public static void main(String[] args) throws IOException 
+	public static void main(String[] args) throws IOException
 	{
+
         String email = null, passwd = null, opcion = null, name = null, username = null;
         IOUsers io = new IOUsers();
         System.out.println("Bienvenido a nuestro sistema de gestion de criticas.");
@@ -39,12 +41,13 @@ public class mainProgram {
     		            new InputStreamReader(System.in));
     	        try {
     				passwd = readerPasswd.readLine();
+    				
     			} catch (IOException e) {
     				e.printStackTrace();
     			}
             System.out.println("Cargando . . .");
             if(io.comprobarUserExist(email)==false) {
-                System.out.println("email no registrado.");
+                System.out.println("Email no registrado.");
                 System.out.println("Para registrarse pulse 1. Para salir pulse cualquier otra tecla.");
                 BufferedReader readerRegister = new BufferedReader(
     		            new InputStreamReader(System.in));
@@ -54,38 +57,59 @@ public class mainProgram {
     				e.printStackTrace();
     			}
     	        if("1".equals(opcion)) {
-    	            System.out.println("Introduzca su email:");
-    	            BufferedReader Register = new BufferedReader(
-    			            new InputStreamReader(System.in));
-    		        try {
+    	        	System.out.println("Introduzca su email:");
+    				BufferedReader Register = new BufferedReader(
+    						new InputStreamReader(System.in));
+    				try {
     					email = Register.readLine();
+    					while(email.equals("") || email.trim().isEmpty())
+    					{
+    						System.err.println("El campo email no puede estar vacio. Por favor, vuelva a intentarlo.");
+    						email = Register.readLine();
+    					}
     				} catch (IOException e) {
     					e.printStackTrace();
     				}
-    		        System.out.println("Introduzca su passwd:");
-    	            BufferedReader Register1 = new BufferedReader(
-    			            new InputStreamReader(System.in));
-    		        try {
+    				System.out.println("Introduzca su passwd:");
+    				BufferedReader Register1 = new BufferedReader(
+    						new InputStreamReader(System.in));
+    				try {
     					passwd = Register1.readLine();
+    					while(passwd.equals("") || passwd.trim().isEmpty())
+    					{
+    						System.err.println("El campo contrasena no puede estar vacio. Por favor, vuelva a intentarlo.");
+    						passwd = Register.readLine();
+    					}
+    					
     				} catch (IOException e) {
     					e.printStackTrace();
-					}
-					System.out.println("Introduzca su nombre:");
-    	            BufferedReader Register11 = new BufferedReader(
-    			            new InputStreamReader(System.in));
-    		        try {
+    				}
+    				System.out.println("Introduzca su nombre:");
+    				BufferedReader Register11 = new BufferedReader(
+    						new InputStreamReader(System.in));
+    				try {
     					name = Register11.readLine();
+    					while(name.equals("") || name.trim().isEmpty())
+    					{
+    						System.err.println("El campo nombre no puede estar vacio. Por favor, vuelva a intentarlo.");
+    						name = Register11.readLine();
+    					}
     				} catch (IOException e) {
     					e.printStackTrace();
-					}
-					System.out.println("Introduzca su username:");
-    	            BufferedReader Register111 = new BufferedReader(
-    			            new InputStreamReader(System.in));
-    		        try {
+    				}
+    				System.out.println("Introduzca su username:");
+    				BufferedReader Register111 = new BufferedReader(
+    						new InputStreamReader(System.in));
+    				try {
     					username = Register111.readLine();
+    					while(username.equals("") || username.trim().isEmpty())
+    					{
+    						System.err.println("El campo username no puede estar vacio. Por favor, vuelva a intentarlo.");
+    						username = Register11.readLine();
+    					}
     				} catch (IOException e) {
     					e.printStackTrace();
-					}
+    				}
 
     		        IOUsers newUser = new IOUsers();
     		        newUser.RegisterUserToFich(name,username,email, passwd);
@@ -176,6 +200,8 @@ public class mainProgram {
     		    		            new InputStreamReader(System.in));
     		    			try {
     		    				opcion1 = readerGestores.readLine();
+
+    		    				
     		    			} catch (IOException e) {
     		    				e.printStackTrace();
     		    			}
@@ -242,6 +268,11 @@ public class mainProgram {
 					new InputStreamReader(System.in));
 			try {
 				email = Register.readLine();
+				while(email.equals("") || email.trim().isEmpty())
+				{
+					System.err.println("El campo email no puede estar vacio. Por favor, vuelva a intentarlo.");
+					email = Register.readLine();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -250,6 +281,12 @@ public class mainProgram {
 					new InputStreamReader(System.in));
 			try {
 				passwd = Register1.readLine();
+				while(passwd.equals("") || passwd.trim().isEmpty())
+				{
+					System.err.println("El campo contrasena no puede estar vacio. Por favor, vuelva a intentarlo.");
+					passwd = Register.readLine();
+				}
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -258,6 +295,11 @@ public class mainProgram {
 					new InputStreamReader(System.in));
 			try {
 				name = Register11.readLine();
+				while(name.equals("") || name.trim().isEmpty())
+				{
+					System.err.println("El campo nombre no puede estar vacio. Por favor, vuelva a intentarlo.");
+					name = Register11.readLine();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -266,6 +308,11 @@ public class mainProgram {
 					new InputStreamReader(System.in));
 			try {
 				username = Register111.readLine();
+				while(username.equals("") || username.trim().isEmpty())
+				{
+					System.err.println("El campo username no puede estar vacio. Por favor, vuelva a intentarlo.");
+					username = Register11.readLine();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

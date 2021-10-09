@@ -3,24 +3,24 @@ package gestor.criticas;
 import critica.Critica;
 import fichero.criticas.IOCriticas;
 
+/**
+ * Clase que llama a todas las funciones para la gestion de criticas.
+ * @author Developers
+ */	
 public class GestorCriticas {
-
-	// 1 - The singleton
 
 			private static GestorCriticas instance = null;
 
-			// Other properties
+
 			private String mail = null;
 			private IOCriticas c = new IOCriticas(); 
-			
-			// 2 - Private constructor
+	
 
 			private GestorCriticas(String Mail) 
 			{
 				this.mail=Mail; 
 			}
 
-			// 3 - Access point to the instance
 
 			public static GestorCriticas getInstance(String Mail) {
 				if(instance == null) {
@@ -84,19 +84,7 @@ public class GestorCriticas {
 					this.c.borrarCritica(c.getId(), this.mail);
 			}
 			
-			/**
-			 * Funcion que anade un voto positivo
-			 * a una critica concreta
-			 * @param c Objeto de la clase critica
-			 * @author Developers
-			 */
-			/**
-			public void votarCriticasPos(Critica c)
-			{
-				if(instance!=null)
-					this.c.votarCriticaPos(this.mail, c);
-			}
-			*/
+
 			/**
 			 * Funcion que anade un voto positivo
 			 * a una critica concreta
@@ -109,20 +97,7 @@ public class GestorCriticas {
 				if(instance!=null)
 					this.c.votarCriticaPos(this.mail, id);
 			}
-			/**
-			 * Funcion que anade un voto negativo
-			 * a una critica concreta
-			 * @param c Objeto de la clase critica
-			 * @author Developers
-			 */
-			/**
 
-			public void votarCriticasNeg(Critica c)
-			{
-				if(instance!=null)
-					this.c.votarCriticaNeg(this.mail, c);
-			}
-			*/
 			/**
 			 * Funcion que anade un voto positivo
 			 * a una critica concreta

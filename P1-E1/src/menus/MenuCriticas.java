@@ -16,15 +16,29 @@ import gestor.criticas.GestorCriticas;
 /**
  * La clase MenuCriticas comprende la impresion por pantalla de un menu,
  * que enlaza la interfaz de usuario con las funciones del gestor de
- * crÃ­ticas.
- * @author Valentin Avram
+ * criticas.
+ * @author Developers
  *
  */
 public class MenuCriticas {
 
+	
+	
+	public boolean isNumeric(String string)
+	{
+		boolean aux = false; 
+	   	 for (int i = 0; i < string.length(); i++) 
+	   	 {
+		     if (Character.isDigit(string.charAt(i))) 
+		     {
+		       aux = true; 
+		     }
+	    }
+	    return aux;
+	}
 /** 
 * Menu que enlaza con las gestiones relacionadas
-* a la gestiÃ³n de crÃ­ticas
+* a la gestionn de criticas
 * @param usuario usuario que realiza la gestion.
 * @author Developers
 *
@@ -69,31 +83,70 @@ public class MenuCriticas {
                 		System.out.println("Introduzca el nombre del espectaculo.");
                 		
                 		String title;
-                        title = teclado1.nextLine();
+                		title = teclado1.nextLine();
+                		while(true)
+                		{
+                			if(title.equals("") || title.trim().isEmpty())
+                			{
+	                			System.err.println("No puede dejar vacio este campo. Intentelo de nuevo"); 
+	                			title = teclado1.nextLine();
+                			}
+                			else
+                			{
+                                break; 
+                			}
+                		}
                         crit.settitle(title);
                         
 
                 		System.out.println("Puntua el espectaculo del 1 al 10:");
                 		System.out.println("(Ejemplo: 6.5)");
                 		
-                		float puntuacion;     
-                        puntuacion = Float.parseFloat(teclado1.nextLine()); 
-                        while(puntuacion<0 || puntuacion>10)
-                        {
-	                        System.out.println("Puntua el espectaculo del 1 al 10:");
-	                    	System.out.println("(Ejemplo: 6.5)");
-	                    	puntuacion = Float.parseFloat(teclado1.nextLine()); 
-                        }
-                        crit.setPuntuacion(puntuacion);       		
-                		System.out.println("Escriba su reseï¿½a");
+                		String puntuacion; 
+                		puntuacion = teclado1.nextLine(); 
+              		
+	                        while(!isNumeric(puntuacion) || Float.parseFloat(puntuacion)<0 || Float.parseFloat(puntuacion)>10)
+	                        {
+	                        	if(!isNumeric(puntuacion))
+	                        	{
+				                     System.err.println("La puntuación tiene que ser numerica. Intentelo de nuevo.");
+				                     System.out.println("(Ejemplo: 6.5)");
+				                     puntuacion = teclado1.nextLine(); 
+	                        	}
+	                        	else
+	                        	{
+			                        System.err.println("La puntuacion debe ser un numero entre 1 y 10. Intentelo de nuevo.");
+			                    	System.out.println("(Ejemplo: 6.5)");
+			                    	puntuacion = teclado1.nextLine();
+			                    	if(!isNumeric(puntuacion))
+			                		{
+				                     System.err.println("La puntuación tiene que ser numerica. Intentelo de nuevo.");
+				                     System.out.println("(Ejemplo: 6.5)");
+				                     puntuacion = teclado1.nextLine(); 
+			                		}
+	                        	}
+	                        }
+                        crit.setPuntuacion(Float.parseFloat(puntuacion));       		
+                		System.out.println("Escriba su resena");
                 		
-                		String resena;             
-                        resena = teclado1.nextLine();
+                		String resena;
+                		resena = teclado1.nextLine();
+                		while(true)
+                		{
+                			if(resena.equals("") || resena.trim().isEmpty())
+                			{
+	                			System.err.println("No puede dejar vacio este campo. Intentelo de nuevo"); 
+	                			resena = teclado1.nextLine();
+                			}
+                			else
+                			{
+                                break; 
+                			}
+                		}
                         crit.setId(newIOCriticas.generarID()); 
                         crit.setResena(resena);
                         crit.setMail(mail);
                         crit.setVotantes(votantes);
-                        
                 		newGestor.crearCritica(crit);
                 		break;
                 	
@@ -141,29 +194,35 @@ public class MenuCriticas {
                 		
                 		
                 		Scanner teclado3 = new Scanner(System.in);  
-                		int id;
+                		String id;
                 		
-                		System.out.println("ELIMINACIï¿½N DE CRITICAS");
+                		System.out.println("ELIMINACION DE CRITICAS");
                 		newGestor.buscarCriticas(mail);
                 		
                 		System.out.println("Introduzca el id de la critica que desea borrar");
                        
-                        id = Integer.parseInt(teclado3.nextLine());
+                        id = (teclado3.nextLine());
                         
-                        if(newIOCriticas.existId(id) == true)
+                        while(!isNumeric(id))
+            			{
+            				System.err.println("El ID de la critica debe ser numérico.Intentelo de nuevo.");
+            				id = (teclado3.nextLine());
+            			}
+                        if(newIOCriticas.existId(Integer.parseInt(id)) == true)
                         {
-                        	newIOCriticas.borrarCritica(id, mail);
+                        	newIOCriticas.borrarCritica(Integer.parseInt(id), mail);
+                        	System.out.println("Critica borrada correctamente."); 
                         }
                         else 
                         {
-                        System.out.println("El ID indicado no existe. Intentelo de nuevo.");	
+                        	System.err.println("El ID indicado no existe. Intentelo de nuevo.");	
                         }
                         
                 		break;
                 		
                 	case "4":
                 
-                		int id1 = 0;
+                		String id1;
                 		
                 		System.out.println("Se mostraran por pantalla las diferentes criticas para que selecciona el ID de la critica que desea puntuar:");
                 		System.out.println("");
@@ -188,18 +247,22 @@ public class MenuCriticas {
 	                    		System.out.println("Indique el ID de la critica que desea puntuar");
 	                    		BufferedReader reader1 = new BufferedReader(
 	                		            new InputStreamReader(System.in));
-	                			try {
-	                				id1 = Integer.parseInt(reader1.readLine());
-	                			} catch (IOException e) {
-	                				e.printStackTrace();
-	                			}
-	                			if(newIOCriticas.existId(id1))
+	                    		
+	                    		
+	                			id1 = reader1.readLine();
+	                			while(!isNumeric(id1))
 	                			{
-	                				newGestor.votarCriticasPos(id1);
+	                				System.err.println("El ID de la critica debe ser numérico.Intentelo de nuevo.");
+	                				id1 = reader1.readLine();
+	                			}
+	                				
+	                			if(newIOCriticas.existId(Integer.parseInt(id1)))
+	                			{
+	                				newGestor.votarCriticasPos(Integer.parseInt(id1));
 	                			}
 	                            else 
 	                            {
-	                            System.out.println("El ID indicado no existe. Intentelo de nuevo.");	
+	                            System.err.println("El ID indicado no existe. Intentelo de nuevo.");	
 	                            }
 	                            
 	                		}
@@ -228,8 +291,6 @@ public class MenuCriticas {
                 	
                 	case "5":
                 		
-                		int id2 = 0;
-                		
                 		System.out.println("Se mostraran por pantalla las diferentes criticas para que selecciona el ID de la critica que desea puntuar:");
                 		System.out.println("");
                 		String rutaAbsoluta2 = new File("").getAbsolutePath();
@@ -253,20 +314,23 @@ public class MenuCriticas {
 	                    		System.out.println("Indique el ID de la critica que desea puntuar");
 	                    		BufferedReader reader1 = new BufferedReader(
 	                		            new InputStreamReader(System.in));
-	                			try {
-	                				id1 = Integer.parseInt(reader1.readLine());
-	                				if(newIOCriticas.existId(id1))
-		                			{
-		                				newGestor.votarCriticasNeg(id1);
-		                				System.out.println("Dislike aÃ±adido correctamente.");
-		                			}
-	                				else 
-	  	                            {
-	  	                            System.out.println("El ID indicado no existe. Intentelo de nuevo.");	
-	  	                            }
-	                			} catch (IOException e) {
-	                				e.printStackTrace();
+	                    		
+	                    		
+	                			id1 = reader1.readLine();
+	                			while(!isNumeric(id1))
+	                			{
+	                				System.out.println("El ID de la critica debe ser numérico. Intentelo de nuevo.");
+	                				id1 = reader1.readLine();
 	                			}
+	                				
+	                			if(newIOCriticas.existId(Integer.parseInt(id1)))
+	                			{
+	                				newGestor.votarCriticasNeg(Integer.parseInt(id1));
+	                			}
+	                            else 
+	                            {
+	                            System.out.println("El ID indicado no existe. Intentelo de nuevo.");	
+	                            }
 	                            
 	                		}
                 		}

@@ -8,7 +8,7 @@ import fichero.criticas.IOCriticas;
 /**
  * Clase que implementa una critica con sus variables 
  * privadas y metodos.
- * @author Antonio Lujano Luna
+ * @author Developers
  *
  */
 public class Critica extends IOCriticas{
@@ -26,7 +26,7 @@ public class Critica extends IOCriticas{
 	
 	private float puntuacion; 
 	
-	/*
+	/**
 	 *  Int con el valor del identificador unico de cada critica
 	 */
 	
@@ -55,17 +55,19 @@ public class Critica extends IOCriticas{
 	
 	private String mail; 
 	
-	/*
+	/**
 	 * Array List de cadenas de texto
 	 */
 	
 	private ArrayList<String> votantes; 
 	
+	/**
+	 * Objeto de la clase IOCriticas, para llamar a funciones de esta
+	 */
 	private IOCriticas ioc = new IOCriticas(); 
 	
 	/**
-	 * Constructor parametrizado de la clase. Inicializamos los
-	 * contadores de likes y dislikes a 0.
+	 * Constructor parametrizado de la clase.
 	 * @param title Titulo de la critica
 	 * @param puntuacion Puntuacion dada
 	 * @param resena Resena
@@ -83,8 +85,7 @@ public class Critica extends IOCriticas{
 	}
 	
 	/**
-	 * Constructor sin parametros. Usado para inicializacion 
-	 * de variables.
+	 * Constructor sin parametros. Usado para inicializacion de variables.
 	 */
 	
 	public Critica() {}
@@ -204,8 +205,7 @@ public class Critica extends IOCriticas{
 	}
 	
 	/**
-	 * Setter de la puntuacion. Comprueba que es un elemento
-	 * de la enum puntuacion
+	 * Setter de la puntuacion.
 	 * @param puntuacion Puntuacion del espectaculo
 	 * @author Developers
 	 */

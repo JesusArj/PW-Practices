@@ -2,9 +2,8 @@ package espectador;
 import fichero.users.IOUsers;
 
 /**
- * Clase que implementa un espectador con sus variables privadas 
- * y metodos
- * @author Antonio Lujano Luna
+ * Clase que implementa un espectador con sus variables privadas y metodos
+ * @author Developers
  *
  */
 
@@ -141,7 +140,7 @@ public class Espectador extends IOUsers{
 	}	
 	
 	/**
-	 * Setter de la contrasenaa
+	 * Setter de la contrasena
 	 * @param Passwd Contrasena del user
 	 * @author Developers
 	 */
