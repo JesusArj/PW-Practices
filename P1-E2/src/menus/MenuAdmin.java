@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import espectaculo.EspectaculoMultiple;
@@ -77,11 +78,13 @@ public class MenuAdmin {
             	switch(opc1)
             	{
             	case 1:
+            		
+            		ArrayList<Integer> ids = new ArrayList<Integer>();
             		System.out.println("Introduzca el nombre del espectaculo:");
             		String title = teclado1.nextLine();
             		ep.setTitulo(title);
             		
-            		//CATEGORIA,DESCRIPCION,LOCALIDADES, VENTA, HORAFECHA, CRITICAS
+
             		System.out.println("Introduzca la categoria del espectaculo:");
             		String category = teclado1.nextLine();
             		ep.setCategoria(category);
@@ -92,20 +95,92 @@ public class MenuAdmin {
             		
             		System.out.println("Introduca el numero de localidades disponibles para el espectaculo:");
             		int totalloc = Integer.parseInt(teclado1.nextLine());
-            		ep.setLocalidadesVenta(opc1);
+            		ep.setLocalidadesVenta(totalloc);
             		
             		System.out.println("Introduzca el numero de localidades ya vendidas");
             		int soldloc = Integer.parseInt(teclado1.nextLine());
             		ep.setLocalidadesVendidas(soldloc);
             		
             		System.out.println("Introduzca la fecha y hora del espectaculo");
-            		System.out.println("Formato de fecha : YEAR-MES-DIA HORA:MIN:SEC");
+            		System.out.println("Formato de fecha : AAAA-MES-DIA HORA:MIN:SEC");
             		String datetime = teclado1.nextLine();
             		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             		LocalDateTime dateTime = LocalDateTime.parse(datetime, formatter);
             		ep.setHoraFecha(dateTime);
-            		
+            		ep.setCritica(ids);
             		newGestor.CrearEspectaculoPunt(ep);
+            		break;
+            		
+            	case 2:
+            		ArrayList<Integer> ids1 = new ArrayList<Integer>();
+            		ArrayList<LocalDateTime> pases = new ArrayList<LocalDateTime>();
+            		System.out.println("Introduzca el nombre del espectaculo:");
+            		String title1 = teclado1.nextLine();
+            		em.setTitulo(title1);
+            		
+
+            		System.out.println("Introduzca la categoria del espectaculo:");
+            		String category1 = teclado1.nextLine();
+            		em.setCategoria(category1);
+            		
+            		System.out.println("Introduca la descripcion del espectaculo:");
+            		String descripcion1 = teclado1.nextLine();
+            		em.setDescripcion(descripcion1);
+            		
+            		System.out.println("Introduca el numero de localidades disponibles para el espectaculo:");
+            		int totalloc1 = Integer.parseInt(teclado1.nextLine());
+            		em.setLocalidadesVenta(totalloc1);
+            		
+            		System.out.println("Introduzca el numero de localidades ya vendidas");
+            		int soldloc1 = Integer.parseInt(teclado1.nextLine());
+            		em.setLocalidadesVendidas(soldloc1);
+            		
+            		em.setPases(pases);
+            		em.setCritica(ids1);
+            		newGestor.CrearEspectaculoMult(em);
+            		break;
+            	
+            	case 3:
+            		ArrayList<Integer> ids2 = new ArrayList<Integer>();
+            		ArrayList<LocalDateTime> fechas = new ArrayList<LocalDateTime>();
+            		System.out.println("Introduzca el nombre del espectaculo:");
+            		String title2 = teclado1.nextLine();
+            		et.setTitulo(title2);
+            		
+
+            		System.out.println("Introduzca la categoria del espectaculo:");
+            		String category2 = teclado1.nextLine();
+            		et.setCategoria(category2);
+            		
+            		System.out.println("Introduca la descripcion del espectaculo:");
+            		String descripcion2 = teclado1.nextLine();
+            		et.setDescripcion(descripcion2);
+            		
+            		System.out.println("Introduca el numero de localidades disponibles para el espectaculo:");
+            		int totalloc2 = Integer.parseInt(teclado1.nextLine());
+            		et.setLocalidadesVenta(totalloc2);
+            		
+            		System.out.println("Introduzca el numero de localidades ya vendidas");
+            		int soldloc2 = Integer.parseInt(teclado1.nextLine());
+            		et.setLocalidadesVendidas(soldloc2);
+            		
+            		System.out.println("Introduzca la fecha de Inicio");
+            		System.out.println("Formato de fecha : YEAR-MES-DIA HORA:MIN:SEC");
+            		String datetime1 = teclado1.nextLine();
+            		DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            		LocalDateTime dateTime1 = LocalDateTime.parse(datetime1, formatter1);
+            		et.setFechaInicio(dateTime1);
+            		
+            		System.out.println("Introduzca la fecha de Fin");
+            		System.out.println("Formato de fecha : YEAR-MES-DIA HORA:MIN:SEC");
+            		String datetime2 = teclado1.nextLine();
+            		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            		LocalDateTime dateTime2 = LocalDateTime.parse(datetime2, formatter2);
+            		et.setFechaFinal(dateTime2);
+            		
+            		et.setFechas(fechas);
+            		et.setCritica(ids2);
+            		newGestor.CrearEspectaculoTemp(et);
             		break;
             	}
             	

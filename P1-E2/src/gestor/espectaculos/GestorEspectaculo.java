@@ -94,10 +94,7 @@ public class GestorEspectaculo {
 				}
 			}
 			
-			/**
-			 * Funcion que busca una critica concreta
-			 * @param mail Mail del autor
-			 */
+
 			
 			public void buscarEspectaculosPunt(String title)
 			{
@@ -143,6 +140,54 @@ public class GestorEspectaculo {
 			{
 				if(instance!=null)
 					this.c.borrarEspectaculoTemp(et);
+			}
+			
+			public void localidadesDisponiblesPunt()
+			{
+				if(instance!=null)
+				{
+					this.c.localidadesDisponiblesPunt();
+				}
+			}
+			
+			public void localidadesDisponiblesMult()
+			{
+				if(instance!=null)
+				{
+					this.c.localidadesDisponiblesMult();
+				}
+			}
+			
+			public void localidadesDisponiblesTemp()
+			{
+				if(instance!=null)
+				{
+					this.c.localidadesDisponiblesTemp();
+				}
+			}
+			
+			public void buscarCategoriaPunt(String categoria)
+			{
+				if(instance!=null)
+				{
+					this.c.buscarCategoriaPunt(categoria);
+				}
+			}
+			
+			public void buscarCategoriaMult(String categoria)
+			{
+				if(instance!=null)
+				{
+					this.c.buscarCategoriaMult(categoria);
+				}
+			}
+			
+			public void buscarCategoriaTemp(String categoria)
+			{
+				if(instance!=null)
+				{
+					this.c.buscarCategoriaTemp(categoria);
+				}
 			}
 }
 			

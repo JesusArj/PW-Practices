@@ -82,8 +82,7 @@ public class MenuCriticas {
                 		System.out.println("CREACION DE CRITICAS");
                 		System.out.println("Introduzca el nombre del espectaculo.");
                 		
-                		String title;
-                		title = teclado1.nextLine();
+                		String title = teclado1.nextLine();
                 		while(true)
                 		{
                 			if(title.equals("") || title.trim().isEmpty())
