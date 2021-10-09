@@ -27,7 +27,7 @@ public class EspectaculoTemporada extends AbstractEspectaculo{
 	public ArrayList<LocalDate> getFechas() {
 		return this.fechas;
 	}
-	public void setPases(ArrayList<LocalDate> fechas) {
+	public void setFechas(ArrayList<LocalDate> fechas) {
 		this.fechas = fechas;
 	}
 }

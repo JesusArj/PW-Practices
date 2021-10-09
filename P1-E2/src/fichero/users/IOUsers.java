@@ -1,5 +1,4 @@
-//TODO: En el constructor hay que inicializar un vector de espectadores que vuelque todos los datos del fichero
-//en dicho vector. Luego se obtendr� el tama�o del vector para poder seguir escribiendo en el fichero de datos.
+
 
 package fichero.users;
 import java.io.BufferedReader;

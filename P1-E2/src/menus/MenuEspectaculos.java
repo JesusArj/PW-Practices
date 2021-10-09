@@ -47,7 +47,7 @@ public class MenuEspectaculos {
             
             case "1":
             	System.out.println("INTRODUCCION DE ESPECTACULOS:");
-            	//TODO
+            	//TODO: Incluir comprobacion de la enumeracion. concierto, obra, monologo;
             break;
             
             case "2":

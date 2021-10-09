@@ -8,11 +8,8 @@ enum categoria
 }
 
 public class AbstractEspectaculo {
-	public enum categoria
-	{
-	    concierto, obra, monologo;
-	}
-	private categoria categoria; 
+
+	private String categoria; 
 	private String titulo;  
 	private String descripcion; 
 	private int localidades_venta; 
@@ -23,7 +20,7 @@ public class AbstractEspectaculo {
 		public AbstractEspectaculo(){};
 		
 		//CONSTRUCTOR PARAMETRIZADO
-		public AbstractEspectaculo(String titulo, categoria categoria, String descripcion) 
+		public AbstractEspectaculo(String titulo, String categoria, String descripcion) 
 		{
 			this.titulo = titulo; 
 			this.descripcion = descripcion;
@@ -32,7 +29,7 @@ public class AbstractEspectaculo {
 		
 		//OBSERVADORES
 		
-		public categoria getCategoria()
+		public String getCategoria()
 		{
 			return this.categoria; 
 		}
@@ -59,7 +56,7 @@ public class AbstractEspectaculo {
 		
 		//MODIFICADORES
 		
-		public void setCategoria(categoria categoria)
+		public void setCategoria(String categoria)
 		{
 			this.categoria=categoria; 
 		}
