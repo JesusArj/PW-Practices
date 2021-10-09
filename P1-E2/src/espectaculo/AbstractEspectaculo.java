@@ -18,7 +18,7 @@ public class AbstractEspectaculo extends IOEspectaculos{
 	private int localidades_vendidas; 
 	private ArrayList<Integer> criticas;
 	
-	//CONSTRUCTOR VACO
+	//CONSTRUCTOR VACIO
 		public AbstractEspectaculo(){};
 		
 		//CONSTRUCTOR PARAMETRIZADO
@@ -56,6 +56,7 @@ public class AbstractEspectaculo extends IOEspectaculos{
 			return this.criticas;
 		}
 		
+		
 		//MODIFICADORES
 		
 		public void setCategoria(String categoria)
@@ -81,5 +82,7 @@ public class AbstractEspectaculo extends IOEspectaculos{
 		public void setCritica(ArrayList<Integer> c) {
 			this.criticas = c;
 		}
+		
+
 		
 }

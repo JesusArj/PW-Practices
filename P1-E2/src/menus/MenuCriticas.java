@@ -76,7 +76,7 @@ public class MenuCriticas {
                 		float puntuacion;     
                         puntuacion = Float.parseFloat(teclado1.nextLine()); 
                         crit.setPuntuacion(puntuacion);       		
-                		System.out.println("Escriba su rese�a");
+                		System.out.println("Escriba su resena");
                 		
                 		String resena;             
                         resena = teclado1.nextLine();
@@ -88,7 +88,7 @@ public class MenuCriticas {
                 		break;
                 	
                 	case "2":
-                		//TODO: No funciona por que se escribe mal?
+                		
                 		newGestor.consultarCriticas();
                 		break;
                 		                	
@@ -113,8 +113,7 @@ public class MenuCriticas {
                 		int id1 = 0;
                 		
                 		System.out.println("Se mostraran por pantalla las diferentes criticas para que selecciona el ID de la critica que desea puntuar");
-                		BufferedReader reader1 = new BufferedReader(
-            		            new InputStreamReader(System.in));
+                		BufferedReader reader1 = new BufferedReader(new InputStreamReader(System.in));
             			try {
             				id1 = Integer.parseInt(reader1.readLine());
             			} catch (IOException e) {

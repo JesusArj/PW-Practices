@@ -18,7 +18,7 @@ import fichero.users.IOUsers;
  * Clase que implementa las funcionalidades relativas 
  * a la lectura y escritura de criticas en el fichero 
  * correspondiente
- * @author 
+ * @author developers
  *
  */
 

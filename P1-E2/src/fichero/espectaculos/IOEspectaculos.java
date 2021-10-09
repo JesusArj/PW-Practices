@@ -10,11 +10,9 @@ import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import critica.Critica;
 import espectaculo.EspectaculoMultiple;
 import espectaculo.EspectaculoPuntual;
 import espectaculo.EspectaculoTemporada;
-import espectador.Espectador;
 
 
 public class IOEspectaculos {

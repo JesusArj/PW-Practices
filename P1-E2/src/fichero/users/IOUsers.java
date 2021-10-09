@@ -39,8 +39,9 @@ public class IOUsers
 		if(comprobarUserExist(mail)==true)
 		{
 			System.err.println("No ha sido posible realizar el registro, el email ya esta registrado en nuestro sistema");
-			return;
+			System.exit(1);
 		}
+
 		else
 		{
 			String rutaAbsoluta = new File("").getAbsolutePath();
@@ -137,6 +138,7 @@ public class IOUsers
 		return false;
 	}
 
+	
 /**
  * Funcion que comprueba que la contraseña sea la correspondiente 
  * al usuario introducido.

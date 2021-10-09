@@ -3,6 +3,17 @@ package menus;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
+import espectaculo.EspectaculoMultiple;
+import espectaculo.EspectaculoPuntual;
+import espectaculo.EspectaculoTemporada;
+import fichero.criticas.IOCriticas;
+import fichero.espectaculos.IOEspectaculos;
+import gestor.criticas.GestorCriticas;
+import gestor.espectaculos.GestorEspectaculo;
 
 /**
  * La clase MenuEspectaculos comprende la impresion por pantalla de un menu,
@@ -18,6 +29,11 @@ public class MenuAdmin {
 	public void AdminMenu(String mail) 
 	{
 		String opc = null;
+        GestorEspectaculo newGestor = GestorEspectaculo.getInstance(mail);
+        IOEspectaculos newIOCEspectaculos = new IOEspectaculos();
+        EspectaculoPuntual ep = new EspectaculoPuntual();
+        EspectaculoMultiple em = new EspectaculoMultiple();
+        EspectaculoTemporada et = new EspectaculoTemporada();
 		//TODO: Que instancia creo, solo la Abstract Clase, una de cada, o al fabric (Abstract o el otro)?
 		
 		while(true)
@@ -46,8 +62,53 @@ public class MenuAdmin {
             {
             
             case "1":
+            	
+            	Scanner teclado1 = new Scanner(System.in); 
+            	int opc1 = 0;
+            	
             	System.out.println("INTRODUCCION DE ESPECTACULOS:");
-            	//TODO: Incluir comprobacion de la enumeracion. concierto, obra, monologo; Y que no se repita titulo
+            	System.out.println("Seleccione que tipo de Espectaculo va a introducir en el Sistema :");
+            	System.out.println("1. Espectaculo Puntual");
+            	System.out.println("2. Espectaculo Multiple");
+            	System.out.println("3. Espectaculo Temporada");
+            	
+            	opc1 = Integer.parseInt(teclado1.nextLine());
+            	
+            	switch(opc1)
+            	{
+            	case 1:
+            		System.out.println("Introduzca el nombre del espectaculo:");
+            		String title = teclado1.nextLine();
+            		ep.setTitulo(title);
+            		
+            		//CATEGORIA,DESCRIPCION,LOCALIDADES, VENTA, HORAFECHA, CRITICAS
+            		System.out.println("Introduzca la categoria del espectaculo:");
+            		String category = teclado1.nextLine();
+            		ep.setCategoria(category);
+            		
+            		System.out.println("Introduca la descripcion del espectaculo:");
+            		String descripcion = teclado1.nextLine();
+            		ep.setDescripcion(descripcion);
+            		
+            		System.out.println("Introduca el numero de localidades disponibles para el espectaculo:");
+            		int totalloc = Integer.parseInt(teclado1.nextLine());
+            		ep.setLocalidadesVenta(opc1);
+            		
+            		System.out.println("Introduzca el numero de localidades ya vendidas");
+            		int soldloc = Integer.parseInt(teclado1.nextLine());
+            		ep.setLocalidadesVendidas(soldloc);
+            		
+            		System.out.println("Introduzca la fecha y hora del espectaculo");
+            		System.out.println("Formato de fecha : 2016-03-04 11:30:\");
+            		String datetime = "2016-03-04 11:30";
+            		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            		LocalDateTime dateTime = LocalDateTime.parse(datetime, formatter);
+            		ep.setHoraFecha(dateTime);
+            		
+            		newGestor.CrearEspectaculoPunt(ep);
+            		break;
+            	}
+            	
             break;
             
             case "2":
