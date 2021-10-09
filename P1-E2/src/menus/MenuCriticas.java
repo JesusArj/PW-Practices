@@ -114,7 +114,7 @@ public class MenuCriticas {
 	                        	}
 	                        	else
 	                        	{
-			                        System.err.println("La puntuacion debe ser un numero entre 1 y 10. Intentelo de nuevo.");
+			                        System.err.println("La puntuacion debe ser un numero entre 0 y 10. Intentelo de nuevo.");
 			                    	System.out.println("(Ejemplo: 6.5)");
 			                    	puntuacion = teclado1.nextLine();
 			                    	if(!isNumeric(puntuacion))

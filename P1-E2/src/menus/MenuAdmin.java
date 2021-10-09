@@ -99,7 +99,20 @@ public class MenuAdmin {
             		
             		System.out.println("Introduzca el numero de localidades ya vendidas");
             		int soldloc = Integer.parseInt(teclado1.nextLine());
-            		ep.setLocalidadesVendidas(soldloc);
+            		
+            		while(true)
+            		{
+	            		if((soldloc) > (totalloc))
+	            		{
+	            			System.err.println("No puede haber mas localidades vendidas de las que hay");
+	            			soldloc = Integer.parseInt(teclado1.nextLine());
+	            		}
+	            		else
+	            		{
+	            			break;
+	            		}
+            		}
+	            	ep.setLocalidadesVendidas(soldloc);
             		
             		System.out.println("Introduzca la fecha y hora del espectaculo");
             		System.out.println("Formato de fecha : AAAA-MES-DIA HORA:MIN:SEC");
@@ -133,6 +146,20 @@ public class MenuAdmin {
             		
             		System.out.println("Introduzca el numero de localidades ya vendidas");
             		int soldloc1 = Integer.parseInt(teclado1.nextLine());
+
+            		while(true)
+            		{
+	            		if((soldloc1) > (totalloc1))
+	            		{
+	            			System.err.println("No puede haber mas localidades vendidas de las que hay");
+	            			soldloc1 = Integer.parseInt(teclado1.nextLine());
+	            		}
+	            		else
+	            		{
+	            			break;
+	            		}
+            		}
+            		
             		em.setLocalidadesVendidas(soldloc1);
             		
             		em.setPases(pases);
@@ -162,6 +189,20 @@ public class MenuAdmin {
             		
             		System.out.println("Introduzca el numero de localidades ya vendidas");
             		int soldloc2 = Integer.parseInt(teclado1.nextLine());
+            		
+            		while(true)
+            		{
+	            		if((soldloc2) > (totalloc2))
+	            		{
+	            			System.err.println("No puede haber mas localidades vendidas de las que hay");
+	            			soldloc = Integer.parseInt(teclado1.nextLine());
+	            		}
+	            		else
+	            		{
+	            			break;
+	            		}
+            		}
+            		
             		et.setLocalidadesVendidas(soldloc2);
             		
             		System.out.println("Introduzca la fecha de Inicio");
