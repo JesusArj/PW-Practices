@@ -1,4 +1,9 @@
 package gestor.usuarios;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.Properties;
+
 import espectador.Espectador;
 import fichero.users.IOUsers;
 
@@ -10,29 +15,58 @@ import fichero.users.IOUsers;
 
 
 public class GestorUsuarios {
-
+	/**
+	 * Instancia del gestor de usuarios
+	 */
 	private static GestorUsuarios instance = null;
-			
-	private IOUsers User = new IOUsers();
+	/**
+	 * Mail del usuario que lanzó el gestor.Asociado a la instancia.
+	 */
 	private String Mail;
+	/**
+	 * Clase IOUsers para llamar a las funciones necesarias
+	 */
+	private IOUsers User = new IOUsers();
 
-/**
- * Constructor parametrizado de la clase.
- * @param mail DirecciÃ³n del e-mail del usuario
- * @author Developers
- *
- */
-
+	/**
+	 * Constructor privado (patron Singleton).
+	 * @param Mail del user que ejecuta el gestor
+	 * @author Developers
+	 */
 	private GestorUsuarios(String Mail) 
 	{
 		this.Mail = Mail; 
 	}
-
-	public static GestorUsuarios getInstance(String Mail)
+	
+	/**
+	 * Funcion para inicializar el gestor. Además escribe en el fichero properties
+	 * la ruta del fichero usuarios.txt
+	 * @param Mail del usuario que ejecuta el gestor
+	 * @return La instancia del gestor.
+	 * @author Developers
+	 */
+	public static GestorUsuarios getInstance(String Mail) 
 	{
 		if(instance == null) 
 		{
-			instance = new GestorUsuarios(Mail);
+			instance = new GestorUsuarios(Mail);	
+			try {
+				String path = new File("").getAbsolutePath();
+				path = path + "/data.properties";
+				File file = new File(path);
+				Properties table = new Properties();
+				FileInputStream in = new FileInputStream(file);
+				table.load(in);
+				in.close();
+				String rutaAbsoluta = new File("").getAbsolutePath();
+				String rutaFichero = rutaAbsoluta + "/ususarios.txt";
+				table.setProperty("UsersFilePath", rutaFichero);
+				FileOutputStream fr = new FileOutputStream(file);
+		        table.store(fr, "Properties");
+		        fr.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return instance;
 	}
