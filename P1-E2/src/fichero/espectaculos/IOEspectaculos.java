@@ -393,7 +393,7 @@ public class IOEspectaculos {
 		aux2 = fichEspectaculoTempToVec(aux2);
 		
 		for(EspectaculoPuntual ep : v) {
-			if(ep.getTitulo().equals(title)) {
+			if(!(ep.getTitulo().equals(title))) {
 				aux.add(ep);
 			}
 		}
@@ -405,26 +405,23 @@ public class IOEspectaculos {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		if(aux.isEmpty()) {
 		for(EspectaculoPuntual ep : aux) 
 		{
 			ep.EspectaculoPuntToFich(ep.getTitulo(), ep.getCategoria(), ep.getDescripcion(), ep.getLocalidadesVenta(), ep.getLocalidadesVendidas(), ep.getHoraFecha(),ep.getCritica());
 		}
-		}
-		if(!aux1.isEmpty())
-		{
+		
+
 		for(EspectaculoMultiple em : aux1)
 		{
 			em.EspectaculoMultToFich(em.getTitulo(), em.getCategoria(), em.getDescripcion(), em.getLocalidadesVenta(), em.getLocalidadesVendidas(), em.getPases(), em.getCritica());
 		}
-		}
-		if(!aux2.isEmpty()) 
-		{
+		
+
 		for(EspectaculoTemporada et : aux2)
 		{
 			et.EspectaculoTempToFich(et.getTitulo(), et.getCategoria(), et.getDescripcion(), et.getLocalidadesVenta(), et.getLocalidadesVendidas(), et.getFechaInicio(), et.getFechaFinal(), et.getFechas() ,et.getCritica());
 		}
-		}
+
 		
 	}
 	
@@ -607,7 +604,7 @@ public class IOEspectaculos {
 	public boolean existEspectaculoMult(String title)
 	{
 		ArrayList<EspectaculoMultiple> v = new ArrayList<EspectaculoMultiple>();
-		fichEspectaculoMultToVec(v);
+		v = fichEspectaculoMultToVec(v);
 		for(EspectaculoMultiple em : v) {
 			if(em.getTitulo().equals(title));
 				return true;
@@ -633,6 +630,8 @@ public class IOEspectaculos {
 					System.out.println("Fecha: " + c.get(i).getHoraFecha());
 					System.out.println("Descripcion: " + c.get(i).getDescripcion());
 					System.out.println("Localidades disponibles :" + ((c.get(i).getLocalidadesVenta())-(c.get(i).getLocalidadesVendidas())) ); 
+					System.out.println("-------------------");
+					System.out.println("");
 				}
 			}
 		}
@@ -661,7 +660,9 @@ public class IOEspectaculos {
 					{
 						System.out.println("Fecha "+ (j+1) + "º :"  + c.get(j).getPases());
 					}
-					System.out.println("Localidades disponibles :" + ((c.get(i).getLocalidadesVenta())-(c.get(i).getLocalidadesVendidas())) ); 					System.out.println("Localidades disponibles" );  
+					System.out.println("Localidades disponibles :" + ((c.get(i).getLocalidadesVenta())-(c.get(i).getLocalidadesVendidas())) );
+					System.out.println("-------------------");
+					System.out.println("");  
 
 				}
 			}
@@ -695,7 +696,9 @@ public class IOEspectaculos {
 						System.out.println("Fecha "+ (j+1) + "º :"  + c.get(j).getFechas());
 					}
 					System.out.println("Fecha de Final: " + c.get(i).getFechaFinal());
-					System.out.println("Localidades disponibles :" + ((c.get(i).getLocalidadesVenta())-(c.get(i).getLocalidadesVendidas())) ); 
+					System.out.println("Localidades disponibles :" + ((c.get(i).getLocalidadesVenta())-(c.get(i).getLocalidadesVendidas())) );
+					System.out.println("-------------------");
+					System.out.println("");
 				}
 			}
 		}

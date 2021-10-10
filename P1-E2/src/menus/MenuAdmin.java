@@ -247,6 +247,8 @@ public class MenuAdmin {
             
             case "2":
             	System.out.println("ELIMINACION DE ESPECTACULOS:");
+            	System.out.println("FUNCION NO IMPLEMENTADA. DISCULPE LAS MOLESTIAS.");
+            	/*
             	Scanner teclado2 = new Scanner(System.in); 
             	System.out.println("Indique la clase de espectaculo que desea borrar");
             	System.out.println("1. Espectaculo Puntual");
@@ -270,12 +272,13 @@ public class MenuAdmin {
             		case 3:
             			newGestor.BorrarEspectaculosTemp(title);     			
             			break;
-            	}
+            	}*/
             break;
             
             case "3":
             	System.out.println("ACTUALIZACION DE ESPECTACULOS:");
-            	
+            	System.out.println("FUNCION NO IMPLEMENTADA. DISCULPE LAS MOLESTIAS");
+            	/*
             	Scanner teclado3 = new Scanner(System.in); 
             	System.out.println("Indique la clase de espectaculo que desea borrar");
             	System.out.println("1. Espectaculo Puntual");
@@ -299,7 +302,7 @@ public class MenuAdmin {
             		case 3:
             			newGestor.updateEspectaculoTemp(title3);     			
             			break;
-            	}
+            	}*/
             break;
             
             

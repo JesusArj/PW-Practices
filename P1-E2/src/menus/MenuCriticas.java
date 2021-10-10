@@ -82,7 +82,8 @@ public class MenuCriticas {
                 		System.out.println("CREACION DE CRITICAS");
                 		System.out.println("Introduzca el nombre del espectaculo.");
                 		
-                		String title = teclado1.nextLine();
+                		String title;
+                		title = teclado1.nextLine();
                 		while(true)
                 		{
                 			if(title.equals("") || title.trim().isEmpty())
@@ -98,7 +99,7 @@ public class MenuCriticas {
                         crit.settitle(title);
                         
 
-                		System.out.println("Puntua el espectaculo del 1 al 10:");
+                		System.out.println("Puntua el espectaculo del 0 al 10:");
                 		System.out.println("(Ejemplo: 6.5)");
                 		
                 		String puntuacion; 
@@ -114,7 +115,7 @@ public class MenuCriticas {
 	                        	}
 	                        	else
 	                        	{
-			                        System.err.println("La puntuacion debe ser un numero entre 0 y 10. Intentelo de nuevo.");
+			                        System.err.println("La puntuacion debe ser un numero entre 1 y 10. Intentelo de nuevo.");
 			                    	System.out.println("(Ejemplo: 6.5)");
 			                    	puntuacion = teclado1.nextLine();
 			                    	if(!isNumeric(puntuacion))

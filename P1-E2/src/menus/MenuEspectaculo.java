@@ -42,7 +42,8 @@ public class MenuEspectaculo {
             
             case "1":
             	System.out.println("ESPECTACULOS REGISTRADOS:");
-        		String rutaAbsoluta = new File("").getAbsolutePath();
+            	System.out.println("FUNCION NO IMPLEMENTADA. DISCULPE LAS MOLESTIAS");
+            	/*String rutaAbsoluta = new File("").getAbsolutePath();
         		String rutaFichero = rutaAbsoluta + "/criticas.txt";
         		
         		FileReader fr = null;
@@ -79,19 +80,40 @@ public class MenuEspectaculo {
         				e2.printStackTrace();
         			}
         		}
-            	
+            	*/
             break;
             
             case "2":
             	System.out.println("ESPECTACULOS CON LOCALIDADES DISPONIBLES:");
             	//TODO:
-            	newGestor.localidadesDisponiblesPunt();
-            	newGestor.localidadesDisponiblesMult();
-            	newGestor.localidadesDisponiblesTemp();
+            	Scanner teclado3 = new Scanner(System.in); 
+            	System.out.println("Indique la clase de espectaculo que desea visualizar");
+            	System.out.println("1. Espectaculo Puntual");
+            	System.out.println("2. Espectaculo Multiple");
+            	System.out.println("3. Espectaculo Temporada");
+            	int opc3 = Integer.parseInt(teclado3.nextLine());
+            	
+            	System.out.println("Introduzca el titulo del espectaculo a visualizar");
+            	String title3 = teclado3.nextLine();
+            	
+            	switch(opc3)
+            	{
+            		case 1:
+            			newGestor.localidadesDisponiblesPunt(); //SI FUNCIONA!!!!
+            			break;
+            			
+            		case 2:
+            			newGestor.localidadesDisponiblesMult();
+            			break;
+            			
+            		case 3:
+            			newGestor.localidadesDisponiblesTemp();     			
+            			break;
+            	}
             break;
             
             case "3":
-            	System.out.println("FUNCION NO IMPLEMENTAD. DISCULPE LAS MOLESTIAS :)");
+            	System.out.println("FUNCION NO IMPLEMENTADA. DISCULPE LAS MOLESTIAS :)");
             	/*System.out.println("BUSQUEDA DE ESPECTACULOS POR CATEGORIA:");
                 Scanner teclado1 = new Scanner(System.in);              
                 System.out.println("Indique que categoria de espectaculos desea buscar:");
@@ -105,15 +127,36 @@ public class MenuEspectaculo {
             break;
             
             case "4":
+            	
             	System.out.println("ESPECTACULO ESPECIFICO:");
-                Scanner teclado2 = new Scanner(System.in);              
-                System.out.println("Indique el titulo del espectaculo concreto que desea ver:");
-                String title = teclado2.nextLine();
-                
-                newGestor.buscarEspectaculosPunt(title);
-                newGestor.buscarEspectaculosMult(title);
-                newGestor.buscarEspectaculosTemp(title);
-            	//TODO: 
+            	System.out.println("FUNCION NO IMPLEMENTADA. DISCULPE LAS MOLESTIAS");
+            	/*
+            	Scanner teclado3 = new Scanner(System.in); 
+            	System.out.println("Indique la clase de espectaculo que desea visualizar");
+            	System.out.println("1. Espectaculo Puntual");
+            	System.out.println("2. Espectaculo Multiple");
+            	System.out.println("3. Espectaculo Temporada");
+            	int opc3 = Integer.parseInt(teclado3.nextLine());
+            	
+            	System.out.println("Introduzca el titulo del espectaculo a visualizar");
+            	String title3 = teclado3.nextLine();
+            	
+            	switch(opc3)
+            	{
+            		case 1:
+            			newGestor.buscarEspectaculosPunt(title3); //SI FUNCIONA!!!!
+            			break;
+            			
+            		case 2:
+            			newGestor.buscarEspectaculosMult(title3);
+            			break;
+            			
+            		case 3:
+            			newGestor.buscarEspectaculosTemp(title3);     			
+            			break;
+            	}
+            	
+            	*/
             break;
          
             
