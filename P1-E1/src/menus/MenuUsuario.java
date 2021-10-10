@@ -51,9 +51,8 @@ public class MenuUsuario {
         }
         else if("3".equals(opc))
         { 
+        	System.out.println("Usuario eliminado del sistema."); 
         	newGestor.darBajaUser();
-        	System.out.println("Ha sido dado de baja. Gracias por usar nuestro sistema.");
-        	return;
         }
         else
         { 

@@ -1,11 +1,10 @@
 package gestor.usuarios;
+import espectador.Espectador;
+import fichero.users.IOUsers;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Properties;
-
-import espectador.Espectador;
-import fichero.users.IOUsers;
 
 /**
  * Clase que implementa las funcionalidades relativas 
@@ -15,6 +14,7 @@ import fichero.users.IOUsers;
 
 
 public class GestorUsuarios {
+
 	/**
 	 * Instancia del gestor de usuarios
 	 */
@@ -22,22 +22,22 @@ public class GestorUsuarios {
 	/**
 	 * Mail del usuario que lanzó el gestor.Asociado a la instancia.
 	 */
-	private String Mail;
+	private IOUsers User = new IOUsers();
 	/**
 	 * Clase IOUsers para llamar a las funciones necesarias
 	 */
-	private IOUsers User = new IOUsers();
+	private String Mail;
 
 	/**
 	 * Constructor privado (patron Singleton).
 	 * @param Mail del user que ejecuta el gestor
 	 * @author Developers
 	 */
+
 	private GestorUsuarios(String Mail) 
 	{
 		this.Mail = Mail; 
 	}
-	
 	/**
 	 * Funcion para inicializar el gestor. Además escribe en el fichero properties
 	 * la ruta del fichero usuarios.txt
@@ -45,11 +45,12 @@ public class GestorUsuarios {
 	 * @return La instancia del gestor.
 	 * @author Developers
 	 */
-	public static GestorUsuarios getInstance(String Mail) 
+
+	public static GestorUsuarios getInstance(String Mail)
 	{
 		if(instance == null) 
 		{
-			instance = new GestorUsuarios(Mail);	
+			instance = new GestorUsuarios(Mail);
 			try {
 				String path = new File("").getAbsolutePath();
 				path = path + "/data.properties";
@@ -59,7 +60,7 @@ public class GestorUsuarios {
 				table.load(in);
 				in.close();
 				String rutaAbsoluta = new File("").getAbsolutePath();
-				String rutaFichero = rutaAbsoluta + "/ususarios.txt";
+				String rutaFichero = rutaAbsoluta + "/usuarios.txt";
 				table.setProperty("UsersFilePath", rutaFichero);
 				FileOutputStream fr = new FileOutputStream(file);
 		        table.store(fr, "Properties");

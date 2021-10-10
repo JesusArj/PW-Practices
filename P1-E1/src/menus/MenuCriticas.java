@@ -99,7 +99,7 @@ public class MenuCriticas {
                         crit.settitle(title);
                         
 
-                		System.out.println("Puntua el espectaculo del 1 al 10:");
+                		System.out.println("Puntua el espectaculo del 0 al 10:");
                 		System.out.println("(Ejemplo: 6.5)");
                 		
                 		String puntuacion; 

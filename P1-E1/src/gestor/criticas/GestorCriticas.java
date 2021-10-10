@@ -1,12 +1,11 @@
 package gestor.criticas;
 
+import critica.Critica;
+import fichero.criticas.IOCriticas;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Properties;
-
-import critica.Critica;
-import fichero.criticas.IOCriticas;
 
 /**
  * Clase que llama a todas las funciones para la gestion de criticas.
@@ -14,37 +13,37 @@ import fichero.criticas.IOCriticas;
  */	
 public class GestorCriticas {
 
-		/** 
-		 * Instancia del gestor de criticas;
-		 */
+			/** 
+		 	* Instancia del gestor de criticas;
+		 	*/
 			private static GestorCriticas instance = null;
 
-		/**
-		 * Mail del usuario que lanzó el gestor. Asociado a la instancia.
-		 */
+			/**
+			 * Mail del usuario que lanzó el gestor. Asociado a la instancia.
+			 */
 			private String mail = null;
-			
-		/**
-		 * Clase IOCriticas para llamar a las funciones necesarias.
-		 */
+			/**
+			 * Clase IOCriticas para llamar a las funciones necesarias.
+			 */
 			private IOCriticas c = new IOCriticas(); 
 	
-		/**
-		 * Constructor privado (patron Singleton).
-		 * @param Mail del user que ejecuta el gestor
-		 * @author Developers
-		 */
+			/**
+			 * Constructor privado (patron Singleton).
+			 * @param Mail del user que ejecuta el gestor
+			 * @author Developers
+			 */
 			private GestorCriticas(String Mail) 
 			{
 				this.mail=Mail; 
 			}
-		/**
-		 * Funcion para inicializar el gestor. Además escribe en el fichero properties
-		 * la ruta del fichero criticas.txt
-		 * @param Mail del usuario que ejecuta el gestor
-		 * @return La instancia del gestor.
-		 * @author Developers
-		 */
+
+			/**
+			 * Funcion para inicializar el gestor. Además escribe en el fichero properties
+			 * la ruta del fichero criticas.txt
+			 * @param Mail del usuario que ejecuta el gestor
+			 * @return La instancia del gestor.
+			 * @author Developers
+			 */
 			public static GestorCriticas getInstance(String Mail) {
 				if(instance == null) {
 					instance = new GestorCriticas(Mail);
@@ -65,7 +64,6 @@ public class GestorCriticas {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					
 				}
 				return instance;
 			}

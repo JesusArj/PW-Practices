@@ -40,7 +40,7 @@ public class IOUsers
 		if(comprobarUserExist(mail)==true)
 		{
 			System.err.println("No ha sido posible realizar el registro, el email ya esta registrado en nuestro sistema");
-			System.exit(1);;
+			System.exit(1);
 		}
 		else
 		{
@@ -63,6 +63,40 @@ public class IOUsers
 		           } catch (Exception e2) {
 		              e2.printStackTrace();
 		           }
+	           }
+	      }	
+	    }
+	
+	/**
+	 * Funcion que anade un usuario de nuevo registro al fichero de usuarios, sin la comprobacion de que el usuario ya exista, ya que se usara para updatear los datos de usuario.
+	 * Asegura que el usuario pueda dejar igual su mail.
+	 * @param name Nombre del usuario
+	 * @param username Nombre de usuario
+	 * @param mail direccion de e-mail del usuario
+	 * @param passwd Contrasena del usuario
+	 * @author Developers
+	 *
+	 */
+	public void RegisterUserToFichMismoMail(String name, String username, String mail, String passwd)
+	{
+			String rutaAbsoluta = new File("").getAbsolutePath();
+			String rutaFichero = rutaAbsoluta + "/usuarios.txt";
+			FileWriter fichero = null;
+		    PrintWriter pw = null; 
+		    try
+		    {	
+		    	fichero= new FileWriter(rutaFichero, true); 
+		    	pw = new PrintWriter(fichero); 
+		    	pw.println(name+"//"+username+"//"+mail+"//"+passwd);
+		    }catch (Exception e) {
+		       e.printStackTrace();
+		    } finally {
+		           try {
+		           if (fichero != null)
+		              fichero.close();
+		           
+		           } catch (Exception e2) {
+		              e2.printStackTrace();
 	           }
 	      }	
 	    }
@@ -224,40 +258,10 @@ public class IOUsers
 		}
 	}
 	
-/**
- * Funcion que borra los datos de un usuario.
- * del fichero de usuarios, guiandose por un objeto de 
- * clase Espectador
- * @param e Objeto de clase Espectador
- * @author Developers
- *
- */
-
-	public void borrarUser(Espectador e) {
-		ArrayList<Espectador> v = new ArrayList<Espectador>();
-		v = fichToVec(v);
-		
-		for(Espectador c : v) {
-			if(c.getMail().equals(e.getMail())) {
-				v.remove(c);
-			}
-		}
-		BufferedWriter bw;
-		try {
-			bw = new BufferedWriter(new FileWriter("usuarios.txt"));
-			bw.write("");
-			bw.close();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}		
-		for(Espectador c : v) {
-			c.RegisterUserToFich(c.getName(), c.getUsername(), c.getMail(), c.getPasswd());
-		}
-	}
-	
 	/**
 	 * Funcion que guarda los datos de un usuario en un
 	 * nuevo objeto de la clase Espectador
+	 * @return e1 objeto de la clase espectador, rellenado por el usuario del sistema
 	 * @author Developers
 	 */
 		
@@ -326,8 +330,15 @@ public class IOUsers
     			{
     				if(comprobarUserExist(e.getMail())==true)
     				{
-    					System.err.println("Ese correo electronico ya pertenece a un usuario. Por favor, indique otro correo electronico.");
-    					correo = correo_scan.nextLine();
+    					if(correo.equals(mail))
+    					{
+    						break; 
+    					}
+    					else
+    					{
+    						System.err.println("Ese correo electronico ya pertenece a un usuario. Por favor, indique otro correo electronico.");
+        					correo = correo_scan.nextLine();
+    					}
     				}
     				else if(correo.trim().isEmpty() || comprobarUserExist(e.getMail())==true)
     				{
@@ -383,7 +394,14 @@ public class IOUsers
     	e.setName(nombre);
     	e.setPasswd(contrasena);
 		this.borrarUser(mail);
-		this.RegisterUserToFich(e.getName(), e.getUsername(), e.getMail(), e.getPasswd());
+		if(correo.equals(mail))
+		{
+			this.RegisterUserToFichMismoMail(e.getName(), e.getUsername(), e.getMail(), e.getPasswd());
+		}	
+		else
+		{
+			this.RegisterUserToFich(e.getName(), e.getUsername(), e.getMail(), e.getPasswd());
+		}
 		System.out.println("Sus credenciales han sido actualizadas. Por favor, acceda al sistema con sus nuevas credenciales.");
 		ioc.updateUserCriticas(mail, e.getMail());
 		correo_scan.close();
