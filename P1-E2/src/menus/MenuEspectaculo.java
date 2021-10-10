@@ -1,8 +1,6 @@
 package menus;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
@@ -43,6 +41,7 @@ public class MenuEspectaculo {
             case "1":
             	System.out.println("ESPECTACULOS REGISTRADOS:");
             	System.out.println("FUNCION NO IMPLEMENTADA. DISCULPE LAS MOLESTIAS");
+            	System.out.println("");
             	/*String rutaAbsoluta = new File("").getAbsolutePath();
         		String rutaFichero = rutaAbsoluta + "/criticas.txt";
         		
@@ -93,9 +92,6 @@ public class MenuEspectaculo {
             	System.out.println("3. Espectaculo Temporada");
             	int opc3 = Integer.parseInt(teclado3.nextLine());
             	
-            	System.out.println("Introduzca el titulo del espectaculo a visualizar");
-            	String title3 = teclado3.nextLine();
-            	
             	switch(opc3)
             	{
             		case 1:
@@ -113,7 +109,8 @@ public class MenuEspectaculo {
             break;
             
             case "3":
-            	System.out.println("FUNCION NO IMPLEMENTADA. DISCULPE LAS MOLESTIAS :)");
+            	System.out.println("FUNCION NO IMPLEMENTADA. DISCULPE LAS MOLESTIAS");
+            	System.out.println("");
             	/*System.out.println("BUSQUEDA DE ESPECTACULOS POR CATEGORIA:");
                 Scanner teclado1 = new Scanner(System.in);              
                 System.out.println("Indique que categoria de espectaculos desea buscar:");
@@ -130,6 +127,7 @@ public class MenuEspectaculo {
             	
             	System.out.println("ESPECTACULO ESPECIFICO:");
             	System.out.println("FUNCION NO IMPLEMENTADA. DISCULPE LAS MOLESTIAS");
+            	System.out.println("");
             	/*
             	Scanner teclado3 = new Scanner(System.in); 
             	System.out.println("Indique la clase de espectaculo que desea visualizar");

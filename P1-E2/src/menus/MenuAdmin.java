@@ -248,6 +248,7 @@ public class MenuAdmin {
             case "2":
             	System.out.println("ELIMINACION DE ESPECTACULOS:");
             	System.out.println("FUNCION NO IMPLEMENTADA. DISCULPE LAS MOLESTIAS.");
+            	System.out.println("");
             	/*
             	Scanner teclado2 = new Scanner(System.in); 
             	System.out.println("Indique la clase de espectaculo que desea borrar");
@@ -278,6 +279,7 @@ public class MenuAdmin {
             case "3":
             	System.out.println("ACTUALIZACION DE ESPECTACULOS:");
             	System.out.println("FUNCION NO IMPLEMENTADA. DISCULPE LAS MOLESTIAS");
+            	System.out.println("");
             	/*
             	Scanner teclado3 = new Scanner(System.in); 
             	System.out.println("Indique la clase de espectaculo que desea borrar");
