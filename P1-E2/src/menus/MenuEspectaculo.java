@@ -91,7 +91,8 @@ public class MenuEspectaculo {
             break;
             
             case "3":
-            	System.out.println("BUSQUEDA DE ESPECTACULOS POR CATEGORIA:");
+            	System.out.println("FUNCION NO IMPLEMENTAD. DISCULPE LAS MOLESTIAS :)");
+            	/*System.out.println("BUSQUEDA DE ESPECTACULOS POR CATEGORIA:");
                 Scanner teclado1 = new Scanner(System.in);              
                 System.out.println("Indique que categoria de espectaculos desea buscar:");
                 String category = teclado1.nextLine();
@@ -99,6 +100,7 @@ public class MenuEspectaculo {
                 newGestor.buscarCategoriaPunt(category);
                 newGestor.buscarCategoriaMult(category);
                 newGestor.buscarCategoriaTemp(category);
+            	*/
             	//TODO
             break;
             

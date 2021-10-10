@@ -112,6 +112,7 @@ public class MenuAdmin {
             		String datetime = teclado1.nextLine();
             		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             		LocalDateTime dateTime = LocalDateTime.parse(datetime, formatter);
+            		
             		ep.setHoraFecha(dateTime);
             		ep.setCritica(ids);
             		newGestor.CrearEspectaculoPunt(ep);
@@ -228,7 +229,7 @@ public class MenuAdmin {
             		int numpases0 = Integer.parseInt(teclado1.nextLine());
             		for(int i = 0; i < numpases0; i++)
             		{
-                		System.out.println("Introduzca la fecha y hora del" + (i+1)+ "º pase del espectaculo");
+                		System.out.println("Introduzca la fecha y hora del " + (i+1)+ "º pase del espectaculo");
                 		System.out.println("Formato de fecha : AAAA-MM-DD HH:MM");
                 		String datetime0 = teclado1.nextLine();
                 		DateTimeFormatter formatter0 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

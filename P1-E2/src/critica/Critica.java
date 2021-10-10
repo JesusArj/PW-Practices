@@ -195,7 +195,7 @@ public class Critica extends IOCriticas{
 	
 	/**
 	 * Setter del username que escribe la critica
-	 * @param username Ususario que escribe la critica
+	 * @param username Usuario que escribe la critica
 	 * @author Developers
 	 */
 	
