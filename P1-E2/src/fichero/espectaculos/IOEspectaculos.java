@@ -8,11 +8,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import espectaculo.EspectaculoMultiple;
 import espectaculo.EspectaculoPuntual;
 import espectaculo.EspectaculoTemporada;
+import espectador.Espectador;
+import fichero.criticas.IOCriticas;
 
 
 public class IOEspectaculos {
@@ -31,7 +35,7 @@ public class IOEspectaculos {
 	    	pw.print(title+"//"+categoria+"//" +descripcion+"//"+localidades_venta+ "//" +localidades_vendidas+ "//" +horaFecha+ "//");
 	    	if(ids != null) {
 	    		for(int s : ids) {
-		    		pw.print(s+"::");
+		    		pw.print(s+")(");
 		    	}
 		    	pw.print("//");
 	    	}
@@ -65,13 +69,13 @@ public class IOEspectaculos {
 	    	pw.print(title+"//"+categoria+"//" +descripcion+"//"+localidades_venta+ "//" +localidades_vendidas+ "//");
 	    	if(pases != null) {
 	    		for(LocalDateTime d : pases) {
-		    		pw.print(d+"::");
+		    		pw.print(d+")(");
 		    	}
 		    	pw.print("//");
 	    	}
 	    	if(ids != null) {
 	    		for(int s : ids) {
-		    		pw.print(s+"::");
+		    		pw.print(s+")(");
 		    	}
 		    	pw.print("//");
 	    	}
@@ -105,13 +109,13 @@ public class IOEspectaculos {
 	    	pw.print(title+"//"+categoria+"//" +descripcion+"//"+localidades_venta+ "//" +localidades_vendidas+ "//" +inicio+ "//" +fin+ "//");
 	    	if(fechas != null) {
 	    		for(LocalDateTime f : fechas) {
-		    		pw.print(f+"::");
+		    		pw.print(f+")(");
 		    	}
 		    	pw.print("//");
 	    	}
 	    	if(ids != null) {
 	    		for(int s : ids) {
-		    		pw.print(s+"::");
+		    		pw.print(s+")(");
 		    	}
 		    	pw.print("//");
 	    	}
@@ -146,7 +150,7 @@ public class IOEspectaculos {
 	        br = new BufferedReader(fr);
 	       
 	        String linea; 
-	        ArrayList<Integer> ids = new ArrayList<Integer>(); 
+	        //ArrayList<Integer> ids = new ArrayList<Integer>(); 
         	while ((linea = br.readLine()) != null) {
         	    String[] data = linea.split("//");
 		    	espp.setTitulo(data[0]);
@@ -154,10 +158,13 @@ public class IOEspectaculos {
 		    	espp.setDescripcion(data[2]);
 		    	espp.setLocalidadesVenta(Integer.parseInt(data[3]));
 		    	espp.setLocalidadesVendidas(Integer.parseInt(data[4]));
-		    	espp.setHoraFecha(LocalDateTime.parse(data[5]));
-		    	//TODO: Posible fallo a la hora de guardar IDs. Comprobar
-		    	if(!("void".equals(data[6]))) {
-		    		String[] data2 = data[6].split("::");
+		    	
+		    	DateTimeFormatter formatter0 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        		LocalDateTime dateTime0 = LocalDateTime.parse(data[5], formatter0);
+		    	espp.setHoraFecha(dateTime0);
+		    	//TODO: Vincular IDs de criticas a espectaculos
+		    	/*if(!("void".equals(data[6]))) {
+		    		String[] data2 = data[6].split(")(");
 			    	for(int i=1; i<data2.length; i++) 
 			    	{
 			    		ids.add(Integer.parseInt(data2[i]));
@@ -166,10 +173,10 @@ public class IOEspectaculos {
 		    	}
 		    	else {
 		    		espp.setCritica(new ArrayList<Integer>());
-		    	}
+		    	}*/
 		    	v.add(espp); 
 		    	espp = new EspectaculoPuntual();
-		    	ids = new ArrayList<Integer>(); 
+		    	//ids = new ArrayList<Integer>(); 
         	}
 	        
 		}catch(Exception e){
@@ -201,7 +208,7 @@ public class IOEspectaculos {
 	        br = new BufferedReader(fr);
 	       
 	        String linea; 
-	        ArrayList<Integer> ids = new ArrayList<Integer>();
+	        //ArrayList<Integer> ids = new ArrayList<Integer>();
 	        ArrayList<LocalDateTime> dates = new ArrayList<LocalDateTime>();
         	while ((linea = br.readLine()) != null) {
         	    String[] data = linea.split("//");
@@ -210,21 +217,24 @@ public class IOEspectaculos {
 		    	espm.setDescripcion(data[2]);
 		    	espm.setLocalidadesVenta(Integer.parseInt(data[3]));
 		    	espm.setLocalidadesVendidas(Integer.parseInt(data[4]));		    	
-		    	//TODO: Posible fallo a la hora de guardar los pases. Comprobar
+		    	
 		    	if(!("void".equals(data[5]))) {
-		    		String[] data2 = data[5].split("::");
+		    		String[] data2 = data[5].split(")(");
 			    	for(int i=1; i<data2.length; i++) 
 			    	{
-			    		dates.add(LocalDateTime.parse(data2[i]));
+				    	DateTimeFormatter formatter0 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		        		LocalDateTime dateTime0 = LocalDateTime.parse(data2[i], formatter0);
+				    	dates.add(dateTime0);
 			    	} 
 
 		    	}
 		    	else {
 		    		espm.setPases(new ArrayList<LocalDateTime>());
 		    	}
-		    	//TODO: Posible fallo a la hora de guardar IDs. Comprobar
+		    	//TODO: Vincular IDs de criticas a espectaculos
+		    	/*
 		    	if(!("void".equals(data[6]))) {
-		    		String[] data3 = data[6].split("::");
+		    		String[] data3 = data[6].split(")(");
 			    	for(int i=1; i<data3.length; i++) 
 			    	{
 			    		ids.add(Integer.parseInt(data3[i]));
@@ -234,9 +244,10 @@ public class IOEspectaculos {
 		    	else {
 		    		espm.setCritica(new ArrayList<Integer>());
 		    	}
+		    	*/
 		    	v.add(espm); 
 		    	espm = new EspectaculoMultiple();
-		    	ids = new ArrayList<Integer>(); 
+		    	//ids = new ArrayList<Integer>(); 
 		    	dates = new ArrayList<LocalDateTime>();
         	}
 	        
@@ -269,7 +280,7 @@ public class IOEspectaculos {
 	        br = new BufferedReader(fr);
 	       
 	        String linea; 
-	        ArrayList<Integer> ids = new ArrayList<Integer>();
+	        //ArrayList<Integer> ids = new ArrayList<Integer>();
 	        ArrayList<LocalDateTime> dates = new ArrayList<LocalDateTime>();
         	while ((linea = br.readLine()) != null) {
         	    String[] data = linea.split("//");
@@ -278,23 +289,32 @@ public class IOEspectaculos {
 		    	espt.setDescripcion(data[2]);
 		    	espt.setLocalidadesVenta(Integer.parseInt(data[3]));
 		    	espt.setLocalidadesVendidas(Integer.parseInt(data[4]));	
-		    	espt.setLocalidadesVendidas(Integer.parseInt(data[5]));
-		    	espt.setLocalidadesVendidas(Integer.parseInt(data[6]));
-		    	//TODO: Posible fallo a la hora de guardar los pases. Comprobar
+		    	
+		    	DateTimeFormatter formatter0 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        		LocalDateTime dateTime0 = LocalDateTime.parse(data[5], formatter0);
+		    	espt.setFechaInicio(dateTime0);
+		    	
+		    	DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        		LocalDateTime dateTime1 = LocalDateTime.parse(data[5], formatter1);
+		    	espt.setFechaFinal(dateTime1);
+	
 		    	if(!("void".equals(data[7]))) {
-		    		String[] data2 = data[7].split("::");
+		    		String[] data2 = data[7].split(")(");
 			    	for(int i=1; i<data2.length; i++) 
 			    	{
-			    		dates.add(LocalDateTime.parse(data2[i]));
+				    	DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		        		LocalDateTime dateTime2 = LocalDateTime.parse(data2[i], formatter2);
+				    	dates.add(dateTime2);
 			    	} 
 
 		    	}
 		    	else {
 		    		espt.setFechas(new ArrayList<LocalDateTime>());
 		    	}
-		    	//TODO: Posible fallo a la hora de guardar IDs. Comprobar
+		    	//TODO: Vincular IDs de criticas a espectaculos
+		    	/*
 		    	if(!("void".equals(data[8]))) {
-		    		String[] data3 = data[8].split("::");
+		    		String[] data3 = data[8].split(")(");
 			    	for(int i=1; i<data3.length; i++) 
 			    	{
 			    		ids.add(Integer.parseInt(data3[i]));
@@ -304,9 +324,10 @@ public class IOEspectaculos {
 		    	else {
 		    		espt.setCritica(new ArrayList<Integer>());
 		    	}
+		    	/*/
 		    	v.add(espt); 
 		    	espt = new EspectaculoTemporada();
-		    	ids = new ArrayList<Integer>(); 
+		    	//ids = new ArrayList<Integer>(); 
 		    	dates = new ArrayList<LocalDateTime>();
         	}
 	        
@@ -358,62 +379,64 @@ public class IOEspectaculos {
 		return false;
 	}
 	
-	public void borrarEspectaculoPunt(EspectaculoPuntual ep1) {
+	public void borrarEspectaculoPunt(String title) {
 		ArrayList<EspectaculoPuntual> v = new ArrayList<EspectaculoPuntual>();
 		v = fichEspectaculoPuntToVec(v);
-		
+		ArrayList<EspectaculoPuntual> aux = new ArrayList<EspectaculoPuntual>();
+
 		for(EspectaculoPuntual ep : v) {
-			if(ep1.equals(ep)) {
-				v.remove(ep);
+			if(ep.getTitulo().equals(title)) {
+				aux.add(ep);
 			}
 		}
 		BufferedWriter bw;
 		try {
-			bw = new BufferedWriter(new FileWriter("criticas.txt"));
+			bw = new BufferedWriter(new FileWriter("espectaculos.txt"));
 			bw.write("");
 			bw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}		
-		for(EspectaculoPuntual ep : v) {
+		for(EspectaculoPuntual ep : aux) {
 			ep.EspectaculoPuntToFich(ep.getTitulo(), ep.getCategoria(), ep.getDescripcion(), ep.getLocalidadesVenta(), ep.getLocalidadesVendidas(), ep.getHoraFecha(),ep.getCritica());
 		}
 	}
 	
-	public void borrarEspectaculoMult(EspectaculoMultiple em1) {
+	public void borrarEspectaculoMult(String title) {
 		ArrayList<EspectaculoMultiple> v = new ArrayList<EspectaculoMultiple>();
 		v = fichEspectaculoMultToVec(v);
+		ArrayList<EspectaculoMultiple> aux = new ArrayList<EspectaculoMultiple>();
 		
 		for(EspectaculoMultiple em : v) {
-			if(em1.equals(em)) {
-				v.remove(em);
+			if(em.getTitulo().equals(title)) {
+				aux.add(em);
 			}
 		}
 		BufferedWriter bw;
 		try {
-			bw = new BufferedWriter(new FileWriter("criticas.txt"));
+			bw = new BufferedWriter(new FileWriter("espectaculos.txt"));
 			bw.write("");
 			bw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}		
-		for(EspectaculoMultiple em : v) {
+		for(EspectaculoMultiple em : aux) {
 			em.EspectaculoMultToFich(em.getTitulo(), em.getCategoria(), em.getDescripcion(), em.getLocalidadesVenta(), em.getLocalidadesVendidas(), em.getPases(),em.getCritica());
 		}
 	}
 	
-	public void borrarEspectaculoTemp(EspectaculoTemporada et1) {
+	public void borrarEspectaculoTemp(String title) {
 		ArrayList<EspectaculoTemporada> v = new ArrayList<EspectaculoTemporada>();
 		v = fichEspectaculoTempToVec(v);
 		
 		for(EspectaculoTemporada et : v) {
-			if(et1.equals(et)) {
+			if(title.equals(et)) {
 				v.remove(et);
 			}
 		}
 		BufferedWriter bw;
 		try {
-			bw = new BufferedWriter(new FileWriter("criticas.txt"));
+			bw = new BufferedWriter(new FileWriter("espectaculos.txt"));
 			bw.write("");
 			bw.close();
 		} catch (IOException e) {
@@ -436,7 +459,7 @@ public class IOEspectaculos {
 			System.out.println("Titulo: " + ep.getTitulo());
 			System.out.println("Fecha: " + ep.getHoraFecha());
 			System.out.println("Descripcion: " + ep.getDescripcion());
-			System.out.println("Localidades disponibles :" + ((ep.getLocalidadesVenta())-(ep.getLocalidadesVendidas())) ); 
+			System.out.println("Localidades disponibles: " + ((ep.getLocalidadesVenta())-(ep.getLocalidadesVendidas())) ); 
 			System.out.println("-------------------");
 			aux++;
 		}
@@ -463,7 +486,7 @@ public class IOEspectaculos {
 			}
 
 			System.out.println("Descripcion: " + em.getDescripcion());
-			System.out.println("Localidades disponibles :" + ((em.getLocalidadesVenta())-(em.getLocalidadesVendidas())) );
+			System.out.println("Localidades disponibles: " + ((em.getLocalidadesVenta())-(em.getLocalidadesVendidas())) );
 			System.out.println("-------------------");
 			aux++;
 		}
@@ -491,7 +514,7 @@ public class IOEspectaculos {
 			}
 			System.out.println("Fecha de Fin: " + et.getFechaFinal());
 			System.out.println("Descripcion: " + et.getDescripcion());
-			System.out.println("Localidades disponibles :" + ((et.getLocalidadesVenta())-(et.getLocalidadesVendidas())) ); 
+			System.out.println("Localidades disponibles: " + ((et.getLocalidadesVenta())-(et.getLocalidadesVendidas())) ); 
 			System.out.println("-------------------");
 			aux++;
 		}
@@ -789,7 +812,7 @@ public class IOEspectaculos {
 			for(int i=0; i<c.size(); i++)
 			{
 				if(c.get(i).getCategoria().equals(categoria))
-				{//TODO: Se puede mejorar sin el for??
+				{
 					System.out.println((i+1) + "º ESPECTACULO PUNTUAL ");
 					System.out.println("-------------------");
 					System.out.println("Titulo: " + c.get(i).getTitulo());
@@ -811,14 +834,166 @@ public class IOEspectaculos {
 			System.exit(-1); 
 		}
 	}
-	/*public void updateEspectaculo(String title) {
-		this.imprimirDatosUser(mail);
-		this.borrarUser(mail);
-		Espectador e = this.proveerDatos();
-		this.comprobarUserExist(e.getMail());
-		this.RegisterUserToFich(e.getName(), e.getUsername(), e.getMail(), e.getPasswd());
+	
+	public void updateEspectaculoPunt(String title) {
+		
+		ArrayList<Integer> ids = new ArrayList<Integer>();
+
+		Scanner teclado1 = new Scanner(System.in);
+		
+		System.out.println("Introduzca la categoria del espectaculo:");
+		String category = teclado1.nextLine();
+		
+		
+		System.out.println("Introduca la descripcion del espectaculo:");
+		String descripcion = teclado1.nextLine();
+		
+		
+		System.out.println("Introduca el numero de localidades disponibles para el espectaculo:");
+		int totalloc = Integer.parseInt(teclado1.nextLine());
+		
+		
+		System.out.println("Introduzca el numero de localidades ya vendidas");
+		int soldloc = Integer.parseInt(teclado1.nextLine());
+		
+		while(true)
+		{
+    		if((soldloc) > (totalloc))
+    		{
+    			System.err.println("No puede haber mas localidades vendidas de las que hay");
+    			soldloc = Integer.parseInt(teclado1.nextLine());
+    		}
+    		else
+    		{
+    			break;
+    		}
+		}
+    	
+		System.out.println("Introduzca la fecha y hora del espectaculo");
+		System.out.println("Formato de fecha : AAAA-MM-DD HH:MM");
+		String datetime = teclado1.nextLine();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		LocalDateTime dateTime = LocalDateTime.parse(datetime, formatter);
+
+		borrarEspectaculoPunt(title);
+		EspectaculoPuntToFich(title, category, descripcion, totalloc, soldloc, dateTime, ids);
+		teclado1.close();
 	}
-	*/
+	
+public void updateEspectaculoMult(String title) {
+		
+		ArrayList<Integer> ids = new ArrayList<Integer>();
+		ArrayList<LocalDateTime> pases = new ArrayList<LocalDateTime>();
+
+		Scanner teclado1 = new Scanner(System.in);
+		
+		System.out.println("Introduzca la categoria del espectaculo:");
+		String category = teclado1.nextLine();
+		
+		
+		System.out.println("Introduca la descripcion del espectaculo:");
+		String descripcion = teclado1.nextLine();
+		
+		
+		System.out.println("Introduca el numero de localidades disponibles para el espectaculo:");
+		int totalloc = Integer.parseInt(teclado1.nextLine());
+		
+		
+		System.out.println("Introduzca el numero de localidades ya vendidas");
+		int soldloc = Integer.parseInt(teclado1.nextLine());
+		
+		while(true)
+		{
+    		if((soldloc) > (totalloc))
+    		{
+    			System.err.println("No puede haber mas localidades vendidas de las que hay");
+    			soldloc = Integer.parseInt(teclado1.nextLine());
+    		}
+    		else
+    		{
+    			break;
+    		}
+		}
+    	
+		System.out.println("Indique cuantos pases habra para el espectaculo");
+		int numpases = Integer.parseInt(teclado1.nextLine());
+		for(int i = 0; i < numpases; i++)
+		{
+    		System.out.println("Introduzca la fecha y hora del" + (i+1) + "º pase del espectaculo");
+    		System.out.println("Formato de fecha : AAAA-MM-DD HH:MM");
+    		String datetime0 = teclado1.nextLine();
+    		DateTimeFormatter formatter0 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    		LocalDateTime dateTime0 = LocalDateTime.parse(datetime0, formatter0);
+    		pases.add(dateTime0);
+		}
+
+		borrarEspectaculoMult(title);
+		EspectaculoMultToFich(title, category, descripcion, soldloc, numpases, pases, ids);
+		teclado1.close();
+	}
+
+public void updateEspectaculoTemp(String title) {
+	
+	ArrayList<Integer> ids = new ArrayList<Integer>();
+	ArrayList<LocalDateTime> pases = new ArrayList<LocalDateTime>();
+	Scanner teclado1 = new Scanner(System.in);
+	
+	System.out.println("Introduzca la categoria del espectaculo:");
+	String category = teclado1.nextLine();
+	
+	
+	System.out.println("Introduca la descripcion del espectaculo:");
+	String descripcion = teclado1.nextLine();
+	
+	
+	System.out.println("Introduca el numero de localidades disponibles para el espectaculo:");
+	int totalloc = Integer.parseInt(teclado1.nextLine());
+	
+	
+	System.out.println("Introduzca el numero de localidades ya vendidas");
+	int soldloc = Integer.parseInt(teclado1.nextLine());
+	
+	while(true)
+	{
+		if((soldloc) > (totalloc))
+		{
+			System.err.println("No puede haber mas localidades vendidas de las que hay");
+			soldloc = Integer.parseInt(teclado1.nextLine());
+		}
+		else
+		{
+			break;
+		}
+	}
+	
+	System.out.println("Introduzca la fecha de Inicio");
+	System.out.println("Formato de fecha : AAAA-MM-DD HH:MM");
+	String datetime1 = teclado1.nextLine();
+	DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+	LocalDateTime dateTime1 = LocalDateTime.parse(datetime1, formatter1);
+	
+	System.out.println("Introduzca la fecha de Fin");
+	System.out.println("Formato de fecha : AAAA-MM-DD HH:MM");
+	String datetime2 = teclado1.nextLine();
+	DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+	LocalDateTime dateTime2 = LocalDateTime.parse(datetime2, formatter2);
+	
+	System.out.println("Indique cuantas veces se repetira el espectaculo");
+	int numpases0 = Integer.parseInt(teclado1.nextLine());
+	for(int i = 0; i < numpases0; i++)
+	{
+		System.out.println("Introduzca la fecha y hora del" + (i+1) + "º pase del espectaculo");
+		System.out.println("Formato de fecha : AAAA-MM-DD HH:MM");
+		String datetime0 = teclado1.nextLine();
+		DateTimeFormatter formatter0 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		LocalDateTime dateTime0 = LocalDateTime.parse(datetime0, formatter0);
+		pases.add(dateTime0);
+	}
+
+	borrarEspectaculoTemp(title);
+	EspectaculoTempToFich(title, category, descripcion, totalloc, soldloc, dateTime1, dateTime2, pases, ids);
+	teclado1.close();
+}
 	
 	//TODO: Comprobar que los IDs del vector Criticas existan y no se repitan
 	//TODO: Buscar por categorias SE HACE DESDE EL MENU

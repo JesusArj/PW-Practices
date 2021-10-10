@@ -125,21 +125,21 @@ public class GestorEspectaculo {
 			 * @param c Objeto de la clase critica
 			 */
 			
-			public void BorrarEspectaculosPunt(EspectaculoPuntual ep)
+			public void BorrarEspectaculosPunt(String title)
 			{
 				if(instance!=null)
-					this.c.borrarEspectaculoPunt(ep);
+					this.c.borrarEspectaculoPunt(title);
 			}
 			
-			public void BorrarEspectaculosMult(EspectaculoMultiple em)
+			public void BorrarEspectaculosMult(String title)
 			{
 				if(instance!=null)
-					this.c.borrarEspectaculoMult(em);
+					this.c.borrarEspectaculoMult(title);
 			}
-			public void BorrarEspectaculosTemp(EspectaculoTemporada et)
+			public void BorrarEspectaculosTemp(String title)
 			{
 				if(instance!=null)
-					this.c.borrarEspectaculoTemp(et);
+					this.c.borrarEspectaculoTemp(title);
 			}
 			
 			public void localidadesDisponiblesPunt()
@@ -187,6 +187,30 @@ public class GestorEspectaculo {
 				if(instance!=null)
 				{
 					this.c.buscarCategoriaTemp(categoria);
+				}
+			}
+			
+			public void updateEspectaculoPunt(String title)
+			{
+				if(instance!=null)
+				{
+					this.c.updateEspectaculoPunt(title);
+				}
+			}
+			
+			public void updateEspectaculoMult(String title)
+			{
+				if(instance!=null)
+				{
+					this.c.updateEspectaculoMult(title);
+				}
+			}
+			
+			public void updateEspectaculoTemp(String title)
+			{
+				if(instance!=null)
+				{
+					this.c.updateEspectaculoTemp(title);
 				}
 			}
 }

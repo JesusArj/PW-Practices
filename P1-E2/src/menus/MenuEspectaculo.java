@@ -7,9 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
-import espectaculo.EspectaculoMultiple;
-import espectaculo.EspectaculoPuntual;
-import espectaculo.EspectaculoTemporada;
+
 import gestor.espectaculos.GestorEspectaculo;
 
 public class MenuEspectaculo {

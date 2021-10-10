@@ -11,9 +11,6 @@ import java.util.Scanner;
 import espectaculo.EspectaculoMultiple;
 import espectaculo.EspectaculoPuntual;
 import espectaculo.EspectaculoTemporada;
-import fichero.criticas.IOCriticas;
-import fichero.espectaculos.IOEspectaculos;
-import gestor.criticas.GestorCriticas;
 import gestor.espectaculos.GestorEspectaculo;
 
 /**
@@ -31,7 +28,7 @@ public class MenuAdmin {
 	{
 		String opc = null;
         GestorEspectaculo newGestor = GestorEspectaculo.getInstance(mail);
-        IOEspectaculos newIOCEspectaculos = new IOEspectaculos();
+        //IOEspectaculos newIOCEspectaculos = new IOEspectaculos();
         EspectaculoPuntual ep = new EspectaculoPuntual();
         EspectaculoMultiple em = new EspectaculoMultiple();
         EspectaculoTemporada et = new EspectaculoTemporada();
@@ -43,10 +40,6 @@ public class MenuAdmin {
 			System.out.println("Para dar de Alta un espectaculo, pulse 1");
 			System.out.println("Para dar de baja de un espectaculo, pulse 2"); // La funcion de dar de baja debe tener dos modos, todas las sesiones, o una en particular
 			System.out.println("Para actualizar la información sobre un espectaculo, pulse 3");
-			System.out.println("Para contabilizar la venta de entradas para una sesión de un espectaculo, pulse 4");
-			System.out.println("Para consultar las localidades disponibles para un espectaculo y fecha concretos, pulse 5");
-			System.out.println("Para buscar un espectaculo, por titulo o categoria, pulse 6");
-			System.out.println("Para ver proximos espectaculos con entradas disponibles, pulse 7.");
 			System.out.println("Para salir del menu, pulse cualquier otra tecla");
 						 
             BufferedReader login = new BufferedReader(new InputStreamReader(System.in));
@@ -115,9 +108,9 @@ public class MenuAdmin {
 	            	ep.setLocalidadesVendidas(soldloc);
             		
             		System.out.println("Introduzca la fecha y hora del espectaculo");
-            		System.out.println("Formato de fecha : AAAA-MES-DIA HORA:MIN:SEC");
+            		System.out.println("Formato de fecha : AAAA-MM-DD HH:MM");
             		String datetime = teclado1.nextLine();
-            		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             		LocalDateTime dateTime = LocalDateTime.parse(datetime, formatter);
             		ep.setHoraFecha(dateTime);
             		ep.setCritica(ids);
@@ -161,6 +154,18 @@ public class MenuAdmin {
             		}
             		
             		em.setLocalidadesVendidas(soldloc1);
+            		
+            		System.out.println("Indique cuantos pases habra para el espectaculo");
+            		int numpases = Integer.parseInt(teclado1.nextLine());
+            		for(int i = 0; i < numpases; i++)
+            		{
+                		System.out.println("Introduzca la fecha y hora del" + (i+1) + "º pase del espectaculo");
+                		System.out.println("Formato de fecha : AAAA-MM-DD HH:MM");
+                		String datetime0 = teclado1.nextLine();
+                		DateTimeFormatter formatter0 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                		LocalDateTime dateTime0 = LocalDateTime.parse(datetime0, formatter0);
+                		pases.add(dateTime0);
+            		}
             		
             		em.setPases(pases);
             		em.setCritica(ids1);
@@ -206,18 +211,30 @@ public class MenuAdmin {
             		et.setLocalidadesVendidas(soldloc2);
             		
             		System.out.println("Introduzca la fecha de Inicio");
-            		System.out.println("Formato de fecha : YEAR-MES-DIA HORA:MIN:SEC");
+            		System.out.println("Formato de fecha : AAAA-MM-DD HH:MM");
             		String datetime1 = teclado1.nextLine();
-            		DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            		DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             		LocalDateTime dateTime1 = LocalDateTime.parse(datetime1, formatter1);
             		et.setFechaInicio(dateTime1);
             		
             		System.out.println("Introduzca la fecha de Fin");
-            		System.out.println("Formato de fecha : YEAR-MES-DIA HORA:MIN:SEC");
+            		System.out.println("Formato de fecha : AAAA-MM-DD HH:MM");
             		String datetime2 = teclado1.nextLine();
-            		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             		LocalDateTime dateTime2 = LocalDateTime.parse(datetime2, formatter2);
             		et.setFechaFinal(dateTime2);
+            		
+            		System.out.println("Indique cuantas veces se repetira el espectaculo");
+            		int numpases0 = Integer.parseInt(teclado1.nextLine());
+            		for(int i = 0; i < numpases0; i++)
+            		{
+                		System.out.println("Introduzca la fecha y hora del" + (i+1)+ "º pase del espectaculo");
+                		System.out.println("Formato de fecha : AAAA-MM-DD HH:MM");
+                		String datetime0 = teclado1.nextLine();
+                		DateTimeFormatter formatter0 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                		LocalDateTime dateTime0 = LocalDateTime.parse(datetime0, formatter0);
+                		fechas.add(dateTime0);
+            		}
             		
             		et.setFechas(fechas);
             		et.setCritica(ids2);
@@ -229,33 +246,61 @@ public class MenuAdmin {
             
             case "2":
             	System.out.println("ELIMINACION DE ESPECTACULOS:");
-            	//TODO
+            	Scanner teclado2 = new Scanner(System.in); 
+            	System.out.println("Indique la clase de espectaculo que desea borrar");
+            	System.out.println("1. Espectaculo Puntual");
+            	System.out.println("2. Espectaculo Multiple");
+            	System.out.println("3. Espectaculo Temporada");
+            	int opc2 = Integer.parseInt(teclado2.nextLine());
+            	
+            	System.out.println("Introduzca el titulo del espectaculo a eliminar");
+            	String title = teclado2.nextLine();
+            	
+            	switch(opc2)
+            	{
+            		case 1:
+            			newGestor.BorrarEspectaculosPunt(title);
+            			break;
+            			
+            		case 2:
+            			newGestor.BorrarEspectaculosMult(title);
+            			break;
+            			
+            		case 3:
+            			newGestor.BorrarEspectaculosTemp(title);     			
+            			break;
+            	}
             break;
             
             case "3":
             	System.out.println("ACTUALIZACION DE ESPECTACULOS:");
-            	//TODO
+            	
+            	Scanner teclado3 = new Scanner(System.in); 
+            	System.out.println("Indique la clase de espectaculo que desea borrar");
+            	System.out.println("1. Espectaculo Puntual");
+            	System.out.println("2. Espectaculo Multiple");
+            	System.out.println("3. Espectaculo Temporada");
+            	int opc3 = Integer.parseInt(teclado3.nextLine());
+            	
+            	System.out.println("Introduzca el titulo del espectaculo a eliminar");
+            	String title3 = teclado3.nextLine();
+            	
+            	switch(opc3)
+            	{
+            		case 1:
+            			newGestor.updateEspectaculoPunt(title3);
+            			break;
+            			
+            		case 2:
+            			newGestor.updateEspectaculoMult(title3);
+            			break;
+            			
+            		case 3:
+            			newGestor.updateEspectaculoTemp(title3);     			
+            			break;
+            	}
             break;
             
-            case "4":
-            	System.out.println("CONTABILIDAD DE ENTRADAS:");
-            	//TODO
-            break;
-            
-            case "5":
-            	System.out.println("LOCALIDADES DISPONIBLES:");
-            	//TODO
-            break;
-            
-            case "6":
-            	System.out.println("BUSQUEDA DE ESPECTACULOS");
-            	//TODO
-            break;
-            
-            case "7":
-            	System.out.println("PROXIMOS ESPECTACULOS");
-            	//TODO
-            break;
             
             default:
             System.out.println("Saliendo del menu . . . ");
