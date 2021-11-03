@@ -1,0 +1,104 @@
+/* USUARIOS
+Crear nuevo user
+*/
+createNewUser = INSERT INTO Usuarios (mail, password, name, username) VALUES ('varmail', 'varpass', 'varname', 'varuser');
+
+
+/* Select datos user a partir del mail
+*/
+
+selectDataUserMail = SELECT name, username, mail FROM Usuarios WHERE mail = 'varmail'
+
+/* Select datos user a partir del username
+*/
+
+selectDataUserName = SELECT name, username, mail FROM Usuarios WHERE username = 'varUser'
+
+/* Update datos de user a partir de mail
+   Podriamos decir que los datos que no quiere cambiar los meta tal cual los tenia antes
+*/ 
+upadteUser = UPDATE Usuarios SET mail = 'newMail', password = 'newPass', name ='newName', username ='newUser' WHERE mail ='varMail';
+
+/* Borrar datos de user a partir de mail
+   Añadir en Java comprobación de que mete su mail y no otro, etc
+*/ 
+deleteUser = DELETE FROM Usuarios WHERE mail='varMail';
+
+/* CRITICAS
+Crear nueva critica
+PODEMOS HACER QUE COJA EL MAIL DEL USER SEGUN EL USERNAME O DEL PROPIO MAIL*/
+createCritica = INSERT INTO Criticas (id, puntuacion, titulo, resena, mail ) VALUES ('varid', 0, 'vartitulo', 'varresena', (SELECT mail FROM Usuarios WHERE username = 'varuser'));
+
+selectDataCritica = SELECT id, puntuacion, titulo, resena, mail FROM Criticas WHERE id = 'varid';
+
+updateCritica = UPDATE Criticas SET titulo = 'vartitulo', resena = 'varresena' WHERE id = 'varid';
+
+deleteCritica = DELETE FROM Criticas WHERE id = 'varid';
+
+/* VOTANTES CRITICAS
+*/
+
+createVC = INSERT INTO VotantesCriticas (mail, id, voto ) VALUES ('varmail', 'varid', 'varvoto');
+
+selectDataVC = SELECT mail, id, voto FROM VotantesCriticas WHERE id = 'varid';
+
+updateVC = UPDATE VotantesCriticas SET mail = 'varid', id = 'varid', voto = 'varvoto' WHERE id = 'varid';
+
+deleteVC = DELETE FROM VotantesCriticas WHERE id = 'varid';
+
+/* ESP_PUNT
+*/
+createEP = INSERT INTO EspPuntual (id, titulo, descripcion, localidades, localidadesVendidas, fecha ) VALUES ('varid', 'vartitulo', 'vardescripcion', 'varlocalidades', 'varlocalidadesven', 'varfecha');
+
+selectDataEP = SELECT id, titulo, descripcion, localidades, localidadesVendidas, fecha FROM EspPuntual WHERE id = 'varid';
+
+updateEP = UPDATE EspPuntual SET mail = 'varid', id = 'varid', voto = 'varvoto' WHERE id = 'varid';
+
+deleteEP = DELETE FROM EspPuntual WHERE id = 'varid';
+/* ESP_MULT
+*/
+createEM = INSERT INTO EspMultiple (id, titulo, descripcion, localidades, localidadesVendidas, idFecha) VALUES ('varid', 'vartitulo', 'vardescripcion', 'varlocalidades', 'varlocalidadesven', (SELECT id FROM MultipleFechas WHERE id = 'varID'));
+
+selectDataEM = SELECT id, titulo, descripcion, localidades, localidadesVendidas FROM EspMultiple WHERE id = 'varid';
+
+updateEM = UPDATE EspMultiple SET mail = 'varid', id = 'varid', voto = 'varvoto' WHERE id = 'varid';
+
+deleteEM = DELETE FROM EspMultiple WHERE id = 'varid';
+
+/*Usar mismo IdFecha para fechas de un mismo espectaculo*/
+createMFecha = INSERT INTO MultipleFechas (id, fecha) VALUES ('varfecha', 'varidfecha');
+
+selectDataMFecha = SELECT fecha FROM MultipleFechas WHERE IdFecha = 'varidfecha'; 
+/*Mostar ID de fechas solo al admin*/
+selectDataMFechaAdmin = SELECT id, fecha FROM MultipleFechas WHERE IdFecha = 'varidfecha';
+
+updateMFecha = UPDATE MultipleFechas SET fecha = 'varfecha' WHERE IdFecha = 'varidfecha';
+
+deleteMFecha = DELETE FROM MultipleFechas WHERE id = 'varidfecha';
+
+createFechas = INSERT INTO Fechas (fecha) VALUES ('varfecha');
+selectDataFechas = SELECT fecha FROM Fechas WHERE fecha = 'varfecha'; /*ARREGLAR*/
+updateFecha = UPDATE Fechas SET fecha = 'varfecha' WHERE fecha = 'fecha'; /*Arreglar*/
+
+/* ESP_TEMP
+*/
+createET = INSERT INTO EspTemporada (id, titulo, descripcion, localidades, localidadesVendidas, idPase ) VALUES ('varid', 'vartitulo', 'vardescripcion', 'varlocalidades', 'varlocalidadesven', 'varfecha',(SELECT pase FROM Pases WHERE pase = 'varpase'));
+
+selectDataET = SELECT id, titulo, descripcion, localidades, localidadesVendidas, idPase FROM EspTemporada WHERE id = 'varid';
+
+updateET = UPDATE EspTemporada SET mail = 'varid', id = 'varid', voto = 'varvoto' WHERE id = 'varid';
+
+deleteET = DELETE FROM EspTemporada WHERE id = 'varid';
+/*Usar mismo IdFecha para fechas de un mismo espectaculo*/
+createMPase = INSERT INTO Pases (id, fechaInicio, fechaFinal) VALUES ('varid', 'varinicial', 'varfinal');
+
+selectDataMPase = SELECT fechaInicio, fechaFinal FROM Pases WHERE pase = 'varpase'; 
+/*Mostar ID de fechas solo al admin*/
+selectDataMPaseAdmin = SELECT id, fechaInicio, fechaFinal FROM Pases WHERE pase = 'varpase';
+
+updateMPase = UPDATE Pases SET fechaInicial = 'varinicial', fechaFinal = 'varfinal' WHERE pase = 'varpase';
+
+deleteMPase = DELETE FROM Pases WHERE id = 'varidfecha';
+
+createPases = INSERT INTO TemporadaPases (id, pase) VALUES ('varid', 'varpase');
+selectDataPases = SELECT pase FROM TemporadaPase WHERE pase = 'varpase'; /*ARREGLAR*/
