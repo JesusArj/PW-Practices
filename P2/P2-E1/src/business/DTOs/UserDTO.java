@@ -1,5 +1,7 @@
 package business.DTOs;
 
+import java.time.LocalDateTime;
+
 /**
  * Clase que implementa un Usuario con sus variables privadas y metodos
  * @author Developers
@@ -36,6 +38,10 @@ public class UserDTO{
 	 * Constructor sin parametros usado en inicializacion
 	 * de variables
 	 */
+
+	private LocalDateTime registerTime;
+	
+	private LocalDateTime lastLogged;
 	
 	public UserDTO(){}
 	
@@ -54,6 +60,15 @@ public class UserDTO{
 		this.mail=mail;
 		this.username = username;
 		this.passwd = passwd;
+	}
+	
+	public UserDTO(String name, String mail, String username, String passwd, LocalDateTime registerTime)
+	{
+		this.name=name; 
+		this.mail=mail;
+		this.username = username;
+		this.passwd = passwd;
+		this.registerTime = registerTime;
 	}
 	
 	public UserDTO(String name, String mail, String username)
@@ -110,6 +125,13 @@ public class UserDTO{
 		return this.passwd;
 	}
 	
+	public LocalDateTime getRegisterTime() {
+		return this.registerTime;
+	}
+	
+	public LocalDateTime getLastLogged() {
+		return this.lastLogged;
+	}
 	//MODIFICADORES
 	
 	/**
@@ -153,5 +175,13 @@ public class UserDTO{
 	
 	public void setPasswd(String Passwd) {
 		this.passwd = Passwd;
+	}
+	
+	public void setRegisterTime(LocalDateTime timeDate) {
+		this.registerTime = timeDate;
+	}
+	
+	public void setLastLogged(LocalDateTime timeDate) {
+		this.lastLogged = timeDate;
 	}
 }

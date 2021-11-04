@@ -32,14 +32,14 @@ public class UserDAO {
 		}
 	}
 	
-	public void deleteUser(UserDTO deleteUser) {
+	public void deleteUser(String mail) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
 		try(InputStream input = new FileInputStream("/src/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("deleteUser");
-			query.replace("'varmail'", deleteUser.getMail());
+			query.replace("'varmail'", mail);
 			
 			Statement stmt = connection.createStatement();
 			stmt.executeQuery(query);
