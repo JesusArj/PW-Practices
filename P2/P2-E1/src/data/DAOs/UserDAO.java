@@ -18,10 +18,10 @@ public class UserDAO {
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("createNewUser");
-			query.replace("'varmail'", newUser.getMail());
-			query.replace("'varpass'", newUser.getPasswd());
-			query.replace("'varname'", newUser.getName());
-			query.replace("'varuser'", newUser.getUsername());
+			query.replace("varmail", newUser.getMail());
+			query.replace("varpass", newUser.getPasswd());
+			query.replace("varname", newUser.getName());
+			query.replace("varuser", newUser.getUsername());
 			
 			Statement stmt = connection.createStatement();
 			stmt.executeQuery(query);
@@ -39,7 +39,7 @@ public class UserDAO {
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("deleteUser");
-			query.replace("'varmail'", mail);
+			query.replace("varmail", mail);
 			
 			Statement stmt = connection.createStatement();
 			stmt.executeQuery(query);
@@ -53,17 +53,19 @@ public class UserDAO {
 	public void updateUser(UserDTO updateUser) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("/src/sql.properties")){
+		try(InputStream input = new FileInputStream("D:/Descargas/PW-Practices-master/P2/P2-E1/src/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("updateUser");
-			query.replace("'varmail'", updateUser.getMail());
-			query.replace("'varpass'", updateUser.getPasswd());
-			query.replace("'varname'", updateUser.getName());
-			query.replace("'varuser'", updateUser.getUsername());
+			query.replace("varmail", updateUser.getMail());
+			query.replace("varpass", updateUser.getPasswd());
+			query.replace("varname", updateUser.getName());
+			query.replace("varuser", updateUser.getUsername());
 			
+			System.out.println(query);
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
+        	System.out.println(query);
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -80,7 +82,7 @@ public class UserDAO {
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectDataUserMail");
-			query.replace("'varmail'", email);
+			query.replace("varmail", email);
 			
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
@@ -114,7 +116,7 @@ public class UserDAO {
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectDataUserName");
-			query.replace("'varuser'", userName);
+			query.replace("varuser", userName);
 			
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);

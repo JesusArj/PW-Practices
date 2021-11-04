@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
+
+import business.managers.UserManager;
 /**
  * La clase MenuUsuario contiene la funcion UserMenu al usuario.
  * @author Developers
@@ -11,7 +13,7 @@ import java.util.Scanner;
 
 public class UsuariosView 
 {
-	public void userMenu(String mail) 
+	public void userMenu() 
 	{
 
 		String opc = null;
@@ -57,7 +59,7 @@ public class UsuariosView
         	username = username_scan.nextLine();
         	
         	System.out.println("Introduzca su nuevo mail");
-        	username = mail_scan.nextLine();
+        	email = mail_scan.nextLine();
         	
         	System.out.println("Introduzca su nuevo nombre");
         	name = name_scan.nextLine();
@@ -66,7 +68,11 @@ public class UsuariosView
         	password = password_scan.nextLine();
         	
         	//TODO: Usar las funcione del DTO
+        	UserManager managerUser = new UserManager();
+        	managerUser.updateUser(email, username, name, password);
+        	
         	username_scan.close();
+        	mail_scan.close();
         	name_scan.close();
         	password_scan.close();
         }
