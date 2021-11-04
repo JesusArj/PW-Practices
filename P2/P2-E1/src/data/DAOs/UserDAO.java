@@ -1,41 +1,156 @@
 package data.DAOs;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Properties;
+
 import business.DTOs.UserDTO;
 import data.common.DBConnection;
 
 public class UserDAO {
 
-	public void createUser() {
-		
+	public void createUser(UserDTO newUser) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("createNewUser");
+			query.replace("'varmail'", newUser.getMail());
+			query.replace("'varpass'", newUser.getPasswd());
+			query.replace("'varname'", newUser.getName());
+			query.replace("'varuser'", newUser.getUsername());
+			
+			Statement stmt = connection.createStatement();
+			stmt.executeQuery(query);
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
 	}
 	
-	public void deleteUser(UserDTO user) {
-		
+	public void deleteUser(UserDTO deleteUser) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("deleteUser");
+			query.replace("'varmail'", deleteUser.getMail());
+			
+			Statement stmt = connection.createStatement();
+			stmt.executeQuery(query);
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
 	}
 	
-	public void updateUser(UserDTO user) {
-		
+	public void updateUser(UserDTO updateUser) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("updateUser");
+			query.replace("'varmail'", updateUser.getMail());
+			query.replace("'varpass'", updateUser.getPasswd());
+			query.replace("'varname'", updateUser.getName());
+			query.replace("'varuser'", updateUser.getUsername());
+			
+			Statement stmt = connection.createStatement();
+			stmt.executeQuery(query);
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
 	}
 	
-	public UserDTO readUser(String email) {
-		UserDTO placeHolder = null;
-		return placeHolder;
+	public UserDTO requestUser(String email) {
+		UserDTO userRequest = new UserDTO();
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectDataUserMail");
+			query.replace("'varmail'", email);
+			
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			
+			String name = rs.getString("name");
+			String mail = rs.getString("mail");
+			String username = rs.getString("username");
+			
+			userRequest.setMail(mail);
+			userRequest.setName(name);
+			userRequest.setUsername(username);
+			
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		
+		return userRequest;
+	}
+	
+	public UserDTO requestUserByUsername(String userName) {
+		UserDTO userRequest = new UserDTO();
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectDataUserName");
+			query.replace("'varuser'", userName);
+			
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			
+			String name = rs.getString("name");
+			String mail = rs.getString("mail");
+			String username = rs.getString("username");
+			
+			userRequest.setMail(mail);
+			userRequest.setName(name);
+			userRequest.setUsername(username);
+			
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return userRequest;
 	}
 	
 	public ArrayList<UserDTO> requestUsers(){
 		ArrayList<UserDTO> listUsers = new ArrayList<UserDTO>();
-		try {
-			DBConnection dbConnection = new DBConnection();
-			Connection connection = dbConnection.getConnection();
-			String query = "A"; //Aqui usaremos las funciones del sql.properties.
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectAllUsers");
 			
-			// Podemos hacer esto o en el DBConnection meter un metodo para cada 
-				//CRUD y nos ahorramos esto.
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
-
+			
 			while (rs.next()) {
 				String name = rs.getString("name");
 				String email = rs.getString("email");
@@ -46,6 +161,7 @@ public class UserDAO {
 			if (stmt != null){ 
 				stmt.close(); 
 			}
+
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -53,7 +169,5 @@ public class UserDAO {
 		}
 		return listUsers;
 	}
-	
-	//TODO todas las funciones que necesitemos en 
-	//las que hagamos uso de BD o la cambiemos. 
+
 }
