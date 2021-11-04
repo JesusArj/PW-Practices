@@ -46,21 +46,17 @@ CREATE TABLE  EspMultiple (
   descripcion varchar(999) NOT NULL,
   localidades int(6) NOT NULL,
   localidadesVendidas int(6) NOT NULL,  
+  idFecha int(9) NOT NULL,
   PRIMARY KEY (id),
-  CONSTRAINT UC_Puntual UNIQUE (id)
-);
-
-CREATE TABLE  Fechas (
-  fecha datetime NOT NULL, 
-  PRIMARY KEY (fecha)
+  CONSTRAINT UC_Puntual UNIQUE (id),
+  CONSTRAINT fk_idFEM FOREIGN KEY (idFecha) REFERENCES MultipleFechas (id),
 );
 
 CREATE TABLE  MultipleFechas (
   id int(9) NOT NULL,
   fecha datetime NOT NULL, 
-  PRIMARY KEY(id, fecha),
+  PRIMARY KEY(id),
   CONSTRAINT fk_idMF FOREIGN KEY (id) REFERENCES EspMultiple (id),
-  CONSTRAINT fk_fechasMF FOREIGN KEY (fecha) REFERENCES Fechas (fecha)
 );
 
 CREATE TABLE  EspTemporada (
