@@ -80,7 +80,7 @@ public class CriticaDAO {
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 			
 			int iduser = Integer.parseInt(rs.getString("id"));
-			float puntuacion = Float.parseFloat(rs.getString("mail"));
+			float puntuacion = Float.parseFloat(rs.getString("puntuacion"));
 			String titulo = rs.getString("titulo");
 			String resena= rs.getString("resena");
 			String mail = rs.getString("mail"); 
