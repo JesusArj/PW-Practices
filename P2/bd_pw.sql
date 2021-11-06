@@ -65,7 +65,7 @@ CREATE TABLE  MultipleFechas (
   idF int(9) NOT NULL, 
   PRIMARY KEY(id),
   CONSTRAINT fk_idMF FOREIGN KEY (id) REFERENCES EspMultiple (id),
-  CONSTRAINT fk_fechasMFN FOREIGN KEY (idF) REFERENCES MultipleFecha (id),
+  CONSTRAINT fk_fechasMFN FOREIGN KEY (idF) REFERENCES Fechas (id),
 );
 
 CREATE TABLE  EspTemporada (
