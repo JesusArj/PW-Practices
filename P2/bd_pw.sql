@@ -26,7 +26,7 @@ CREATE TABLE VotantesCriticas (
   id int(6) NOT NULL,
   voto int(1) NOT NULL, 
   PRIMARY KEY (mail),
-  CONSTRAINT UC_VotanteCritica UNIQUE (mail, voto),
+  CONSTRAINT UC_VotanteCritica UNIQUE (mail),
   CONSTRAINT fk_MailVC FOREIGN KEY (mail) REFERENCES Usuarios (mail),
   CONSTRAINT fk_idVC FOREIGN KEY (id) REFERENCES Criticas (id)
 );
