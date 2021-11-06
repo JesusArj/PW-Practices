@@ -3,6 +3,7 @@ CREATE TABLE Usuarios (
   password varchar(50) NOT NULL,
   name varchar(99) NOT NULL,
   username varchar(100) NOT NULL,
+  rol varchar(10) NOT NULL,
   fechaRegistro datetime NOT NULL,
   fechaUltConex datetime NOT NULL,
   PRIMARY KEY (mail),
