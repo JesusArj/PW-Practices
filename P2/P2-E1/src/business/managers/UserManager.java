@@ -16,27 +16,35 @@ public class UserManager {
 		return this.mail;
 	}
 	
-	public void createUser(String mail, String username, String name, String passwd) {	
+	public Boolean createUser(String mail, String username, String name, String passwd) {	
+		if(!this.UserExist(mail)) {
 			UserDAO newUser = new UserDAO();
 			UserDTO newUserDTO = new UserDTO(name,mail,username,passwd);  
 			newUser.createUser(newUserDTO);
-	}
-	
-	public Boolean updateUser(String mail, String username, String name, String passwd) {
-		if(!this.getMail().equals(mail)) {
-			UserDAO newUser = new UserDAO();
-			UserDTO newUserDTO = new UserDTO(name,mail,username,passwd);  
-			newUser.updateUser(newUserDTO);
 			return true;
 		}
 		return false;
 	}
 	
+	public Boolean updateUser(String mail, String username, String name, String passwd) {
+		if(this.UserExist(mail)) {
+			if(this.getMail().equals(mail)) {
+				UserDAO newUser = new UserDAO();
+				UserDTO newUserDTO = new UserDTO(name,mail,username,passwd);  
+				newUser.updateUser(newUserDTO);
+				return true;
+			}	
+		}
+		return false;
+	}
+	
 	public Boolean deleteUser(String mail) {
-		if(!this.getMail().equals(mail)) {	
-			UserDAO deleteUser = new UserDAO();
-			deleteUser.deleteUser(mail);
-			return true;
+		if(this.UserExist(mail)) {
+			if(this.getMail().equals(mail)) {	
+				UserDAO deleteUser = new UserDAO();
+				deleteUser.deleteUser(mail);
+				return true;
+			}	
 		}
 		return false;
 	}

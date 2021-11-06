@@ -16,32 +16,40 @@ public class CriticaManager {
 		return this.mail;
 	}
 	
-	public void createCritica(String titulo, float puntuacion, String resena) {
+	public Boolean createCritica(String titulo, float puntuacion, String resena) {
 		CriticaDAO newCritica = new CriticaDAO();
 		//TODO funcion id;
 		int id = 0;
-		CriticaDTO newCriticaDTO = new CriticaDTO(titulo,puntuacion,resena,id,this.getMail());  
-		newCritica.createCritica(newCriticaDTO);
+		if(!this.CriticaExist(id)) {
+			CriticaDTO newCriticaDTO = new CriticaDTO(titulo,puntuacion,resena,id,this.getMail());  
+			newCritica.createCritica(newCriticaDTO);	
+			return true;
+		}
+		return false;
 	}
 	
-	public Boolean updateCritica(String titulo, float puntuacion, String resena, String mail) {
-		if(!this.getMail().equals(mail)) {
-			CriticaDAO newCritica = new CriticaDAO();
-			//TODO funcion id;
-			int id = 0;
-			CriticaDTO newCriticaDTO = new CriticaDTO(titulo,puntuacion,resena,id,this.getMail());  
-			newCritica.updateCritica(newCriticaDTO);
-			return true;
+	public Boolean updateCritica(String titulo, float puntuacion, String resena, String mail, int id) {
+			if(this.CriticaExist(id)) {
+				CriticaDTO critica = this.requestCritica(id);
+				if(critica.getMail().equals(this.getMail())) {
+					CriticaDAO newCritica = new CriticaDAO();			
+					CriticaDTO newCriticaDTO = new CriticaDTO(titulo,puntuacion,resena,id,this.getMail());  
+					newCritica.updateCritica(newCriticaDTO);
+				return true;		
 			}
-		return false;
 		}
+		return false;
+	}
 	
 	public Boolean deleteCritica(int id) {
-		if(!this.getMail().equals(mail)) {	
-			CriticaDAO deleteCritica = new CriticaDAO();
-			deleteCritica.deleteCritica(id);
-			return true;
-		}
+		if(this.CriticaExist(id)) {
+			CriticaDTO critica = this.requestCritica(id);
+			if(critica.getMail().equals(this.getMail())) {
+				CriticaDAO deleteCritica = new CriticaDAO();
+				deleteCritica.deleteCritica(id);
+				return true;				
+			}
+		}	
 		return false;
 	}
 	
@@ -59,10 +67,10 @@ public class CriticaManager {
 		return requestedCriticas;
 	}
 	
-	public Boolean CriticaExist(String mail) {
+	public Boolean CriticaExist(int id) {
 		ArrayList<CriticaDTO> Criticas = this.requestCriticas();
 		for(CriticaDTO u : Criticas) {
-			if(u.getMail().equals(mail)) {
+			if(u.getId() == id) {
 				return true;
 			}
 		}
