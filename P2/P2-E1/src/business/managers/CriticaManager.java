@@ -77,5 +77,10 @@ public class CriticaManager {
 		return false;	
 	}
 	
+	public ArrayList<String> readCritica(int id){
+		ArrayList<String> critica = new ArrayList<String>();
+		return critica;
+	}
+	
 	
 }

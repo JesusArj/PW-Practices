@@ -6,15 +6,6 @@ import business.DTOs.UserDTO;
 import data.DAOs.UserDAO;
 
 public class UserManager {
-	private String mail;
-	
-	public UserManager(String mail) {
-		this.mail = mail;
-	}
-	
-	private String getMail() {
-		return this.mail;
-	}
 	
 	public Boolean createUser(String mail, String username, String name, String passwd) {	
 		if(!this.UserExist(mail)) {
@@ -28,38 +19,38 @@ public class UserManager {
 	
 	public Boolean updateUser(String mail, String username, String name, String passwd) {
 		if(this.UserExist(mail)) {
-			if(this.getMail().equals(mail)) {
-				UserDAO newUser = new UserDAO();
-				UserDTO newUserDTO = new UserDTO(name,mail,username,passwd);  
-				newUser.updateUser(newUserDTO);
-				return true;
-			}	
+			UserDAO newUser = new UserDAO();
+			UserDTO newUserDTO = new UserDTO(name,mail,username,passwd);  
+			newUser.updateUser(newUserDTO);
+			return true;
 		}
 		return false;
 	}
 	
 	public Boolean deleteUser(String mail) {
 		if(this.UserExist(mail)) {
-			if(this.getMail().equals(mail)) {	
-				UserDAO deleteUser = new UserDAO();
-				deleteUser.deleteUser(mail);
-				return true;
-			}	
-		}
+			UserDAO deleteUser = new UserDAO();
+			deleteUser.deleteUser(mail);
+			return true;
+		}	
 		return false;
 	}
 	
 	public UserDTO requestUser(String mail) {
 		UserDAO requestUser = new UserDAO();
 		UserDTO requestedUser = new UserDTO();
-		requestedUser = requestUser.requestUser(mail);
+		if(this.UserExist(mail)) {
+			requestedUser = requestUser.requestUser(mail);	
+		}
 		return requestedUser;
 	}
 	
 	public UserDTO requestUserByUsername(String username) {
 		UserDAO requestUser = new UserDAO();
 		UserDTO requestedUser = new UserDTO();
-		requestedUser = requestUser.requestUserByUsername(username);
+		if(this.UserExistByUsername(username)) {
+			requestedUser = requestUser.requestUserByUsername(username);	
+		}
 		return requestedUser;
 	}
 	
@@ -90,4 +81,14 @@ public class UserManager {
 		return false;	
 	}
 	
+	public ArrayList<String> readUser(String mail){
+		ArrayList<String> userS =  new ArrayList<String>();
+		if(this.UserExist(mail)) {
+			UserDTO user = this.requestUser(mail);
+			userS.add(user.getMail());
+			userS.add(user.getName());
+			userS.add(user.getUsername());	
+		}
+		return userS;
+	}
 }
