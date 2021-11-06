@@ -65,13 +65,15 @@ public class CriticaDTO {
 	 * @param resena Resena
 	 * @author Developers
 	 */
-	public CriticaDTO(String title, float puntuacion, String resena)
+	public CriticaDTO(String title, float puntuacion, String resena, int id, String mail)
 	{
 		this.title = title; 
+		this.mail = mail;
 		this.puntuacion = puntuacion; 
 		this.resena=resena; 
+		this.id = id;
 		this.like = 0; 
-		this.dislike =0;
+		this.dislike = 0;
 		this.votantes= new ArrayList<String>(); 
 	}
 	

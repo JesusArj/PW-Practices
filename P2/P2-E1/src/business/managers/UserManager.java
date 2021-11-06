@@ -6,25 +6,39 @@ import business.DTOs.UserDTO;
 import data.DAOs.UserDAO;
 
 public class UserManager {
+	private String mail;
 	
-	public UserManager() {
+	public UserManager(String mail) {
+		this.mail = mail;
 	}
 	
-	public void createUser(String mail, String username, String name, String passwd) {
-		UserDAO newUser = new UserDAO();
-		UserDTO newUserDTO = new UserDTO(name,mail,username,passwd);  
-		newUser.createUser(newUserDTO);
+	private String getMail() {
+		return this.mail;
 	}
 	
-	public void updateUser(String mail, String username, String name, String passwd) {
-		UserDAO newUser = new UserDAO();
-		UserDTO newUserDTO = new UserDTO(name,mail,username,passwd);  
-		newUser.updateUser(newUserDTO);
+	public void createUser(String mail, String username, String name, String passwd) {	
+			UserDAO newUser = new UserDAO();
+			UserDTO newUserDTO = new UserDTO(name,mail,username,passwd);  
+			newUser.createUser(newUserDTO);
 	}
 	
-	public void deleteUser(String mail) {
-		UserDAO deleteUser = new UserDAO();
-		deleteUser.deleteUser(mail);
+	public Boolean updateUser(String mail, String username, String name, String passwd) {
+		if(!this.getMail().equals(mail)) {
+			UserDAO newUser = new UserDAO();
+			UserDTO newUserDTO = new UserDTO(name,mail,username,passwd);  
+			newUser.updateUser(newUserDTO);
+			return true;
+		}
+		return false;
+	}
+	
+	public Boolean deleteUser(String mail) {
+		if(!this.getMail().equals(mail)) {	
+			UserDAO deleteUser = new UserDAO();
+			deleteUser.deleteUser(mail);
+			return true;
+		}
+		return false;
 	}
 	
 	public UserDTO requestUser(String mail) {

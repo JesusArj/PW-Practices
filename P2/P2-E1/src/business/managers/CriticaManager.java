@@ -6,23 +6,43 @@ import data.DAOs.CriticaDAO;
 	
 
 public class CriticaManager {
-
+	private String mail;
+	
+	public CriticaManager(String mail) {
+		this.mail = mail;
+	}
+	
+	private String getMail() {
+		return this.mail;
+	}
 	
 	public void createCritica(String titulo, float puntuacion, String resena) {
 		CriticaDAO newCritica = new CriticaDAO();
-		CriticaDTO newCriticaDTO = new CriticaDTO(titulo,puntuacion,resena);  
+		//TODO funcion id;
+		int id = 0;
+		CriticaDTO newCriticaDTO = new CriticaDTO(titulo,puntuacion,resena,id,this.getMail());  
 		newCritica.createCritica(newCriticaDTO);
 	}
 	
-	public void updateCritica(String titulo, float puntuacion, String resena) {
-		CriticaDAO newCritica = new CriticaDAO();
-		CriticaDTO newCriticaDTO = new CriticaDTO(titulo,puntuacion,resena);  
-		newCritica.updateCritica(newCriticaDTO);
-	}
+	public Boolean updateCritica(String titulo, float puntuacion, String resena, String mail) {
+		if(!this.getMail().equals(mail)) {
+			CriticaDAO newCritica = new CriticaDAO();
+			//TODO funcion id;
+			int id = 0;
+			CriticaDTO newCriticaDTO = new CriticaDTO(titulo,puntuacion,resena,id,this.getMail());  
+			newCritica.updateCritica(newCriticaDTO);
+			return true;
+			}
+		return false;
+		}
 	
-	public void deleteCritica(int id) {
-		CriticaDAO deleteCritica = new CriticaDAO();
-		deleteCritica.deleteCritica(id);
+	public Boolean deleteCritica(int id) {
+		if(!this.getMail().equals(mail)) {	
+			CriticaDAO deleteCritica = new CriticaDAO();
+			deleteCritica.deleteCritica(id);
+			return true;
+		}
+		return false;
 	}
 	
 	public CriticaDTO requestCritica(int id) {

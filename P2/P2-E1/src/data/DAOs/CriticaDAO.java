@@ -120,7 +120,9 @@ public class CriticaDAO {
 				String titulo = rs.getString("titulo");
 				float puntuacion = rs.getFloat("puntuacion");
 				String resena = rs.getString("resena");
-				listCriticas.add(new CriticaDTO(titulo,puntuacion,resena));
+				int id = rs.getInt("id");
+				String mail = rs.getString("mail");
+				listCriticas.add(new CriticaDTO(titulo,puntuacion,resena,id,mail));
 			}
 
 			if (stmt != null){ 
