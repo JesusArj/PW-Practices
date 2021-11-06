@@ -18,10 +18,10 @@ public class UserDAO {
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("createNewUser");
-			query.replace("varmail", newUser.getMail());
-			query.replace("varpass", newUser.getPasswd());
-			query.replace("varname", newUser.getName());
-			query.replace("varuser", newUser.getUsername());
+			query=query.replaceAll("varmail", newUser.getMail());
+			query=query.replaceAll("varpass", newUser.getPasswd());
+			query=query.replaceAll("varname", newUser.getName());
+			query=query.replaceAll("varuser", newUser.getUsername());
 			
 			Statement stmt = connection.createStatement();
 			stmt.executeQuery(query);
@@ -39,7 +39,7 @@ public class UserDAO {
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("deleteUser");
-			query.replace("varmail", mail);
+			query=query.replaceAll("varmail", mail);
 			
 			Statement stmt = connection.createStatement();
 			stmt.executeQuery(query);
@@ -57,15 +57,13 @@ public class UserDAO {
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("updateUser");
-			query.replace("varmail", updateUser.getMail());
-			query.replace("varpass", updateUser.getPasswd());
-			query.replace("varname", updateUser.getName());
-			query.replace("varuser", updateUser.getUsername());
+			query=query.replaceAll("varmail", updateUser.getMail());
+			query=query.replaceAll("varpass", updateUser.getPasswd());
+			query=query.replaceAll("varname", updateUser.getName());
+			query=query.replaceAll("varuser", updateUser.getUsername());
 			
-			System.out.println(query);
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
-        	System.out.println(query);
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -82,7 +80,7 @@ public class UserDAO {
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectDataUserMail");
-			query.replace("varmail", email);
+			query=query.replaceAll("varmail", email);
 			
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
@@ -116,7 +114,7 @@ public class UserDAO {
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectDataUserName");
-			query.replace("varuser", userName);
+			query=query.replaceAll("varuser", userName);
 			
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);

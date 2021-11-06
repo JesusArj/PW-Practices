@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import business.DTOs.CriticaDTO;
-import business.DTOs.UserDTO;
 import data.common.DBConnection;
 
 public class CriticaDAO {
@@ -19,9 +18,9 @@ public class CriticaDAO {
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("createCritica");
-			query.replace("varid", Integer.toString(newCritica.getId()));
-			query.replace("vartitulo", newCritica.getTitle());
-			query.replace("varresena", newCritica.getResena()); 
+			query=query.replaceAll("varid", Integer.toString(newCritica.getId()));
+			query=query.replaceAll("vartitulo", newCritica.getTitle());
+			query=query.replaceAll("varresena", newCritica.getResena()); 
 			Statement stmt = connection.createStatement();
 			stmt.executeQuery(query);
 			dbConnection.closeConnection();
@@ -39,8 +38,8 @@ public class CriticaDAO {
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("updateCritica");
-			query.replace("vartitulo", updateCritica.getTitle());
-			query.replace("varresena", updateCritica.getResena()); 
+			query=query.replaceAll("vartitulo", updateCritica.getTitle());
+			query=query.replaceAll("varresena", updateCritica.getResena()); 
 			Statement stmt = connection.createStatement();
 			stmt.executeQuery(query);
 			dbConnection.closeConnection();
@@ -56,7 +55,7 @@ public class CriticaDAO {
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("deleteCritica");
-			query.replace("varid", Integer.toString(id));
+			query=query.replaceAll("varid", Integer.toString(id));
 			Statement stmt = connection.createStatement();
 			stmt.executeQuery(query);
 			dbConnection.closeConnection();
@@ -75,7 +74,7 @@ public class CriticaDAO {
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectDataCritica");
-			query.replace("varid", Integer.toString(id));
+			query=query.replaceAll("varid", Integer.toString(id));
 			
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
@@ -104,4 +103,37 @@ public class CriticaDAO {
 		return criticaRequest;
 	}
 	
+	public ArrayList<CriticaDTO> requestCriticas(){
+		ArrayList<CriticaDTO> listCriticas = new ArrayList<CriticaDTO>();
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectAllCriticas");
+			
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			
+			while (rs.next()) {
+				String titulo = rs.getString("titulo");
+				float puntuacion = rs.getFloat("puntuacion");
+				String resena = rs.getString("resena");
+				listCriticas.add(new CriticaDTO(titulo,puntuacion,resena));
+			}
+
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return listCriticas;
+	}
+
 }
+	
