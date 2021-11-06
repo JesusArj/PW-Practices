@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class EspectaculoDTO {
 
+	private int id;
 	private String categoria; 
 	private String titulo;  
 	private String descripcion; 
@@ -32,19 +33,31 @@ public class EspectaculoDTO {
 		
 		/**
 		 * Constructor parametrizado de la clase.
+		 * @param id Identificador del espectaculo
 		 * @param titulo Titulo del espectaculo
 		 * @param categoria Categoria del espectaculo
 		 * @param descripcion Breve descripcion del Espectaculo
 		 * @author Developers
 		 */
-		public EspectaculoDTO(String titulo, String categoria, String descripcion) 
+		public EspectaculoDTO(int id, String titulo, String categoria, String descripcion) 
 		{
+			this.id = id;
 			this.titulo = titulo; 
 			this.descripcion = descripcion;
 			this.categoria=categoria; 
 		}
 		
 		//OBSERVADORES
+		/**
+		 * Getter del id unico del espectaculo.
+		 * @return ID del espectaculo
+		 * @author Developers
+		 */
+		
+		public int getID()
+		{
+			return this.id; 
+		}
 		
 		/**
 		 * Getter de la categoria.
@@ -113,6 +126,17 @@ public class EspectaculoDTO {
 		
 		
 		//MODIFICADORES
+		
+		/**
+		 * Setter del ID del espectaculo
+		 * @param id Identificador del espectaculo
+		 * @author Developers
+		 */
+		
+		public void setId(int id)
+		{
+			this.id=id; 
+		}
 		
 		/**
 		 * Setter de la categoria del espectaculo

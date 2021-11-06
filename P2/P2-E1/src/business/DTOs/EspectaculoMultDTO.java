@@ -3,16 +3,16 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class EspectaculoMultDTO extends EspectaculoDTO{
-		private ArrayList<LocalDateTime> pases;
+		private ArrayList<LocalDateTime> fechas;
 		
 		public EspectaculoMultDTO() {
 			
 		}	
-		public ArrayList<LocalDateTime> getPases() {
-			return this.pases;
+		public ArrayList<LocalDateTime> getFechas() {
+			return this.fechas;
 		}
-		public void setPases(ArrayList<LocalDateTime> pases) {
-			this.pases = pases;
+		public void setFechas(ArrayList<LocalDateTime> fechas) {
+			this.fechas = fechas;
 		}
 		
 }
