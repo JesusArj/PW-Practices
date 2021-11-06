@@ -52,13 +52,13 @@ CREATE TABLE  EspMultiple (
   idFecha int(9) NOT NULL,
   PRIMARY KEY (id),
   CONSTRAINT UC_Puntual UNIQUE (id),
-  CONSTRAINT fk_idFEM FOREIGN KEY (idFecha) REFERENCES MultipleFechas (id),
+  CONSTRAINT fk_idFEM FOREIGN KEY (idFecha) REFERENCES MultipleFechas (id)
 );
 
 CREATE TABLE  Fechas (
   id int(9) NOT NULL,
   fecha datetime NOT NULL, 
-  PRIMARY KEY (fecha),
+  PRIMARY KEY (fecha)
 );
 
 CREATE TABLE  MultipleFechas (
@@ -66,7 +66,7 @@ CREATE TABLE  MultipleFechas (
   idF int(9) NOT NULL, 
   PRIMARY KEY(id),
   CONSTRAINT fk_idMF FOREIGN KEY (id) REFERENCES EspMultiple (id),
-  CONSTRAINT fk_fechasMFN FOREIGN KEY (idF) REFERENCES Fechas (id),
+  CONSTRAINT fk_fechasMFN FOREIGN KEY (idF) REFERENCES Fechas (id)
 );
 
 CREATE TABLE  EspTemporada (
@@ -78,20 +78,20 @@ CREATE TABLE  EspTemporada (
   idP int(9) NOT NULL,
   PRIMARY KEY (id),
   CONSTRAINT UC_Temp UNIQUE (id),
-  CONSTRAINT fk_idPET FOREIGN KEY (idPase) REFERENCES TemporadaPase (id),
+  CONSTRAINT fk_idPET FOREIGN KEY (idP) REFERENCES TemporadaPase (id)
 );
 
 CREATE TABLE  Pases (
   id int(9) NOT NULL,
   fechaInicio datetime NOT NULL,
   fechaFinal datetime NOT NULL, 
-  PRIMARY KEY (pase)
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE  TemporadaPases (
   id int(9) NOT NULL,
   idP int(9) NOT NULL, 
-  PRIMARY KEY(id, pase),
+  PRIMARY KEY(id, idP),
   CONSTRAINT fk_idTP FOREIGN KEY (id) REFERENCES EspTemporada (id),
   CONSTRAINT fk_paseTP FOREIGN KEY (idP) REFERENCES Pases (id)
 );
