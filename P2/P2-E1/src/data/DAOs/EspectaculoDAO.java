@@ -247,7 +247,7 @@ public class EspectaculoDAO {
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("createEP");
-			query=query.replaceAll("varid", Integer.toString(newPunt.getID()));
+			query=query.replaceAll("varid", Integer.toString(generarIDPunt())); //TODO: Make sense??
 			query=query.replaceAll("vartitulo", newPunt.getTitulo());
 			query=query.replaceAll("vardescripcion", newPunt.getDescripcion());
 			query=query.replaceAll("varlocalidades", Integer.toString(newPunt.getLocalidadesVenta()));
@@ -284,7 +284,7 @@ public class EspectaculoDAO {
 		}
 	}
 	
-	public void updateEspectaculoPuntual(EspectaculoPuntDTO updatePunt) {
+	public void updateEspectaculoPuntual(EspectaculoPuntDTO updatePunt) { 
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
 		try(InputStream input = new FileInputStream("D:/Descargas/PW-Practices-master/P2/P2-E1/src/sql.properties")){
@@ -403,7 +403,7 @@ public class EspectaculoDAO {
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("createEM");
-			query=query.replaceAll("varid", Integer.toString(newMult.getID()));
+			query=query.replaceAll("varid", Integer.toString(generarIDMult())); //TODO: Make sense?
 			query=query.replaceAll("vartitulo", newMult.getTitulo());
 			query=query.replaceAll("vardescripcion", newMult.getDescripcion());
 			query=query.replaceAll("varlocalidades", Integer.toString(newMult.getLocalidadesVenta()));
@@ -426,7 +426,7 @@ public class EspectaculoDAO {
 			prop.load(input);
 			
 			String query = prop.getProperty("createFecha");
-			query=query.replaceAll("varid", Integer.toString(newFecha.getID()));
+			query=query.replaceAll("varid", Integer.toString(generarIDFecha())); //TODO: Make sense?
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
 			String formattedDateTime = newFecha.getFecha().format(formatter);
 			query=query.replaceAll("varfecha", formattedDateTime);
@@ -671,8 +671,8 @@ public class EspectaculoDAO {
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("createET");
-			query=query.replaceAll("varid", Integer.toString(newTemp.getID()));
-			query=query.replaceAll("vartitulo", newTemp.getTitulo());
+			query=query.replaceAll("varid", Integer.toString(generarIDTemp())); //TODO: Make sense?
+			query=query.replaceAll("vartitulo", newTemp.getTitulo()); 
 			query=query.replaceAll("vardescripcion", newTemp.getDescripcion());
 			query=query.replaceAll("varlocalidades", Integer.toString(newTemp.getLocalidadesVenta()));
 			query=query.replaceAll("varlocalidadesvendidas", Integer.toString(newTemp.getLocalidadesVendidas())); 
@@ -694,7 +694,7 @@ public class EspectaculoDAO {
 			prop.load(input);
 			
 			String query = prop.getProperty("createPases");
-			query=query.replaceAll("varid", Integer.toString(newPase.getID()));
+			query=query.replaceAll("varid", Integer.toString(generarIdPases())); //TODO: Make sense?
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
 			String formattedDateTime = newPase.getFechaInicio().format(formatter);
 			query=query.replaceAll("varfechaInicio", formattedDateTime);
