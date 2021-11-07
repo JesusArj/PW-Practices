@@ -137,28 +137,5 @@ public class CriticaDAO {
 		return listCriticas;
 	}
 
-	public Boolean existID(CriticaDTO critica)
-	{
-		DBConnection dbConnection = new DBConnection();
-		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("/src/sql.properties")){
-			Properties prop = new Properties();
-			prop.load(input);
-			String query = prop.getProperty("existIDCriticas");
-			query=query.replaceAll("varid", Integer.toString(critica.getId()));
-			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
-			
-			ResultSet rs = (ResultSet) stmt.executeQuery(query);
-
-			
-			dbConnection.closeConnection();
-		} catch (Exception e){
-			System.err.println(e);
-			e.printStackTrace();
-		}
-		return false;
-	}
-	
 }
 	

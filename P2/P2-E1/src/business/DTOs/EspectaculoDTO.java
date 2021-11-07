@@ -2,7 +2,6 @@ package business.DTOs;
 
 
 import java.util.ArrayList;
-import java.util.Random;
 
 
 //TODO: Comprobaciones de que la categoria introducida sea correcta
@@ -40,7 +39,6 @@ public class EspectaculoDTO {
 		 * @param descripcion Breve descripcion del Espectaculo
 		 * @author Developers
 		 */
-
 		public EspectaculoDTO(int id, String titulo, String categoria, String descripcion) 
 		{
 			this.id = id;

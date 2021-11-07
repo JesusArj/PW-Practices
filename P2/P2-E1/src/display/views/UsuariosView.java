@@ -98,6 +98,8 @@ public class UsuariosView
 	        		UserManager managerUserDelete = new UserManager();
 	        		managerUserDelete.deleteUser(this.getMail());
 	        		System.out.println("Su usuario ha sido borrado.");
+	        		System.out.println("Gracias por usar nuestro sistema.");
+	        		System.exit(0);
 		    	}
 	        	else {
 	        		System.out.println("Su usuario no ha sido borrado.");	

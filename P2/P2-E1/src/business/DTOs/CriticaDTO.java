@@ -1,7 +1,6 @@
 package business.DTOs;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Clase que implementa una critica con sus variables 
@@ -66,8 +65,6 @@ public class CriticaDTO {
 	 * @param resena Resena
 	 * @author Developers
 	 */
-	
-
 	public CriticaDTO(String title, float puntuacion, String resena, int id, String mail)
 	{
 		this.title = title; 
