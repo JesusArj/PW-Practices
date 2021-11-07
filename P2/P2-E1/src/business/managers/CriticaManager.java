@@ -2,6 +2,7 @@ package business.managers;
 
 import java.util.ArrayList;
 import business.DTOs.CriticaDTO;
+import business.DTOs.VotantesCriticaDTO;
 import data.DAOs.CriticaDAO;
 	
 
@@ -47,6 +48,7 @@ public class CriticaManager {
 			if(critica.getMail().equals(this.getMail())) {
 				CriticaDAO deleteCritica = new CriticaDAO();
 				deleteCritica.deleteCritica(id);
+				deleteCritica.removeVotantesCritica(id);
 				return true;				
 			}
 		}	
@@ -92,23 +94,52 @@ public class CriticaManager {
 	public Boolean darLike(int id) {
 		if(this.CriticaExist(id)) {
 			CriticaDTO critica = this.requestCritica(id);
-			critica.addLike();
-			CriticaDAO Like = new CriticaDAO();
-			Like.updateCritica(critica);
-			return true;				
+			if(!this.getMail().equals(critica.getMail())) {
+				for(VotantesCriticaDTO v : critica.getVotantes()) {
+					if(v.getVotante().equals(this.getMail())) {
+						if(v.getVoto().equals("like")) {
+							return false;
+						}
+						else {
+							critica.lessDislike();
+							critica.addLike();
+						}
+					}
+				}
+				CriticaDAO Like = new CriticaDAO();
+				Like.updateCritica(critica);
+				Like.removeVotanteCritica(this.getMail(), id);
+				Like.addVotanteCritica(this.getMail(), id, "like");
+				return true;	
+			}				
 		}	
 		return false;
 	}
-
+	
 	public Boolean darDislike(int id) {
 		if(this.CriticaExist(id)) {
 			CriticaDTO critica = this.requestCritica(id);
-			critica.addDislike();
-			CriticaDAO Like = new CriticaDAO();
-			Like.updateCritica(critica);
-			return true;				
+			if(!this.getMail().equals(critica.getMail())) {
+				for(VotantesCriticaDTO v : critica.getVotantes()) {
+					if(v.getVotante().equals(this.getMail())) {
+						if(v.getVoto().equals("dislike")) {
+							return false;
+						}
+						else {
+							critica.lessLike();
+							critica.addDislike();
+							
+						}
+					}
+				}
+				CriticaDAO Like = new CriticaDAO();
+				Like.updateCritica(critica);
+				Like.removeVotanteCritica(this.getMail(), id);
+				Like.addVotanteCritica(this.getMail(), id, "dislike");
+				return true;	
+			}				
 		}	
-		return false;
+		return false;	
 	}
 	
 	public ArrayList<String> requestWriters(){
