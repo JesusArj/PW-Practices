@@ -59,7 +59,7 @@ public class UsuariosView
 	        	System.out.println("Estos son sus datos actuales:");
 	        	UserManager managerUser = new UserManager();
 	        	ArrayList<String> user = managerUser.readUser(this.getMail());
-	        	System.out.println("	Mail : " + user.get(2));
+	        	System.out.println("	Mail : " + user.get(0));
 	        	System.out.println("	Name : " + user.get(1));
 	        	System.out.println("	Username : " + user.get(2)); 
 	        	System.out.println("IMPORTANTE: Si hay un valor que NO desee actualizar, escriba su valor actual");
