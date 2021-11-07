@@ -16,7 +16,9 @@ CREATE TABLE Criticas (
   puntuacion int(9) NOT NULL, 
   titulo varchar(99) NOT NULL,
   resena varchar(250) NOT NULL, 
-  mail varchar(99) NULL,
+  mail varchar(99) NOT NULL,
+  like int(9) NOT NULL,
+  dislike int(9) NOT NULL,
   PRIMARY KEY (id),
   CONSTRAINT UC_Critica UNIQUE (titulo, id),
   CONSTRAINT fk_Mail FOREIGN KEY (mail) REFERENCES Usuarios (mail)
@@ -25,7 +27,7 @@ CREATE TABLE Criticas (
 CREATE TABLE VotantesCriticas (
   mail varchar(99) NOT NULL,
   id int(6) NOT NULL,
-  voto int(1) NOT NULL, 
+  voto varchar(30) NOT NULL, 
   PRIMARY KEY (mail),
   CONSTRAINT UC_VotanteCritica UNIQUE (mail),
   CONSTRAINT fk_MailVC FOREIGN KEY (mail) REFERENCES Usuarios (mail),
