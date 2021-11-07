@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.Random;
 
 import business.DTOs.CriticaDTO;
 import business.DTOs.VotantesCriticaDTO;
@@ -11,6 +12,43 @@ import data.common.DBConnection;
 
 public class CriticaDAO {
 
+	
+	private boolean existIdCritica(int id)
+	{
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("existIDCriticas");
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			while (rs.next())
+			{
+				if(Integer.parseInt(rs.getString("id"))==id)
+				{
+					return true; 
+				}
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return false; 
+	}
+	
+	public int generarIDCritica()
+	{
+		Random r = new Random();
+		int id = r.nextInt(99999)+1; 
+		if (existIdCritica(id) == true)
+		{
+			generarIDCritica();
+		}
+		return id;
+	}
+	
 	public void createCritica(CriticaDTO newCritica)
 	{
 		DBConnection dbConnection = new DBConnection();

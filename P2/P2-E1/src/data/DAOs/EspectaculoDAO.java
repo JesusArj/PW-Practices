@@ -15,9 +15,231 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Properties;
+import java.util.Random;
 
 public class EspectaculoDAO {
 
+	private boolean existIdPunt(int id)
+	{
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("existIDEP");
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			while (rs.next())
+			{
+				if(Integer.parseInt(rs.getString("id"))==id)
+				{
+					return true; 
+				}
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return false; 
+	}
+	
+	private boolean existIdMult(int id)
+	{
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("existIDEM");
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			while (rs.next())
+			{
+				if(Integer.parseInt(rs.getString("id"))==id)
+				{
+					return true; 
+				}
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return false; 
+	}
+	
+	private boolean existIdTemp(int id)
+	{
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("existIDET");
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			while (rs.next())
+			{
+				if(Integer.parseInt(rs.getString("id"))==id)
+				{
+					return true; 
+				}
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return false; 
+	}
+
+	private boolean existIdFecha(int id)
+	{
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("existIDFecha");
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			while (rs.next())
+			{
+				if(Integer.parseInt(rs.getString("id"))==id)
+				{
+					return true; 
+				}
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return false; 
+	}
+
+	private boolean existIdMultFechas(int id)
+	{
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("existIDMF");
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			while (rs.next())
+			{
+				if(Integer.parseInt(rs.getString("id"))==id)
+				{
+					return true; 
+				}
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return false; 
+	}
+
+	private boolean existIdPases(int id)
+	{
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("existIDPases");
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			while (rs.next())
+			{
+				if(Integer.parseInt(rs.getString("id"))==id)
+				{
+					return true; 
+				}
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return false; 
+	}
+	
+	public int generarIdPases()
+	{
+		
+		Random r = new Random();
+		int id = r.nextInt(99999)+1; 
+		if (existIdPases(id) == true)
+		{
+			generarIdPases();
+		}
+		return id;
+	}
+	
+	public int generarIDMultFechas()
+	{
+		
+		Random r = new Random();
+		int id = r.nextInt(99999)+1; 
+		if (existIdMultFechas(id) == true)
+		{
+			generarIDMultFechas();
+		}
+		return id;
+	}
+	
+	public int generarIDFecha()
+	{
+		
+		Random r = new Random();
+		int id = r.nextInt(99999)+1; 
+		if (existIdFecha(id) == true)
+		{
+			generarIDFecha();
+		}
+		return id;
+	}
+	
+	public int generarIDMult()
+	{
+		
+		Random r = new Random();
+		int id = r.nextInt(99999)+1; 
+		if (existIdMult(id) == true)
+		{
+			generarIDMult();
+		}
+		return id;
+	}
+
+	public int generarIDPunt()
+	{
+		Random r = new Random();
+		int id = r.nextInt(99999)+1; 
+		if (existIdPunt(id) == true)
+		{
+			generarIDPunt();
+		}
+		return id;
+	}
+	
+	public int generarIDTemp()
+	{
+		
+		Random r = new Random();
+		int id = r.nextInt(99999)+1; 
+		if (existIdTemp(id) == true)
+		{
+			generarIDTemp();
+		}
+		return id;
+	}
+	
 	public void createEspectaculoPuntual(EspectaculoPuntDTO newPunt) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
@@ -713,9 +935,8 @@ public class EspectaculoDAO {
 					LocalDateTime fechaFinal = LocalDateTime.parse(fecha, formatter);
 					listPases.add(new PasesDTO(Integer.parseInt(idf), fechaInicio, diaSemana, fechaFinal));
 				} 
-				listETs.add(new EspectaculoTempDTO(Integer.parseInt(ident), titulo, categoria, descripcion, Integer.parseInt(localidades), Integer.parseInt(localidadesvendidas), null, null, listPases));
+				listETs.add(new EspectaculoTempDTO(Integer.parseInt(ident), titulo, categoria, descripcion, Integer.parseInt(localidades), Integer.parseInt(localidadesvendidas),listPases));
 			}
-
 			if (stmt != null){ 
 				stmt.close(); 
 			}
@@ -727,6 +948,5 @@ public class EspectaculoDAO {
 		}
 		return listETs;
 	}
-	
 }
 
