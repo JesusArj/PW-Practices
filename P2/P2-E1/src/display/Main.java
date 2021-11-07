@@ -14,38 +14,38 @@ public class Main
 		String opc = "1";
 		while(opc.equals("1") || opc.equals("2") || opc.equals("3")) {
 			System.out.println("Bienvenido a nuestro sistema.");
-		    System.out.println("Para ir a gestion de usuario, pulse 1.");
-		    System.out.println("Para ir a gestion de criticas, pulse 2.");
-		    System.out.println("Para ir a gestion de espectaculos, pulse 3.");
-		    System.out.println("Para salir del menu, pulse cualquier otra tecla.");
+		   	System.out.println("Para ir a gestion de usuario, pulse 1.");
+		   	System.out.println("Para ir a gestion de criticas, pulse 2.");
+		   	System.out.println("Para ir a gestion de espectaculos, pulse 3.");
+		   	System.out.println("Para salir del menu, pulse cualquier otra tecla.");
 		    
-	        BufferedReader buf = new BufferedReader(new InputStreamReader(System.in));
-	        try 
-	        {
-				opc = buf.readLine();
-			} 
-	        catch (IOException e) 
-	        {
-				e.printStackTrace();
+			BufferedReader buf = new BufferedReader(new InputStreamReader(System.in));
+			try 
+			{
+					opc = buf.readLine();
+				} 
+			catch (IOException e) 
+			{
+					e.printStackTrace();
+				}
+
+			if("1".equals(opc)) 
+				{ 
+				UsuariosView userView = new UsuariosView(mail);
+				userView.userMenu();
 			}
-	        
-	        if("1".equals(opc)) 
+			else if("2".equals(opc))
 			{ 
-	        	UsuariosView userView = new UsuariosView(mail);
-	        	userView.userMenu();
-	        }
-	        else if("2".equals(opc))
-	        { 
-	        	CriticasView criticasView = new CriticasView(mail);
-	        	criticasView.CriticaMenu();
-	        }
-	        else if("3".equals(opc))
-	        { 
-	        	/* TODO
-	        	EspectaculosView espView = new EspectaculosView(mail);
-	        	espView.EspectaculoMenu();
-	        	*/
-	        }
+				CriticasView criticasView = new CriticasView(mail);
+				criticasView.CriticaMenu();
+			}
+			else if("3".equals(opc))
+			{ 
+
+				EspectaculosView espView = new EspectaculosView();
+				espView.EspectaculoMenu();
+
+			}
 		}
 	}
 }
