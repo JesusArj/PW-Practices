@@ -7,7 +7,7 @@ public class EspectaculoMultDTO extends EspectaculoDTO{
 		public EspectaculoMultDTO() {
 			
 		}	
-		public EspectaculoMultDTO(int id, String titulo, String categoria,String descripcion, int localidades_vendida, ArrayList<FechasDTO> fechasE) {
+		public EspectaculoMultDTO(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendida, ArrayList<FechasDTO> fechasE) {
 			super(id,titulo,categoria,descripcion); 
 			this.fechas = fechasE; 
 		}	

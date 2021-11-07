@@ -1,25 +1,20 @@
 package business.DTOs;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class EspectaculoTempDTO extends EspectaculoDTO{
-	private LocalDateTime fechaInicio;
-	private LocalDateTime fechaFinal;
-	private ArrayList<PasesDTO> fechas;
+	private ArrayList<PasesDTO> pases;
 	
 	public EspectaculoTempDTO() {
 		
 	}
-	public EspectaculoTempDTO(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas,LocalDateTime fechaInicio,LocalDateTime fechaFinal,ArrayList<PasesDTO> fechas ) 
+	public EspectaculoTempDTO(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas,ArrayList<PasesDTO> pases ) 
 	{
 		super(id,titulo,categoria,descripcion); 
-		this.fechaInicio = fechaInicio; 
-		this.fechaFinal = fechaFinal; 
-		this.fechas = fechas; 
+		this.pases = pases; 
 	}
 	
-	public LocalDateTime getFechaInicio() {
+	/*public LocalDateTime getFechaInicio() {
 		return this.fechaInicio;
 	}
 	public void setFechaInicio(LocalDateTime inicio) {
@@ -30,11 +25,11 @@ public class EspectaculoTempDTO extends EspectaculoDTO{
 	}
 	public void setFechaFinal(LocalDateTime fechaFin) {
 		this.fechaFinal = fechaFin;
+	}*/
+	public ArrayList<PasesDTO> getPases() {
+		return this.pases;
 	}
-	public ArrayList<PasesDTO> getFechas() {
-		return this.fechas;
-	}
-	public void setFechas(ArrayList<PasesDTO> fechas) {
-		this.fechas = fechas;
+	public void setPases(ArrayList<PasesDTO> listPases) {
+		this.pases = listPases;
 	}
 }

@@ -4,6 +4,10 @@ import java.time.LocalDateTime;
 
 public class FechasDTO 
 {
+	public FechasDTO(int id, LocalDateTime fecha_date) {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * Clase que implementa una fecha con sus variables privadas y metodos
 	 * @author Developers

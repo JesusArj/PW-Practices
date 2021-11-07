@@ -4,6 +4,10 @@ import java.time.LocalDateTime;
 
 public class PasesDTO 
 {
+	public PasesDTO(int parseInt, LocalDateTime fechaInicio, String diaSemana, LocalDateTime fechaFinal) {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * Clase que implementa un pase de fechas con sus variables privadas y metodos
 	 * @author Developers
@@ -24,6 +28,12 @@ public class PasesDTO
 		private LocalDateTime fechaInicio;
 		
 		/**
+		 * Varaible que almacena el dia y hora de la semana en la que se repetira el espectaculo a lo largo del pase
+		 */
+		
+		private String diaSemana;
+		
+		/**
 		 * Varaible que almacena fecha y hora de fin del espectaculo
 		 */
 		
@@ -39,10 +49,11 @@ public class PasesDTO
 		 * @author Developers
 		 */
 		
-		public PaseDTO(int id, LocalDateTime fechaInicio, LocalDateTime fechaFinal)
+		public PaseDTO(int id, LocalDateTime fechaInicio, String diaSemana, LocalDateTime fechaFinal)
 		{
 			this.id=id; 
 			this.fechaInicio = fechaInicio;
+			this.diaSemana = diaSemana;
 			this.fechaFinal = fechaFinal;
 		}
 		
@@ -68,6 +79,17 @@ public class PasesDTO
 		public LocalDateTime getFechaInicio()
 		{
 			return this.fechaInicio; 
+		}
+		
+		/**
+		 * Getter del dia de la semana en la que se repite el espectaculo
+		 * @return Variable con el dia y hora de la semana que se repetira el espectaculo a lo largo del pase
+		 * @author Developers
+		 */
+		
+		public String getDiaSemana()
+		{
+			return this.diaSemana; 
 		}
 		
 		/**
@@ -103,6 +125,17 @@ public class PasesDTO
 		public void setFechaInicio(LocalDateTime fechaInicio)
 		{
 			this.fechaInicio = fechaInicio; 
+		}
+		
+		/**
+		 * Setter del dia de la semana del pase
+		 * @param fecha Dia y hora de la semana en la que se repetira el espectaculo a lo largo del pase
+		 * @author Developers
+		 */
+		
+		public void setDiaSemana(String diaSemana)
+		{
+			this.diaSemana = diaSemana; 
 		}
 		
 		/**
