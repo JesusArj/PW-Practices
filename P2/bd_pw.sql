@@ -89,6 +89,7 @@ CREATE TABLE  EspTemporada (
 CREATE TABLE  Pases (
   id int(9) NOT NULL,
   fechaInicio datetime NOT NULL,
+  diaSemana varchar(20) NOT NULL,
   fechaFinal datetime NOT NULL, 
   PRIMARY KEY (id)
 );
