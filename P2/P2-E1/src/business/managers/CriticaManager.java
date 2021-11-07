@@ -67,6 +67,13 @@ public class CriticaManager {
 		return requestedCriticas;
 	}
 	
+	public ArrayList<CriticaDTO> requestCriticasExUser(){
+		CriticaDAO requestCritica = new CriticaDAO();
+		ArrayList<CriticaDTO> requestedCriticas = new ArrayList<CriticaDTO>();
+		requestedCriticas = requestCritica.requestCriticasExUser(this.getMail());
+		return requestedCriticas;
+	}
+	
 	public Boolean CriticaExist(int id) {
 		ArrayList<CriticaDTO> Criticas = this.requestCriticas();
 		for(CriticaDTO u : Criticas) {
@@ -82,5 +89,33 @@ public class CriticaManager {
 		return critica;
 	}
 	
+	public Boolean darLike(int id) {
+		if(this.CriticaExist(id)) {
+			CriticaDTO critica = this.requestCritica(id);
+			critica.addLike();
+			CriticaDAO Like = new CriticaDAO();
+			Like.updateCritica(critica);
+			return true;				
+		}	
+		return false;
+	}
+
+	public Boolean darDislike(int id) {
+		if(this.CriticaExist(id)) {
+			CriticaDTO critica = this.requestCritica(id);
+			critica.addDislike();
+			CriticaDAO Like = new CriticaDAO();
+			Like.updateCritica(critica);
+			return true;				
+		}	
+		return false;
+	}
+	
+	public ArrayList<String> requestWriters(){
+		CriticaDAO requestW = new CriticaDAO();
+		ArrayList<String> requestedWriters = new ArrayList<String>();
+		requestedWriters = requestW.requestWriters();
+		return requestedWriters;
+	}
 	
 }
