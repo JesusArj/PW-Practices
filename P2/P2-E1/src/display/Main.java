@@ -23,14 +23,14 @@ public class Main
 			try 
 			{
 					opc = buf.readLine();
-				} 
+			} 
 			catch (IOException e) 
 			{
 					e.printStackTrace();
-				}
+			}
 
 			if("1".equals(opc)) 
-				{ 
+			{ 
 				UsuariosView userView = new UsuariosView(mail);
 				userView.userMenu();
 			}
@@ -41,7 +41,6 @@ public class Main
 			}
 			else if("3".equals(opc))
 			{ 
-
 				EspectaculosView espView = new EspectaculosView();
 				espView.EspectaculoMenu();
 
