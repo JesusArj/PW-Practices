@@ -140,14 +140,20 @@ public class CriticasView {
         		Scanner likeCritica_scan = new Scanner(System.in);
 	        	String like = likeCritica_scan.nextLine();
 	        	if(Integer.parseInt(like) > 0 && Integer.parseInt(like) < cont ) {
-	        		System.out.println("Ha dado like a la critica:");
-	        		CriticaDTO critica = criticasValorables.get(Integer.parseInt(like)-1);
-	        		System.out.println("Titulo : " + critica.getTitle());
-		        	System.out.println("	Autor : " + critica.getMail());
-		        	System.out.println("	Puntuacion : " + critica.getPuntuacion());
-		        	System.out.println("	Resena : " + critica.getResena());
-		        	
-		        	managerCriticaLike.darLike(critica.getId());
+		        	if(managerCriticaLike.darLike(criticasValorables.get(Integer.parseInt(like)-1).getId())) {
+		        		System.out.println("Ha dado like a la critica:");
+		        		CriticaDTO critica = criticasValorables.get(Integer.parseInt(like)-1);
+		        		System.out.println("Titulo : " + critica.getTitle());
+			        	System.out.println("	Autor : " + critica.getMail());
+			        	System.out.println("	Puntuacion : " + critica.getPuntuacion());
+			        	System.out.println("	Resena : " + critica.getResena());		
+		        	}
+		        	else {
+		        		System.out.println("No ha podido dar like");
+		        	}
+	        	}
+	        	else {
+	        		System.out.println("Numero de critica no valido");
 	        	}
         		likeCritica_scan.close();
 	        }
@@ -171,14 +177,20 @@ public class CriticasView {
         		Scanner dislikeCritica_scan = new Scanner(System.in);
 	        	String dislike = dislikeCritica_scan.nextLine();
 	        	if(Integer.parseInt(dislike) > 0 && Integer.parseInt(dislike) < cont ) {
-	        		System.out.println("Ha dado dislike a la critica:");
-	        		CriticaDTO critica = criticasValorables.get(Integer.parseInt(dislike)-1);
-	        		System.out.println("Titulo : " + critica.getTitle());
-		        	System.out.println("	Autor : " + critica.getMail());
-		        	System.out.println("	Puntuacion : " + critica.getPuntuacion());
-		        	System.out.println("	Resena : " + critica.getResena());
-		        	
-		        	managerCriticaLike.darDislike(critica.getId());
+		        	if(managerCriticaLike.darDislike(criticasValorables.get(Integer.parseInt(dislike)-1).getId())) {
+		        		System.out.println("Ha dado dislike a la critica:");
+		        		CriticaDTO critica = criticasValorables.get(Integer.parseInt(dislike)-1);
+		        		System.out.println("Titulo : " + critica.getTitle());
+			        	System.out.println("	Autor : " + critica.getMail());
+			        	System.out.println("	Puntuacion : " + critica.getPuntuacion());
+			        	System.out.println("	Resena : " + critica.getResena());		
+		        	}
+		        	else {
+		        		System.out.println("No ha podido dar dislike");
+		        	}
+	        	}
+	        	else {
+	        		System.out.println("Numero de critica no valido");
 	        	}
         		dislikeCritica_scan.close();
 	        }
