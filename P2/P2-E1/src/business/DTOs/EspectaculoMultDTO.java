@@ -1,21 +1,20 @@
 package business.DTOs;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class EspectaculoMultDTO extends EspectaculoDTO{
-		private ArrayList<LocalDateTime> fechas;
+		private ArrayList<FechasDTO> fechas;
 		
 		public EspectaculoMultDTO() {
 			
 		}	
-		public EspectaculoMultDTO(int id, String titulo, String categoria,String descripcion, int localidades_vendida, ArrayList<LocalDateTime> fechasE) {
+		public EspectaculoMultDTO(int id, String titulo, String categoria,String descripcion, int localidades_vendida, ArrayList<FechasDTO> fechasE) {
 			super(id,titulo,categoria,descripcion); 
 			this.fechas = fechasE; 
 		}	
-		public ArrayList<LocalDateTime> getFechas() {
+		public ArrayList<FechasDTO> getFechas() {
 			return this.fechas;
 		}
-		public void setFechas(ArrayList<LocalDateTime> fechas) {
+		public void setFechas(ArrayList<FechasDTO> fechas) {
 			this.fechas = fechas;
 		}
 		

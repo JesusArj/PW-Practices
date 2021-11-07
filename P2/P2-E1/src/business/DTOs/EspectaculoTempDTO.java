@@ -6,12 +6,12 @@ import java.util.ArrayList;
 public class EspectaculoTempDTO extends EspectaculoDTO{
 	private LocalDateTime fechaInicio;
 	private LocalDateTime fechaFinal;
-	private ArrayList<LocalDateTime> fechas;
+	private ArrayList<PasesDTO> fechas;
 	
 	public EspectaculoTempDTO() {
 		
 	}
-	public EspectaculoTempDTO(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas,LocalDateTime fechaInicio,LocalDateTime fechaFinal,ArrayList<LocalDateTime> fechas ) 
+	public EspectaculoTempDTO(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas,LocalDateTime fechaInicio,LocalDateTime fechaFinal,ArrayList<PasesDTO> fechas ) 
 	{
 		super(id,titulo,categoria,descripcion); 
 		this.fechaInicio = fechaInicio; 
@@ -31,10 +31,10 @@ public class EspectaculoTempDTO extends EspectaculoDTO{
 	public void setFechaFinal(LocalDateTime fechaFin) {
 		this.fechaFinal = fechaFin;
 	}
-	public ArrayList<LocalDateTime> getFechas() {
+	public ArrayList<PasesDTO> getFechas() {
 		return this.fechas;
 	}
-	public void setFechas(ArrayList<LocalDateTime> fechas) {
+	public void setFechas(ArrayList<PasesDTO> fechas) {
 		this.fechas = fechas;
 	}
 }
