@@ -1,7 +1,6 @@
 package business.DTOs;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Clase que implementa una critica con sus variables 
@@ -57,7 +56,7 @@ public class CriticaDTO {
 	 * Array List de cadenas de texto
 	 */
 	
-	private ArrayList<String> votantes; 
+	private ArrayList<VotantesCriticaDTO> votantes; 
 		
 	/**
 	 * Constructor parametrizado de la clase.
@@ -77,7 +76,19 @@ public class CriticaDTO {
 		this.id = id;
 		this.like = 0; 
 		this.dislike = 0;
-		this.votantes= new ArrayList<String>(); 
+		this.votantes= new ArrayList<VotantesCriticaDTO>(); 
+	}
+	
+	public CriticaDTO(String title, float puntuacion, String resena, int id, String mail, int like, int dislike)
+	{
+		this.title = title; 
+		this.mail = mail;
+		this.puntuacion = puntuacion; 
+		this.resena=resena; 
+		this.id = id;
+		this.like = like; 
+		this.dislike = dislike;
+		this.votantes= new ArrayList<VotantesCriticaDTO>(); 
 	}
 	
 	/**
@@ -171,7 +182,7 @@ public class CriticaDTO {
 	 * @author Developers
 	 */
 	
-	public ArrayList<String> getVotantes()
+	public ArrayList<VotantesCriticaDTO> getVotantes()
 	{
 		return this.votantes; 
 	}
@@ -264,6 +275,16 @@ public class CriticaDTO {
 		this.dislike ++; 
 	}
 	
+	public void lessLike()
+	{
+		this.like--;
+	}
+	
+	public void lessDislike() 
+	{
+		this.dislike--;
+	}
+	
 	/**
 	 * Setter del identificador unico de la critica
 	 * @param id Identificador de la critica
@@ -281,7 +302,7 @@ public class CriticaDTO {
 	 * @author Developers
 	 */
 	
-	public void setVotantes(ArrayList<String> votantes)
+	public void setVotantes(ArrayList<VotantesCriticaDTO> votantes)
 	{
 		this.votantes = votantes; 
 	}
