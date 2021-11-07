@@ -7,6 +7,17 @@ import data.DAOs.UserDAO;
 
 public class UserManager {
 	
+	public Boolean login(String mail, String passwd) {
+		if(this.UserExist(mail)) {
+			UserDAO login = new UserDAO();
+			String password = login.requestCredenciales(mail);
+			if(passwd.equals(password)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public Boolean createUser(String mail, String username, String name, String passwd) {	
 		if(!this.UserExist(mail)) {
 			UserDAO newUser = new UserDAO();

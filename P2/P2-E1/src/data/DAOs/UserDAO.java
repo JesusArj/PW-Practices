@@ -32,6 +32,33 @@ public class UserDAO {
 		}
 	}
 	
+	public String requestCredenciales(String mail) {
+		String password = null;
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectPass");
+			query=query.replaceAll("varmail", mail);
+			
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			
+			password = rs.getString("password");
+			
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		
+		return password;
+	}
+	
 	public void deleteUser(String mail) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
