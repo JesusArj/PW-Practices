@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import business.DTOs.CriticaDTO;
+import business.DTOs.VotantesCriticaDTO;
 import data.common.DBConnection;
 
 public class CriticaDAO {
@@ -28,6 +29,88 @@ public class CriticaDAO {
 			System.err.println(e);
 			e.printStackTrace();
 		}
+	}
+	
+	public void addVotanteCritica(String mail, int id, String voto) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("updateVC");
+			query=query.replaceAll("varmail", mail);
+			query=query.replaceAll("varid", Integer.toString(id));
+			query=query.replaceAll("varvoto", voto);
+			Statement stmt = connection.createStatement();
+			stmt.executeQuery(query);
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	
+	public void removeVotantesCritica(int id) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("deleteVC");
+			query=query.replaceAll("varid", Integer.toString(id));
+			Statement stmt = connection.createStatement();
+			stmt.executeQuery(query);
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	
+	public void removeVotanteCritica(String mail, int id) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("deleteUSERVC");
+			query=query.replaceAll("varmail", mail);
+			query=query.replaceAll("varid", Integer.toString(id));
+			Statement stmt = connection.createStatement();
+			stmt.executeQuery(query);
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	
+	public ArrayList<VotantesCriticaDTO> requestVotantes(int id){
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		ArrayList<VotantesCriticaDTO> votantes = new ArrayList<VotantesCriticaDTO>();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectDataVC");
+			query=query.replaceAll("varid", Integer.toString(id));
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			while(rs.next()) {
+				VotantesCriticaDTO votCri = new VotantesCriticaDTO();
+				String votante = rs.getString("mail");
+				String voto = rs.getString("voto");
+				votCri.setId(id);
+				votCri.setVotante(votante);
+				votCri.setVoto(voto);
+				votantes.add(votCri);
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return votantes;
 	}
 	
 	public void updateCritica(CriticaDTO updateCritica)
@@ -58,6 +141,12 @@ public class CriticaDAO {
 			query=query.replaceAll("varid", Integer.toString(id));
 			Statement stmt = connection.createStatement();
 			stmt.executeQuery(query);
+			
+			String query2 = prop.getProperty("deleteVC");
+			query2=query2.replaceAll("varid", Integer.toString(id));
+			Statement stmt2 = connection.createStatement();
+			stmt2.executeQuery(query2);
+			
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -83,13 +172,19 @@ public class CriticaDAO {
 			float puntuacion = Float.parseFloat(rs.getString("puntuacion"));
 			String titulo = rs.getString("titulo");
 			String resena= rs.getString("resena");
-			String mail = rs.getString("mail"); 
+			String mail = rs.getString("mail");
+			int like = rs.getInt("like");
+			int dislike = rs.getInt("dislike");
+			ArrayList<VotantesCriticaDTO> votantes = this.requestVotantes(id);
 			
 			criticaRequest.setMail(mail);
 			criticaRequest.setId(iduser);
 			criticaRequest.settitle(titulo);
 			criticaRequest.setResena(resena);
 			criticaRequest.setPuntuacion(puntuacion); 
+			criticaRequest.setLike(like);
+			criticaRequest.setDislike(dislike);
+			criticaRequest.setVotantes(votantes);
 			
 			if (stmt != null){ 
 				stmt.close(); 
@@ -122,7 +217,12 @@ public class CriticaDAO {
 				String resena = rs.getString("resena");
 				int id = rs.getInt("id");
 				String mail = rs.getString("mail");
-				listCriticas.add(new CriticaDTO(titulo,puntuacion,resena,id,mail));
+				int like = rs.getInt("like");
+				int dislike = rs.getInt("dislike");
+				ArrayList<VotantesCriticaDTO> votantes = this.requestVotantes(id);
+				CriticaDTO critic = new CriticaDTO(titulo,puntuacion,resena,id,mail,like,dislike);
+				critic.setVotantes(votantes);
+				listCriticas.add(critic);
 			}
 
 			if (stmt != null){ 
@@ -155,7 +255,12 @@ public class CriticaDAO {
 				String resena = rs.getString("resena");
 				int id = rs.getInt("id");
 				String mailW = rs.getString("mail");
-				listCriticas.add(new CriticaDTO(titulo,puntuacion,resena,id,mailW));
+				int like = rs.getInt("like");
+				int dislike = rs.getInt("dislike");
+				ArrayList<VotantesCriticaDTO> votantes = this.requestVotantes(id);
+				CriticaDTO critic = new CriticaDTO(titulo,puntuacion,resena,id,mailW,like,dislike);
+				critic.setVotantes(votantes);
+				listCriticas.add(critic);
 			}
 			if (stmt != null){ 
 				stmt.close(); 
