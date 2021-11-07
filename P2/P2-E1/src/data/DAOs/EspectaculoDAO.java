@@ -2,7 +2,11 @@ package data.DAOs;
 
 import business.DTOs.EspectaculoMultDTO;
 import business.DTOs.EspectaculoPuntDTO;
-import business.DTOs.UserDTO;
+import business.DTOs.EspectaculoTempDTO;
+import business.DTOs.FechasDTO;
+import business.DTOs.FechasDTO.FechaDTO;
+import business.DTOs.PasesDTO;
+import business.DTOs.PasesDTO.PaseDTO;
 import data.common.DBConnection;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -29,6 +33,7 @@ public class EspectaculoDAO {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
 			String formattedDateTime = newPunt.getHoraFecha().format(formatter);
 			query=query.replaceAll("varfecha",	formattedDateTime);
+			query=query.replaceAll("varcategoria", newPunt.getCategoria());
 			
 			Statement stmt = connection.createStatement();
 			stmt.executeQuery(query);
@@ -72,6 +77,7 @@ public class EspectaculoDAO {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
 			String formattedDateTime = updatePunt.getHoraFecha().format(formatter);
 			query=query.replaceAll("varfecha", formattedDateTime);
+			query=query.replaceAll("varcategoria", updatePunt.getCategoria());
 			
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
@@ -96,15 +102,16 @@ public class EspectaculoDAO {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 			
-			//TODO: Falta el ID
+			
 			String ident = rs.getString("id");
 			String titulo = rs.getString("titulo");
 			String descripcion = rs.getString("descripcion");
 			String localidades = rs.getString("localidades");
 			String localidadesvendidas = rs.getString("localidadesvendidas");
 			String fecha = rs.getString("fecha");
+			String categoria = rs.getString("categoria");
 			
-			//TODO: Falta el ID
+			epRequest.setId(Integer.parseInt(ident));
 			epRequest.setTitulo(titulo);
 			epRequest.setDescripcion(descripcion);
 			epRequest.setLocalidadesVenta(Integer.parseInt(localidades));
@@ -113,6 +120,7 @@ public class EspectaculoDAO {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 			LocalDateTime fecha_date = LocalDateTime.parse(fecha, formatter);
 			epRequest.setHoraFecha(fecha_date);
+			epRequest.setCategoria(categoria);
 			
 			if (stmt != null){ 
 				stmt.close(); 
@@ -134,7 +142,7 @@ public class EspectaculoDAO {
 		try(InputStream input = new FileInputStream("/src/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
-			String query = prop.getProperty("selectAllEp");
+			String query = prop.getProperty("selectAllEP");
 			
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
@@ -146,7 +154,7 @@ public class EspectaculoDAO {
 				String localidades = rs.getString("localidades");
 				String localidadesvendidas = rs.getString("localidadesvendidas");
 				String fecha = rs.getString("fecha");
-				String categoria = rs.getString("categoria"); //Esto funcionara cuando se meta el valor categoria en la BD
+				String categoria = rs.getString("categoria");
 				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 				LocalDateTime fecha_date = LocalDateTime.parse(fecha, formatter);
 				listEPs.add(new EspectaculoPuntDTO(Integer.parseInt(ident), titulo, categoria, descripcion, Integer.parseInt(localidades), Integer.parseInt(localidadesvendidas), fecha_date)); 
@@ -164,32 +172,23 @@ public class EspectaculoDAO {
 		return listEPs;
 	}
 	
+	
+	//Espectaculo Multiple
 	public void createEspectaculoMultiple(EspectaculoMultDTO newMult) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
 		try(InputStream input = new FileInputStream("/src/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
-			String query = prop.getProperty("createEM"); 
-			// TODO: Falta el ID
+			String query = prop.getProperty("createEM");
+			query=query.replaceAll("varid", Integer.toString(newMult.getID()));
 			query=query.replaceAll("vartitulo", newMult.getTitulo());
 			query=query.replaceAll("vardescripcion", newMult.getDescripcion());
 			query=query.replaceAll("varlocalidades", Integer.toString(newMult.getLocalidadesVenta()));
 			query=query.replaceAll("varlocalidadesvendidas", Integer.toString(newMult.getLocalidadesVendidas())); 
-			
+			query=query.replaceAll("categoria", newMult.getCategoria());
 			Statement stmt = connection.createStatement();
 			stmt.executeQuery(query);
-			
-			//TODO: Query y Query3 en un bucle, por cada fecha que se quiera crear. El tamaño del bucle nos lo dirá el user, con "Cuantas fechas quiere crear"
-			String query2 = prop.getProperty("createFecha");
-			//TODO: ID debe ser random, con el de criticas
-			query=query.replaceAll("varid", /*TODO: ???*/));
-			query=query.replaceAll("varfecha", Integer.toString(newMult.getFechas())); //Pasar de String a LocalDateTime
-			
-			String query3 = prop.getProperty("createMFecha");
-			query=query.replaceAll("varid", Integer.toString(newMult.getID())); // Este debe ser el id del espectaculo
-			query=query.replaceAll("varidF", /*TODO: ???*/)); // Este debe ser el ID de la fecha
-			
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -197,5 +196,537 @@ public class EspectaculoDAO {
 		}
 	}
 
+	public void createFecha(FechaDTO newFecha, int idEspectaculo) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			
+			String query = prop.getProperty("createFecha");
+			query=query.replaceAll("varid", Integer.toString(newFecha.getID()));
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
+			String formattedDateTime = newFecha.getFecha().format(formatter);
+			query=query.replaceAll("varfecha", formattedDateTime);
+			
+			Statement stmt = connection.createStatement();
+			stmt.executeQuery(query);
+			
+			String query2=prop.getProperty("createMFecha");
+			query2=query2.replaceAll("varid", Integer.toString(idEspectaculo));
+			query2=query2.replaceAll("varidfecha",Integer.toString(newFecha.getID()));
+			stmt.executeQuery(query2);
+			
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteEspectaculoMultiple(int id) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("deleteEM");
+			query=query.replaceAll("varid", Integer.toString(id));
+			
+			Statement stmt = connection.createStatement();
+			stmt.executeQuery(query);
+			
+			String query2 = prop.getProperty("deleteFecha");
+			query2 = query2.replaceAll("varid", Integer.toString(id));
+			stmt.executeQuery(query2);
+			
+			String query3 = prop.getProperty("deleteMFecha2");
+			query3 = query3.replaceAll("varid", Integer.toString(id));
+			stmt.executeQuery(query3);
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	public void deleteFecha(FechaDTO deleteFecha) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("deleteFecha");
+			query=query.replaceAll("varid", Integer.toString(deleteFecha.getID()));
+			
+			Statement stmt = connection.createStatement();
+			stmt.executeQuery(query);
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteMFecha(int idfecha) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("deleteMFecha");
+			query=query.replaceAll("varid", Integer.toString(idfecha));
+			
+			Statement stmt = connection.createStatement();
+			stmt.executeQuery(query);
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateEspectaculoMultiple(EspectaculoMultDTO updateMult) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("D:/Descargas/PW-Practices-master/P2/P2-E1/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("updateEM"); 
+			query=query.replaceAll("varid", Integer.toString(updateMult.getID()));
+			query=query.replaceAll("vartitulo", updateMult.getTitulo());
+			query=query.replaceAll("vardescripcion", updateMult.getDescripcion());
+			query=query.replaceAll("varlocalidades", Integer.toString(updateMult.getLocalidadesVenta()));
+			query=query.replaceAll("varlocalidadesvendidas", Integer.toString(updateMult.getLocalidadesVendidas())); 
+			query=query.replaceAll("varcategoria", updateMult.getCategoria());
+			
+			Statement stmt = connection.createStatement();
+			stmt.executeUpdate(query);
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateFecha(FechaDTO updateFecha, int idEspectaculo) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			
+			String query = prop.getProperty("updateFecha");
+			query=query.replaceAll("varid", Integer.toString(idEspectaculo));
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
+			String formattedDateTime = updateFecha.getFecha().format(formatter);
+			query=query.replaceAll("varfecha", formattedDateTime);
+			
+			Statement stmt = connection.createStatement();
+			stmt.executeQuery(query);
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	
+	public EspectaculoMultDTO requestEspectaculoMultiple(int id) {
+		EspectaculoMultDTO emRequest = new EspectaculoMultDTO();
+		ArrayList<FechasDTO> listFechas = new ArrayList<FechasDTO>();
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectDataEM");
+			query=query.replaceAll("varid", Integer.toString(id));
+			
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			
+			String ident = rs.getString("id");
+			String titulo = rs.getString("titulo");
+			String descripcion = rs.getString("descripcion");
+			String localidades = rs.getString("localidades");
+			String localidadesvendidas = rs.getString("localidadesvendidas");
+			String categoria = rs.getString("categoria");
+			
+			emRequest.setId(Integer.parseInt(ident));
+			emRequest.setTitulo(titulo);
+			emRequest.setDescripcion(descripcion);
+			emRequest.setLocalidadesVenta(Integer.parseInt(localidades));
+			emRequest.setLocalidadesVendidas(Integer.parseInt(localidadesvendidas));
+			emRequest.setCategoria(categoria);
+			
+			String query2 = prop.getProperty("selectFechasEspMul");
+			query2 = query2.replaceAll("varid", Integer.toString(id));
+			
+			ResultSet rs2 = (ResultSet) stmt.executeQuery(query);
+			
+			while (rs2.next()) {
+				String idf = rs.getString("id");
+				String fecha = rs.getString("fecha");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+				LocalDateTime fecha_date = LocalDateTime.parse(fecha, formatter);
+				listFechas.add(new FechasDTO(Integer.parseInt(idf), fecha_date));
+			}
+			
+			emRequest.setFechas(listFechas);
+			
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		
+		return emRequest;
+	}
+	
+	public ArrayList<EspectaculoMultDTO> requestEMs(){
+		ArrayList<EspectaculoMultDTO> listEMs = new ArrayList<EspectaculoMultDTO>();
+		ArrayList<FechasDTO> listFechas = new ArrayList<FechasDTO>();
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectAllEM");
+			
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			
+			while (rs.next()) {
+				String ident = rs.getString("id");
+				String titulo = rs.getString("titulo");
+				String descripcion = rs.getString("descripcion");
+				String localidades = rs.getString("localidades");
+				String localidadesvendidas = rs.getString("localidadesvendidas");
+				String categoria = rs.getString("categoria");
+				
+				String query2 = prop.getProperty("selectFechasEspMul");
+				query2 = query2.replaceAll("varid", ident);
+				
+				ResultSet rs2 = (ResultSet) stmt.executeQuery(query);
+				
+				while (rs2.next()) {
+					String idf = rs.getString("id");
+					String fecha = rs.getString("fecha");
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+					LocalDateTime fecha_date = LocalDateTime.parse(fecha, formatter);
+					listFechas.add(new FechasDTO(Integer.parseInt(idf), fecha_date));
+				} 
+				listEMs.add(new EspectaculoMultDTO(Integer.parseInt(ident), titulo, categoria, descripcion, Integer.parseInt(localidades), Integer.parseInt(localidadesvendidas), listFechas));
+			}
+
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return listEMs;
+	}
+	
+	//Espectaculos Temporada
+	
+	public void createEspectaculoTemporada(EspectaculoTempDTO newTemp) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("createET");
+			query=query.replaceAll("varid", Integer.toString(newTemp.getID()));
+			query=query.replaceAll("vartitulo", newTemp.getTitulo());
+			query=query.replaceAll("vardescripcion", newTemp.getDescripcion());
+			query=query.replaceAll("varlocalidades", Integer.toString(newTemp.getLocalidadesVenta()));
+			query=query.replaceAll("varlocalidadesvendidas", Integer.toString(newTemp.getLocalidadesVendidas())); 
+			query=query.replaceAll("categoria", newTemp.getCategoria());
+			Statement stmt = connection.createStatement();
+			stmt.executeQuery(query);
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+
+	public void createPase(PaseDTO newPase, int idEspectaculo) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			
+			String query = prop.getProperty("createPases");
+			query=query.replaceAll("varid", Integer.toString(newPase.getID()));
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
+			String formattedDateTime = newPase.getFechaInicio().format(formatter);
+			query=query.replaceAll("varfechaInicio", formattedDateTime);
+			
+			query = query.replaceAll("diaSemana", newPase.getDiaSemana());
+			
+			formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
+			formattedDateTime = newPase.getFechaFinal().format(formatter);
+			query=query.replaceAll("varfechaFinal", formattedDateTime);
+			
+			Statement stmt = connection.createStatement();
+			stmt.executeQuery(query);
+			
+			String query2=prop.getProperty("createMPase");
+			query2=query2.replaceAll("varid", Integer.toString(idEspectaculo));
+			query2=query2.replaceAll("varidpase",Integer.toString(newPase.getID()));
+			stmt.executeQuery(query2);
+			
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteEspectaculoTemporada(int id) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("deleteET");
+			query=query.replaceAll("varid", Integer.toString(id));
+			
+			Statement stmt = connection.createStatement();
+			stmt.executeQuery(query);
+			
+			String query2 = prop.getProperty("deletePases");
+			query2 = query2.replaceAll("varid", Integer.toString(id));
+			stmt.executeQuery(query2);
+			
+			String query3 = prop.getProperty("deleteMPases2");
+			query3 = query3.replaceAll("varid", Integer.toString(id));
+			stmt.executeQuery(query3);
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	public void deletePase(PaseDTO deletePase) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("deletePase");
+			query=query.replaceAll("varid", Integer.toString(deletePase.getID()));
+			
+			Statement stmt = connection.createStatement();
+			stmt.executeQuery(query);
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	
+	public void deleteTPase(int idpase) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("deleteMPase");
+			query=query.replaceAll("varid", Integer.toString(idpase));
+			
+			Statement stmt = connection.createStatement();
+			stmt.executeQuery(query);
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateEspectaculoTemporada(EspectaculoTempDTO updateTemp) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("D:/Descargas/PW-Practices-master/P2/P2-E1/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("updateET"); 
+			query=query.replaceAll("varid", Integer.toString(updateTemp.getID()));
+			query=query.replaceAll("vartitulo", updateTemp.getTitulo());
+			query=query.replaceAll("vardescripcion", updateTemp.getDescripcion());
+			query=query.replaceAll("varlocalidades", Integer.toString(updateTemp.getLocalidadesVenta()));
+			query=query.replaceAll("varlocalidadesvendidas", Integer.toString(updateTemp.getLocalidadesVendidas())); 
+			query=query.replaceAll("varcategoria", updateTemp.getCategoria());
+			
+			Statement stmt = connection.createStatement();
+			stmt.executeUpdate(query);
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	
+	public void updatePase(PaseDTO updatePase, int idEspectaculo) {
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			
+			String query = prop.getProperty("updatePase");
+			query=query.replaceAll("varid", Integer.toString(idEspectaculo));
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
+			String formattedDateTime = updatePase.getFechaInicio().format(formatter);
+			query=query.replaceAll("varfechaInicio", formattedDateTime);
+			
+			query=query.replaceAll("diaSemana", updatePase.getDiaSemana());
+			
+			formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
+			formattedDateTime = updatePase.getFechaInicio().format(formatter);
+			query=query.replaceAll("varfechaFinal", formattedDateTime);
+			
+			Statement stmt = connection.createStatement();
+			stmt.executeQuery(query);
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+	}
+	
+	public EspectaculoTempDTO requestEspectaculoTemporada(int id) {
+		EspectaculoTempDTO etRequest = new EspectaculoTempDTO();
+		ArrayList<PasesDTO> listPases = new ArrayList<PasesDTO>();
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectDataET");
+			query=query.replaceAll("varid", Integer.toString(id));
+			
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			
+			String ident = rs.getString("id");
+			String titulo = rs.getString("titulo");
+			String descripcion = rs.getString("descripcion");
+			String localidades = rs.getString("localidades");
+			String localidadesvendidas = rs.getString("localidadesvendidas");
+			String categoria = rs.getString("categoria");
+			
+			etRequest.setId(Integer.parseInt(ident));
+			etRequest.setTitulo(titulo);
+			etRequest.setDescripcion(descripcion);
+			etRequest.setLocalidadesVenta(Integer.parseInt(localidades));
+			etRequest.setLocalidadesVendidas(Integer.parseInt(localidadesvendidas));
+			etRequest.setCategoria(categoria);
+			
+			String query2 = prop.getProperty("selectPasesEspTemp");
+			query2 = query2.replaceAll("varid", Integer.toString(id));
+			
+			ResultSet rs2 = (ResultSet) stmt.executeQuery(query);
+			
+			while (rs2.next()) {
+				String idf = rs.getString("id");
+				String fecha = rs.getString("fechaInicio");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+				LocalDateTime fechaInicio = LocalDateTime.parse(fecha, formatter);
+				String diaSemana = rs.getString("diaSemana");
+				fecha = rs.getString("fechaFinal");
+				formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+				LocalDateTime fechaFinal = LocalDateTime.parse(fecha, formatter);
+				listPases.add(new PasesDTO(Integer.parseInt(idf), fechaInicio, diaSemana, fechaFinal));
+			}
+			
+			etRequest.setPases(listPases);
+			
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		
+		return etRequest;
+	}
+	
+	public ArrayList<EspectaculoTempDTO> requestETs(){
+		ArrayList<EspectaculoTempDTO> listETs = new ArrayList<EspectaculoTempDTO>();
+		ArrayList<PasesDTO> listPases = new ArrayList<PasesDTO>();
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectAllET");
+			
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			
+			while (rs.next()) {
+				String ident = rs.getString("id");
+				String titulo = rs.getString("titulo");
+				String descripcion = rs.getString("descripcion");
+				String localidades = rs.getString("localidades");
+				String localidadesvendidas = rs.getString("localidadesvendidas");
+				String categoria = rs.getString("categoria");
+				
+				String query2 = prop.getProperty("selectFechasEspMul");
+				query2 = query2.replaceAll("varid", ident);
+				
+				ResultSet rs2 = (ResultSet) stmt.executeQuery(query);
+				
+				while (rs2.next()) {
+					String idf = rs.getString("id");
+					String fecha = rs.getString("fechaInicio");
+					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+					LocalDateTime fechaInicio = LocalDateTime.parse(fecha, formatter);
+					String diaSemana = rs.getString("diaSemana");
+					fecha = rs.getString("fechaFinal");
+					formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+					LocalDateTime fechaFinal = LocalDateTime.parse(fecha, formatter);
+					listPases.add(new PasesDTO(Integer.parseInt(idf), fechaInicio, diaSemana, fechaFinal));
+				} 
+				listETs.add(new EspectaculoTempDTO(Integer.parseInt(ident), titulo, categoria, descripcion, Integer.parseInt(localidades), Integer.parseInt(localidadesvendidas), null, null, listPases));
+			}
+
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return listETs;
+	}
+	
 }
 
