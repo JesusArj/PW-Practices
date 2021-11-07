@@ -7,6 +7,8 @@ import data.common.DBConnection;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -24,7 +26,9 @@ public class EspectaculoDAO {
 			query=query.replaceAll("vardescripcion", newPunt.getDescripcion());
 			query=query.replaceAll("varlocalidades", Integer.toString(newPunt.getLocalidadesVenta()));
 			query=query.replaceAll("varlocalidadesvendidas", Integer.toString(newPunt.getLocalidadesVendidas())); 
-			query=query.replaceAll("varfecha", newPunt.getHoraFecha()); //TODO:
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
+			String formattedDateTime = newPunt.getHoraFecha().format(formatter);
+			query=query.replaceAll("varfecha",	formattedDateTime);
 			
 			Statement stmt = connection.createStatement();
 			stmt.executeQuery(query);
@@ -65,7 +69,9 @@ public class EspectaculoDAO {
 			query=query.replaceAll("vardescripcion", updatePunt.getDescripcion());
 			query=query.replaceAll("varlocalidades", Integer.toString(updatePunt.getLocalidadesVenta()));
 			query=query.replaceAll("varlocalidadesvendidas", Integer.toString(updatePunt.getLocalidadesVendidas())); 
-			query=query.replaceAll("varfecha", updatePunt.getHoraFecha()); //TODO:
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
+			String formattedDateTime = updatePunt.getHoraFecha().format(formatter);
+			query=query.replaceAll("varfecha", formattedDateTime);
 			
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
@@ -103,7 +109,10 @@ public class EspectaculoDAO {
 			epRequest.setDescripcion(descripcion);
 			epRequest.setLocalidadesVenta(Integer.parseInt(localidades));
 			epRequest.setLocalidadesVendidas(Integer.parseInt(localidadesvendidas));
-			epRequest.setHoraFecha(fecha) //TODO: Pasar de string a LocalDateTime
+			//Pasar de string a LocalDateTime
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			LocalDateTime fecha_date = LocalDateTime.parse(fecha, formatter);
+			epRequest.setHoraFecha(fecha_date);
 			
 			if (stmt != null){ 
 				stmt.close(); 
@@ -137,7 +146,10 @@ public class EspectaculoDAO {
 				String localidades = rs.getString("localidades");
 				String localidadesvendidas = rs.getString("localidadesvendidas");
 				String fecha = rs.getString("fecha");
-				listEPs.add(new EspectaculoPuntDTO()); //TODO: Crear constructor de EP con los valores de arriba.
+				String categoria = rs.getString("categoria"); //Esto funcionara cuando se meta el valor categoria en la BD
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+				LocalDateTime fecha_date = LocalDateTime.parse(fecha, formatter);
+				listEPs.add(new EspectaculoPuntDTO(Integer.parseInt(ident), titulo, categoria, descripcion, Integer.parseInt(localidades), Integer.parseInt(localidadesvendidas), fecha_date)); 
 			}
 
 			if (stmt != null){ 
