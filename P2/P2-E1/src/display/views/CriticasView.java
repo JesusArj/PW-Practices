@@ -122,15 +122,65 @@ public class CriticasView {
 	        }
 	        else if("4".equals(opc)) 
 			{ 
-	        	//TODO mostrar todas las criticas de las que el user no es autor.
-	        	//TODO seleccionar por cont critica a dar like 
-	        	//TODO dar like 
+	        	System.out.println("Estas son todas las criticas que puede valorar");
+	        	CriticaManager managerCriticaLike = new CriticaManager(this.getMail());
+	        	ArrayList<CriticaDTO> criticasValorables = managerCriticaLike.requestCriticasExUser();
+	        	int cont = 1;
+	        	for(CriticaDTO c : criticasValorables) {
+	        		System.out.println("------------------------------------------------");
+	        		System.out.println("Titulo : " + c.getTitle());
+		        	System.out.println("	Autor : " + c.getMail());
+		        	System.out.println("	Puntuacion : " + c.getPuntuacion());
+		        	System.out.println("	Resena : " + c.getResena());
+		        	System.out.println("	Likes : " + c.getLike());
+		        	System.out.println("	Dislikes : " + c.getDislike());
+	        		System.out.println("------------------------------------------------");
+	        	}
+	        	System.out.println("Introduzca el numero de la critica a la que desea dar like");
+        		Scanner likeCritica_scan = new Scanner(System.in);
+	        	String like = likeCritica_scan.nextLine();
+	        	if(Integer.parseInt(like) > 0 && Integer.parseInt(like) < cont ) {
+	        		System.out.println("Ha dado like a la critica:");
+	        		CriticaDTO critica = criticasValorables.get(Integer.parseInt(like)-1);
+	        		System.out.println("Titulo : " + critica.getTitle());
+		        	System.out.println("	Autor : " + critica.getMail());
+		        	System.out.println("	Puntuacion : " + critica.getPuntuacion());
+		        	System.out.println("	Resena : " + critica.getResena());
+		        	
+		        	managerCriticaLike.darLike(critica.getId());
+	        	}
+        		likeCritica_scan.close();
 	        }
 	        else if("5".equals(opc))
 	        { 
-	        	//TODO mostrar todas las criticas de las que el user no es autor.
-	        	//TODO seleccionar por cont critica a dar dislike 
-	        	//TODO dar dislike	
+	        	System.out.println("Estas son todas las criticas que puede valorar");
+	        	CriticaManager managerCriticaLike = new CriticaManager(this.getMail());
+	        	ArrayList<CriticaDTO> criticasValorables = managerCriticaLike.requestCriticasExUser();
+	        	int cont = 1;
+	        	for(CriticaDTO c : criticasValorables) {
+	        		System.out.println("------------------------------------------------");
+	        		System.out.println("Titulo : " + c.getTitle());
+		        	System.out.println("	Autor : " + c.getMail());
+		        	System.out.println("	Puntuacion : " + c.getPuntuacion());
+		        	System.out.println("	Resena : " + c.getResena());
+		        	System.out.println("	Likes : " + c.getLike());
+		        	System.out.println("	Dislikes : " + c.getDislike());
+	        		System.out.println("------------------------------------------------");
+	        	}
+	        	System.out.println("Introduzca el numero de la critica a la que desea dar dislike");
+        		Scanner dislikeCritica_scan = new Scanner(System.in);
+	        	String dislike = dislikeCritica_scan.nextLine();
+	        	if(Integer.parseInt(dislike) > 0 && Integer.parseInt(dislike) < cont ) {
+	        		System.out.println("Ha dado dislike a la critica:");
+	        		CriticaDTO critica = criticasValorables.get(Integer.parseInt(dislike)-1);
+	        		System.out.println("Titulo : " + critica.getTitle());
+		        	System.out.println("	Autor : " + critica.getMail());
+		        	System.out.println("	Puntuacion : " + critica.getPuntuacion());
+		        	System.out.println("	Resena : " + critica.getResena());
+		        	
+		        	managerCriticaLike.darDislike(critica.getId());
+	        	}
+        		dislikeCritica_scan.close();
 	        }
 	        else if("6".equals(opc))
 	        { 
@@ -153,9 +203,29 @@ public class CriticasView {
 	        {
 	        	System.out.println("MOSTRAR CRITICAS DE UN USUARIO");
 	        	System.out.println("Estos son los usuarios que han escrito criticas");
-	        	//TODO mostrar writers.
-	        	//TODO seleccion por cont de writer
-	        	//TODO mostrar criticas de writer
+	        	CriticaManager managerCriticaMostrarCriticasWriter = new CriticaManager(this.getMail());
+	        	ArrayList<String> writers = managerCriticaMostrarCriticasWriter.requestWriters();
+	        	int cont = 1;
+	        	for(String s : writers) {
+	        		System.out.println(cont + ". " + s);
+	        	}
+	        	System.out.println("Introduzca el numero del autor del que quiere ver todas sus criticas");
+        		Scanner writer_scan = new Scanner(System.in);
+	        	String s = writer_scan.nextLine();
+	        	String writer = writers.get(Integer.parseInt(s)-1);
+	        	ArrayList<CriticaDTO> criticasUser = managerCriticaMostrarCriticasWriter.requestCriticas();
+	        	for (CriticaDTO c : criticasUser) {
+	        		if(c.getMail().equals(writer)) {
+	        			System.out.println("------------------------------------------------");
+    	        		System.out.println("Titulo : " + c.getTitle());
+    		        	System.out.println("	Puntuacion : " + c.getPuntuacion());
+    		        	System.out.println("	Resena : " + c.getResena());
+    		        	System.out.println("	Likes : " + c.getLike());
+    		        	System.out.println("	Dislikes : " + c.getDislike());
+    	        		System.out.println("------------------------------------------------");
+	        		}
+	        	}
+	        	writer_scan.close();
 	        }
 	        else
 	        { 
