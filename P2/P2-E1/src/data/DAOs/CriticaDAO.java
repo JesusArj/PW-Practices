@@ -137,5 +137,64 @@ public class CriticaDAO {
 		return listCriticas;
 	}
 
+	public ArrayList<CriticaDTO> requestCriticasExUser(String mail){
+		ArrayList<CriticaDTO> listCriticas = new ArrayList<CriticaDTO>();
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectAllCriticasPermit");
+			query = query.replace("varmail", mail);
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			while (rs.next()) {
+				String titulo = rs.getString("titulo");
+				float puntuacion = rs.getFloat("puntuacion");
+				String resena = rs.getString("resena");
+				int id = rs.getInt("id");
+				String mailW = rs.getString("mail");
+				listCriticas.add(new CriticaDTO(titulo,puntuacion,resena,id,mailW));
+			}
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return listCriticas;
+	}
+
+	public ArrayList<String> requestWriters(){
+		ArrayList<String> listWriters = new ArrayList<String>();
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("/src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectWriters");
+			
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			
+			while (rs.next()) {
+				String writer = rs.getString("mail");
+				listWriters.add(writer);
+			}
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return listWriters;
+	}
 }
 	
