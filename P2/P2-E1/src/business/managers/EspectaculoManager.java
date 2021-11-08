@@ -12,7 +12,6 @@ import data.DAOs.EspectaculoDAO;
 public class EspectaculoManager
 {
 	
-	//TODO: Hacer Funciones PuntExist(), MultExist(), TempExist(). Comprobar si ID existe
 
 	public Boolean PuntExist(int id) {
 		ArrayList<EspectaculoPuntDTO> Punt = this.requestEPs();
@@ -47,7 +46,6 @@ public class EspectaculoManager
 	
 	public Boolean createEspectaculoPunt(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas,LocalDateTime fecha) {
 		EspectaculoDAO newPuntDAO = new EspectaculoDAO();
-		//TODO funcion id;
 		if(!this.PuntExist(id)) 
 		{
 			EspectaculoPuntDTO newPuntDTO = new EspectaculoPuntDTO(id, titulo, categoria, descripcion, localidades_venta, localidades_vendidas, fecha);  
@@ -96,7 +94,6 @@ public class EspectaculoManager
 	
 	public Boolean createEspectaculoMult(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas, ArrayList<FechasDTO> fechas) {
 		EspectaculoDAO newMultDAO = new EspectaculoDAO();
-		//TODO funcion id;
 		if(!this.MultExist(id)) 
 		{
 			EspectaculoMultDTO newMultDTO = new EspectaculoMultDTO(id, titulo, categoria, descripcion, localidades_venta, localidades_vendidas, fechas);  

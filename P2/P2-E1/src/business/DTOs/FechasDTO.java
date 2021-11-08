@@ -1,19 +1,15 @@
 package business.DTOs;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class FechasDTO 
 {
-	public FechasDTO(int id, LocalDateTime fecha_date) {
-		// TODO Auto-generated constructor stub
-	}
-
 	/**
 	 * Clase que implementa una fecha con sus variables privadas y metodos
 	 * @author Developers
 	 */
 
-	public class FechaDTO{
 
 		/**
 		 * Variable que almacena el identificador de la fecha especifica
@@ -27,7 +23,7 @@ public class FechasDTO
 		
 		private LocalDateTime fecha;
 		
-		public FechaDTO(){}
+		public FechasDTO(){}
 		
 		/**
 		 * Constructor parametrizado.
@@ -36,7 +32,7 @@ public class FechasDTO
 		 * @author Developers
 		 */
 		
-		public FechaDTO(int id, LocalDateTime fecha)
+		public FechasDTO(int id, LocalDateTime fecha)
 		{
 			this.id=id; 
 			this.fecha=fecha;
@@ -66,6 +62,13 @@ public class FechasDTO
 			return this.fecha; 
 		}
 		
+		public String getFechaString()
+		{
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
+			String formattedDateTime = this.getFecha().format(formatter);
+			return formattedDateTime; 
+		}
+		
 		
 		//MODIFICADORES
 		
@@ -91,4 +94,3 @@ public class FechasDTO
 			this.fecha = fecha; 
 		}
 	}
-}

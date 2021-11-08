@@ -1,6 +1,7 @@
 package business.DTOs;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class EspectaculoPuntDTO extends EspectaculoDTO {
 	private LocalDateTime horaFecha;
@@ -17,6 +18,12 @@ public EspectaculoPuntDTO(int id, String titulo, String categoria,String descrip
 	
 	public LocalDateTime getHoraFecha() {
 		return this.horaFecha;
+	}
+	public String getHoraFechaString()
+	{
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
+		String formattedDateTime = this.getHoraFecha().format(formatter);
+		return formattedDateTime; 
 	}
 	public void setHoraFecha(LocalDateTime horaFecha) {
 		this.horaFecha = horaFecha;

@@ -2,7 +2,6 @@ package business.DTOs;
 
 
 import java.util.ArrayList;
-import java.util.Random;
 
 
 //TODO: Comprobaciones de que la categoria introducida sea correcta

@@ -4,9 +4,7 @@ import business.DTOs.EspectaculoMultDTO;
 import business.DTOs.EspectaculoPuntDTO;
 import business.DTOs.EspectaculoTempDTO;
 import business.DTOs.FechasDTO;
-import business.DTOs.FechasDTO.FechaDTO;
 import business.DTOs.PasesDTO;
-import business.DTOs.PasesDTO.PaseDTO;
 import data.common.DBConnection;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -418,7 +416,7 @@ public class EspectaculoDAO {
 		}
 	}
 
-	public void createFecha(FechaDTO newFecha, int idEspectaculo) {
+	public void createFecha(FechasDTO newFecha, int idEspectaculo) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
 		try(InputStream input = new FileInputStream("/src/sql.properties")){
@@ -472,7 +470,7 @@ public class EspectaculoDAO {
 			e.printStackTrace();
 		}
 	}
-	public void deleteFecha(FechaDTO deleteFecha) {
+	public void deleteFecha(FechasDTO deleteFecha) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
 		try(InputStream input = new FileInputStream("/src/sql.properties")){
@@ -533,7 +531,7 @@ public class EspectaculoDAO {
 		}
 	}
 	
-	public void updateFecha(FechaDTO updateFecha, int idEspectaculo) {
+	public void updateFecha(FechasDTO updateFecha, int idEspectaculo) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
 		try(InputStream input = new FileInputStream("/src/sql.properties")){
@@ -686,7 +684,7 @@ public class EspectaculoDAO {
 		}
 	}
 
-	public void createPase(PaseDTO newPase, int idEspectaculo) {
+	public void createPase(PasesDTO newPase, int idEspectaculo) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
 		try(InputStream input = new FileInputStream("/src/sql.properties")){
@@ -746,7 +744,7 @@ public class EspectaculoDAO {
 			e.printStackTrace();
 		}
 	}
-	public void deletePase(PaseDTO deletePase) {
+	public void deletePase(PasesDTO deletePase) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
 		try(InputStream input = new FileInputStream("/src/sql.properties")){
@@ -807,7 +805,7 @@ public class EspectaculoDAO {
 		}
 	}
 	
-	public void updatePase(PaseDTO updatePase, int idEspectaculo) {
+	public void updatePase(PasesDTO updatePase, int idEspectaculo) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
 		try(InputStream input = new FileInputStream("/src/sql.properties")){

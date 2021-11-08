@@ -1,20 +1,15 @@
 package business.DTOs;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+/**
+ * Clase que implementa un pase de fechas con sus variables privadas y metodos
+ * @author Developers
+ */
 
 public class PasesDTO 
 {
-	public PasesDTO(int parseInt, LocalDateTime fechaInicio, String diaSemana, LocalDateTime fechaFinal) {
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * Clase que implementa un pase de fechas con sus variables privadas y metodos
-	 * @author Developers
-	 */
-
-	public class PaseDTO{
-
 		/**
 		 * Variable que almacena el identificador del pase especifico
 		 */
@@ -39,7 +34,7 @@ public class PasesDTO
 		
 		private LocalDateTime fechaFinal;
 		
-		public PaseDTO(){}
+		public PasesDTO(){}
 		
 		/**
 		 * Constructor parametrizado.
@@ -49,7 +44,7 @@ public class PasesDTO
 		 * @author Developers
 		 */
 		
-		public PaseDTO(int id, LocalDateTime fechaInicio, String diaSemana, LocalDateTime fechaFinal)
+		public PasesDTO(int id, LocalDateTime fechaInicio, String diaSemana, LocalDateTime fechaFinal)
 		{
 			this.id=id; 
 			this.fechaInicio = fechaInicio;
@@ -81,6 +76,13 @@ public class PasesDTO
 			return this.fechaInicio; 
 		}
 		
+		public String getFechaInicioString()
+		{
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
+			String formattedDateTime = this.getFechaInicio().format(formatter);
+			return formattedDateTime; 
+		}
+		
 		/**
 		 * Getter del dia de la semana en la que se repite el espectaculo
 		 * @return Variable con el dia y hora de la semana que se repetira el espectaculo a lo largo del pase
@@ -101,6 +103,12 @@ public class PasesDTO
 		public LocalDateTime getFechaFinal()
 		{
 			return this.fechaFinal; 
+		}
+		public String getFechaFinalString()
+		{
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
+			String formattedDateTime = this.getFechaFinal().format(formatter);
+			return formattedDateTime; 
 		}
 		
 		//MODIFICADORES
@@ -149,4 +157,3 @@ public class PasesDTO
 			this.fechaFinal = fechaFinal; 
 		}
 	}
-}
