@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import business.DTOs.CriticaDTO;
+import business.DTOs.EspectaculoDTO;
 import business.managers.CriticaManager;
 
 public class CriticasView {
@@ -44,25 +45,132 @@ public class CriticasView {
 	        
 	        if("1".equals(opc)) 
 			{ 
+	        	String tipo = "1";
+	        	Scanner tipo_scan = new Scanner(System.in);
+	        	tipo = tipo_scan.nextLine();
+	    
 	        	System.out.println("CREAR CRITICA");
-	        	String titulo = null;
-	        	Scanner titulo_scan = new Scanner(System.in);
-	        	float puntuacion = 0;
-	        	Scanner puntuacion_scan = new Scanner(System.in);
-	        	String resena = null;
-	        	Scanner resena_scan = new Scanner(System.in);
-	        	System.out.println("Introduzca el titulo del espectaculo");
-	        	titulo = titulo_scan.nextLine();	
-	        	System.out.println("Introduzca la puntuacion que da al espectaculo");
-	        	puntuacion = Float.parseFloat(puntuacion_scan.nextLine());
-	        	System.out.println("Escriba la resena del mismo");
-	        	resena = resena_scan.nextLine();
-
-	        	CriticaManager managerCriticaCreate = new CriticaManager(this.getMail());
-	        	managerCriticaCreate.createCritica(titulo, puntuacion , resena);
-	        	titulo_scan.close();
-	        	puntuacion_scan.close();
-	        	resena_scan.close();    	
+	        	System.out.println("Desea escribir una critica de un espectaculo:");
+	        	System.out.println("1. Puntual");
+	        	System.out.println("2. Temporada");
+	        	System.out.println("3. Multiple");
+	
+	        	if(tipo.equals("1")) {
+	        		CriticaManager managerCriticaCreatePunt = new CriticaManager(this.getMail());
+	        		ArrayList<EspectaculoDTO> esps = managerCriticaCreatePunt.requestEspCriticablesPunt();
+	        		int cont = 1;
+	        		for(EspectaculoDTO e : esps) {
+	        			System.out.println(cont + ". " + e.getTitulo());
+	        			System.out.println(e.getCategoria());
+	        			System.out.println(e.getDescripcion());
+	        		}
+	        		System.out.println("Introduzca el numero del espectaculo a criticar");
+	        		Scanner criticarEsp_scan = new Scanner(System.in);
+		        	String criticarEsp = criticarEsp_scan.nextLine();
+		        	if(Integer.parseInt(criticarEsp) > 0 && Integer.parseInt(criticarEsp) < cont ) {
+		        		int id = esps.get(Integer.parseInt(criticarEsp)).getID();
+		        		String titulo = null;
+			        	Scanner titulo_scan = new Scanner(System.in);
+			        	float puntuacion = 0;
+			        	Scanner puntuacion_scan = new Scanner(System.in);
+			        	String resena = null;
+			        	Scanner resena_scan = new Scanner(System.in);
+			        	System.out.println("Introduzca el titulo de la critica");
+			        	titulo = titulo_scan.nextLine();	
+			        	System.out.println("Introduzca la puntuacion que da al espectaculo");
+			        	puntuacion = Float.parseFloat(puntuacion_scan.nextLine());
+			        	System.out.println("Escriba la resena del mismo");
+			        	resena = resena_scan.nextLine(); 
+			        	managerCriticaCreatePunt.createCritica(titulo, puntuacion , resena, id);
+			        	titulo_scan.close();
+			        	puntuacion_scan.close();
+			        	resena_scan.close(); 
+		        	}
+		        	else {
+		        		System.out.println("Espectaculo no valido");
+		        	}
+		        	tipo_scan.close();
+		        	criticarEsp_scan.close();
+	        	}
+	        	else if (tipo.equals("2")) {
+	        		CriticaManager managerCriticaCreateTemp = new CriticaManager(this.getMail());
+	        		ArrayList<EspectaculoDTO> esps = managerCriticaCreateTemp.requestEspCriticablesTemp();
+	        		int cont = 1;
+	        		for(EspectaculoDTO e : esps) {
+	        			System.out.println(cont + ". " + e.getTitulo());
+	        			System.out.println(e.getCategoria());
+	        			System.out.println(e.getDescripcion());
+	        		}
+	        		System.out.println("Introduzca el numero del espectaculo a criticar");
+	        		Scanner criticarEsp_scan = new Scanner(System.in);
+		        	String criticarEsp = criticarEsp_scan.nextLine();
+		        	if(Integer.parseInt(criticarEsp) > 0 && Integer.parseInt(criticarEsp) < cont ) {
+		        		int id = esps.get(Integer.parseInt(criticarEsp)).getID();
+		        		String titulo = null;
+			        	Scanner titulo_scan = new Scanner(System.in);
+			        	float puntuacion = 0;
+			        	Scanner puntuacion_scan = new Scanner(System.in);
+			        	String resena = null;
+			        	Scanner resena_scan = new Scanner(System.in);
+			        	System.out.println("Introduzca el titulo de la critica");
+			        	titulo = titulo_scan.nextLine();	
+			        	System.out.println("Introduzca la puntuacion que da al espectaculo");
+			        	puntuacion = Float.parseFloat(puntuacion_scan.nextLine());
+			        	System.out.println("Escriba la resena del mismo");
+			        	resena = resena_scan.nextLine(); 
+			        	managerCriticaCreateTemp.createCritica(titulo, puntuacion , resena, id);
+			        	titulo_scan.close();
+			        	puntuacion_scan.close();
+			        	resena_scan.close(); 
+		        	}
+		        	else {
+		        		System.out.println("Espectaculo no valido");
+		        	}
+		        	tipo_scan.close();
+		        	criticarEsp_scan.close();
+	        		
+	        	}
+	        	else if (tipo.equals("3")) {
+	        		CriticaManager managerCriticaCreateMult = new CriticaManager(this.getMail());
+	        		ArrayList<EspectaculoDTO> esps = managerCriticaCreateMult.requestEspCriticablesMult();
+	        		int cont = 1;
+	        		for(EspectaculoDTO e : esps) {
+	        			System.out.println(cont + ". " + e.getTitulo());
+	        			System.out.println(e.getCategoria());
+	        			System.out.println(e.getDescripcion());
+	        		}
+	        		System.out.println("Introduzca el numero del espectaculo a criticar");
+	        		Scanner criticarEsp_scan = new Scanner(System.in);
+		        	String criticarEsp = criticarEsp_scan.nextLine();
+		        	if(Integer.parseInt(criticarEsp) > 0 && Integer.parseInt(criticarEsp) < cont ) {
+		        		int id = esps.get(Integer.parseInt(criticarEsp)).getID();
+		        		String titulo = null;
+			        	Scanner titulo_scan = new Scanner(System.in);
+			        	float puntuacion = 0;
+			        	Scanner puntuacion_scan = new Scanner(System.in);
+			        	String resena = null;
+			        	Scanner resena_scan = new Scanner(System.in);
+			        	System.out.println("Introduzca el titulo de la critica");
+			        	titulo = titulo_scan.nextLine();	
+			        	System.out.println("Introduzca la puntuacion que da al espectaculo");
+			        	puntuacion = Float.parseFloat(puntuacion_scan.nextLine());
+			        	System.out.println("Escriba la resena del mismo");
+			        	resena = resena_scan.nextLine(); 
+			        	managerCriticaCreateMult.createCritica(titulo, puntuacion , resena, id);
+			        	titulo_scan.close();
+			        	puntuacion_scan.close();
+			        	resena_scan.close(); 
+		        	}
+		        	else {
+		        		System.out.println("Espectaculo no valido");
+		        	}
+		        	tipo_scan.close();
+		        	criticarEsp_scan.close();	
+	        	}
+	        	else {
+	        		break;
+	        	}
+	        	tipo_scan.close();
 	        }
 	        else if("2".equals(opc))
 	        { 

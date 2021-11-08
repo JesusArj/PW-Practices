@@ -2,11 +2,13 @@ package data.DAOs;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Random;
 
 import business.DTOs.CriticaDTO;
+import business.DTOs.EspectaculoDTO;
 import business.DTOs.VotantesCriticaDTO;
 import data.common.DBConnection;
 
@@ -17,7 +19,7 @@ public class CriticaDAO {
 	{
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("/src/sql.properties")){
+		try(InputStream input = new FileInputStream("src/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("existIDCriticas");
@@ -53,7 +55,7 @@ public class CriticaDAO {
 	{
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("/src/sql.properties")){
+		try(InputStream input = new FileInputStream("src/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("createCritica");
@@ -74,7 +76,7 @@ public class CriticaDAO {
 	public void addVotanteCritica(String mail, int id, String voto) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("/src/sql.properties")){
+		try(InputStream input = new FileInputStream("src/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("updateVC");
@@ -93,7 +95,7 @@ public class CriticaDAO {
 	public void removeVotantesCritica(int id) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("/src/sql.properties")){
+		try(InputStream input = new FileInputStream("src/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("deleteVC");
@@ -110,7 +112,7 @@ public class CriticaDAO {
 	public void removeVotanteCritica(String mail, int id) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("/src/sql.properties")){
+		try(InputStream input = new FileInputStream("src/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("deleteUSERVC");
@@ -129,7 +131,7 @@ public class CriticaDAO {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
 		ArrayList<VotantesCriticaDTO> votantes = new ArrayList<VotantesCriticaDTO>();
-		try(InputStream input = new FileInputStream("/src/sql.properties")){
+		try(InputStream input = new FileInputStream("src/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectDataVC");
@@ -157,7 +159,7 @@ public class CriticaDAO {
 	{
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("/src/sql.properties")){
+		try(InputStream input = new FileInputStream("src/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("updateCritica");
@@ -177,7 +179,7 @@ public class CriticaDAO {
 	public void deleteCritica(int id) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("/src/sql.properties")){
+		try(InputStream input = new FileInputStream("src/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("deleteCritica");
@@ -202,7 +204,7 @@ public class CriticaDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("/src/sql.properties")){
+		try(InputStream input = new FileInputStream("src/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectDataCritica");
@@ -248,7 +250,7 @@ public class CriticaDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("/src/sql.properties")){
+		try(InputStream input = new FileInputStream("src/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectAllCriticas");
@@ -289,7 +291,7 @@ public class CriticaDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("/src/sql.properties")){
+		try(InputStream input = new FileInputStream("src/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectAllCriticasPermit");
@@ -326,7 +328,7 @@ public class CriticaDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("/src/sql.properties")){
+		try(InputStream input = new FileInputStream("src/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectWriters");
@@ -349,5 +351,111 @@ public class CriticaDAO {
 		}
 		return listWriters;
 	}
+	
+	public ArrayList<EspectaculoDTO> requestEspPuntPast(){
+		ArrayList<EspectaculoDTO> esp = new ArrayList<EspectaculoDTO>();
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectDataEspPuntPast");
+			query = query.replace("varfechaactual", LocalDateTime.now().toString());
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String categoria = rs.getString("categoria");
+				String titulo = rs.getString("titulo");
+				String descripcion = rs.getString("descripcion");
+				
+				EspectaculoDTO espPunt = new EspectaculoDTO(id,titulo,categoria,descripcion);
+				esp.add(espPunt);
+			}
+
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		
+		return esp;
+	}
+
+	public ArrayList<EspectaculoDTO> requestEspMultPast(){
+		ArrayList<EspectaculoDTO> esp = new ArrayList<EspectaculoDTO>();
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectDataEspMultPast");
+			query = query.replace("varfechaactual", LocalDateTime.now().toString());
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String categoria = rs.getString("categoria");
+				String titulo = rs.getString("titulo");
+				String descripcion = rs.getString("descripcion");
+				
+				EspectaculoDTO espMult = new EspectaculoDTO(id,titulo,categoria,descripcion);
+				esp.add(espMult);
+			}
+
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		
+		return esp;
+	}
+	
+	public ArrayList<EspectaculoDTO> requestEspTempPast(){
+		ArrayList<EspectaculoDTO> esp = new ArrayList<EspectaculoDTO>();
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectDataEspTempPast");
+			query = query.replace("varfechaactual", LocalDateTime.now().toString());
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				String categoria = rs.getString("categoria");
+				String titulo = rs.getString("titulo");
+				String descripcion = rs.getString("descripcion");
+				
+				EspectaculoDTO espTemp = new EspectaculoDTO(id,titulo,categoria,descripcion);
+				esp.add(espTemp);
+			}
+
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		
+		return esp;
+	}
+
 }
 	

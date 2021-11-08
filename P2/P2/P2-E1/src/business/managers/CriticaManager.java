@@ -2,6 +2,7 @@ package business.managers;
 
 import java.util.ArrayList;
 import business.DTOs.CriticaDTO;
+import business.DTOs.EspectaculoDTO;
 import business.DTOs.VotantesCriticaDTO;
 import data.DAOs.CriticaDAO;
 	
@@ -17,7 +18,28 @@ public class CriticaManager {
 		return this.mail;
 	}
 	
-	public Boolean createCritica(String titulo, float puntuacion, String resena,String mail, int idEsp) {
+	public ArrayList<EspectaculoDTO> requestEspCriticablesPunt(){
+		ArrayList<EspectaculoDTO> espectaculos = new ArrayList<EspectaculoDTO>();
+		CriticaDAO requestEsp = new CriticaDAO();
+		espectaculos = requestEsp.requestEspPuntPast();
+		return espectaculos;
+	}
+	
+	public ArrayList<EspectaculoDTO> requestEspCriticablesMult(){
+		ArrayList<EspectaculoDTO> espectaculos = new ArrayList<EspectaculoDTO>();
+		CriticaDAO requestEsp = new CriticaDAO();
+		espectaculos = requestEsp.requestEspMultPast();
+		return espectaculos;
+	}
+	
+	public ArrayList<EspectaculoDTO> requestEspCriticablesTemp(){
+		ArrayList<EspectaculoDTO> espectaculos = new ArrayList<EspectaculoDTO>();
+		CriticaDAO requestEsp = new CriticaDAO();
+		espectaculos = requestEsp.requestEspTempPast();
+		return espectaculos;
+	}
+	
+	public Boolean createCritica(String titulo, float puntuacion, String resena, int idEsp) {
 		CriticaDAO newCritica = new CriticaDAO();
 			CriticaDTO newCriticaDTO = new CriticaDTO(titulo,puntuacion,resena,this.getMail(), idEsp);  
 			newCritica.createCritica(newCriticaDTO);	
