@@ -75,6 +75,7 @@ public class CriticasView {
 			        	Scanner puntuacion_scan = new Scanner(System.in);
 			        	String resena = null;
 			        	Scanner resena_scan = new Scanner(System.in);
+			        	System.out.println("Va a criticar: " + esps.get(Integer.parseInt(criticarEsp)).getTitulo());
 			        	System.out.println("Introduzca el titulo de la critica");
 			        	titulo = titulo_scan.nextLine();	
 			        	System.out.println("Introduzca la puntuacion que da al espectaculo");
@@ -112,6 +113,7 @@ public class CriticasView {
 			        	Scanner puntuacion_scan = new Scanner(System.in);
 			        	String resena = null;
 			        	Scanner resena_scan = new Scanner(System.in);
+			        	System.out.println("Va a criticar: " + esps.get(Integer.parseInt(criticarEsp)).getTitulo());
 			        	System.out.println("Introduzca el titulo de la critica");
 			        	titulo = titulo_scan.nextLine();	
 			        	System.out.println("Introduzca la puntuacion que da al espectaculo");
@@ -150,6 +152,7 @@ public class CriticasView {
 			        	Scanner puntuacion_scan = new Scanner(System.in);
 			        	String resena = null;
 			        	Scanner resena_scan = new Scanner(System.in);
+			        	System.out.println("Va a criticar: " + esps.get(Integer.parseInt(criticarEsp)).getTitulo());
 			        	System.out.println("Introduzca el titulo de la critica");
 			        	titulo = titulo_scan.nextLine();	
 			        	System.out.println("Introduzca la puntuacion que da al espectaculo");
@@ -181,6 +184,7 @@ public class CriticasView {
 	        		System.out.println("------------------------------------------------");
 	        		System.out.println("Titulo : " + c.getTitle());
 		        	System.out.println("	Autor : " + c.getMail());
+	        		System.out.println("	Espectaculo : " + managerCriticaReadAll.selectTituloEsp(c.getId()));
 		        	System.out.println("	Puntuacion : " + c.getPuntuacion());
 		        	System.out.println("	Resena : " + c.getResena());
 		        	System.out.println("	Likes : " + c.getLike());
@@ -199,6 +203,7 @@ public class CriticasView {
 	        			if(c.getMail().equals(this.getMail())) {
 	        				System.out.println("------------------------------------------------");
 	    	        		System.out.println(cont + " Titulo : " + c.getTitle());
+	    	        		System.out.println("	Espectaculo : " + managerCriticaMostrarDelUser.selectTituloEsp(c.getId()));
 	    		        	System.out.println("	Puntuacion : " + c.getPuntuacion());
 	    		        	System.out.println("	Resena : " + c.getResena());
 	    		        	System.out.println("	Likes : " + c.getLike());
@@ -237,6 +242,7 @@ public class CriticasView {
 	        		System.out.println("------------------------------------------------");
 	        		System.out.println("Titulo : " + c.getTitle());
 		        	System.out.println("	Autor : " + c.getMail());
+	        		System.out.println("	Espectaculo : " + managerCriticaLike.selectTituloEsp(c.getId()));
 		        	System.out.println("	Puntuacion : " + c.getPuntuacion());
 		        	System.out.println("	Resena : " + c.getResena());
 		        	System.out.println("	Likes : " + c.getLike());
@@ -252,6 +258,7 @@ public class CriticasView {
 		        		CriticaDTO critica = criticasValorables.get(Integer.parseInt(like)-1);
 		        		System.out.println("Titulo : " + critica.getTitle());
 			        	System.out.println("	Autor : " + critica.getMail());
+		        		System.out.println("	Espectaculo : " + managerCriticaLike.selectTituloEsp(critica.getId()));
 			        	System.out.println("	Puntuacion : " + critica.getPuntuacion());
 			        	System.out.println("	Resena : " + critica.getResena());		
 		        	}
@@ -274,6 +281,7 @@ public class CriticasView {
 	        		System.out.println("------------------------------------------------");
 	        		System.out.println("Titulo : " + c.getTitle());
 		        	System.out.println("	Autor : " + c.getMail());
+	        		System.out.println("	Espectaculo : " + managerCriticaLike.selectTituloEsp(c.getId()));
 		        	System.out.println("	Puntuacion : " + c.getPuntuacion());
 		        	System.out.println("	Resena : " + c.getResena());
 		        	System.out.println("	Likes : " + c.getLike());
@@ -289,6 +297,7 @@ public class CriticasView {
 		        		CriticaDTO critica = criticasValorables.get(Integer.parseInt(dislike)-1);
 		        		System.out.println("Titulo : " + critica.getTitle());
 			        	System.out.println("	Autor : " + critica.getMail());
+		        		System.out.println("	Espectaculo : " + managerCriticaLike.selectTituloEsp(critica.getId()));
 			        	System.out.println("	Puntuacion : " + critica.getPuntuacion());
 			        	System.out.println("	Resena : " + critica.getResena());		
 		        	}
@@ -310,6 +319,7 @@ public class CriticasView {
         			if(c.getMail().equals(this.getMail())) {
         				System.out.println("------------------------------------------------");
     	        		System.out.println("Titulo : " + c.getTitle());
+    	        		System.out.println("	Espectaculo : " + managerCriticaMostrarDelUser.selectTituloEsp(c.getId()));
     		        	System.out.println("	Puntuacion : " + c.getPuntuacion());
     		        	System.out.println("	Resena : " + c.getResena());
     		        	System.out.println("	Likes : " + c.getLike());
@@ -337,6 +347,7 @@ public class CriticasView {
 	        		if(c.getMail().equals(writer)) {
 	        			System.out.println("------------------------------------------------");
     	        		System.out.println("Titulo : " + c.getTitle());
+    	        		System.out.println("	Espectaculo : " + managerCriticaMostrarCriticasWriter.selectTituloEsp(c.getId()));
     		        	System.out.println("	Puntuacion : " + c.getPuntuacion());
     		        	System.out.println("	Resena : " + c.getResena());
     		        	System.out.println("	Likes : " + c.getLike());

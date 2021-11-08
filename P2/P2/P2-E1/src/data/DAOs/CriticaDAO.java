@@ -14,6 +14,29 @@ import data.common.DBConnection;
 
 public class CriticaDAO {
 
+	public String selectTituloEsp(int id) {
+		String titulo = null;
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectTituloEsp");
+			query=query.replaceAll("varid", Integer.toString(id));
+			
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			titulo = rs.getString("titulo");
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return titulo;
+	}
 	
 	private boolean existIdCritica(int id)
 	{

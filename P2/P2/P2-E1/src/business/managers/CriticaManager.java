@@ -160,6 +160,12 @@ public class CriticaManager {
 		return false;	
 	}
 	
+	public String selectTituloEsp(int id) {
+		CriticaDAO selectTituloEsp = new CriticaDAO();
+		String titulo = selectTituloEsp.selectTituloEsp(id);
+		return titulo;
+	}
+	
 	public ArrayList<String> requestWriters(){
 		CriticaDAO requestW = new CriticaDAO();
 		ArrayList<String> requestedWriters = new ArrayList<String>();
