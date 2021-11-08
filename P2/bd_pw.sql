@@ -19,6 +19,7 @@ CREATE TABLE Criticas (
   mail varchar(99) NOT NULL,
   like int(9) NOT NULL,
   dislike int(9) NOT NULL,
+  idEsp int(9) NOT NULL,
   PRIMARY KEY (id),
   CONSTRAINT UC_Critica UNIQUE (titulo, id),
   CONSTRAINT fk_Mail FOREIGN KEY (mail) REFERENCES Usuarios (mail)
