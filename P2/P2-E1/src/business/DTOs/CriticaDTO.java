@@ -57,7 +57,13 @@ public class CriticaDTO {
 	 */
 	
 	private ArrayList<VotantesCriticaDTO> votantes; 
-		
+
+	/**
+	 * ID del espectaculo asociado a la critica
+	 */
+	
+	private int idEsp; 
+
 	/**
 	 * Constructor parametrizado de la clase.
 	 * @param title Titulo de la critica
@@ -67,7 +73,7 @@ public class CriticaDTO {
 	 */
 	
 
-	public CriticaDTO(String title, float puntuacion, String resena, int id, String mail)
+	public CriticaDTO(String title, float puntuacion, String resena, int id, String mail, int idEsp)
 	{
 		this.title = title; 
 		this.mail = mail;
@@ -76,10 +82,11 @@ public class CriticaDTO {
 		this.id = id;
 		this.like = 0; 
 		this.dislike = 0;
+		this.idEsp = idEsp;
 		this.votantes= new ArrayList<VotantesCriticaDTO>(); 
 	}
 	
-	public CriticaDTO(String title, float puntuacion, String resena, int id, String mail, int like, int dislike)
+	public CriticaDTO(String title, float puntuacion, String resena, int id, String mail, int like, int dislike, int idEsp)
 	{
 		this.title = title; 
 		this.mail = mail;
@@ -88,6 +95,7 @@ public class CriticaDTO {
 		this.id = id;
 		this.like = like; 
 		this.dislike = dislike;
+		this.idEsp = idEsp;
 		this.votantes= new ArrayList<VotantesCriticaDTO>(); 
 	}
 	
@@ -187,6 +195,17 @@ public class CriticaDTO {
 		return this.votantes; 
 	}
 	
+	/**
+	 * Getter del identificador del espectaculo asociado a la critica
+	 * @return ID del espectaculo que se critica
+	 * @author Developers
+	 */
+	
+	public int getIdEsp()
+	{
+		return this.idEsp; 
+	}
+
 	//SETTERS 
 	
 	/**
@@ -307,4 +326,14 @@ public class CriticaDTO {
 		this.votantes = votantes; 
 	}
 	
+	/**
+	 * Setter del valor del Identificador del espectaculo asociado a la crítica
+	 * @param idEsp Identficador del espectaculo
+	 * @author Developers
+	 */
+	
+	public void setIdEsp(int idEsp)
+	{
+		this.idEsp = idEsp; 
+	}
 }

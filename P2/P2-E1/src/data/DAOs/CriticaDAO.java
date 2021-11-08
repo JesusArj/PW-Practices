@@ -60,6 +60,8 @@ public class CriticaDAO {
 			query=query.replaceAll("varid", Integer.toString(newCritica.getId()));
 			query=query.replaceAll("vartitulo", newCritica.getTitle());
 			query=query.replaceAll("varresena", newCritica.getResena()); 
+			query=query.replaceAll("varmail", newCritica.getMail());
+			quey=query.replaceAll("varidesp", Integer.toString(newCritica.getIdEsp()));
 			Statement stmt = connection.createStatement();
 			stmt.executeQuery(query);
 			dbConnection.closeConnection();
@@ -160,7 +162,10 @@ public class CriticaDAO {
 			prop.load(input);
 			String query = prop.getProperty("updateCritica");
 			query=query.replaceAll("vartitulo", updateCritica.getTitle());
-			query=query.replaceAll("varresena", updateCritica.getResena()); 
+			query=query.replaceAll("varresena", updateCritica.getResena());
+			query=query.replaceAll("varresena", updateCritica.getResena());
+			query=query.replaceAll("varlike", updateCritica.getLike());
+			query=query.replaceAll("vardislike", updateCritica.getDislike());
 			Statement stmt = connection.createStatement();
 			stmt.executeQuery(query);
 			dbConnection.closeConnection();
@@ -212,9 +217,10 @@ public class CriticaDAO {
 			String resena= rs.getString("resena");
 			String mail = rs.getString("mail");
 			int like = rs.getInt("like");
-			int dislike = rs.getInt("dislike");
+			int dislike = Integer.parseInt(rs.getInt("dislike");
 			ArrayList<VotantesCriticaDTO> votantes = this.requestVotantes(id);
-			
+			int idEsp = rs.getString("idEsp";)
+
 			criticaRequest.setMail(mail);
 			criticaRequest.setId(iduser);
 			criticaRequest.settitle(titulo);
@@ -223,7 +229,8 @@ public class CriticaDAO {
 			criticaRequest.setLike(like);
 			criticaRequest.setDislike(dislike);
 			criticaRequest.setVotantes(votantes);
-			
+			criticaRequest.setIdEsp(idEsp);
+
 			if (stmt != null){ 
 				stmt.close(); 
 			}
@@ -258,6 +265,8 @@ public class CriticaDAO {
 				int like = rs.getInt("like");
 				int dislike = rs.getInt("dislike");
 				ArrayList<VotantesCriticaDTO> votantes = this.requestVotantes(id);
+				int idEsp = rs.getString("idEsp");
+				
 				CriticaDTO critic = new CriticaDTO(titulo,puntuacion,resena,id,mail,like,dislike);
 				critic.setVotantes(votantes);
 				listCriticas.add(critic);

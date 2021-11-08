@@ -17,24 +17,24 @@ public class CriticaManager {
 		return this.mail;
 	}
 	
-	public Boolean createCritica(String titulo, float puntuacion, String resena) {
+	public Boolean createCritica(String titulo, float puntuacion, String resena, int idEsp) {
 		CriticaDAO newCritica = new CriticaDAO();
 		//TODO funcion id;
 		int id = 0;
 		if(!this.CriticaExist(id)) {
-			CriticaDTO newCriticaDTO = new CriticaDTO(titulo,puntuacion,resena,id,this.getMail());  
+			CriticaDTO newCriticaDTO = new CriticaDTO(titulo,puntuacion,resena,id,this.getMail(),int idEsp);  
 			newCritica.createCritica(newCriticaDTO);	
 			return true;
 		}
 		return false;
 	}
 	
-	public Boolean updateCritica(String titulo, float puntuacion, String resena, String mail, int id) {
+	public Boolean updateCritica(String titulo, float puntuacion, String resena, String mail, int id, int idEsp) {
 			if(this.CriticaExist(id)) {
 				CriticaDTO critica = this.requestCritica(id);
 				if(critica.getMail().equals(this.getMail())) {
 					CriticaDAO newCritica = new CriticaDAO();			
-					CriticaDTO newCriticaDTO = new CriticaDTO(titulo,puntuacion,resena,id,this.getMail());  
+					CriticaDTO newCriticaDTO = new CriticaDTO(titulo,puntuacion,resena,id,this.getMail(), int idEsp);  
 					newCritica.updateCritica(newCriticaDTO);
 				return true;		
 			}
