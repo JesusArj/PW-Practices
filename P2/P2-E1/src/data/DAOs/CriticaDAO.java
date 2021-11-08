@@ -216,7 +216,7 @@ public class CriticaDAO {
 			String titulo = rs.getString("titulo");
 			String resena= rs.getString("resena");
 			String mail = rs.getString("mail");
-			int like = rs.getInt("like");
+			int like = rs.getInt("vlike");
 			int dislike = Integer.parseInt(rs.getInt("dislike");
 			ArrayList<VotantesCriticaDTO> votantes = this.requestVotantes(id);
 			int idEsp = rs.getString("idEsp";)
@@ -262,7 +262,7 @@ public class CriticaDAO {
 				String resena = rs.getString("resena");
 				int id = rs.getInt("id");
 				String mail = rs.getString("mail");
-				int like = rs.getInt("like");
+				int like = rs.getInt("vlike");
 				int dislike = rs.getInt("dislike");
 				ArrayList<VotantesCriticaDTO> votantes = this.requestVotantes(id);
 				int idEsp = rs.getString("idEsp");
@@ -302,7 +302,7 @@ public class CriticaDAO {
 				String resena = rs.getString("resena");
 				int id = rs.getInt("id");
 				String mailW = rs.getString("mail");
-				int like = rs.getInt("like");
+				int like = rs.getInt("vlike");
 				int dislike = rs.getInt("dislike");
 				ArrayList<VotantesCriticaDTO> votantes = this.requestVotantes(id);
 				CriticaDTO critic = new CriticaDTO(titulo,puntuacion,resena,id,mailW,like,dislike);
