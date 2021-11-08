@@ -2,6 +2,7 @@ package display.views;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 import business.managers.CriticaManager;
 import business.managers.EspectaculoManager;
@@ -43,7 +44,6 @@ public class EspectaculosView
 		        		System.out.println("DESCRIPCION: " + manager.requestEPs().get(i).getDescripcion());
 		        		System.out.println("CATEGORIA: " + manager.requestEPs().get(i).getCategoria());
 		        		System.out.println("FECHA " + manager.requestEPs().get(i).getHoraFechaString());
-		        		System.out.println("ID: " + manager.requestEPs().get(i).getID());
 		        		System.out.println("------------------------------------------------------------------------------------");
 		        	}
 		        	for(int i=0; i<manager.requestEMs().size(); i++ )
@@ -59,7 +59,6 @@ public class EspectaculosView
 		        			System.out.println("Fecha " + Integer.toString(countFechas) + ":" + manager.requestEMs().get(i).getFechas().get(j).getFechaString() );
 		        			countFechas++; 
 		        		}
-		        		System.out.println("ID: " + manager.requestEMs().get(i).getID());
 		        		System.out.println("------------------------------------------------------------------------------------");
 		        	}
 		        	for(int i=0; i<manager.requestETs().size(); i++ )
@@ -74,12 +73,11 @@ public class EspectaculosView
 		        		{
 		        			System.out.println(); 
 		        			System.out.println("FECHA " + Integer.toString(countFechas) + ":");
-		        			System.out.println("DÍA: " + manager.requestETs().get(i).getPases().get(j).getDiaSemana());
+		        			System.out.println("Dï¿½A: " + manager.requestETs().get(i).getPases().get(j).getDiaSemana());
 		        			System.out.println("INICIO: " + manager.requestETs().get(i).getPases().get(j).getFechaInicioString());
 		        			System.out.println("FINAL: " + manager.requestETs().get(i).getPases().get(j).getFechaFinalString());
 		        			countFechas++; 
 		        		}
-		        		System.out.println("ID: " + manager.requestETs().get(i).getID());
 		        		System.out.println("------------------------------------------------------------------------------------");
 		        	}
 		        }
@@ -98,7 +96,6 @@ public class EspectaculosView
 			        		System.out.println("DESCRIPCION: " + manager.requestEPs().get(i).getDescripcion());
 			        		System.out.println("CATEGORIA: " + manager.requestEPs().get(i).getCategoria());
 			        		System.out.println("FECHA " + manager.requestEPs().get(i).getHoraFechaString());
-			        		System.out.println("ID: " + manager.requestEPs().get(i).getID());
 			        		System.out.println("------------------------------------------------------------------------------------");
 		        		}
 		        	}
@@ -118,7 +115,6 @@ public class EspectaculosView
 			        			System.out.println("Fecha " + Integer.toString(countFechas) + ":" + manager.requestEMs().get(i).getFechas().get(j).getFechaString() );
 			        			countFechas++; 
 			        		}
-			        		System.out.println("ID: " + manager.requestEMs().get(i).getID());
 			        		System.out.println("------------------------------------------------------------------------------------");
 		        		}
 		        	}
@@ -138,12 +134,11 @@ public class EspectaculosView
 			        		{
 			        			System.out.println(); 
 			        			System.out.println("FECHA " + Integer.toString(countFechas) + ":");
-			        			System.out.println("DÍA: " + manager.requestETs().get(i).getPases().get(j).getDiaSemana());
+			        			System.out.println("Dï¿½A: " + manager.requestETs().get(i).getPases().get(j).getDiaSemana());
 			        			System.out.println("INICIO: " + manager.requestETs().get(i).getPases().get(j).getFechaInicioString());
 			        			System.out.println("FINAL: " + manager.requestETs().get(i).getPases().get(j).getFechaFinalString());
 			        			countFechas++; 
 			        		}
-			        		System.out.println("ID: " + manager.requestETs().get(i).getID());
 			        		System.out.println("------------------------------------------------------------------------------------");
 		        		}
 
@@ -152,7 +147,7 @@ public class EspectaculosView
 		        else if("3".equals(opc))
 		        {
 		        	String category = null;  
-		        	System.out.println("Introduzca categoría: ");
+		        	System.out.println("Introduzca categorï¿½a: ");
 		        	BufferedReader categoria = new BufferedReader(new InputStreamReader(System.in));
 		        	try 
 				    {
@@ -173,7 +168,6 @@ public class EspectaculosView
 			        		System.out.println("DESCRIPCION: " + manager.requestEPs().get(i).getDescripcion());
 			        		System.out.println("CATEGORIA: " + manager.requestEPs().get(i).getCategoria());
 			        		System.out.println("FECHA " + manager.requestEPs().get(i).getHoraFechaString());
-			        		System.out.println("ID: " + manager.requestEPs().get(i).getID());
 			        		System.out.println("------------------------------------------------------------------------------------");
 		        		}
 		        	}
@@ -193,7 +187,6 @@ public class EspectaculosView
 			        			System.out.println("Fecha " + Integer.toString(countFechas) + ":" + manager.requestEMs().get(i).getFechas().get(j).getFechaString() );
 			        			countFechas++; 
 			        		}
-			        		System.out.println("ID: " + manager.requestEMs().get(i).getID());
 			        		System.out.println("------------------------------------------------------------------------------------");
 		        		}
 		        	}
@@ -213,12 +206,11 @@ public class EspectaculosView
 			        		{
 			        			System.out.println(); 
 			        			System.out.println("FECHA " + Integer.toString(countFechas) + ":");
-			        			System.out.println("DÍA: " + manager.requestETs().get(i).getPases().get(j).getDiaSemana());
+			        			System.out.println("Dï¿½A: " + manager.requestETs().get(i).getPases().get(j).getDiaSemana());
 			        			System.out.println("INICIO: " + manager.requestETs().get(i).getPases().get(j).getFechaInicioString());
 			        			System.out.println("FINAL: " + manager.requestETs().get(i).getPases().get(j).getFechaFinalString());
 			        			countFechas++; 
 			        		}
-			        		System.out.println("ID: " + manager.requestETs().get(i).getID());
 			        		System.out.println("------------------------------------------------------------------------------------");
 		        		}
 
@@ -251,7 +243,6 @@ public class EspectaculosView
 			        		System.out.println("DESCRIPCION: " + manager.requestEPs().get(i).getDescripcion());
 			        		System.out.println("CATEGORIA: " + manager.requestEPs().get(i).getCategoria());
 			        		System.out.println("FECHA " + manager.requestEPs().get(i).getHoraFechaString());
-			        		System.out.println("ID: " + manager.requestEPs().get(i).getID());
 			        		System.out.println("------------------------------------------------------------------------------------");
 		        		}
 		        	}
@@ -271,7 +262,6 @@ public class EspectaculosView
 			        			System.out.println("Fecha " + Integer.toString(countFechas) + ":" + manager.requestEMs().get(i).getFechas().get(j).getFechaString() );
 			        			countFechas++; 
 			        		}
-			        		System.out.println("ID: " + manager.requestEMs().get(i).getID());
 			        		System.out.println("------------------------------------------------------------------------------------");
 		        		}
 		        	}
@@ -291,12 +281,11 @@ public class EspectaculosView
 			        		{
 			        			System.out.println(); 
 			        			System.out.println("FECHA " + Integer.toString(countFechas) + ":");
-			        			System.out.println("DÍA: " + manager.requestETs().get(i).getPases().get(j).getDiaSemana());
+			        			System.out.println("Dï¿½A: " + manager.requestETs().get(i).getPases().get(j).getDiaSemana());
 			        			System.out.println("INICIO: " + manager.requestETs().get(i).getPases().get(j).getFechaInicioString());
 			        			System.out.println("FINAL: " + manager.requestETs().get(i).getPases().get(j).getFechaFinalString());
 			        			countFechas++; 
 			        		}
-			        		System.out.println("ID: " + manager.requestETs().get(i).getID());
 			        		System.out.println("------------------------------------------------------------------------------------");
 		        		}
 
@@ -314,7 +303,7 @@ public class EspectaculosView
 			System.out.println("MENU DE ADMINISTRADOR: Gestion de Espectaculos");
 			System.out.println("Para dar de Alta un espectaculo, pulse 1");
 			System.out.println("Para dar de baja de un espectaculo, pulse 2"); // La funcion de dar de baja debe tener dos modos, todas las sesiones, o una en particular
-			System.out.println("Para actualizar la información sobre un espectaculo, pulse 3");
+			System.out.println("Para actualizar la informacion sobre un espectaculo, pulse 3");
 			System.out.println("Para salir del menu, pulse cualquier otra tecla");
 			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		    try 
@@ -328,15 +317,39 @@ public class EspectaculosView
 		        
 			if("1".equals(opc))
 			{
-				
+				String opcEspectaculo = "1"; 
+				Scanner opcEspectaculo_reader = new Scanner(System.in); 
+				while(opcEspectaculo.equals("1") || opcEspectaculo.equals("2") || opcEspectaculo.equals("3"))
+				{
+					System.out.println("DAR DE ALTA ESPECTACULO");
+					System.out.println("Si quiere crear un espectaculo temporal, pulse 1");
+					System.out.println("Si quiere crear un espectaculo puntual, pulse 2");
+					System.out.println("Si quiere crear un espectaculo multiple, pulse 3");
+					System.out.println("Para volver, pulse cualquier otra tecla");
+					opcEspectaculo = opcEspectaculo_reader.nextLine(); 
+					if("1".equals(opcEspectaculo))
+					{
+						//crear espectaculo temporal
+					}
+					if("2".equals(opcEspectaculo))
+					{
+						//crear espectaculo puntual
+					}
+					if("3".equals(opcEspectaculo))
+					{
+						//crear espectaculo multiple
+					}
+				}
+				opcEspectaculo_reader.close(); 
 			}
 			else if("2".equals(opc))
 			{
+				System.out.println("DAR DE BAJA ESPECTACULO");
 				
 			}
 			else if("3".equals(opc))
 			{
-				
+				System.out.println("ACTUALIZAR INFORMACIÃ“N DE ESPECTACULO");
 			}
 		}
 

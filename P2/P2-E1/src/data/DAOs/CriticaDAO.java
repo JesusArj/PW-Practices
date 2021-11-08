@@ -57,11 +57,11 @@ public class CriticaDAO {
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("createCritica");
-			query=query.replaceAll("varid", Integer.toString(newCritica.getId()));
+			query=query.replaceAll("varid", Integer.toString(generarIDCritica()));
 			query=query.replaceAll("vartitulo", newCritica.getTitle());
 			query=query.replaceAll("varresena", newCritica.getResena()); 
 			query=query.replaceAll("varmail", newCritica.getMail());
-			quey=query.replaceAll("varidesp", Integer.toString(newCritica.getIdEsp()));
+			query=query.replaceAll("varidesp", Integer.toString(newCritica.getIdEsp()));
 			Statement stmt = connection.createStatement();
 			stmt.executeQuery(query);
 			dbConnection.closeConnection();
@@ -164,8 +164,8 @@ public class CriticaDAO {
 			query=query.replaceAll("vartitulo", updateCritica.getTitle());
 			query=query.replaceAll("varresena", updateCritica.getResena());
 			query=query.replaceAll("varresena", updateCritica.getResena());
-			query=query.replaceAll("varlike", updateCritica.getLike());
-			query=query.replaceAll("vardislike", updateCritica.getDislike());
+			query=query.replaceAll("varlike", Integer.toString(updateCritica.getLike()));
+			query=query.replaceAll("vardislike", Integer.toString(updateCritica.getDislike()));
 			Statement stmt = connection.createStatement();
 			stmt.executeQuery(query);
 			dbConnection.closeConnection();
@@ -217,9 +217,9 @@ public class CriticaDAO {
 			String resena= rs.getString("resena");
 			String mail = rs.getString("mail");
 			int like = rs.getInt("vlike");
-			int dislike = Integer.parseInt(rs.getInt("dislike");
+			int dislike =rs.getInt("dislike");
 			ArrayList<VotantesCriticaDTO> votantes = this.requestVotantes(id);
-			int idEsp = rs.getString("idEsp";)
+			int idEsp = Integer.parseInt(rs.getString("idEsp")); 
 
 			criticaRequest.setMail(mail);
 			criticaRequest.setId(iduser);
@@ -265,9 +265,9 @@ public class CriticaDAO {
 				int like = rs.getInt("vlike");
 				int dislike = rs.getInt("dislike");
 				ArrayList<VotantesCriticaDTO> votantes = this.requestVotantes(id);
-				int idEsp = rs.getString("idEsp");
+				int idEsp = Integer.parseInt(rs.getString("idEsp"));
 				
-				CriticaDTO critic = new CriticaDTO(titulo,puntuacion,resena,id,mail,like,dislike);
+				CriticaDTO critic = new CriticaDTO(titulo,puntuacion,resena,id,mail,like,dislike, idEsp);
 				critic.setVotantes(votantes);
 				listCriticas.add(critic);
 			}
@@ -305,7 +305,8 @@ public class CriticaDAO {
 				int like = rs.getInt("vlike");
 				int dislike = rs.getInt("dislike");
 				ArrayList<VotantesCriticaDTO> votantes = this.requestVotantes(id);
-				CriticaDTO critic = new CriticaDTO(titulo,puntuacion,resena,id,mailW,like,dislike);
+				int idEsp = Integer.parseInt(rs.getString("idEsp"));
+				CriticaDTO critic = new CriticaDTO(titulo,puntuacion,resena,id,mailW,like,dislike, idEsp);
 				critic.setVotantes(votantes);
 				listCriticas.add(critic);
 			}

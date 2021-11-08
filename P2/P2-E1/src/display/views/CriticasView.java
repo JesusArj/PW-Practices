@@ -51,7 +51,6 @@ public class CriticasView {
 	        	Scanner puntuacion_scan = new Scanner(System.in);
 	        	String resena = null;
 	        	Scanner resena_scan = new Scanner(System.in);
-	        
 	        	System.out.println("Introduzca el titulo del espectaculo");
 	        	titulo = titulo_scan.nextLine();	
 	        	System.out.println("Introduzca la puntuacion que da al espectaculo");
@@ -104,7 +103,7 @@ public class CriticasView {
 	        		Scanner deleteCritica_scan = new Scanner(System.in);
 		        	String delete = deleteCritica_scan.nextLine();
 		        	if(Integer.parseInt(delete) > 0 && Integer.parseInt(delete) < cont ) {
-		        		System.out.println("Esta accion es permanente. ¿Desea borrar la critica " + delete + " ? Y/N.");
+		        		System.out.println("Esta accion es permanente. ï¿½Desea borrar la critica " + delete + " ? Y/N.");
 			        	Scanner delete_scan = new Scanner(System.in);
 			        	String deleteOpc = delete_scan.nextLine();
 			        	if(deleteOpc.equals("Y")) {

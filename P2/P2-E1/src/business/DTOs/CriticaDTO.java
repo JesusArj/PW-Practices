@@ -73,13 +73,13 @@ public class CriticaDTO {
 	 */
 	
 
-	public CriticaDTO(String title, float puntuacion, String resena, int id, String mail, int idEsp)
+	public CriticaDTO(String title, float puntuacion, String resena,String mail, int idEsp)
 	{
 		this.title = title; 
 		this.mail = mail;
 		this.puntuacion = puntuacion; 
 		this.resena=resena; 
-		this.id = id;
+		this.id = 0;
 		this.like = 0; 
 		this.dislike = 0;
 		this.idEsp = idEsp;
@@ -98,6 +98,7 @@ public class CriticaDTO {
 		this.idEsp = idEsp;
 		this.votantes= new ArrayList<VotantesCriticaDTO>(); 
 	}
+	
 	
 	/**
 	 * Constructor sin parametros. Usado para inicializacion de variables.
