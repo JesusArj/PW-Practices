@@ -22,6 +22,7 @@ public class UserDAO {
 			query=query.replaceAll("varpass", newUser.getPasswd());
 			query=query.replaceAll("varname", newUser.getName());
 			query=query.replaceAll("varuser", newUser.getUsername());
+			query=query.replaceAll("varrol", newUser.getRol());
 			
 			Statement stmt = connection.createStatement();
 			stmt.executeQuery(query);
@@ -30,6 +31,37 @@ public class UserDAO {
 			System.err.println(e);
 			e.printStackTrace();
 		}
+	}
+	
+	public ArrayList<UserDTO> selectByRol(String rol){
+		ArrayList<UserDTO> users = new ArrayList<UserDTO>();
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectByRol");
+			query = query.replace("varrol", rol);
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			
+			while (rs.next()) {
+				String name = rs.getString("name");
+				String email = rs.getString("email");
+				String username = rs.getString("username");
+				users.add(new UserDTO(name, email,username));
+			}
+
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return users;
 	}
 	
 	public String requestCredenciales(String mail) {
@@ -115,10 +147,12 @@ public class UserDAO {
 			String name = rs.getString("name");
 			String mail = rs.getString("mail");
 			String username = rs.getString("username");
+			String rol = rs.getString("rol");
 			
 			userRequest.setMail(mail);
 			userRequest.setName(name);
 			userRequest.setUsername(username);
+			userRequest.setRol(rol);
 			
 			if (stmt != null){ 
 				stmt.close(); 
@@ -149,10 +183,12 @@ public class UserDAO {
 			String name = rs.getString("name");
 			String mail = rs.getString("mail");
 			String username = rs.getString("username");
+			String rol = rs.getString("rol");
 			
 			userRequest.setMail(mail);
 			userRequest.setName(name);
 			userRequest.setUsername(username);
+			userRequest.setRol(rol);
 			
 			if (stmt != null){ 
 				stmt.close(); 
@@ -182,7 +218,8 @@ public class UserDAO {
 				String name = rs.getString("name");
 				String email = rs.getString("email");
 				String username = rs.getString("username");
-				listUsers.add(new UserDTO(name, email,username));
+				String rol = rs.getString("rol");
+				listUsers.add(new UserDTO(name, email,username,rol));
 			}
 
 			if (stmt != null){ 

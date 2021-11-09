@@ -34,16 +34,16 @@ public class UserDTO{
 	
 	private String passwd;
 
-	/**
-	 * Constructor sin parametros usado en inicializacion
-	 * de variables
-	 */
-
+	private String rol;
+	
 	private LocalDateTime registerTime;
 	
 	private LocalDateTime lastLogged;
+
 	
-	public UserDTO(){}
+	public UserDTO() {
+
+	}
 	
 	/**
 	 * Constructor parametrizado.
@@ -54,12 +54,13 @@ public class UserDTO{
 	 * @author Developers
 	 */
 	
-	public UserDTO(String name, String mail, String username, String passwd)
+	public UserDTO(String name, String mail, String username, String passwd, String rol)
 	{
 		this.name=name; 
 		this.mail=mail;
 		this.username = username;
 		this.passwd = passwd;
+		this.rol = rol;
 	}
 	
 	public UserDTO(String name, String mail, String username, String passwd, LocalDateTime registerTime)
@@ -71,6 +72,14 @@ public class UserDTO{
 		this.registerTime = registerTime;
 	}
 	
+	public UserDTO(String name, String mail, String username, String rol)
+	{
+		this.name=name; 
+		this.mail=mail;
+		this.username = username;
+		this.rol = rol;
+	}
+	
 	public UserDTO(String name, String mail, String username)
 	{
 		this.name=name; 
@@ -78,8 +87,10 @@ public class UserDTO{
 		this.username = username;
 	}
 	
+	
 	//OBSERVADORES
 	
+
 	/**
 	 * Getter del nombre del usuario
 	 * @return Cadena con el nombre del usuario
@@ -183,5 +194,13 @@ public class UserDTO{
 	
 	public void setLastLogged(LocalDateTime timeDate) {
 		this.lastLogged = timeDate;
+	}
+
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
 }

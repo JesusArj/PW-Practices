@@ -3,9 +3,9 @@ package display.views;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Scanner;
 
+import business.DTOs.UserDTO;
 import business.managers.UserManager;
 /**
  * La clase MenuUsuario contiene la funcion UserMenu al usuario.
@@ -48,20 +48,22 @@ public class UsuariosView
 			{ 
 	        	System.out.println("DATOS DE USUARIO");
 	        	UserManager managerUserRead = new UserManager();
-	        	ArrayList<String> user = managerUserRead.readUser(this.getMail());
-	        	System.out.println("Mail : " + user.get(2));
-	        	System.out.println("Name : " + user.get(1));
-	        	System.out.println("Username : " + user.get(2));  	
+	        	UserDTO user = managerUserRead.requestUser(this.getMail());
+	        	System.out.println("Mail : " + user.getMail());
+	        	System.out.println("Name : " + user.getName());
+	        	System.out.println("Username : " + user.getUsername());  
+	        	System.out.println("Rol : " + user.getRol());
 	        }
 	        else if("2".equals(opc))
 	        { 
 	        	System.out.println("ACTUALIZACION DE DATOS");
 	        	System.out.println("Estos son sus datos actuales:");
 	        	UserManager managerUser = new UserManager();
-	        	ArrayList<String> user = managerUser.readUser(this.getMail());
-	        	System.out.println("	Mail : " + user.get(0));
-	        	System.out.println("	Name : " + user.get(1));
-	        	System.out.println("	Username : " + user.get(2)); 
+	        	UserDTO user = managerUser.requestUser(this.getMail());
+	        	System.out.println("Mail : " + user.getMail());
+	        	System.out.println("Name : " + user.getName());
+	        	System.out.println("Username : " + user.getUsername());  
+	
 	        	System.out.println("IMPORTANTE: Si hay un valor que NO desee actualizar, escriba su valor actual");
 	        	String username = null;
 	        	Scanner username_scan = new Scanner(System.in);

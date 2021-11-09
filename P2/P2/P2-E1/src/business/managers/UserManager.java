@@ -18,10 +18,10 @@ public class UserManager {
 		return false;
 	}
 	
-	public Boolean createUser(String mail, String username, String name, String passwd) {	
+	public Boolean createUser(String mail, String username, String name, String passwd, String rol) {	
 		if(!this.UserExist(mail)) {
 			UserDAO newUser = new UserDAO();
-			UserDTO newUserDTO = new UserDTO(name,mail,username,passwd);  
+			UserDTO newUserDTO = new UserDTO(name,mail,username,passwd, rol);  
 			newUser.createUser(newUserDTO);
 			return true;
 		}
@@ -31,7 +31,8 @@ public class UserManager {
 	public Boolean updateUser(String mail, String username, String name, String passwd) {
 		if(this.UserExist(mail)) {
 			UserDAO newUser = new UserDAO();
-			UserDTO newUserDTO = new UserDTO(name,mail,username,passwd);  
+			UserDTO newUserDTO = new UserDTO(name,mail,username);
+			newUserDTO.setPasswd(passwd);
 			newUser.updateUser(newUserDTO);
 			return true;
 		}
@@ -101,5 +102,22 @@ public class UserManager {
 			userS.add(user.getUsername());	
 		}
 		return userS;
+	}
+	
+	public ArrayList<UserDTO> requestByRol(String rol){
+		ArrayList<UserDTO> users = new ArrayList<UserDTO>();
+		UserDAO requestByRol = new UserDAO();
+		users = requestByRol.selectByRol(rol);		
+		return users;
+	}
+	
+	public Boolean checkAdmin(String mail) {
+		ArrayList<UserDTO> users = new ArrayList<UserDTO>();
+		users = this.requestByRol("admin");
+		for(UserDTO u : users) {
+			if(u.getMail().equals(mail))
+				return true;
+		}
+		return false;
 	}
 }

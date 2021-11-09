@@ -67,7 +67,9 @@ public class LoginView
 	        	Scanner password_scan = new Scanner(System.in);
 	        	String mail = null;
 	        	Scanner mail_scan = new Scanner(System.in);
-	        	
+	        	String rol = "0";
+	        	Scanner rol_scan = new Scanner(System.in);
+	     
 	        	System.out.println("Introduzca su mail:");
 	        	mail = mail_scan.nextLine();
 	        	System.out.println("Introduzca su username:");
@@ -75,17 +77,29 @@ public class LoginView
 	        	System.out.println("Introduzca su name:");
 	        	name = name_scan.nextLine();
 	        	System.out.println("Introduzca su password:");
-	        	password = password_scan.nextLine();
-	        	
+	        	password = password_scan.nextLine();	
+	        	System.out.println("Introduzca 1 si es Admin, 2 si es usuario");
+	        	rol = rol_scan.nextLine();
+	        	if(rol.equals("1"))
+	        		rol = "admin";
+	        	else 
+	        		rol = "user";	
+        	
 	        	UserManager managerUser = new UserManager();
 	        	if(!managerUser.UserExist(mail)) {
-	        		managerUser.createUser(mail, username, name, password);
+	        		managerUser.createUser(mail, username, name, password,rol);
+	        	}
+	        	else {
+	        		System.out.println("El mail que desea usar ya existe");
+	        		System.out.println("Saliendo...\n\n");
+	        		System.exit(0);
 	        	}
 	        	
 	        	username_scan.close();
 	        	name_scan.close();
 	        	password_scan.close();
 	        	mail_scan.close();
+	        	rol_scan.close();
 	        	return mail;
 	        }
 	        else
