@@ -245,7 +245,7 @@ public class EspectaculoDAO {
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("createEP");
-			query=query.replaceAll("varid", Integer.toString(generarIDPunt())); //TODO: Make sense??
+			query=query.replaceAll("varid", Integer.toString(newPunt.getID())); 
 			query=query.replaceAll("vartitulo", newPunt.getTitulo());
 			query=query.replaceAll("vardescripcion", newPunt.getDescripcion());
 			query=query.replaceAll("varlocalidades", Integer.toString(newPunt.getLocalidadesVenta()));
@@ -1014,5 +1014,87 @@ public class EspectaculoDAO {
 		}
 		return listPases;
 	}
+	
+	public FechasDTO requestFecha(int id)
+	{
+		FechasDTO fechaRequest = new FechasDTO();
+
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectDataFechaAdmin");
+			query=query.replaceAll("varid", Integer.toString(id));
+			
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			
+			String ident = rs.getString("id");
+			String fechaDB = rs.getString("fechaFinal");
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			LocalDateTime fecha = LocalDateTime.parse(fechaDB, formatter);
+			
+			fechaRequest.setID(Integer.parseInt(ident));
+			fechaRequest.setFecha(fecha);
+			
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		
+		return fechaRequest;	
+	}
+
+	public PasesDTO requestPase(int id)
+	{
+		PasesDTO paseRequest = new PasesDTO();
+
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectDataPases");
+			query=query.replaceAll("varid", Integer.toString(id));
+			
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			
+			String idf = rs.getString("id");
+			String fecha = rs.getString("fechaInicio");
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			LocalDateTime fechaInicio = LocalDateTime.parse(fecha, formatter);
+			String diaSemana = rs.getString("diaSemana");
+			fecha = rs.getString("fechaFinal");
+			formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			LocalDateTime fechaFinal = LocalDateTime.parse(fecha, formatter);
+			
+			paseRequest.setID(Integer.parseInt(idf));
+			paseRequest.setFechaInicio(fechaInicio);
+			paseRequest.setDiaSemana(diaSemana);
+			paseRequest.setFechaInicio(fechaFinal);
+
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+			
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		
+		return paseRequest;	
+	}
+
 }
+
 

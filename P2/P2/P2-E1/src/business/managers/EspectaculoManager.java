@@ -65,6 +65,45 @@ public class EspectaculoManager
 		return false;	
 	}
 	
+	public int generarIDPunt()
+	{
+		EspectaculoDAO puntDAO = new EspectaculoDAO();
+		int id = puntDAO.generarIDPunt();
+		
+		return id;
+	}
+	
+	public int generarIDMult()
+	{
+		EspectaculoDAO puntDAO = new EspectaculoDAO();
+		int id = puntDAO.generarIDMult();
+		
+		return id;
+	}
+	
+	public int generarIDTemp()
+	{
+		EspectaculoDAO puntDAO = new EspectaculoDAO();
+		int id = puntDAO.generarIDTemp();
+		
+		return id;
+	}
+	
+	public int generarIDFechas()
+	{
+		EspectaculoDAO puntDAO = new EspectaculoDAO();
+		int id = puntDAO.generarIDFecha();
+		
+		return id;
+	}
+	
+	public int generarIDPases()
+	{
+		EspectaculoDAO puntDAO = new EspectaculoDAO();
+		int id = puntDAO.generarIdPases();
+		return id;
+	}
+	
 	public Boolean createEspectaculoPunt(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas,LocalDateTime fecha) {
 		EspectaculoDAO newPuntDAO = new EspectaculoDAO();
 		if(!this.PuntExist(id)) 
@@ -113,7 +152,7 @@ public class EspectaculoManager
 		return requestedPunt;
 	}
 	
-	public Boolean createEspectaculoMult(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas, ArrayList<FechasDTO> fechas) {
+	public Boolean createEspectaculoMult(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas) {
 		EspectaculoDAO newMultDAO = new EspectaculoDAO();
 		if(!this.MultExist(id)) 
 		{
@@ -177,9 +216,9 @@ public class EspectaculoManager
 		return requestedPases;
 	}
 	
-	public Boolean createEspectaculoTemp(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas, ArrayList<PasesDTO> pases) {
+	public Boolean createEspectaculoTemp(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas) {
 		EspectaculoDAO newTempDAO = new EspectaculoDAO();
-			EspectaculoTempDTO newTempDTO = new EspectaculoTempDTO(id, titulo, categoria, descripcion, localidades_venta, localidades_vendidas, pases);  
+			EspectaculoTempDTO newTempDTO = new EspectaculoTempDTO(id, titulo, categoria, descripcion, localidades_venta, localidades_vendidas);  
 			newTempDAO.createEspectaculoTemporada(newTempDTO);	
 			return true;
 	}
@@ -267,6 +306,44 @@ public class EspectaculoManager
 			PasesDTO newPase = new PasesDTO(id, fechaInicio, diaSemana, fechaFinal);
 			newPuntDAO.createPase(newPase, idE);
 			return true;
+		}
+		return false;
+	}
+	
+	public FechasDTO requestFecha(int id) 
+	{
+		EspectaculoDAO requestFecha = new EspectaculoDAO();
+		FechasDTO requestedFecha = new FechasDTO();
+		requestedFecha = requestFecha.requestFecha(id);
+		return requestedFecha;
+	}
+	
+	public PasesDTO requestPase(int id) 
+	{
+		EspectaculoDAO requestPase = new EspectaculoDAO();
+		PasesDTO requestedPase = new PasesDTO();
+		requestedPase = requestPase.requestPase(id);
+		return requestedPase;
+	}
+	
+	public Boolean updateFechas(int id, LocalDateTime fechas, int idE) {
+		if(this.fechaExist(id)) 
+		{
+			EspectaculoDAO newEspectaculo = new EspectaculoDAO();			
+			FechasDTO newFechasDTO = new FechasDTO(id, fechas);  
+			newEspectaculo.updateFecha(newFechasDTO, idE);
+			return true;		
+		}
+		return false;
+	}
+	
+	public Boolean updatePases(int id, LocalDateTime fechaInicio, String diaSemana, LocalDateTime fechaFinal, int idE) {
+		if(this.fechaExist(id)) 
+		{
+			EspectaculoDAO newEspectaculo = new EspectaculoDAO();			
+			PasesDTO newPasesDTO = new PasesDTO(id, fechaInicio, diaSemana, fechaFinal);  
+			newEspectaculo.updatePase(newPasesDTO, idE);
+			return true;		
 		}
 		return false;
 	}
