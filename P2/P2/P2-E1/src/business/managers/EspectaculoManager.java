@@ -189,6 +189,8 @@ public class EspectaculoManager
 		return requestedTemp;
 	}
 	
+	
+	
 	public boolean sesionTerminadaMult(EspectaculoMultDTO espect)
 	{
 		for(int i=0; i<espect.getFechas().size(); i++)
