@@ -946,5 +946,73 @@ public class EspectaculoDAO {
 		}
 		return listETs;
 	}
+	
+	public ArrayList<FechasDTO> requestFechas(){
+		ArrayList<FechasDTO> listFechas = new ArrayList<FechasDTO>();
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectAllFechas");
+			
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			
+			while (rs.next()) {
+				String ident = rs.getString("id");
+				String fechaBD =  rs.getString("fecha");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+				LocalDateTime fecha = LocalDateTime.parse(fechaBD, formatter);
+				listFechas.add(new FechasDTO(Integer.parseInt(ident), fecha));
+			}
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return listFechas;
+	}
+	
+	public ArrayList<PasesDTO> requestPases(){
+		ArrayList<PasesDTO> listPases = new ArrayList<PasesDTO>();
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream("src/sql.properties")){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectAllPases");
+			
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			
+			while (rs.next()) {
+				String ident = rs.getString("id");
+				String fechaBD =  rs.getString("fechaInicio");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+				LocalDateTime fechaInicio = LocalDateTime.parse(fechaBD, formatter);
+				String diaSemana = rs.getString("diaSemana");
+				fechaBD =  rs.getString("fechaFinal");		
+				formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+				LocalDateTime fechaFinal = LocalDateTime.parse(fechaBD, formatter);
+				listPases.add(new PasesDTO(Integer.parseInt(ident), fechaInicio, diaSemana,fechaFinal));
+			}
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return listPases;
+	}
 }
 
