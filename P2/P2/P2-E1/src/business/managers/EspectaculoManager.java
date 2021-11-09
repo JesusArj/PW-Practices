@@ -44,6 +44,27 @@ public class EspectaculoManager
 		return false;	
 	}
 	
+	public Boolean paseExist(int id) {
+		ArrayList<PasesDTO> pases = this.request();
+		for(EspectaculoTempDTO u : Criticas) {
+			if(u.getID() == id) 
+			{
+				return true;
+			}
+		}
+		return false;	
+	}
+	public Boolean fechaExist(int id) {
+		ArrayList<EspectaculoTempDTO> Criticas = this.requestETs();
+		for(EspectaculoTempDTO u : Criticas) {
+			if(u.getID() == id) 
+			{
+				return true;
+			}
+		}
+		return false;	
+	}
+	
 	public Boolean createEspectaculoPunt(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas,LocalDateTime fecha) {
 		EspectaculoDAO newPuntDAO = new EspectaculoDAO();
 		if(!this.PuntExist(id)) 
@@ -139,6 +160,22 @@ public class EspectaculoManager
 		requestedMult = requestMult.requestEMs();
 		return requestedMult;
 	}
+
+	public ArrayList<FechasDTO> requestFechas()
+	{
+		EspectaculoDAO requestFechas = new EspectaculoDAO();
+		ArrayList<FechasDTO> requestedFechas = new ArrayList<FechasDTO>();
+		requestedFechas = requestFechas.requestFechas();
+		return requestedFechas;
+	}
+	
+	public ArrayList<PasesDTO> requestPases()
+	{
+		EspectaculoDAO requestPases = new EspectaculoDAO();
+		ArrayList<PasesDTO> requestedPases = new ArrayList<PasesDTO>();
+		requestedPases = requestPases.requestPases();
+		return requestedPases;
+	}
 	
 	public Boolean createEspectaculoTemp(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas, ArrayList<PasesDTO> pases) {
 		EspectaculoDAO newTempDAO = new EspectaculoDAO();
@@ -210,5 +247,17 @@ public class EspectaculoManager
 			}
 		}
 		return false; 
+	}
+	
+	public Boolean createPase(int id, LocalDateTime fechaInicio, String diaSemana, fechaFinal)) {
+		EspectaculoDAO newPuntDAO = new EspectaculoDAO();
+		if(!this.PuntExist(id)) 
+		{
+			PasesDTO newPase = newPasesDTO(id, fechaInicio, diaSemana, fechaFinal);
+			EspectaculoPuntDTO newPuntDTO = new EspectaculoPuntDTO(id, titulo, categoria, descripcion, localidades_venta, localidades_vendidas, fecha);  
+			newPuntDAO.createEspectaculoPuntual(newPuntDTO);	
+			return true;
+		}
+		return false;
 	}
 }
