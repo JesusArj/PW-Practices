@@ -13,6 +13,11 @@ public class EspectaculoTempDTO extends EspectaculoDTO{
 		super(id,titulo,categoria,descripcion); 
 		this.pases = pases; 
 	}
+	public EspectaculoTempDTO(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas) 
+	{
+		super(id,titulo,categoria,descripcion); 
+	}
+	
 	
 	/*public LocalDateTime getFechaInicio() {
 		return this.fechaInicio;

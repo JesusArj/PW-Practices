@@ -179,14 +179,9 @@ public class EspectaculoManager
 	
 	public Boolean createEspectaculoTemp(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas, ArrayList<PasesDTO> pases) {
 		EspectaculoDAO newTempDAO = new EspectaculoDAO();
-		//TODO funcion id;
-		if(!this.MultExist(id)) 
-		{
 			EspectaculoTempDTO newTempDTO = new EspectaculoTempDTO(id, titulo, categoria, descripcion, localidades_venta, localidades_vendidas, pases);  
 			newTempDAO.createEspectaculoTemporada(newTempDTO);	
 			return true;
-		}
-		return false;
 	}
 	
 	public Boolean updateEspectaculoTemp(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas,ArrayList<PasesDTO> pases) {
@@ -257,8 +252,8 @@ public class EspectaculoManager
 		EspectaculoDAO newPuntDAO = new EspectaculoDAO();
 		if(!this.MultExist(idE)) 
 		{
-			PasesDTO newPase = new PasesDTO(id, fecha);
-			//TODO: Añadir a un espectaculo CONCRETO, el de idE. Añadir el pase al vector de fechas
+			FechasDTO newFecha = new FechasDTO(id, fecha);
+			newPuntDAO.createFecha(newFecha, idE);
 			return true;
 		}
 		return false;
@@ -270,7 +265,7 @@ public class EspectaculoManager
 		if(!this.TempExist(idE)) 
 		{
 			PasesDTO newPase = new PasesDTO(id, fechaInicio, diaSemana, fechaFinal);
-			//TODO: Añadir a un espectaculo CONCRETO, el de idE. Añadir el pase al vector de pases
+			newPuntDAO.createPase(newPase, idE);
 			return true;
 		}
 		return false;
