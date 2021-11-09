@@ -4,13 +4,27 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import business.DTOs.PasesDTO;
 import business.managers.CriticaManager;
 import business.managers.EspectaculoManager;
+import data.DAOs.EspectaculoDAO;
+import data.DAOs.UserDAO;
 
 public class EspectaculosView 
 {
+	private String mail;
+	
+	private String getMail() {
+		return mail;
+	}
+	
+	public EspectaculosView(String mail) {
+		this.mail = mail;
+	}
+	
 	public void EspectaculoMenu()
 	{
 		String opc = "1";
@@ -297,153 +311,135 @@ public class EspectaculosView
 
 	}
 	
-	public void EspectaculoMenuAdmin()
+	public void EspectaculoMenuAdmin(String mail)
 	{
-		String opc = "1";
-		EspectaculoManager manager = new EspectaculoManager(); 
-		while(opc.equals("1") || opc.equals("2") || opc.equals("3"))
+		UserDAO userDao = new UserDAO();
+		
+		if(userDao.checkAdmin(mail) == true)
 		{
-			System.out.println("MENU DE ADMINISTRADOR: Gestion de Espectaculos");
-			System.out.println("Para dar de Alta un espectaculo, pulse 1");
-			System.out.println("Para dar de baja de un espectaculo, pulse 2");
-			System.out.println("Para actualizar la informacion sobre un espectaculo, pulse 3");
-			System.out.println("Para salir del menu, pulse cualquier otra tecla");
-			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		    try 
-	        {
-				opc = reader.readLine();
-			} 
-	        catch (IOException e) 
-		    {
-	        	e.printStackTrace();
-			}
-		        
-			if("1".equals(opc))
+			String opc = "1";
+			EspectaculoManager manager = new EspectaculoManager(); 
+			while(opc.equals("1") || opc.equals("2") || opc.equals("3"))
 			{
-				String opcEspectaculo = "1"; 
-				Scanner opcEspectaculo_reader = new Scanner(System.in); 
-				while(opcEspectaculo.equals("1") || opcEspectaculo.equals("2") || opcEspectaculo.equals("3"))
-				{
-					System.out.println("DAR DE ALTA ESPECTACULO");
-					System.out.println("Si quiere crear un espectaculo de temporada, pulse 1");
-					System.out.println("Si quiere crear un espectaculo puntual, pulse 2");
-					System.out.println("Si quiere crear un espectaculo multiple, pulse 3");
-					System.out.println("Para volver, pulse cualquier otra tecla");
-					opcEspectaculo = opcEspectaculo_reader.nextLine(); 
-					if("1".equals(opcEspectaculo))
-					{
-						Scanner tituloReader, categoriaReader,descripcionReader,localidadesVentaReader,fechaInicioReader,diaSemanaReader, fechaFinalReader; 
-						String titulo, descripcion, categoria, diaSemana ; 
-						LocalDateTime fechaInicio, fechaFinal; 
-						int localidadesVenta; 
-						//crear espectaculo temporal
-						System.out.println("Introduce el titulo.");
-						tituloReader = new Scanner(System.in); 
-						titulo = tituloReader.nextLine(); 
-						System.out.println("Introduce la categoria.");
-						categoriaReader = new Scanner(System.in); 
-						categoria = categoriaReader.nextLine(); 
-						System.out.println("Introduce la descripcion.");
-						descripcionReader =  new Scanner(System.in); 
-						descripcion = descripcionReader.nextLine(); 
-						System.out.println("Introduce el numero de localidades a la venta.");
-						localidadesVentaReader = new Scanner(System.in); 
-						localidadesVenta = localidadesVentaReader.nextInt(); 
-						System.out.println("Introduce fecha de Inicio. (Formato: yyyy-MM-dd HH:mm)");
-						fechaInicioReader = new Scanner(System.in); 
-						String aux = fechaInicioReader.nextLine();
-						//conversion string to localdatetime
-						DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-						fechaInicio = LocalDateTime.parse(aux, formatter);
-						
-						System.out.println("Introduce fecha de finalizacion. (Formato: yyyy-MM-dd HH:mm)");
-						fechaFinalReader = new Scanner(System.in); 
-						aux = fechaFinalReader.nextLine();
-						//conversion string to localdatetime
-						fechaFinal = LocalDateTime.parse(aux, formatter);
-						System.out.println("Introduce dia de la Semana.");
-						diaSemanaReader =  new Scanner(System.in); 
-						diaSemana = diaSemanaReader.nextLine(); 
-						
-						
-						//manager.createEspectaculoTemp()
-						
-						
-						tituloReader.close(); 
-						categoriaReader.close(); 
-						descripcionReader.close(); 
-						localidadesVentaReader.close(); 
-						fechaInicioReader.close();
-						diaSemanaReader.close();
-						fechaFinalReader.close(); 
-					}
-					if("2".equals(opcEspectaculo))
-					{
-						//crear espectaculo puntual
-					}
-					if("3".equals(opcEspectaculo))
-					{
-						//crear espectaculo multiple
-					}
+				System.out.println("MENU DE ADMINISTRADOR: Gestion de Espectaculos");
+				System.out.println("Para dar de Alta un espectaculo, pulse 1");
+				System.out.println("Para dar de baja de un espectaculo, pulse 2");
+				System.out.println("Para actualizar la informacion sobre un espectaculo, pulse 3");
+				System.out.println("Para salir del menu, pulse cualquier otra tecla");
+				BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			    try 
+		        {
+					opc = reader.readLine();
+				} 
+		        catch (IOException e) 
+			    {
+		        	e.printStackTrace();
 				}
-				opcEspectaculo_reader.close(); 
+			        
+				if("1".equals(opc))
+				{
+					String opcEspectaculo = "1"; 
+					Scanner opcEspectaculo_reader = new Scanner(System.in); 
+					while(opcEspectaculo.equals("1") || opcEspectaculo.equals("2") || opcEspectaculo.equals("3"))
+					{
+						System.out.println("DAR DE ALTA ESPECTACULO");
+						System.out.println("Si quiere crear un espectaculo de temporada, pulse 1");
+						System.out.println("Si quiere crear un espectaculo puntual, pulse 2");
+						System.out.println("Si quiere crear un espectaculo multiple, pulse 3");
+						System.out.println("Para volver, pulse cualquier otra tecla");
+						opcEspectaculo = opcEspectaculo_reader.nextLine(); 
+						if("1".equals(opcEspectaculo))
+						{
+							Scanner tituloReader, categoriaReader,descripcionReader,localidadesVentaReader,localidadesVendidasReader,fechaInicioReader,diaSemanaReader, fechaFinalReader; 
+							String titulo, descripcion, categoria, diaSemana ; 
+							LocalDateTime fechaInicio, fechaFinal; 
+							int localidadesVenta, localidadesVendidas; 
+							
+							PasesDTO newPase = new PasesDTO();
+							
+							//crear espectaculo temporal
+							System.out.println("Introduce el titulo.");
+							tituloReader = new Scanner(System.in); 
+							titulo = tituloReader.nextLine(); 
+							System.out.println("Introduce la categoria.");
+							categoriaReader = new Scanner(System.in); 
+							categoria = categoriaReader.nextLine(); 
+							System.out.println("Introduce la descripcion.");
+							descripcionReader =  new Scanner(System.in); 
+							descripcion = descripcionReader.nextLine(); 
+							System.out.println("Introduce el numero de localidades a la venta.");
+							localidadesVentaReader = new Scanner(System.in); 
+							localidadesVenta = localidadesVentaReader.nextInt(); 
+							System.out.println("Introduce el numero de localidades vendidas.");
+							localidadesVendidasReader = new Scanner(System.in); 
+							localidadesVendidas = localidadesVentaReader.nextInt();
+							
+							ArrayList<PasesDTO> listPases = new ArrayList<PasesDTO>();
+							
+							System.out.println("Introduce fecha de Inicio. (Formato: yyyy-MM-dd HH:mm)");
+							fechaInicioReader = new Scanner(System.in); 
+							String aux = fechaInicioReader.nextLine();
+							//conversion string to localdatetime
+							DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+							fechaInicio = LocalDateTime.parse(aux, formatter);
+							
+							System.out.println("Introduce fecha de finalizacion. (Formato: yyyy-MM-dd HH:mm)");
+							fechaFinalReader = new Scanner(System.in); 
+							aux = fechaFinalReader.nextLine();
+							//conversion string to localdatetime
+							fechaFinal = LocalDateTime.parse(aux, formatter);
+							System.out.println("Introduce dia de la Semana.");
+							diaSemanaReader =  new Scanner(System.in); 
+							diaSemana = diaSemanaReader.nextLine(); 
+							
+							EspectaculoDAO newEspectaculo = new EspectaculoDAO();
+							int idpase = newEspectaculo.generarIdPases();
+							listPases.add(new PasesDTO(idpase, fechaInicio, diaSemana, fechaFinal));
+							
+							int id = newEspectaculo.generarIDPunt();
+							//TODO:
+							manager.createEspectaculoTemp(id, titulo, categoria, descripcion, localidadesVenta, localidadesVendidas, listPases);
+							
+							
+							tituloReader.close(); 
+							categoriaReader.close(); 
+							descripcionReader.close(); 
+							localidadesVentaReader.close(); 
+							localidadesVendidasReader.close();
+							fechaInicioReader.close();
+							diaSemanaReader.close();
+							fechaFinalReader.close(); 
+						}
+						if("2".equals(opcEspectaculo))
+						{
+							//TODO
+							//crear espectaculo puntual
+						}
+						if("3".equals(opcEspectaculo))
+						{
+							//TODO
+							//crear espectaculo multiple
+						}
+					}
+					opcEspectaculo_reader.close(); 
+				}
+				else if("2".equals(opc))
+				{
+					System.out.println("DAR DE BAJA ESPECTACULO");
+					//TODO:
+					
+				}
+				else if("3".equals(opc))
+				{
+					System.out.println("ACTUALIZAR INFORMACION DE ESPECTACULO");
+					//TODO:
+				}
 			}
-			else if("2".equals(opc))
-			{
-				System.out.println("DAR DE BAJA ESPECTACULO");
-				
-			}
-			else if("3".equals(opc))
-			{
-				System.out.println("ACTUALIZAR INFORMACION DE ESPECTACULO");
-			}
-		}
-
-	}
-	public void mostrarEspectaculosTerminados()
-	{
-		System.out.println("ESPECTACULOS TERMINADOS: ");
-    	EspectaculoManager manager = new EspectaculoManager();
-    	
-    	for(int i=0; i<manager.requestEPs().size(); i++ )
-    	{
-    		if(manager.requestEPs().get(i).getHoraFecha().isBefore(LocalDateTime.now()))
-    		{
-    			System.out.println("------------------------------------------------------------------------------------");
-        		System.out.println("TITULO: " + manager.requestEPs().get(i).getTitulo());
-        		System.out.println("DESCRIPCION: " + manager.requestEPs().get(i).getDescripcion());
-        		System.out.println("CATEGORIA: " + manager.requestEPs().get(i).getCategoria());
-        		System.out.println("ID: " + manager.requestEPs().get(i).getID());
-        		System.out.println("------------------------------------------------------------------------------------");
-
-    		}
-    	}
-    	
-    	for(int i=0; i<manager.requestEMs().size(); i++ )
-    	{
-    		if(manager.sesionTerminadaMult(manager.requestEMs().get(i)))
-    		{
-    			System.out.println("------------------------------------------------------------------------------------");
-        		System.out.println("TITULO: " + manager.requestEMs().get(i).getTitulo());
-        		System.out.println("DESCRIPCION: " + manager.requestEMs().get(i).getDescripcion());
-        		System.out.println("CATEGORIA: " + manager.requestEMs().get(i).getCategoria());
-        		System.out.println("ID: " + manager.requestEMs().get(i).getID());
-        		System.out.println("------------------------------------------------------------------------------------");
-        	}
-    	}
-    		
-    	for(int i=0; i<manager.requestETs().size(); i++ )
-    	{
-    		if(manager.sesionTerminadaTemp(manager.requestETs().get(i)))
-    		{
-    			System.out.println("------------------------------------------------------------------------------------");
-        		System.out.println("TITULO: " + manager.requestETs().get(i).getTitulo());
-        		System.out.println("DESCRIPCION: " + manager.requestETs().get(i).getDescripcion());
-        		System.out.println("CATEGORIA: " + manager.requestETs().get(i).getCategoria());
-        		System.out.println("ID: " + manager.requestETs().get(i).getID());
-        		System.out.println("------------------------------------------------------------------------------------");
-    		}
-    	}
-	}
 	
+		}
+		else
+		{
+			System.out.println("No tiene permiso para acceder al menu de Administración");
+		}
+	}
 }
