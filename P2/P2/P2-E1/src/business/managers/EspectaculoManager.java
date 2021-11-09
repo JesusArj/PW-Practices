@@ -45,8 +45,8 @@ public class EspectaculoManager
 	}
 	
 	public Boolean paseExist(int id) {
-		ArrayList<PasesDTO> pases = this.request();
-		for(EspectaculoTempDTO u : Criticas) {
+		ArrayList<PasesDTO> pases = this.requestPases();
+		for(PasesDTO u : pases) {
 			if(u.getID() == id) 
 			{
 				return true;
@@ -55,8 +55,8 @@ public class EspectaculoManager
 		return false;	
 	}
 	public Boolean fechaExist(int id) {
-		ArrayList<EspectaculoTempDTO> Criticas = this.requestETs();
-		for(EspectaculoTempDTO u : Criticas) {
+		ArrayList<FechasDTO> fechas = this.requestFechas();
+		for(FechasDTO u : fechas) {
 			if(u.getID() == id) 
 			{
 				return true;
@@ -226,17 +226,20 @@ public class EspectaculoManager
 		return requestedTemp;
 	}
 	
-	
+	//TODO: No necesitarias un sesión terminada de Puntuales?
 	
 	public boolean sesionTerminadaMult(EspectaculoMultDTO espect)
 	{
 		for(int i=0; i<espect.getFechas().size(); i++)
+		{
 			if(espect.getFechas().get(i).getFecha().isBefore(LocalDateTime.now()))
 			{
 				return true; 
 			}
+		}
 		return false; 
 	}
+	
 	public boolean sesionTerminadaTemp(EspectaculoTempDTO espect)
 	{
 		for(int i=0; i<espect.getPases().size(); i++)
@@ -249,15 +252,28 @@ public class EspectaculoManager
 		return false; 
 	}
 	
-	public Boolean createPase(int id, LocalDateTime fechaInicio, String diaSemana, fechaFinal)) {
+	public Boolean createFecha(int id, LocalDateTime fecha, int idE) 
+	{
 		EspectaculoDAO newPuntDAO = new EspectaculoDAO();
-		if(!this.PuntExist(id)) 
+		if(!this.MultExist(idE)) 
 		{
-			PasesDTO newPase = newPasesDTO(id, fechaInicio, diaSemana, fechaFinal);
-			EspectaculoPuntDTO newPuntDTO = new EspectaculoPuntDTO(id, titulo, categoria, descripcion, localidades_venta, localidades_vendidas, fecha);  
-			newPuntDAO.createEspectaculoPuntual(newPuntDTO);	
+			PasesDTO newPase = new PasesDTO(id, fecha);
+			//TODO: Añadir a un espectaculo CONCRETO, el de idE. Añadir el pase al vector de fechas
 			return true;
 		}
 		return false;
 	}
+	
+	public Boolean createPase(int id, LocalDateTime fechaInicio, String diaSemana, LocalDateTime fechaFinal, int idE) 
+	{
+		EspectaculoDAO newPuntDAO = new EspectaculoDAO();
+		if(!this.TempExist(idE)) 
+		{
+			PasesDTO newPase = new PasesDTO(id, fechaInicio, diaSemana, fechaFinal);
+			//TODO: Añadir a un espectaculo CONCRETO, el de idE. Añadir el pase al vector de pases
+			return true;
+		}
+		return false;
+	}
+
 }
