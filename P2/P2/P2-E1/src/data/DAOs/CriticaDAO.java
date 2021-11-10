@@ -1,4 +1,5 @@
 package data.DAOs;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.*;
@@ -14,11 +15,14 @@ import data.common.DBConnection;
 
 public class CriticaDAO {
 
+	String rutaAbsoluta = new File("").getAbsolutePath();
+	String rutaFicheroProp = rutaAbsoluta + "/P2/P2-E1/src/sql.properties";
+	
 	public String selectTituloEsp(int id) {
 		String titulo = null;
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectTituloEsp");
@@ -42,7 +46,7 @@ public class CriticaDAO {
 	{
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("existIDCriticas");
@@ -78,7 +82,7 @@ public class CriticaDAO {
 	{
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("createCritica");
@@ -99,7 +103,7 @@ public class CriticaDAO {
 	public void addVotanteCritica(String mail, int id, String voto) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("updateVC");
@@ -118,7 +122,7 @@ public class CriticaDAO {
 	public void removeVotantesCritica(int id) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("deleteVC");
@@ -135,7 +139,7 @@ public class CriticaDAO {
 	public void removeVotanteCritica(String mail, int id) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("deleteUSERVC");
@@ -154,7 +158,7 @@ public class CriticaDAO {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
 		ArrayList<VotantesCriticaDTO> votantes = new ArrayList<VotantesCriticaDTO>();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectDataVC");
@@ -182,7 +186,7 @@ public class CriticaDAO {
 	{
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("updateCritica");
@@ -202,7 +206,7 @@ public class CriticaDAO {
 	public void deleteCritica(int id) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("deleteCritica");
@@ -227,7 +231,7 @@ public class CriticaDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectDataCritica");
@@ -273,7 +277,7 @@ public class CriticaDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectAllCriticas");
@@ -314,7 +318,7 @@ public class CriticaDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectAllCriticasPermit");
@@ -351,7 +355,7 @@ public class CriticaDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectWriters");
@@ -379,7 +383,7 @@ public class CriticaDAO {
 		ArrayList<EspectaculoDTO> esp = new ArrayList<EspectaculoDTO>();
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectDataEspPuntPast");
@@ -414,7 +418,7 @@ public class CriticaDAO {
 		ArrayList<EspectaculoDTO> esp = new ArrayList<EspectaculoDTO>();
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectDataEspMultPast");
@@ -449,7 +453,7 @@ public class CriticaDAO {
 		ArrayList<EspectaculoDTO> esp = new ArrayList<EspectaculoDTO>();
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectDataEspTempPast");

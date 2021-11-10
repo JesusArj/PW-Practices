@@ -1,6 +1,7 @@
 package display.views;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
@@ -12,6 +13,12 @@ public class LoginView
 	
 	public String loginMenu() 
 	{
+		
+		String rutaAbsoluta = new File("").getAbsolutePath();
+		String rutaFicheroProp = rutaAbsoluta + "/P2/P2-E1/src/sql.properties";
+		System.out.println(rutaAbsoluta);
+		System.out.println(rutaFicheroProp);
+		
 		String mailNotUsed = "";
 		String opc = "1";
 		while(opc.equals("1") || opc.equals("2")) {

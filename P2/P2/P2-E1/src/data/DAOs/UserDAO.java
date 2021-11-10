@@ -1,5 +1,6 @@
 package data.DAOs;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.*;
@@ -11,10 +12,13 @@ import data.common.DBConnection;
 
 public class UserDAO {
 
+	String rutaAbsoluta = new File("").getAbsolutePath();
+	String rutaFicheroProp = rutaAbsoluta + "/P2/P2-E1/src/sql.properties";
+	
 	public void createUser(UserDTO newUser) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("createNewUser");
@@ -37,7 +41,7 @@ public class UserDAO {
 		ArrayList<UserDTO> users = new ArrayList<UserDTO>();
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectByRol");
@@ -68,7 +72,7 @@ public class UserDAO {
 		String password = null;
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectPass");
@@ -94,7 +98,7 @@ public class UserDAO {
 	public void deleteUser(String mail) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("deleteUser");
@@ -112,7 +116,7 @@ public class UserDAO {
 	public void updateUser(UserDTO updateUser) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("D:/Descargas/PW-Practices-master/P2/P2-E1sql.properties")){
+		try(InputStream input = new FileInputStream("D:/Descargas/PW-Practices-master/P2/P2-E1rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("updateUser");
@@ -135,7 +139,7 @@ public class UserDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectDataUserMail");
@@ -171,7 +175,7 @@ public class UserDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectDataUserName");
@@ -206,7 +210,7 @@ public class UserDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("sql.properties")){
+		try(InputStream input = new FileInputStream("rutaFicheroProp")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectAllUsers");
