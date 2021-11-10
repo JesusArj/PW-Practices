@@ -41,7 +41,7 @@ public class Main
 			}
 			else if("3".equals(opc))
 			{ 
-				EspectaculosView espView = new EspectaculosView();
+				EspectaculosView espView = new EspectaculosView(mail);
 				espView.EspectaculoMenu();
 
 			}
