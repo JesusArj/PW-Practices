@@ -1,8 +1,8 @@
 package display;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
+
 import display.views.*;
 public class Main 
 {
@@ -11,47 +11,49 @@ public class Main
 		LoginView login = new LoginView();
 		String mail = login.loginMenu();
 		String opc = "";
-		if(mail.equals("----"))
+		if(!mail.equals(""))
 		{
-			System.exit(0);
-		}
 			opc = "0";
-			while(opc.equals("1") || opc.equals("2") || opc.equals("3") || opc.equals("0") && (!mail.equals(""))) 
+			UsuariosView userView = new UsuariosView(mail);
+			userView.userMenu();
+			/*while(opc.equals("1") || opc.equals("2") || opc.equals("3") || opc.equals("0") && (!mail.equals(""))) 
 			{
+				Scanner opcScan = new Scanner(System.in);
 				System.out.println("Bienvenido a nuestro sistema.");
 			   	System.out.println("Para ir a gestion de usuario, pulse 1.");
 			   	System.out.println("Para ir a gestion de criticas, pulse 2.");
 			   	System.out.println("Para ir a gestion de espectaculos, pulse 3.");
 			   	System.out.println("Para salir del menu, pulse cualquier otra tecla.");
-			    
-				BufferedReader buf = new BufferedReader(new InputStreamReader(System.in));
-				try 
-				{
-						opc = buf.readLine();
-				} 
-				catch (IOException e) 
-				{
-						e.printStackTrace();
-				}
-				if("1".equals(opc)) 
-				{ 
-					UsuariosView userView = new UsuariosView(mail);
-					userView.userMenu();
-				}
-				else if("2".equals(opc))
-				{ 
-					CriticasView criticasView = new CriticasView(mail);
-					criticasView.CriticaMenu();
-				}
-				else if("3".equals(opc))
-				{ 
-					EspectaculosView espView = new EspectaculosView(mail);
-					espView.EspectaculoMenu(mail);
-				}
-
-			}
+			   	opc = "0";
+			   	
+			   	if(opcScan.hasNext())
+			   	{
+				    opc = opcScan.nextLine();
+				    
+					if("1".equals(opc)) 
+					{ 
+						UsuariosView userView = new UsuariosView(mail);
+						userView.userMenu();
+					}
+					else if("2".equals(opc))
+					{ 
+						CriticasView criticasView = new CriticasView(mail);
+						criticasView.CriticaMenu();
+					}
+					else if("3".equals(opc))
+					{ 
+						EspectaculosView espView = new EspectaculosView(mail);
+						espView.EspectaculoMenu(mail);
+					}
+					else 
+					{
+						break;
+					}
+			   	}
+			   	opcScan.close();
+			}*/
 		}
 	}
-
+}
 	
 

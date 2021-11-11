@@ -81,9 +81,10 @@ public class UserDAO {
 			
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
-			
+			if(rs.next())
+			{
 			password = rs.getString("password");
-			
+			}
 			if (stmt != null){ 
 				stmt.close(); 
 			}
@@ -149,16 +150,18 @@ public class UserDAO {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 			
-			String name = rs.getString("name");
-			String mail = rs.getString("mail");
-			String username = rs.getString("username");
-			String rol = rs.getString("rol");
-			
-			userRequest.setMail(mail);
-			userRequest.setName(name);
-			userRequest.setUsername(username);
-			userRequest.setRol(rol);
-			
+			if(rs.next())
+			{
+				String name = rs.getString("name");
+				String mail = rs.getString("mail");
+				String username = rs.getString("username");
+				String rol = rs.getString("rol");
+				
+				userRequest.setMail(mail);
+				userRequest.setName(name);
+				userRequest.setUsername(username);
+				userRequest.setRol(rol);
+			}
 			if (stmt != null){ 
 				stmt.close(); 
 			}
@@ -221,7 +224,7 @@ public class UserDAO {
 			
 			while (rs.next()) {
 				String name = rs.getString("name");
-				String email = rs.getString("email");
+				String email = rs.getString("mail");
 				String username = rs.getString("username");
 				String rol = rs.getString("rol");
 				listUsers.add(new UserDTO(name, email,username,rol));
