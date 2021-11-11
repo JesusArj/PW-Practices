@@ -63,13 +63,15 @@ public class UserDTO{
 		this.rol = rol;
 	}
 	
-	public UserDTO(String name, String mail, String username, String passwd, LocalDateTime registerTime)
+	public UserDTO(String name, String mail, String username, String passwd, String rol, LocalDateTime registerTime, LocalDateTime lastLogged)
 	{
 		this.name=name; 
 		this.mail=mail;
 		this.username = username;
 		this.passwd = passwd;
+		this.rol = rol;
 		this.registerTime = registerTime;
+		this.lastLogged = lastLogged;
 	}
 	
 	public UserDTO(String name, String mail, String username, String rol)
@@ -197,7 +199,7 @@ public class UserDTO{
 	}
 
 	public String getRol() {
-		return rol;
+		return this.rol;
 	}
 
 	public void setRol(String rol) {

@@ -1,9 +1,8 @@
 package display.views;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import business.managers.UserManager;
@@ -15,28 +14,23 @@ public class LoginView
 	{
 		
 		String rutaAbsoluta = new File("").getAbsolutePath();
-		String rutaFicheroProp = rutaAbsoluta + "/P2/P2-E1/src/sql.properties";
+		String rutaFicheroProp = rutaAbsoluta + "/sql.properties";
 		System.out.println(rutaAbsoluta);
 		System.out.println(rutaFicheroProp);
 		
 		String mailNotUsed = "";
-		String opc = "1";
-		while(opc.equals("1") || opc.equals("2")) {
+		String opc="1";
+		
+		while(opc.equals("1") || opc.equals("2")) 
+		{
 			System.out.println("Bienvenido a nuestro sistema.");
 		    System.out.println("Para iniciar sesion, pulse 1.");
 		    System.out.println("Para registrarse, pulse 2.");	    
-		    System.out.println("Para salir del menu, pulse cualquier otra tecla.");
-		    
-	        BufferedReader login = new BufferedReader(new InputStreamReader(System.in));
-	        try 
-	        {
-				opc = login.readLine();
-			} 
-	        catch (IOException e) 
-	        {
-				e.printStackTrace();
-			}
+		    System.out.println("Para salir del menu, pulse cualquier otra tecla.");			
 	        
+		    Scanner opcScan = new Scanner(System.in);
+		    opc = opcScan.nextLine();
+		    
 	        if("1".equals(opc)) 
 			{ 
 	        	System.out.println("LOGIN");
@@ -48,6 +42,7 @@ public class LoginView
 	        	
 	        	System.out.println("Introduzca su mail");
 	        	mail = mail_scan.nextLine();
+	     
 	        	System.out.println("Introduzca su password");
 	        	password = password_scan.nextLine();
 	        	
@@ -62,6 +57,7 @@ public class LoginView
 	        		mail_scan.close();
 		        	password_scan.close();
 	        	}
+	        	opc = "0";
 	        }
 	        else if("2".equals(opc))
 	        { 
@@ -79,6 +75,7 @@ public class LoginView
 	     
 	        	System.out.println("Introduzca su mail:");
 	        	mail = mail_scan.nextLine();
+	        	System.out.println(mail);
 	        	System.out.println("Introduzca su username:");
 	        	username = username_scan.nextLine();
 	        	System.out.println("Introduzca su name:");
@@ -91,29 +88,40 @@ public class LoginView
 	        		rol = "admin";
 	        	else 
 	        		rol = "user";	
-        	
+      
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+				LocalDateTime now = LocalDateTime.now();
+				String aux = now.format(formatter);
+				
+				LocalDateTime fecha = LocalDateTime.parse(aux, formatter);
+				
 	        	UserManager managerUser = new UserManager();
+	        	
 	        	if(!managerUser.UserExist(mail)) {
-	        		managerUser.createUser(mail, username, name, password,rol);
+	        		managerUser.createUser(mail, username, name, password, rol, fecha, fecha);
+	        		mail_scan.close();
+	        	
 	        	}
 	        	else {
 	        		System.out.println("El mail que desea usar ya existe");
 	        		System.out.println("Saliendo...\n\n");
 	        		System.exit(0);
 	        	}
-	        	
+	        	opc = "0";
 	        	username_scan.close();
 	        	name_scan.close();
 	        	password_scan.close();
 	        	mail_scan.close();
 	        	rol_scan.close();
 	        	return mail;
+	        	
 	        }
 	        else
 	        { 
 	        	System.out.println("Saliendo...\n\n");
 	        	System.exit(0);
-	        }	
+	        }
+	        opcScan.close();
 		}
 		return mailNotUsed;
 	}

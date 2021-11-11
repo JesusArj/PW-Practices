@@ -6,8 +6,6 @@ import business.DTOs.EspectaculoTempDTO;
 import business.DTOs.FechasDTO;
 import business.DTOs.PasesDTO;
 import data.common.DBConnection;
-
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.*;
@@ -19,14 +17,12 @@ import java.util.Random;
 
 public class EspectaculoDAO {
 
-	String rutaAbsoluta = new File("").getAbsolutePath();
-	String rutaFicheroProp = rutaAbsoluta + "/P2/P2-E1/src/sql.properties";
 	
 	private boolean existIdPunt(int id)
 	{
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("existIDEP");
@@ -51,7 +47,7 @@ public class EspectaculoDAO {
 	{
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("existIDEM");
@@ -76,7 +72,7 @@ public class EspectaculoDAO {
 	{
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("existIDET");
@@ -101,7 +97,7 @@ public class EspectaculoDAO {
 	{
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("existIDFecha");
@@ -126,7 +122,7 @@ public class EspectaculoDAO {
 	{
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("existIDMF");
@@ -151,7 +147,7 @@ public class EspectaculoDAO {
 	{
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("existIDPases");
@@ -246,7 +242,7 @@ public class EspectaculoDAO {
 	public void createEspectaculoPuntual(EspectaculoPuntDTO newPunt) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("createEP");
@@ -272,7 +268,7 @@ public class EspectaculoDAO {
 	public void deleteEspectaculoPuntual(int id) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("deleteEP");
@@ -290,7 +286,7 @@ public class EspectaculoDAO {
 	public void updateEspectaculoPuntual(EspectaculoPuntDTO updatePunt) { 
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("D:/Descargas/PW-Practices-master/P2/P2-E1rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("D:/Descargas/PW-Practices-master/P2/P2-E1/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("updateEP"); 
@@ -318,7 +314,7 @@ public class EspectaculoDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectDataEP");
@@ -364,7 +360,7 @@ public class EspectaculoDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectAllEP");
@@ -402,7 +398,7 @@ public class EspectaculoDAO {
 	public void createEspectaculoMultiple(EspectaculoMultDTO newMult) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("createEM");
@@ -424,7 +420,7 @@ public class EspectaculoDAO {
 	public void createFecha(FechasDTO newFecha, int idEspectaculo) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			
@@ -452,7 +448,7 @@ public class EspectaculoDAO {
 	public void deleteEspectaculoMultiple(int id) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("deleteEM");
@@ -478,7 +474,7 @@ public class EspectaculoDAO {
 	public void deleteFecha(FechasDTO deleteFecha) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("deleteFecha");
@@ -497,7 +493,7 @@ public class EspectaculoDAO {
 	public void deleteMFecha(int idfecha) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("deleteMFecha");
@@ -516,7 +512,7 @@ public class EspectaculoDAO {
 	public void updateEspectaculoMultiple(EspectaculoMultDTO updateMult) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("D:/Descargas/PW-Practices-master/P2/P2-E1rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("D:/Descargas/PW-Practices-master/P2/P2-E1/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("updateEM"); 
@@ -539,7 +535,7 @@ public class EspectaculoDAO {
 	public void updateFecha(FechasDTO updateFecha, int idEspectaculo) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			
@@ -565,7 +561,7 @@ public class EspectaculoDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectDataEM");
@@ -622,7 +618,7 @@ public class EspectaculoDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectAllEM");
@@ -670,7 +666,7 @@ public class EspectaculoDAO {
 	public void createEspectaculoTemporada(EspectaculoTempDTO newTemp) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("createET");
@@ -692,7 +688,7 @@ public class EspectaculoDAO {
 	public void createPase(PasesDTO newPase, int idEspectaculo) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			
@@ -726,7 +722,7 @@ public class EspectaculoDAO {
 	public void deleteEspectaculoTemporada(int id) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("deleteET");
@@ -752,7 +748,7 @@ public class EspectaculoDAO {
 	public void deletePase(PasesDTO deletePase) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("deletePase");
@@ -771,7 +767,7 @@ public class EspectaculoDAO {
 	public void deleteTPase(int idpase) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("deleteMPase");
@@ -790,7 +786,7 @@ public class EspectaculoDAO {
 	public void updateEspectaculoTemporada(EspectaculoTempDTO updateTemp) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("D:/Descargas/PW-Practices-master/P2/P2-E1rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("D:/Descargas/PW-Practices-master/P2/P2-E1/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("updateET"); 
@@ -813,7 +809,7 @@ public class EspectaculoDAO {
 	public void updatePase(PasesDTO updatePase, int idEspectaculo) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			
@@ -845,7 +841,7 @@ public class EspectaculoDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectDataET");
@@ -906,7 +902,7 @@ public class EspectaculoDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectAllET");
@@ -957,7 +953,7 @@ public class EspectaculoDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectAllFechas");
@@ -989,7 +985,7 @@ public class EspectaculoDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectAllPases");
@@ -1027,7 +1023,7 @@ public class EspectaculoDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectDataFechaAdmin");
@@ -1064,7 +1060,7 @@ public class EspectaculoDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectDataPases");

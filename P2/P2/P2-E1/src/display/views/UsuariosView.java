@@ -93,7 +93,7 @@ public class UsuariosView
 	        else if("3".equals(opc))
 	        { 
 	        	System.out.println("ELMINACION DE USUARIO");
-	        	System.out.println("Esta accion es permanente. ¿Desea borrar su usuario? Y / N.");
+	        	System.out.println("Esta accion es permanente. ï¿½Desea borrar su usuario? Y / N.");
 	        	Scanner delete_scan = new Scanner(System.in);
 	        	String delete = delete_scan.nextLine();
 	        	if(delete.equals("Y")) {

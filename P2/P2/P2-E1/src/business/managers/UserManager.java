@@ -1,5 +1,6 @@
 package business.managers;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import business.DTOs.UserDTO;
@@ -18,10 +19,10 @@ public class UserManager {
 		return false;
 	}
 	
-	public Boolean createUser(String mail, String username, String name, String passwd, String rol) {	
+	public Boolean createUser(String mail, String username, String name, String passwd, String rol, LocalDateTime fechaRegistro, LocalDateTime fechaConex) {	
 		if(!this.UserExist(mail)) {
 			UserDAO newUser = new UserDAO();
-			UserDTO newUserDTO = new UserDTO(name,mail,username,passwd, rol);  
+			UserDTO newUserDTO = new UserDTO(name,mail,username,passwd, rol, fechaRegistro, fechaConex);  
 			newUser.createUser(newUserDTO);
 			return true;
 		}
