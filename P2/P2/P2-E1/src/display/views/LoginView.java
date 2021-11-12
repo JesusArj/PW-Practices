@@ -1,5 +1,6 @@
 package display.views;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -8,13 +9,16 @@ import business.managers.UserManager;
 
 public class LoginView 
 {
-	
 	public String loginMenu() 
 	{
-
-		String mailNotUsed = "";
+		String rutaAbsoluta = new File("").getAbsolutePath();
+		String rutaFicheroProp = rutaAbsoluta + "/sql.properties";
+		System.out.println(rutaAbsoluta);
+		System.out.println(rutaFicheroProp);
+		
 		String opc="1";
 		Scanner opcScan = new Scanner(System.in);
+    	String mail = null;
 		while(opc.equals("1") || opc.equals("2")) 
 		{
 			System.out.println("Bienvenido a nuestro sistema.");
@@ -30,58 +34,42 @@ public class LoginView
 				{ 
 		        	System.out.println("LOGIN");
 		        	UserManager managerUserLogin = new UserManager();
-		        	String mail = null;
-		        	Scanner mail_scan = new Scanner(System.in);
 		        	String password = null;
-		        	Scanner password_scan = new Scanner(System.in);
 		        	
 		        	System.out.println("Introduzca su mail");
-		        	mail = mail_scan.nextLine();
+		        	mail = opcScan.nextLine();
 		     
 		        	System.out.println("Introduzca su password");
-		        	password = password_scan.nextLine();
+		        	password = opcScan.nextLine();
 		        	
 		        	if(managerUserLogin.login(mail,password)) {
 		        		System.out.println("Bienvenido");
-			        	password_scan.close();
-			        	mail_scan.close();
-			        	opcScan.close();
-			        	return mail;
 		        	}
 		        	else {
 		        		System.out.println("Login incorrecto");
 		        		System.out.println("Saliendo...\n\n");
 		        		System.exit(0);
 		        	}
-		        	mail_scan.close();
-		        	password_scan.close();
-		        	opcScan.close();
 		        }
 		        else if("2".equals(opc))
 		        { 
 		        	System.out.println("REGISTRO");
 		        	String username = null;
-		        	Scanner username_scan = new Scanner(System.in);
 		        	String name = null;
-		        	Scanner name_scan = new Scanner(System.in);
 		        	String password = null;
-		        	Scanner password_scan = new Scanner(System.in);
-		        	String mail = null;
-		        	Scanner mail_scan = new Scanner(System.in);
 		        	String rol = "0";
-		        	Scanner rol_scan = new Scanner(System.in);
 		     
 		        	System.out.println("Introduzca su mail:");
-		        	mail = mail_scan.nextLine();
+		        	mail = opcScan.nextLine();
 		        	System.out.println(mail);
 		        	System.out.println("Introduzca su username:");
-		        	username = username_scan.nextLine();
+		        	username = opcScan.nextLine();
 		        	System.out.println("Introduzca su name:");
-		        	name = name_scan.nextLine();
+		        	name = opcScan.nextLine();
 		        	System.out.println("Introduzca su password:");
-		        	password = password_scan.nextLine();	
+		        	password = opcScan.nextLine();	
 		        	System.out.println("Introduzca 1 si es Admin, 2 si es usuario");
-		        	rol = rol_scan.nextLine();
+		        	rol = opcScan.nextLine();
 		        	if(rol.equals("1"))
 		        		rol = "admin";
 		        	else 
@@ -97,14 +85,6 @@ public class LoginView
 		        	
 		        	if(!managerUser.UserExist(mail)) {
 		        		managerUser.createUser(mail, username, name, password, rol, fecha, fecha);
-			        	username_scan.close();
-			        	name_scan.close();
-			        	password_scan.close();
-			        	mail_scan.close();
-			        	rol_scan.close();
-			        	opcScan.close();
-			        	return mail;
-		        	
 		        	}
 		        	else {
 		        		System.out.println("El mail que desea usar ya existe");
@@ -112,14 +92,6 @@ public class LoginView
 		        		System.exit(0);
 		        	}
 		        	opc = "0";
-		        	username_scan.close();
-		        	name_scan.close();
-		        	password_scan.close();
-		        	mail_scan.close();
-		        	rol_scan.close();
-		        	opcScan.close();
-		        	return mail;
-		        	
 		        }
 		        else
 		        { 
@@ -128,7 +100,7 @@ public class LoginView
 		        }
 		    }    
 		}
-		opcScan.close();
-		return mailNotUsed;
+		opcScan.close(); 
+		return mail; 
 	}
 }
