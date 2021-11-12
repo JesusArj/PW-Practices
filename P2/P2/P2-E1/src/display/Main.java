@@ -23,29 +23,28 @@ public class Main
 			   	System.out.println("Para salir del menu, pulse cualquier otra tecla."); 
 			   	
 			   	Scanner reader = new Scanner(System.in);
-					opc = reader.nextLine();
+				opc = reader.nextLine();
 
-
-					if("1".equals(opc)) 
-					{ 
-						UsuariosView userView = new UsuariosView(mail);
-						userView.userMenu();
-					}
-					else if("2".equals(opc))
-					{ 
-						CriticasView criticasView = new CriticasView(mail);
-						criticasView.CriticaMenu();
-					}
-					else if("3".equals(opc))
-					{ 
-						EspectaculosView espView = new EspectaculosView(mail);
-						espView.EspectaculoMenu();
-					}
-					else 
-					{
-						break;
-					}
-					reader.close(); 
+				if("1".equals(opc)) 
+				{ 
+					UsuariosView userView = new UsuariosView(mail);
+					userView.userMenu();
+				}
+				else if("2".equals(opc))
+				{ 
+					CriticasView criticasView = new CriticasView(mail);
+					criticasView.CriticaMenu();
+				}
+				else if("3".equals(opc))
+				{ 
+					EspectaculosView espView = new EspectaculosView(mail);
+					espView.EspectaculoMenu();
+				}
+				else 
+				{
+					break;
+				}
+				reader.close(); 
 			}
 		}
 	}

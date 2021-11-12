@@ -29,54 +29,9 @@ public class EspectaculosView
 	
 	public void EspectaculoMenu()
 	{
-		System.out.println("ESPECTACULOS REGISTRADOS: ");
-    	EspectaculoManager manager = new EspectaculoManager();
-		int countFechas =1; 
-    	for(int i=0; i<manager.requestEPs().size(); i++ )
-    	{
-    		System.out.println("------------------------------------------------------------------------------------");
-    		System.out.println("TITULO: " + manager.requestEPs().get(i).getTitulo());
-    		System.out.println("DESCRIPCION: " + manager.requestEPs().get(i).getDescripcion());
-    		System.out.println("CATEGORIA: " + manager.requestEPs().get(i).getCategoria());
-    		System.out.println("FECHA " + manager.requestEPs().get(i).getHoraFechaString());
-    		System.out.println("------------------------------------------------------------------------------------");
-    	}
-    	for(int i=0; i<manager.requestEMs().size(); i++ )
-    	{
-    		countFechas=1;
-    		System.out.println("------------------------------------------------------------------------------------");
-    		System.out.println("TITULO: " + manager.requestEMs().get(i).getTitulo());
-    		System.out.println("DESCRIPCION: " + manager.requestEMs().get(i).getDescripcion());
-    		System.out.println("CATEGORIA: " + manager.requestEMs().get(i).getCategoria());
-    		System.out.println("FECHAS: ");
-    		for(int j=0; j<manager.requestEMs().get(i).getFechas().size(); j++)
-    		{
-    			System.out.println("Fecha " + Integer.toString(countFechas) + ":" + manager.requestEMs().get(i).getFechas().get(j).getFechaString() );
-    			countFechas++; 
-    		}
-    		System.out.println("------------------------------------------------------------------------------------");
-    	}
-    	for(int i=0; i<manager.requestETs().size(); i++ )
-    	{
-    		countFechas=1;
-    		System.out.println("------------------------------------------------------------------------------------");
-    		System.out.println("TITULO: " + manager.requestETs().get(i).getTitulo());
-    		System.out.println("DESCRIPCION: " + manager.requestETs().get(i).getDescripcion());
-    		System.out.println("CATEGORIA: " + manager.requestETs().get(i).getCategoria());
-    		System.out.println("FECHAS: ");
-    		for(int j=0; j<manager.requestETs().get(i).getPases().size(); j++)
-    		{
-    			System.out.println(); 
-    			System.out.println("FECHA " + Integer.toString(countFechas) + ":");
-    			System.out.println("DIA: " + manager.requestETs().get(i).getPases().get(j).getDiaSemana());
-    			System.out.println("INICIO: " + manager.requestETs().get(i).getPases().get(j).getFechaInicioString());
-    			System.out.println("FINAL: " + manager.requestETs().get(i).getPases().get(j).getFechaFinalString());
-    			countFechas++; 
-    		}
-    		System.out.println("------------------------------------------------------------------------------------");
-    	}
-		/*String opc = "1";
 		
+		String opc = "1";
+		Scanner reader = new Scanner(System.in);
 		while(opc.equals("1") || opc.equals("2") || opc.equals("3") || opc.equals("4") || opc.equals("5"))
 		{
 			System.out.println("Bienvenido al menu de Espectaculos");
@@ -86,17 +41,9 @@ public class EspectaculosView
 			System.out.println("Para ver la informacion de un espectaculo concreto, pulse 4");
 			System.out.println("Para acceder al menu de administracion, pulse 5");
 			System.out.println("Para salir del menu, pulse cualquier otra tecla");
-			
-			 BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		        try 
-		        {
-					opc = reader.readLine();
-				} 
-		        catch (IOException e) 
-		        {
-					e.printStackTrace();
-				}
-		        
+
+			opc = reader.nextLine();
+
 		        if("1".equals(opc)) 
 		        {
 		        	System.out.println("ESPECTACULOS REGISTRADOS: ");
@@ -212,16 +159,11 @@ public class EspectaculosView
 		        else if("3".equals(opc))
 		        {
 		        	String category = null;  
-		        	System.out.println("Introduzca categor�a: ");
-		        	BufferedReader categoria = new BufferedReader(new InputStreamReader(System.in));
-		        	try 
-				    {
-		        		category= categoria.readLine();
-					} 
-				    catch (IOException e) 
-				    {
-				    	e.printStackTrace();
-				    }
+		        	System.out.println("Introduzca categoria: ");
+		        		
+		        	category= reader.nextLine();
+		
+				    
 		        	EspectaculoManager manager = new EspectaculoManager();
 	        		int countFechas =1; 
 		        	for(int i=0; i<manager.requestEPs().size(); i++ )
@@ -284,15 +226,9 @@ public class EspectaculosView
 		        {
 		        	String title = null;  
 		        	System.out.println("Introduzca titulo del espectaculo: ");
-		        	BufferedReader tituloreader = new BufferedReader(new InputStreamReader(System.in));
-		        	try 
-				    {
-		        		title= tituloreader.readLine();
-					} 
-				    catch (IOException e) 
-				    {
-				    	e.printStackTrace();
-				    }
+
+	        		title= reader.nextLine();
+
 		        	EspectaculoManager manager = new EspectaculoManager();
 	        		int countFechas =1; 
 		        	for(int i=0; i<manager.requestEPs().size(); i++ )
@@ -362,7 +298,7 @@ public class EspectaculosView
 	
 	public void EspectaculoMenuAdmin(String mail)
 	{
-		
+		Scanner reader = new Scanner(System.in);
 		EspectaculoManager manager = new EspectaculoManager(); 
 		UserManager manageruser = new UserManager(); 
 		for(int i =0; i < manageruser.requestByRol("admin").size(); i++)
@@ -377,20 +313,12 @@ public class EspectaculosView
 					System.out.println("Para dar de baja de un espectaculo, pulse 2");
 					System.out.println("Para actualizar la informacion sobre un espectaculo, pulse 3");
 					System.out.println("Para salir del menu, pulse cualquier otra tecla");
-					BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-				    try 
-			        {
-						opc = reader.readLine();
-					} 
-			        catch (IOException e) 
-				    {
-			        	e.printStackTrace();
-					}
+
+					opc = reader.nextLine();
 				        
 					if("1".equals(opc))
 					{
-						String opcEspectaculo = "1"; 
-						Scanner opcEspectaculo_reader = new Scanner(System.in); 
+						String opcEspectaculo = "1";
 						while(opcEspectaculo.equals("1") || opcEspectaculo.equals("2") || opcEspectaculo.equals("3"))
 						{
 							System.out.println("DAR DE ALTA ESPECTACULO");
@@ -398,59 +326,47 @@ public class EspectaculosView
 							System.out.println("Si quiere crear un espectaculo puntual, pulse 2");
 							System.out.println("Si quiere crear un espectaculo multiple, pulse 3");
 							System.out.println("Para volver, pulse cualquier otra tecla");
-							opcEspectaculo = opcEspectaculo_reader.nextLine(); 
+							opcEspectaculo = reader.nextLine(); 
 							if("1".equals(opcEspectaculo))
 							{
-								Scanner tituloReader, categoriaReader,descripcionReader,localidadesVentaReader,localidadesVendidasReader, fechaInicioReader, diaSemanaReader, fechaFinalReader, decisionReader; 
 								String titulo, descripcion, categoria, diaSemana; 
 								LocalDateTime fechaInicio, fechaFinal;
 								int localidadesVenta, localidadesVendidas;  
 								Boolean decisionPases = true;
 								ArrayList<PasesDTO> listPases = new ArrayList<PasesDTO>();
-								//crear espectaculo temporal
 								
 								EspectaculoManager managerPunt = new EspectaculoManager();
 								int id = managerPunt.generarIDPunt();
 								System.out.println("Introduce el titulo.");
-								tituloReader = new Scanner(System.in); 
-								titulo = tituloReader.nextLine(); 
+								titulo = reader.nextLine(); 
 								System.out.println("Introduce la categoria.");
-								categoriaReader = new Scanner(System.in); 
-								categoria = categoriaReader.nextLine(); 
+								categoria = reader.nextLine(); 
 								System.out.println("Introduce la descripcion.");
-								descripcionReader =  new Scanner(System.in); 
-								descripcion = descripcionReader.nextLine(); 
+								descripcion = reader.nextLine(); 
 								System.out.println("Introduce el numero de localidades a la venta.");
-								localidadesVentaReader = new Scanner(System.in); 
-								localidadesVenta = localidadesVentaReader.nextInt(); 
+								localidadesVenta = reader.nextInt(); 
 								System.out.println("Introduce el numero de localidades vendidas.");
-								localidadesVendidasReader = new Scanner(System.in); 
-								localidadesVendidas = localidadesVentaReader.nextInt();
+								localidadesVendidas = reader.nextInt();
 												
 								manager.createEspectaculoTemp(id, titulo, categoria, descripcion, localidadesVenta, localidadesVendidas);
-								
 								
 								do
 								{
 									System.out.println("Introduce fecha de Inicio. (Formato: yyyy-MM-dd HH:mm)");
-									fechaInicioReader = new Scanner(System.in); 
-									String aux = fechaInicioReader.nextLine();
+									String aux = reader.nextLine();
 									//conversion string to localdatetime
 									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 									fechaInicio = LocalDateTime.parse(aux, formatter);
 									
 									int idP = managerPunt.generarIDPases();
-									System.out.println("Introduce fecha de finalizacion. (Formato: yyyy-MM-dd HH:mm)");
-									fechaFinalReader = new Scanner(System.in); 
-									aux = fechaFinalReader.nextLine();
+									System.out.println("Introduce fecha de finalizacion. (Formato: yyyy-MM-dd HH:mm)"); 
+									aux = reader.nextLine();
 									//conversion string to localdatetime
 									fechaFinal = LocalDateTime.parse(aux, formatter);
 									System.out.println("Introduce dia de la Semana.");
-									diaSemanaReader =  new Scanner(System.in); 
-									diaSemana = diaSemanaReader.nextLine(); 
+									diaSemana = reader.nextLine(); 
 									System.out.println("Desea introducir mas pases? (y/n)");
-									decisionReader =  new Scanner(System.in); 
-									aux = decisionReader.nextLine(); 
+									aux = reader.nextLine(); 
 									while(true)
 									{
 										if(aux.equals("n") || aux.equals("N"))
@@ -466,102 +382,66 @@ public class EspectaculosView
 										else
 										{
 											System.out.println("Desea introducir mas pases? (y/n)");
-											aux = decisionReader.nextLine(); 
+											aux = reader.nextLine(); 
 										}
 									}
 									manager.createPase(idP,fechaInicio, diaSemana, fechaFinal, id); 
 
 									listPases.add(managerPunt.requestPase(id)); 
 								}while(decisionPases==true); 
-								
-								tituloReader.close(); 
-								categoriaReader.close(); 
-								descripcionReader.close(); 
-								localidadesVentaReader.close(); 
-								localidadesVendidasReader.close();
-								fechaInicioReader.close();
-								fechaFinalReader.close();
-								diaSemanaReader.close();
-								decisionReader.close();
-
 							}
 							if("2".equals(opcEspectaculo))
 							{
-								Scanner tituloReader, categoriaReader,descripcionReader,localidadesVentaReader,localidadesVendidasReader,fechaReader; 
 								String titulo, descripcion, categoria; 
 								LocalDateTime fecha;
 								int localidadesVenta, localidadesVendidas; 
-	
-								//crear espectaculo temporal
 								
 								EspectaculoManager managerPunt = new EspectaculoManager();
 								int id = managerPunt.generarIDPunt();
 								System.out.println("Introduce el titulo.");
-								tituloReader = new Scanner(System.in); 
-								titulo = tituloReader.nextLine(); 
+								titulo = reader.nextLine(); 
 								System.out.println("Introduce la categoria.");
-								categoriaReader = new Scanner(System.in); 
-								categoria = categoriaReader.nextLine(); 
+								categoria = reader.nextLine(); 
 								System.out.println("Introduce la descripcion.");
-								descripcionReader =  new Scanner(System.in); 
-								descripcion = descripcionReader.nextLine(); 
+								descripcion = reader.nextLine(); 
 								System.out.println("Introduce el numero de localidades a la venta.");
-								localidadesVentaReader = new Scanner(System.in); 
-								localidadesVenta = localidadesVentaReader.nextInt(); 
+								localidadesVenta = reader.nextInt(); 
 								System.out.println("Introduce el numero de localidades vendidas.");
-								localidadesVendidasReader = new Scanner(System.in); 
-								localidadesVendidas = localidadesVentaReader.nextInt();
+								localidadesVendidas = reader.nextInt();
 								System.out.println("Introduce fecha de Inicio. (Formato: yyyy-MM-dd HH:mm)");
-								fechaReader = new Scanner(System.in); 
-								String aux = fechaReader.nextLine();
+								String aux = reader.nextLine();
 								
 								DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-								fecha = LocalDateTime.parse(aux, formatter);
-								
+								fecha = LocalDateTime.parse(aux, formatter);		
 								
 								manager.createEspectaculoPunt(id, titulo, categoria, descripcion, localidadesVenta, localidadesVendidas, fecha);
-								
-								tituloReader.close(); 
-								categoriaReader.close(); 
-								descripcionReader.close(); 
-								localidadesVentaReader.close(); 
-								localidadesVendidasReader.close();
-								fechaReader.close();
 								
 							}
 							if("3".equals(opcEspectaculo))
 							{
-								Scanner tituloReader, categoriaReader,descripcionReader,localidadesVentaReader,localidadesVendidasReader, fechaReader, decisionReader; 
 								String titulo, descripcion, categoria;
 								LocalDateTime fecha;
 								int localidadesVenta, localidadesVendidas;  
 								Boolean decisionPases = true;
 								ArrayList<FechasDTO> listFechas = new ArrayList<FechasDTO>();
-								//crear espectaculo temporal
-								
+
 								EspectaculoManager managerMult = new EspectaculoManager();
 								int id = managerMult.generarIDMult();
 								System.out.println("Introduce el titulo.");
-								tituloReader = new Scanner(System.in); 
-								titulo = tituloReader.nextLine(); 
+								titulo = reader.nextLine(); 
 								System.out.println("Introduce la categoria.");
-								categoriaReader = new Scanner(System.in); 
-								categoria = categoriaReader.nextLine(); 
+								categoria = reader.nextLine(); 
 								System.out.println("Introduce la descripcion.");
-								descripcionReader =  new Scanner(System.in); 
-								descripcion = descripcionReader.nextLine(); 
+								descripcion = reader.nextLine(); 
 								System.out.println("Introduce el numero de localidades a la venta.");
-								localidadesVentaReader = new Scanner(System.in); 
-								localidadesVenta = localidadesVentaReader.nextInt(); 
+								localidadesVenta = reader.nextInt(); 
 								System.out.println("Introduce el numero de localidades vendidas.");
-								localidadesVendidasReader = new Scanner(System.in); 
-								localidadesVendidas = localidadesVentaReader.nextInt();								
+								localidadesVendidas = reader.nextInt();								
 								
 								do
 								{
 									System.out.println("Introduce fecha. (Formato: yyyy-MM-dd HH:mm)");
-									fechaReader = new Scanner(System.in); 
-									String aux = fechaReader.nextLine();
+									String aux = reader.nextLine();
 									//conversion string to localdatetime
 									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 									fecha = LocalDateTime.parse(aux, formatter);
@@ -569,8 +449,7 @@ public class EspectaculosView
 									int idF = managerMult.generarIDFechas();
  
 									System.out.println("Desea introducir mas fechas? (y/n)");
-									decisionReader =  new Scanner(System.in); 
-									aux = decisionReader.nextLine(); 
+									aux = reader.nextLine(); 
 									while(true)
 									{
 										if(aux.equals("n") || aux.equals("N"))
@@ -586,7 +465,7 @@ public class EspectaculosView
 										else
 										{
 											System.out.println("Desea introducir mas fechas? (y/n)");
-											aux = decisionReader.nextLine(); 
+											aux = reader.nextLine(); 
 										}
 									}
 									manager.createFecha(idF,fecha, id); 
@@ -595,23 +474,14 @@ public class EspectaculosView
 								}while(decisionPases==true); 
 								
 								managerMult.createEspectaculoMult(id, titulo, categoria, descripcion, localidadesVenta, localidadesVendidas,listFechas);
-								
-								tituloReader.close(); 
-								categoriaReader.close(); 
-								descripcionReader.close(); 
-								localidadesVentaReader.close(); 
-								localidadesVendidasReader.close();
-								fechaReader.close();
-								decisionReader.close();
+
 							}
 						}
-						opcEspectaculo_reader.close(); 
 					}
 					else if("2".equals(opc))
 					{
 						System.out.println("DAR DE BAJA ESPECTACULO");
 						String opcEspectaculo = "1"; 
-						Scanner opcEspectaculo_reader = new Scanner(System.in); 
 						while(opcEspectaculo.equals("1") || opcEspectaculo.equals("2") || opcEspectaculo.equals("3"))
 						{
 							System.out.println("DAR DE BAJA ESPECTACULO");
@@ -619,7 +489,7 @@ public class EspectaculosView
 							System.out.println("Si quiere eliminar un espectaculo puntual, pulse 2");
 							System.out.println("Si quiere eliminar un espectaculo multiple, pulse 3");
 							System.out.println("Para volver, pulse cualquier otra tecla");
-							opcEspectaculo = opcEspectaculo_reader.nextLine(); 
+							opcEspectaculo = reader.nextLine(); 
 							if("1".equals(opcEspectaculo))
 							{
 								EspectaculoManager deleteTemp = new EspectaculoManager();
@@ -632,8 +502,7 @@ public class EspectaculosView
 				        			System.out.println(e.getDescripcion());
 				        		}
 				        		System.out.println("Introduzca el numero del espectaculo a eliminar");
-				        		Scanner Esp_scan = new Scanner(System.in);
-					        	String Esp = Esp_scan.nextLine();
+					        	String Esp = reader.nextLine();
 					        	if(Integer.parseInt(Esp) > 0 && Integer.parseInt(Esp) < cont ) 
 					        	{
 					        		int id = esps.get(Integer.parseInt(Esp)).getID();
@@ -644,13 +513,9 @@ public class EspectaculosView
 					        	{
 					        		System.out.println("Espectaculo no valido");
 					        	}
-
-					        	Esp_scan.close();	
-				        	
 							}
 							else if("2".equals(opcEspectaculo))
 							{
-								//Todo: borrar espectaculo puntual
 								EspectaculoManager deletePunt = new EspectaculoManager();
 				        		ArrayList<EspectaculoPuntDTO> esps = deletePunt.requestEPs();
 				        		int cont = 1;
@@ -661,8 +526,7 @@ public class EspectaculosView
 				        			System.out.println(e.getDescripcion());
 				        		}
 				        		System.out.println("Introduzca el numero del espectaculo a eliminar");
-				        		Scanner Esp_scan = new Scanner(System.in);
-					        	String Esp = Esp_scan.nextLine();
+					        	String Esp = reader.nextLine();
 					        	if(Integer.parseInt(Esp) > 0 && Integer.parseInt(Esp) < cont ) 
 					        	{
 					        		int id = esps.get(Integer.parseInt(Esp)).getID();
@@ -674,12 +538,11 @@ public class EspectaculosView
 					        		System.out.println("Espectaculo no valido");
 					        	}
 
-					        	Esp_scan.close();
+					        	reader.close();
 							}
 							
 							else if("3".equals(opcEspectaculo))
 							{
-								//Todo: borrar espectaculo multiple	
 								EspectaculoManager deleteMult = new EspectaculoManager();
 				        		ArrayList<EspectaculoMultDTO> esps = deleteMult.requestEMs();
 				        		int cont = 1;
@@ -690,8 +553,7 @@ public class EspectaculosView
 				        			System.out.println(e.getDescripcion());
 				        		}
 				        		System.out.println("Introduzca el numero del espectaculo a eliminar");
-				        		Scanner Esp_scan = new Scanner(System.in);
-					        	String Esp = Esp_scan.nextLine();
+					        	String Esp = reader.nextLine();
 					        	if(Integer.parseInt(Esp) > 0 && Integer.parseInt(Esp) < cont ) 
 					        	{
 					        		int id = esps.get(Integer.parseInt(Esp)).getID();
@@ -702,17 +564,13 @@ public class EspectaculosView
 					        	{
 					        		System.out.println("Espectaculo no valido");
 					        	}
-
-					        	Esp_scan.close();
 							}
 						}
-						opcEspectaculo_reader.close();
 					}
 					else if("3".equals(opc))
 					{
 						
 						String opcEspectaculo = "1"; 
-						Scanner opcEspectaculo_reader = new Scanner(System.in); 
 						while(opcEspectaculo.equals("1") || opcEspectaculo.equals("2") || opcEspectaculo.equals("3"))
 						{
 							System.out.println("ACTUALIZAR INFORMACION DE ESPECTACULO");
@@ -720,7 +578,7 @@ public class EspectaculosView
 							System.out.println("Si quiere actualizar un espectaculo puntual, pulse 2");
 							System.out.println("Si quiere actualizar un espectaculo multiple, pulse 3");
 							System.out.println("Para volver, pulse cualquier otra tecla");
-							opcEspectaculo = opcEspectaculo_reader.nextLine(); 
+							opcEspectaculo = reader.nextLine(); 
 							if("1".equals(opcEspectaculo))
 							{
 								System.out.println("ACTUALIZACION DE DATOS");
@@ -736,11 +594,9 @@ public class EspectaculosView
 				        			System.out.println(e.getDescripcion());
 				        		}
 				        		System.out.println("Introduzca el numero del espectaculo a actualizar");
-				        		Scanner Esp_scan = new Scanner(System.in);
-					        	String Esp = Esp_scan.nextLine();
+					        	String Esp = reader.nextLine();
 					        	if(Integer.parseInt(Esp) > 0 && Integer.parseInt(Esp) < cont ) 
 					        	{
-					        		Scanner tituloReader, categoriaReader,descripcionReader,localidadesVentaReader,localidadesVendidasReader, fechaInicioReader = null, diaSemanaReader=null, fechaFinalReader=null, decisionReader=null; 
 									String titulo, descripcion, categoria, diaSemana; 
 									LocalDateTime fechaInicio, fechaFinal;
 									int localidadesVenta, localidadesVendidas;  
@@ -749,24 +605,18 @@ public class EspectaculosView
 									
 					        		int id = esps.get(Integer.parseInt(Esp)).getID();
 									System.out.println("Introduce el titulo.");
-									tituloReader = new Scanner(System.in); 
-									titulo = tituloReader.nextLine(); 
+									titulo = reader.nextLine(); 
 									System.out.println("Introduce la categoria.");
-									categoriaReader = new Scanner(System.in); 
-									categoria = categoriaReader.nextLine(); 
+									categoria = reader.nextLine(); 
 									System.out.println("Introduce la descripcion.");
-									descripcionReader =  new Scanner(System.in); 
-									descripcion = descripcionReader.nextLine(); 
+									descripcion = reader.nextLine(); 
 									System.out.println("Introduce el numero de localidades a la venta.");
-									localidadesVentaReader = new Scanner(System.in); 
-									localidadesVenta = localidadesVentaReader.nextInt(); 
+									localidadesVenta = reader.nextInt(); 
 									System.out.println("Introduce el numero de localidades vendidas.");
-									localidadesVendidasReader = new Scanner(System.in); 
-									localidadesVendidas = localidadesVentaReader.nextInt();	
+									localidadesVendidas = reader.nextInt();	
 									
 									System.out.println("Introduzca el numero del pase a actualizar");
-					        		Scanner Pase_scan = new Scanner(System.in);
-						        	String Pase = Pase_scan.nextLine();
+						        	String Pase = reader.nextLine();
 						        	
 									if(Integer.parseInt(Pase) > 0 && Integer.parseInt(Pase) < cont ) 
 						        	{
@@ -783,24 +633,20 @@ public class EspectaculosView
 							        			System.out.println(p.getFechaFinal());
 							        		}
 											System.out.println("Introduce fecha de Inicio. (Formato: yyyy-MM-dd HH:mm)");
-											fechaInicioReader = new Scanner(System.in); 
-											String aux = fechaInicioReader.nextLine();
+											String aux = reader.nextLine();
 											//conversion string to localdatetime
 											int idP = pases.get(Integer.parseInt(Pase)).getID();
 											
 											DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 											fechaInicio = LocalDateTime.parse(aux, formatter);
 											System.out.println("Introduce fecha de finalizacion. (Formato: yyyy-MM-dd HH:mm)");
-											fechaFinalReader = new Scanner(System.in); 
-											aux = fechaFinalReader.nextLine();
+											aux = reader.nextLine();
 											//conversion string to localdatetime
 											fechaFinal = LocalDateTime.parse(aux, formatter);
 											System.out.println("Introduce dia de la Semana.");
-											diaSemanaReader =  new Scanner(System.in); 
-											diaSemana = diaSemanaReader.nextLine(); 
+											diaSemana = reader.nextLine(); 
 											System.out.println("Desea actualizar otro pase? (y/n)");
-											decisionReader =  new Scanner(System.in); 
-											aux = decisionReader.nextLine(); 
+											aux = reader.nextLine(); 
 											while(true)
 											{
 												if(aux.equals("n") || aux.equals("N"))
@@ -816,7 +662,6 @@ public class EspectaculosView
 												else
 												{
 													System.out.println("Desea introducir mas pases? (y/n)");
-													aux = decisionReader.nextLine(); 
 												}
 											}
 											manager.updatePases(idP,fechaInicio, diaSemana, fechaFinal, id);  
@@ -824,26 +669,12 @@ public class EspectaculosView
 										listPases = esps.get(Integer.parseInt(Esp)).getPases();
 						        	}
 									manager.updateEspectaculoTemp(id, titulo, categoria, descripcion, localidadesVenta, localidadesVendidas, listPases);
-									
-									tituloReader.close(); 
-									categoriaReader.close(); 
-									descripcionReader.close(); 
-									localidadesVentaReader.close(); 
-									localidadesVendidasReader.close();
-									fechaInicioReader.close();
-									fechaFinalReader.close();
-									diaSemanaReader.close();
-									decisionReader.close();
-					        		Pase_scan.close();
-									
 					        		System.out.println("Espectaculo actualizado.");
 					        	}
 					        	else 
 					        	{
 					        		System.out.println("Espectaculo no valido");
 					        	}
-
-					        	Esp_scan.close();	
 							}
 							else if("2".equals(opcEspectaculo))
 							{
@@ -861,11 +692,9 @@ public class EspectaculosView
 				        			System.out.println(e.getDescripcion());
 				        		}
 				        		System.out.println("Introduzca el numero del espectaculo a actualizar");
-				        		Scanner Esp_scan = new Scanner(System.in);
-					        	String Esp = Esp_scan.nextLine();
+					        	String Esp = reader.nextLine();
 					        	if(Integer.parseInt(Esp) > 0 && Integer.parseInt(Esp) < cont ) 
 					        	{
-					        		Scanner tituloReader, categoriaReader,descripcionReader,localidadesVentaReader,localidadesVendidasReader,fechaReader; 
 									String titulo, descripcion, categoria; 
 									LocalDateTime fecha;
 									int localidadesVenta, localidadesVendidas;  
@@ -873,36 +702,22 @@ public class EspectaculosView
 									
 					        		int id = esps.get(Integer.parseInt(Esp)).getID();
 									System.out.println("Introduce el titulo.");
-									tituloReader = new Scanner(System.in); 
-									titulo = tituloReader.nextLine(); 
+									titulo = reader.nextLine(); 
 									System.out.println("Introduce la categoria.");
-									categoriaReader = new Scanner(System.in); 
-									categoria = categoriaReader.nextLine(); 
+									categoria = reader.nextLine(); 
 									System.out.println("Introduce la descripcion.");
-									descripcionReader =  new Scanner(System.in); 
-									descripcion = descripcionReader.nextLine(); 
+									descripcion = reader.nextLine(); 
 									System.out.println("Introduce el numero de localidades a la venta.");
-									localidadesVentaReader = new Scanner(System.in); 
-									localidadesVenta = localidadesVentaReader.nextInt(); 
+									localidadesVenta = reader.nextInt(); 
 									System.out.println("Introduce el numero de localidades vendidas.");
-									localidadesVendidasReader = new Scanner(System.in); 
-									localidadesVendidas = localidadesVentaReader.nextInt();	
+									localidadesVendidas = reader.nextInt();	
 		
 									System.out.println("Introduce fecha de Inicio. (Formato: yyyy-MM-dd HH:mm)");
-									fechaReader = new Scanner(System.in); 
-									String aux = fechaReader.nextLine();
+									String aux = reader.nextLine();
 									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 									fecha = LocalDateTime.parse(aux, formatter);
 									
 									manager.updateEspectaculoPunt(id, titulo, categoria, descripcion, localidadesVenta, localidadesVendidas, fecha);
-									
-									tituloReader.close(); 
-									categoriaReader.close(); 
-									descripcionReader.close(); 
-									localidadesVentaReader.close(); 
-									localidadesVendidasReader.close();
-									fechaReader.close();
-									
 					        		System.out.println("Espectaculo actualizado.");
 					        	}
 					        	else 
@@ -910,7 +725,6 @@ public class EspectaculosView
 					        		System.out.println("Espectaculo no valido");
 					        	}
 
-					        	Esp_scan.close();
 							}
 							else if("3".equals(opcEspectaculo))
 							{
@@ -928,11 +742,9 @@ public class EspectaculosView
 				        			System.out.println(e.getDescripcion());
 				        		}
 				        		System.out.println("Introduzca el numero del espectaculo a actualizar");
-				        		Scanner Esp_scan = new Scanner(System.in);
-					        	String Esp = Esp_scan.nextLine();
+					        	String Esp = reader.nextLine();
 					        	if(Integer.parseInt(Esp) > 0 && Integer.parseInt(Esp) < cont ) 
 					        	{
-					        		Scanner tituloReader, categoriaReader,descripcionReader,localidadesVentaReader,localidadesVendidasReader, fechaReader = null, DecisionReader = null; 
 									String titulo, descripcion, categoria; 
 									LocalDateTime fecha;
 									int localidadesVenta, localidadesVendidas;  
@@ -941,20 +753,15 @@ public class EspectaculosView
 									
 					        		int id = esps.get(Integer.parseInt(Esp)).getID();
 									System.out.println("Introduce el titulo.");
-									tituloReader = new Scanner(System.in); 
-									titulo = tituloReader.nextLine(); 
+									titulo = reader.nextLine(); 
 									System.out.println("Introduce la categoria.");
-									categoriaReader = new Scanner(System.in); 
-									categoria = categoriaReader.nextLine(); 
+									categoria = reader.nextLine(); 
 									System.out.println("Introduce la descripcion.");
-									descripcionReader =  new Scanner(System.in); 
-									descripcion = descripcionReader.nextLine(); 
+									descripcion = reader.nextLine(); 
 									System.out.println("Introduce el numero de localidades a la venta.");
-									localidadesVentaReader = new Scanner(System.in); 
-									localidadesVenta = localidadesVentaReader.nextInt(); 
+									localidadesVenta = reader.nextInt(); 
 									System.out.println("Introduce el numero de localidades vendidas.");
-									localidadesVendidasReader = new Scanner(System.in); 
-									localidadesVendidas = localidadesVentaReader.nextInt();	
+									localidadesVendidas = reader.nextInt();	
 						        	
 									ArrayList<FechasDTO> fechas = updateMult.requestFechas();
 					        		int count = 1;
@@ -965,8 +772,7 @@ public class EspectaculosView
 					        		}
 					        		
 					        		System.out.println("Introduzca el numero de la fecha a actualizar");
-					        		Scanner Fecha_scan = new Scanner(System.in);
-						        	String Fecha = Fecha_scan.nextLine();
+						        	String Fecha = reader.nextLine();
 						        	
 									if(Integer.parseInt(Fecha) > 0 && Integer.parseInt(Fecha) < cont ) 
 						        	{
@@ -980,12 +786,10 @@ public class EspectaculosView
 							        		}
 							        		
 							        		System.out.println("Confirme  el numero de la fecha a actualizar");
-							        		Fecha_scan = new Scanner(System.in);
-							        		Fecha = Fecha_scan.nextLine();
+							        		Fecha = reader.nextLine();
 								        	
 											System.out.println("Introduce fecha. (Formato: yyyy-MM-dd HH:mm)");
-											fechaReader = new Scanner(System.in); 
-											String aux = fechaReader.nextLine();
+											String aux = reader.nextLine();
 											//conversion string to localdatetime
 											DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 											fecha = LocalDateTime.parse(aux, formatter);
@@ -993,8 +797,7 @@ public class EspectaculosView
 											int idP = fechas.get(Integer.parseInt(Fecha)).getID();
 											
 											System.out.println("Desea actualizar otra fecha? (y/n)");
-											DecisionReader =  new Scanner(System.in); 
-											aux = DecisionReader.nextLine(); 
+											aux = reader.nextLine(); 
 											while(true)
 											{
 												if(aux.equals("n") || aux.equals("N"))
@@ -1010,7 +813,7 @@ public class EspectaculosView
 												else
 												{
 													System.out.println("Desea actualizar mas fechas? (y/n)");
-													aux = DecisionReader.nextLine(); 
+													aux = reader.nextLine(); 
 												}
 											}
 											manager.updateFechas(idP,fecha, id);  
@@ -1020,13 +823,7 @@ public class EspectaculosView
 									listFechas = esps.get(Integer.parseInt(Esp)).getFechas();
 									manager.updateEspectaculoMultiple(id, titulo, categoria, descripcion, localidadesVenta, localidadesVendidas, listFechas);
 									
-									tituloReader.close(); 
-									categoriaReader.close(); 
-									descripcionReader.close(); 
-									localidadesVentaReader.close(); 
-									localidadesVendidasReader.close();
-									DecisionReader.close();
-					        		Fecha_scan.close();
+
 									
 					        		System.out.println("Espectaculo actualizado.");
 					        	}
@@ -1035,10 +832,8 @@ public class EspectaculosView
 					        		System.out.println("Espectaculo no valido");
 					        	}
 
-					        	Esp_scan.close();
 							}
 						}
-						opcEspectaculo_reader.close();
 					}
 				}
 		
@@ -1047,6 +842,6 @@ public class EspectaculosView
 				{
 					System.out.println("No tiene permiso para acceder al menu de Administracion");
 				}
-			}*/
+			}
 		}
 	}

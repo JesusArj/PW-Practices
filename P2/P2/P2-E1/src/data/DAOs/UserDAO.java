@@ -11,7 +11,7 @@ import data.common.DBConnection;
 
 public class UserDAO {
 
-	String ruta ="D:\\Descargas\\PW-Practices-master\\P2\\P2\\P2-E1\\src\\sql.properties";
+	String ruta ="/home/valentin/Downloads/PW-Practices-master/P2/P2/P2-E1/src/sql.properties";
 	public void createUser(UserDTO newUser) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();

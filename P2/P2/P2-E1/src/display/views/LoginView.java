@@ -44,6 +44,7 @@ public class LoginView
 		        	
 		        	if(managerUserLogin.login(mail,password)) {
 		        		System.out.println("Bienvenido");
+		        		return mail;
 		        	}
 		        	else {
 		        		System.out.println("Login incorrecto");

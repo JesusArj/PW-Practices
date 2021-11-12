@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class EspectaculoDAO {
 
-	String ruta ="D:\\Descargas\\PW-Practices-master\\P2\\P2\\P2-E1\\src\\sql.properties";
+	String ruta ="/home/valentin/Downloads/PW-Practices-master/P2/P2/P2-E1/src/sql.properties";
 	private boolean existIdPunt(int id)
 	{
 		DBConnection dbConnection = new DBConnection();
@@ -646,7 +646,7 @@ public class EspectaculoDAO {
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
 					LocalDateTime fecha_date = LocalDateTime.parse(fecha, formatter);
 					listFechas.add(new FechasDTO(Integer.parseInt(idf), fecha_date));
-				} 
+				}
 				listEMs.add(new EspectaculoMultDTO(Integer.parseInt(ident), titulo, categoria, descripcion, Integer.parseInt(localidades), Integer.parseInt(localidadesvendidas), listFechas));
 			}
 
