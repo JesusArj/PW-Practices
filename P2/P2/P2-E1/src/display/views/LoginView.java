@@ -1,6 +1,5 @@
 package display.views;
 
-import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -12,12 +11,7 @@ public class LoginView
 	
 	public String loginMenu() 
 	{
-		
-		String rutaAbsoluta = new File("").getAbsolutePath();
-		String rutaFicheroProp = rutaAbsoluta + "/sql.properties";
-		System.out.println(rutaAbsoluta);
-		System.out.println(rutaFicheroProp);
-		
+
 		String mailNotUsed = "";
 		String opc="1";
 		Scanner opcScan = new Scanner(System.in);

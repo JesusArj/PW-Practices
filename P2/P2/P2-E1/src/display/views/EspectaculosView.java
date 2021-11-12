@@ -29,7 +29,53 @@ public class EspectaculosView
 	
 	public void EspectaculoMenu()
 	{
-		String opc = "1";
+		System.out.println("ESPECTACULOS REGISTRADOS: ");
+    	EspectaculoManager manager = new EspectaculoManager();
+		int countFechas =1; 
+    	for(int i=0; i<manager.requestEPs().size(); i++ )
+    	{
+    		System.out.println("------------------------------------------------------------------------------------");
+    		System.out.println("TITULO: " + manager.requestEPs().get(i).getTitulo());
+    		System.out.println("DESCRIPCION: " + manager.requestEPs().get(i).getDescripcion());
+    		System.out.println("CATEGORIA: " + manager.requestEPs().get(i).getCategoria());
+    		System.out.println("FECHA " + manager.requestEPs().get(i).getHoraFechaString());
+    		System.out.println("------------------------------------------------------------------------------------");
+    	}
+    	for(int i=0; i<manager.requestEMs().size(); i++ )
+    	{
+    		countFechas=1;
+    		System.out.println("------------------------------------------------------------------------------------");
+    		System.out.println("TITULO: " + manager.requestEMs().get(i).getTitulo());
+    		System.out.println("DESCRIPCION: " + manager.requestEMs().get(i).getDescripcion());
+    		System.out.println("CATEGORIA: " + manager.requestEMs().get(i).getCategoria());
+    		System.out.println("FECHAS: ");
+    		for(int j=0; j<manager.requestEMs().get(i).getFechas().size(); j++)
+    		{
+    			System.out.println("Fecha " + Integer.toString(countFechas) + ":" + manager.requestEMs().get(i).getFechas().get(j).getFechaString() );
+    			countFechas++; 
+    		}
+    		System.out.println("------------------------------------------------------------------------------------");
+    	}
+    	for(int i=0; i<manager.requestETs().size(); i++ )
+    	{
+    		countFechas=1;
+    		System.out.println("------------------------------------------------------------------------------------");
+    		System.out.println("TITULO: " + manager.requestETs().get(i).getTitulo());
+    		System.out.println("DESCRIPCION: " + manager.requestETs().get(i).getDescripcion());
+    		System.out.println("CATEGORIA: " + manager.requestETs().get(i).getCategoria());
+    		System.out.println("FECHAS: ");
+    		for(int j=0; j<manager.requestETs().get(i).getPases().size(); j++)
+    		{
+    			System.out.println(); 
+    			System.out.println("FECHA " + Integer.toString(countFechas) + ":");
+    			System.out.println("DIA: " + manager.requestETs().get(i).getPases().get(j).getDiaSemana());
+    			System.out.println("INICIO: " + manager.requestETs().get(i).getPases().get(j).getFechaInicioString());
+    			System.out.println("FINAL: " + manager.requestETs().get(i).getPases().get(j).getFechaFinalString());
+    			countFechas++; 
+    		}
+    		System.out.println("------------------------------------------------------------------------------------");
+    	}
+		/*String opc = "1";
 		
 		while(opc.equals("1") || opc.equals("2") || opc.equals("3") || opc.equals("4") || opc.equals("5"))
 		{
@@ -1001,6 +1047,6 @@ public class EspectaculosView
 				{
 					System.out.println("No tiene permiso para acceder al menu de Administracion");
 				}
-			}
+			}*/
 		}
 	}
