@@ -250,14 +250,14 @@ public class EspectaculoDAO {
 			query=query.replaceAll("vartitulo", newPunt.getTitulo());
 			query=query.replaceAll("vardescripcion", newPunt.getDescripcion());
 			query=query.replaceAll("varlocalidades", Integer.toString(newPunt.getLocalidadesVenta()));
-			query=query.replaceAll("varlocalidadesvendidas", Integer.toString(newPunt.getLocalidadesVendidas())); 
+			query=query.replaceAll("varlocalidadesven", Integer.toString(newPunt.getLocalidadesVendidas())); 
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
 			String formattedDateTime = newPunt.getHoraFecha().format(formatter);
 			query=query.replaceAll("varfecha",	formattedDateTime);
 			query=query.replaceAll("varcategoria", newPunt.getCategoria());
 			
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -275,7 +275,7 @@ public class EspectaculoDAO {
 			query=query.replaceAll("varid", Integer.toString(id));
 			
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -409,7 +409,7 @@ public class EspectaculoDAO {
 			query=query.replaceAll("varlocalidadesvendidas", Integer.toString(newMult.getLocalidadesVendidas())); 
 			query=query.replaceAll("categoria", newMult.getCategoria());
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -431,12 +431,12 @@ public class EspectaculoDAO {
 			query=query.replaceAll("varfecha", formattedDateTime);
 			
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 			
 			String query2=prop.getProperty("createMFecha");
 			query2=query2.replaceAll("varid", Integer.toString(idEspectaculo));
 			query2=query2.replaceAll("varidfecha",Integer.toString(newFecha.getID()));
-			stmt.executeQuery(query2);
+			stmt.executeUpdate(query2);
 			
 			dbConnection.closeConnection();
 		} catch (Exception e){
@@ -455,15 +455,15 @@ public class EspectaculoDAO {
 			query=query.replaceAll("varid", Integer.toString(id));
 			
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 			
 			String query2 = prop.getProperty("deleteFecha");
 			query2 = query2.replaceAll("varid", Integer.toString(id));
-			stmt.executeQuery(query2);
+			stmt.executeUpdate(query2);
 			
 			String query3 = prop.getProperty("deleteMFecha2");
 			query3 = query3.replaceAll("varid", Integer.toString(id));
-			stmt.executeQuery(query3);
+			stmt.executeUpdate(query3);
 
 			dbConnection.closeConnection();
 		} catch (Exception e){
@@ -481,7 +481,7 @@ public class EspectaculoDAO {
 			query=query.replaceAll("varid", Integer.toString(deleteFecha.getID()));
 			
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 
 			dbConnection.closeConnection();
 		} catch (Exception e){
@@ -500,7 +500,7 @@ public class EspectaculoDAO {
 			query=query.replaceAll("varid", Integer.toString(idfecha));
 			
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 
 			dbConnection.closeConnection();
 		} catch (Exception e){
@@ -546,7 +546,7 @@ public class EspectaculoDAO {
 			query=query.replaceAll("varfecha", formattedDateTime);
 			
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 
 			dbConnection.closeConnection();
 		} catch (Exception e){
@@ -677,7 +677,7 @@ public class EspectaculoDAO {
 			query=query.replaceAll("varlocalidadesvendidas", Integer.toString(newTemp.getLocalidadesVendidas())); 
 			query=query.replaceAll("categoria", newTemp.getCategoria());
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -705,12 +705,12 @@ public class EspectaculoDAO {
 			query=query.replaceAll("varfechaFinal", formattedDateTime);
 			
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 			
 			String query2=prop.getProperty("createMPase");
 			query2=query2.replaceAll("varid", Integer.toString(idEspectaculo));
 			query2=query2.replaceAll("varidpase",Integer.toString(newPase.getID()));
-			stmt.executeQuery(query2);
+			stmt.executeUpdate(query2);
 			
 			dbConnection.closeConnection();
 		} catch (Exception e){
@@ -729,15 +729,15 @@ public class EspectaculoDAO {
 			query=query.replaceAll("varid", Integer.toString(id));
 			
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 			
 			String query2 = prop.getProperty("deletePases");
 			query2 = query2.replaceAll("varid", Integer.toString(id));
-			stmt.executeQuery(query2);
+			stmt.executeUpdate(query2);
 			
 			String query3 = prop.getProperty("deleteMPases2");
 			query3 = query3.replaceAll("varid", Integer.toString(id));
-			stmt.executeQuery(query3);
+			stmt.executeUpdate(query3);
 
 			dbConnection.closeConnection();
 		} catch (Exception e){
@@ -755,7 +755,7 @@ public class EspectaculoDAO {
 			query=query.replaceAll("varid", Integer.toString(deletePase.getID()));
 			
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 
 			dbConnection.closeConnection();
 		} catch (Exception e){
@@ -774,7 +774,7 @@ public class EspectaculoDAO {
 			query=query.replaceAll("varid", Integer.toString(idpase));
 			
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 
 			dbConnection.closeConnection();
 		} catch (Exception e){
@@ -826,7 +826,7 @@ public class EspectaculoDAO {
 			query=query.replaceAll("varfechaFinal", formattedDateTime);
 			
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 
 			dbConnection.closeConnection();
 		} catch (Exception e){

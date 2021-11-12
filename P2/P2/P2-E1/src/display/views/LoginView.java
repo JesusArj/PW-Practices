@@ -49,9 +49,10 @@ public class LoginView
 		        	
 		        	if(managerUserLogin.login(mail,password)) {
 		        		System.out.println("Bienvenido");
-		        		mail_scan.close();
 			        	password_scan.close();
-		        		return mail;
+			        	mail_scan.close();
+			        	opcScan.close();
+			        	return mail;
 		        	}
 		        	else {
 		        		System.out.println("Login incorrecto");
@@ -60,6 +61,7 @@ public class LoginView
 		        	}
 		        	mail_scan.close();
 		        	password_scan.close();
+		        	opcScan.close();
 		        }
 		        else if("2".equals(opc))
 		        { 
@@ -101,7 +103,13 @@ public class LoginView
 		        	
 		        	if(!managerUser.UserExist(mail)) {
 		        		managerUser.createUser(mail, username, name, password, rol, fecha, fecha);
-		        		mail_scan.close();
+			        	username_scan.close();
+			        	name_scan.close();
+			        	password_scan.close();
+			        	mail_scan.close();
+			        	rol_scan.close();
+			        	opcScan.close();
+			        	return mail;
 		        	
 		        	}
 		        	else {
@@ -115,7 +123,7 @@ public class LoginView
 		        	password_scan.close();
 		        	mail_scan.close();
 		        	rol_scan.close();
-		        	
+		        	opcScan.close();
 		        	return mail;
 		        	
 		        }

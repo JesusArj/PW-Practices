@@ -27,7 +27,7 @@ public class EspectaculosView
 		this.mail = mail;
 	}
 	
-	public void EspectaculoMenu(String mail)
+	public void EspectaculoMenu()
 	{
 		String opc = "1";
 		
@@ -1003,6 +1003,4 @@ public class EspectaculosView
 				}
 			}
 		}
-			
-		
 	}

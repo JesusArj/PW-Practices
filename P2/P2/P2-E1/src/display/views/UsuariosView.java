@@ -22,46 +22,9 @@ public class UsuariosView
 	
 	public void userMenu() 
 	{
-		//String opc = "0";
-		
-		//Opcion 2:
-    	
-		System.out.println("ACTUALIZACION DE DATOS");
-    	System.out.println("Estos son sus datos actuales:");
-    	UserManager managerUser = new UserManager();
-    	UserDTO user = managerUser.requestUser(this.getMail());
-    	System.out.println("Mail : " + user.getMail());
-    	System.out.println("Name : " + user.getName());
-    	System.out.println("Username : " + user.getUsername());  
+		String opc = "0";
 
-    	System.out.println("IMPORTANTE: Si hay un valor que NO desee actualizar, escriba su valor actual");
-    	Scanner username_scan = new Scanner(System.in);
-    	
-    	String name = null;
-    	Scanner name_scan = new Scanner(System.in);
-    	
-    	String password = null;
-    	Scanner password_scan = new Scanner(System.in);
-    	
-    	System.out.println("Introduzca su nuevo nombre de usuario");
-    
-    	String username = username_scan.nextLine();
-    	System.out.println(username);
-    	
-    	System.out.println("Introduzca su nuevo nombre");
-    	name = name_scan.nextLine();
-    	
-    	System.out.println("Introduzca su nueva Password");
-    	password = password_scan.nextLine();
-
-    	UserManager managerUserUpdate = new UserManager();
-    	managerUserUpdate.updateUser(this.getMail(), username, name, password);
-    	
-    	username_scan.close();
-    	name_scan.close();
-    	password_scan.close();
-    	
-		/*while(opc.equals("1") || opc.equals("2") || opc.equals("3") || opc.equals("0")) {
+		while(opc.equals("1") || opc.equals("2") || opc.equals("3") || opc.equals("0")) {
 			System.out.println("Bienvenido a nuestro Menu de gestion de usuarios.");
 		    System.out.println("Para ver los datos de su perfil, pulse 1.");
 		    System.out.println("Para actualizar sus datos de usuario, pulse 2.");
@@ -125,11 +88,11 @@ public class UsuariosView
 		        	Scanner delete_scan = new Scanner(System.in);
 		        	String delete = delete_scan.nextLine();
 		        	if(delete.equals("Y")) {
-		        		UserManager managerUserDelete = new UserManager();
-		        		managerUserDelete.deleteUser(this.getMail());
-		        		System.out.println("Su usuario ha sido borrado.");
-		        		System.out.println("Gracias por usar nuestro sistema.");
-		        		System.exit(0);
+		        	UserManager managerUserDelete = new UserManager();
+		        	managerUserDelete.deleteUser(this.getMail());
+		       		System.out.println("Su usuario ha sido borrado.");
+		       		System.out.println("Gracias por usar nuestro sistema.");
+		       		System.exit(0);
 			    	}
 		        	else {
 		        		System.out.println("Su usuario no ha sido borrado.");	
@@ -142,6 +105,6 @@ public class UsuariosView
 		        }
 	        }
 	        opcScan.close();
-		}*/
+		}
 	}
 }

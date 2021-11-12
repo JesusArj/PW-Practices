@@ -52,7 +52,7 @@ public class UserDAO {
 			
 			while (rs.next()) {
 				String name = rs.getString("name");
-				String email = rs.getString("email");
+				String email = rs.getString("mail");
 				String username = rs.getString("username");
 				users.add(new UserDTO(name, email,username));
 			}
@@ -118,7 +118,7 @@ public class UserDAO {
 	public void updateUser(UserDTO updateUser) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("D:/Descargas/PW-Practices-master/P2/P2-E1/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
+		try(InputStream input = new FileInputStream("/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("updateUser");
