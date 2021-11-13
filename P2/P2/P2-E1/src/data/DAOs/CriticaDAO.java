@@ -14,7 +14,7 @@ import data.common.DBConnection;
 
 public class CriticaDAO {
 
-	String ruta ="D:\\Descargas\\PW-Practices-master\\PW-Practices-master\\P2\\P2\\P2-E1\\src\\sql.properties";
+	String ruta ="C:\\Users\\jesus\\eclipse-workspace\\P2\\P2-E1\\src\\sql.properties";
 	public String selectTituloEsp(int id) {
 		String titulo = null;
 		DBConnection dbConnection = new DBConnection();
@@ -89,7 +89,7 @@ public class CriticaDAO {
 			query=query.replaceAll("varmail", newCritica.getMail());
 			query=query.replaceAll("varidesp", Integer.toString(newCritica.getIdEsp()));
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -108,7 +108,7 @@ public class CriticaDAO {
 			query=query.replaceAll("varid", Integer.toString(id));
 			query=query.replaceAll("varvoto", voto);
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -125,7 +125,7 @@ public class CriticaDAO {
 			String query = prop.getProperty("deleteVC");
 			query=query.replaceAll("varid", Integer.toString(id));
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -143,7 +143,7 @@ public class CriticaDAO {
 			query=query.replaceAll("varmail", mail);
 			query=query.replaceAll("varid", Integer.toString(id));
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -193,7 +193,7 @@ public class CriticaDAO {
 			query=query.replaceAll("varlike", Integer.toString(updateCritica.getLike()));
 			query=query.replaceAll("vardislike", Integer.toString(updateCritica.getDislike()));
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -209,12 +209,12 @@ public class CriticaDAO {
 			String query = prop.getProperty("deleteCritica");
 			query=query.replaceAll("varid", Integer.toString(id));
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 			
 			String query2 = prop.getProperty("deleteVC");
 			query2=query2.replaceAll("varid", Integer.toString(id));
 			Statement stmt2 = connection.createStatement();
-			stmt2.executeQuery(query2);
+			stmt2.executeUpdate(query2);
 			
 			dbConnection.closeConnection();
 		} catch (Exception e){
