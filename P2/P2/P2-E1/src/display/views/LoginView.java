@@ -56,7 +56,6 @@ public class LoginView
 		     
 		        	System.out.println("Introduzca su mail:");
 		        	mail = opcScan.nextLine();
-		        	System.out.println(mail);
 		        	System.out.println("Introduzca su username:");
 		        	username = opcScan.nextLine();
 		        	System.out.println("Introduzca su name:");
