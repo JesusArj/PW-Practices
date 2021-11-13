@@ -1,6 +1,4 @@
 package display.views;
-
-import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -93,11 +91,9 @@ public class LoginView
 		        else
 		        { 
 		        	System.out.println("Saliendo...\n\n");
-		        	System.exit(0);
 		        }
 		    }    
 		}
-		opcScan.close(); 
 		return mail; 
 	}
 }
