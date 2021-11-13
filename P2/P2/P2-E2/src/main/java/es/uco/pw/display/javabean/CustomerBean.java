@@ -9,6 +9,7 @@ public class CustomerBean implements java.io.Serializable {
 	private String emailUser = "";
 	private String userName = "";
 	private LocalDateTime regTime;
+	private String rol = "";
 
 	public String getEmailUser() {
 		return emailUser;
@@ -32,6 +33,14 @@ public class CustomerBean implements java.io.Serializable {
 
 	public void setRegisterTime(LocalDateTime registerTime) {
 		this.regTime = registerTime;
+	}
+
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
 	}
 	
 }

@@ -19,6 +19,7 @@ if (customerBean != null && !customerBean.getEmailUser().equals("")) {
 } else {
 %>
 <%= messageNextPage %><br/><br/>
+<h1>Inicio de sesion</h1>
 Bienvenido a nuestro sistema:
 
 <form method="post" action="../controller/loginController.jsp">

@@ -73,6 +73,16 @@ public class UserDTO{
 		this.registerTime = registerTime;
 	}
 	
+	public UserDTO(String name, String mail, String username, String passwd, String rol, LocalDateTime registerTime)
+	{
+		this.name=name; 
+		this.mail=mail;
+		this.username = username;
+		this.passwd = passwd;
+		this.rol = rol;
+		this.registerTime = registerTime;
+	}
+	
 	public UserDTO(String name, String mail, String username, String rol)
 	{
 		this.name=name; 

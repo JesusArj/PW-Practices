@@ -21,9 +21,12 @@ if (customerBean == null || customerBean.getEmailUser().equals("")) {
 				if (passwd.equals(password)){
 					String username = u.getUsername();
 					LocalDateTime regTime = u.getRegisterTime();
+					String rol = u.getRol();
 					%>
+					<jsp:setProperty property="emailUser" value="<%=mail%>" name="customerBean"/>
 					<jsp:setProperty property="userName" value="<%=username%>" name="customerBean"/>
 					<jsp:setProperty property="regTime" value="<%=regTime%>" name="customerBean"/>
+					<jsp:setProperty property="rol" value="<%=rol%>" name="customerBean"/>
 					<%
 				}
 			}
