@@ -11,7 +11,6 @@ public class Main
 		LoginView login = new LoginView();
 		String mail = login.loginMenu();
 		String opc="0";
-		System.out.println(mail);
 	   	Scanner reader = new Scanner(System.in);
 		if(!mail.equals(""))
 		{

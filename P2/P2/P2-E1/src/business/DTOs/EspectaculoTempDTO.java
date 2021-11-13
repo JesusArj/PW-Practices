@@ -10,12 +10,12 @@ public class EspectaculoTempDTO extends EspectaculoDTO{
 	}
 	public EspectaculoTempDTO(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas,ArrayList<PasesDTO> pases ) 
 	{
-		super(id,titulo,categoria,descripcion); 
+		super(id,titulo,categoria,descripcion, localidades_venta, localidades_vendidas); 
 		this.pases = pases; 
 	}
 	public EspectaculoTempDTO(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas) 
 	{
-		super(id,titulo,categoria,descripcion); 
+		super(id,titulo,categoria,descripcion, localidades_venta, localidades_vendidas); 
 	}
 	
 	

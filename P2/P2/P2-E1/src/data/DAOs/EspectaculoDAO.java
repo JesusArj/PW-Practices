@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class EspectaculoDAO {
 
-	String ruta ="D:\\\\Descargas\\\\PW-Practices-master\\\\PW-Practices-master\\\\P2\\\\P2\\\\P2-E1\\\\src\\\\sql.properties";
+	String ruta ="/home/valentin/Downloads/PW-Practices-master/P2/P2/P2-E1/src/sql.properties";
 	private boolean existIdPunt(int id)
 	{
 		DBConnection dbConnection = new DBConnection();
@@ -245,23 +245,17 @@ public class EspectaculoDAO {
 		try(InputStream input = new FileInputStream(ruta)){
 			Properties prop = new Properties();
 			prop.load(input);
-			System.out.println(newPunt.getLocalidadesVenta());
-			System.out.println(newPunt.getLocalidadesVendidas());
 			String query = prop.getProperty("createEP");
 			query=query.replaceAll("varid", Integer.toString(newPunt.getID())); 
 			query=query.replaceAll("vartitulo", newPunt.getTitulo());
 			query=query.replaceAll("vardescripcion", newPunt.getDescripcion());
 			System.out.println(newPunt.getLocalidadesVenta());
 			query=query.replaceAll("varlocalidades", Integer.toString(newPunt.getLocalidadesVenta()));
-			query=query.replaceAll("varlocalidadesven", Integer.toString(newPunt.getLocalidadesVendidas())); 
+			query=query.replaceAll("varvendidas", Integer.toString(newPunt.getLocalidadesVendidas())); 
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"); 
 			String formattedDateTime = newPunt.getHoraFecha().format(formatter);
 			query=query.replaceAll("varfecha",	formattedDateTime);
 			query=query.replaceAll("varcategoria", newPunt.getCategoria());
-			
-			System.out.println(newPunt.getLocalidadesVenta());
-			System.out.println(newPunt.getLocalidadesVendidas());
-			
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
 			dbConnection.closeConnection();
@@ -300,7 +294,7 @@ public class EspectaculoDAO {
 			query=query.replaceAll("vartitulo", updatePunt.getTitulo());
 			query=query.replaceAll("vardescripcion", updatePunt.getDescripcion());
 			query=query.replaceAll("varlocalidades", Integer.toString(updatePunt.getLocalidadesVenta()));
-			query=query.replaceAll("varlocalidadesvendidas", Integer.toString(updatePunt.getLocalidadesVendidas())); 
+			query=query.replaceAll("varvendidas", Integer.toString(updatePunt.getLocalidadesVendidas())); 
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"); 
 			String formattedDateTime = updatePunt.getHoraFecha().format(formatter);
 			query=query.replaceAll("varfecha", formattedDateTime);
@@ -412,7 +406,7 @@ public class EspectaculoDAO {
 			query=query.replaceAll("vartitulo", newMult.getTitulo());
 			query=query.replaceAll("vardescripcion", newMult.getDescripcion());
 			query=query.replaceAll("varlocalidades", Integer.toString(newMult.getLocalidadesVenta()));
-			query=query.replaceAll("varlocalidadesvendidas", Integer.toString(newMult.getLocalidadesVendidas())); 
+			query=query.replaceAll("varvendidas", Integer.toString(newMult.getLocalidadesVendidas())); 
 			query=query.replaceAll("categoria", newMult.getCategoria());
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
@@ -526,7 +520,7 @@ public class EspectaculoDAO {
 			query=query.replaceAll("vartitulo", updateMult.getTitulo());
 			query=query.replaceAll("vardescripcion", updateMult.getDescripcion());
 			query=query.replaceAll("varlocalidades", Integer.toString(updateMult.getLocalidadesVenta()));
-			query=query.replaceAll("varlocalidadesvendidas", Integer.toString(updateMult.getLocalidadesVendidas())); 
+			query=query.replaceAll("varvendidas", Integer.toString(updateMult.getLocalidadesVendidas())); 
 			query=query.replaceAll("varcategoria", updateMult.getCategoria());
 			
 			Statement stmt = connection.createStatement();
@@ -668,7 +662,7 @@ public class EspectaculoDAO {
 			query=query.replaceAll("vartitulo", newTemp.getTitulo()); 
 			query=query.replaceAll("vardescripcion", newTemp.getDescripcion());
 			query=query.replaceAll("varlocalidades", Integer.toString(newTemp.getLocalidadesVenta()));
-			query=query.replaceAll("varlocalidadesvendidas", Integer.toString(newTemp.getLocalidadesVendidas())); 
+			query=query.replaceAll("varvendidas", Integer.toString(newTemp.getLocalidadesVendidas())); 
 			query=query.replaceAll("categoria", newTemp.getCategoria());
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
@@ -788,7 +782,7 @@ public class EspectaculoDAO {
 			query=query.replaceAll("vartitulo", updateTemp.getTitulo());
 			query=query.replaceAll("vardescripcion", updateTemp.getDescripcion());
 			query=query.replaceAll("varlocalidades", Integer.toString(updateTemp.getLocalidadesVenta()));
-			query=query.replaceAll("varlocalidadesvendidas", Integer.toString(updateTemp.getLocalidadesVendidas())); 
+			query=query.replaceAll("varvendidas", Integer.toString(updateTemp.getLocalidadesVendidas())); 
 			query=query.replaceAll("varcategoria", updateTemp.getCategoria());
 			
 			Statement stmt = connection.createStatement();
@@ -1006,9 +1000,10 @@ public class EspectaculoDAO {
 			prop.load(input);
 			String query = prop.getProperty("selectDataFechaAdmin");
 			query=query.replaceAll("varid", Integer.toString(id));
-			
+			System.out.println(query);
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			
 			
 			String ident = rs.getString("id");
 			String fechaDB = rs.getString("fechaFinal");

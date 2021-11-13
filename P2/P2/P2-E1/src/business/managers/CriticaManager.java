@@ -39,8 +39,9 @@ public class CriticaManager {
 		return espectaculos;
 	}
 	
-	public Boolean createCritica(String titulo, float puntuacion, String resena, int idEsp) {
+	public Boolean createCritica(String titulo, float puntuacion, String resena,int idEsp) {
 		CriticaDAO newCritica = new CriticaDAO();
+		
 			CriticaDTO newCriticaDTO = new CriticaDTO(titulo,puntuacion,resena,this.getMail(), idEsp);  
 			newCritica.createCritica(newCriticaDTO);	
 		return true;

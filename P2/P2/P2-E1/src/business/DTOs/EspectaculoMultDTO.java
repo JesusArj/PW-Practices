@@ -8,12 +8,12 @@ public class EspectaculoMultDTO extends EspectaculoDTO{
 			
 		}	
 		public EspectaculoMultDTO(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendida, ArrayList<FechasDTO> fechas) {
-			super(id,titulo,categoria,descripcion); 
+			super(id,titulo,categoria,descripcion, localidades_venta, localidades_vendida); 
 			this.fechas = fechas;
 		}
 		public EspectaculoMultDTO(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas) 
 		{
-			super(id,titulo,categoria,descripcion); 
+			super(id,titulo,categoria,descripcion, localidades_venta, localidades_vendidas); 
 		}
 		
 		public ArrayList<FechasDTO> getFechas() {

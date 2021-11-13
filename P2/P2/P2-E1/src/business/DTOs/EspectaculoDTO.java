@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Clase que implementa un espectaculo abstracto, con sus variables 
  * privadas y metodos. Este Espectaculo es la base de los demas
- * tipos de espectaculos, siguiendo un patrón Abstract Fabric
+ * tipos de espectaculos, siguiendo un patrï¿½n Abstract Fabric
  * @author Developers
  *
  */
@@ -40,12 +40,14 @@ public class EspectaculoDTO {
 		 * @author Developers
 		 */
 
-		public EspectaculoDTO(int id, String titulo, String categoria, String descripcion) 
+		public EspectaculoDTO(int id, String titulo, String categoria, String descripcion, int localidades_venta, int localidades_vendidas) 
 		{
 			this.id = id;
 			this.titulo = titulo; 
 			this.descripcion = descripcion;
 			this.categoria=categoria; 
+			this.localidades_venta = localidades_venta;
+			this.localidades_vendidas = localidades_vendidas;
 		}
 		
 		//OBSERVADORES

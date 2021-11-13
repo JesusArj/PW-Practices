@@ -109,9 +109,7 @@ public class EspectaculoManager
 		if(!this.PuntExist(id)) 
 		{
 			EspectaculoPuntDTO newPuntDTO = new EspectaculoPuntDTO(id, titulo, categoria, descripcion, localidades_venta, localidades_vendidas, fecha);
-			newPuntDAO.createEspectaculoPuntual(newPuntDTO);	
-			System.out.println(localidades_vendidas);
-			System.out.println(localidades_venta);
+			newPuntDAO.createEspectaculoPuntual(newPuntDTO);
 			return true;
 		}
 		return false;
@@ -262,7 +260,7 @@ public class EspectaculoManager
 		return requestedTemp;
 	}
 	
-	//TODO: No necesitarias un sesión terminada de Puntuales?
+	//TODO: No necesitarias un sesiï¿½n terminada de Puntuales?
 	
 	public boolean sesionTerminadaMult(EspectaculoMultDTO espect)
 	{

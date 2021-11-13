@@ -14,7 +14,7 @@ import data.common.DBConnection;
 
 public class CriticaDAO {
 
-	String ruta ="C:\\Users\\jesus\\eclipse-workspace\\P2\\P2-E1\\src\\sql.properties";
+	String ruta ="/home/valentin/Downloads/PW-Practices-master/P2/P2/P2-E1/src/sql.properties";
 	public String selectTituloEsp(int id) {
 		String titulo = null;
 		DBConnection dbConnection = new DBConnection();
@@ -87,9 +87,11 @@ public class CriticaDAO {
 			query=query.replaceAll("vartitulo", newCritica.getTitle());
 			query=query.replaceAll("varresena", newCritica.getResena()); 
 			query=query.replaceAll("varmail", newCritica.getMail());
-			query=query.replaceAll("varidesp", Integer.toString(newCritica.getIdEsp()));
+			query=query.replaceAll("varespid", Integer.toString(newCritica.getIdEsp()));
+			System.out.println(Integer.toString(newCritica.getIdEsp()));
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
+			
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -393,8 +395,12 @@ public class CriticaDAO {
 				String categoria = rs.getString("categoria");
 				String titulo = rs.getString("titulo");
 				String descripcion = rs.getString("descripcion");
+				String venta = rs.getString("localidades");
+				String vendidas = rs.getString("localidadesVendidas");
+				int localidades = Integer.parseInt(venta);
+				int localidadesVendidas = Integer.parseInt(vendidas);
 				
-				EspectaculoDTO espPunt = new EspectaculoDTO(id,titulo,categoria,descripcion);
+				EspectaculoDTO espPunt = new EspectaculoDTO(id,titulo,categoria,descripcion,localidades,localidadesVendidas);
 				esp.add(espPunt);
 			}
 
@@ -428,8 +434,12 @@ public class CriticaDAO {
 				String categoria = rs.getString("categoria");
 				String titulo = rs.getString("titulo");
 				String descripcion = rs.getString("descripcion");
+				String venta = rs.getString("localidades");
+				String vendidas = rs.getString("localidadesVendidas");
+				int localidades = Integer.parseInt(venta);
+				int localidadesVendidas = Integer.parseInt(vendidas);
 				
-				EspectaculoDTO espMult = new EspectaculoDTO(id,titulo,categoria,descripcion);
+				EspectaculoDTO espMult = new EspectaculoDTO(id,titulo,categoria,descripcion,localidades, localidadesVendidas);
 				esp.add(espMult);
 			}
 
@@ -463,8 +473,12 @@ public class CriticaDAO {
 				String categoria = rs.getString("categoria");
 				String titulo = rs.getString("titulo");
 				String descripcion = rs.getString("descripcion");
+				String venta = rs.getString("localidades");
+				String vendidas = rs.getString("localidadesVendidas");
+				int localidades = Integer.parseInt(venta);
+				int localidadesVendidas = Integer.parseInt(vendidas);
 				
-				EspectaculoDTO espTemp = new EspectaculoDTO(id,titulo,categoria,descripcion);
+				EspectaculoDTO espTemp = new EspectaculoDTO(id,titulo,categoria,descripcion,localidades, localidadesVendidas);
 				esp.add(espTemp);
 			}
 

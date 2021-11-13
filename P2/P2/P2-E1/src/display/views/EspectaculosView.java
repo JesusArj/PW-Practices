@@ -434,11 +434,7 @@ public class EspectaculosView
 								System.out.println("Introduce la categoria.");
 								categoria = reader.nextLine(); 
 								System.out.println("Introduce la descripcion.");
-								descripcion = reader.nextLine(); 
-								System.out.println("Introduce el numero de localidades a la venta.");
-								localidadesVenta = reader.nextInt(); 
-								System.out.println("Introduce el numero de localidades vendidas.");
-								localidadesVendidas = reader.nextInt();								
+								descripcion = reader.nextLine(); 							
 								
 								do
 								{
@@ -474,6 +470,11 @@ public class EspectaculosView
 
 									listFechas.add(managerMult.requestFecha(id)); 
 								}while(decisionPases==true); 
+
+								System.out.println("Introduce el numero de localidades a la venta.");
+								localidadesVenta = reader.nextInt(); 
+								System.out.println("Introduce el numero de localidades vendidas.");
+								localidadesVendidas = reader.nextInt();	
 								
 								managerMult.createEspectaculoMult(id, titulo, categoria, descripcion, localidadesVenta, localidadesVendidas,listFechas);
 
