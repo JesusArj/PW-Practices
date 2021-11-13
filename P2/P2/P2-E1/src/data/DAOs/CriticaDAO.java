@@ -14,9 +14,9 @@ import data.common.DBConnection;
 
 public class CriticaDAO {
 
-	String ruta ="/home/valentin/Downloads/PW-Practices-master/P2/P2/P2-E1/src/sql.properties";
+	String ruta ="C:\\Users\\jesus\\eclipse-workspace\\P2\\P2\\P2-E1\\src\\sql.properties";
 	public String selectTituloEsp(int id) {
-		String titulo = null;
+		String titulo=null;
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
 		try(InputStream input = new FileInputStream(ruta)){
@@ -27,7 +27,10 @@ public class CriticaDAO {
 			
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
-			titulo = rs.getString("titulo");
+			if(rs.next())
+			{
+				titulo = rs.getString("titulo");
+			}
 			if (stmt != null){ 
 				stmt.close(); 
 			}
@@ -87,8 +90,8 @@ public class CriticaDAO {
 			query=query.replaceAll("vartitulo", newCritica.getTitle());
 			query=query.replaceAll("varresena", newCritica.getResena()); 
 			query=query.replaceAll("varmail", newCritica.getMail());
+			query=query.replaceAll("varpuntuacion", Float.toString(newCritica.getPuntuacion()));
 			query=query.replaceAll("varespid", Integer.toString(newCritica.getIdEsp()));
-			System.out.println(Integer.toString(newCritica.getIdEsp()));
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
 			
@@ -105,7 +108,7 @@ public class CriticaDAO {
 		try(InputStream input = new FileInputStream(ruta)){
 			Properties prop = new Properties();
 			prop.load(input);
-			String query = prop.getProperty("updateVC");
+			String query = prop.getProperty("createVC");
 			query=query.replaceAll("varmail", mail);
 			query=query.replaceAll("varid", Integer.toString(id));
 			query=query.replaceAll("varvoto", voto);
@@ -185,6 +188,7 @@ public class CriticaDAO {
 	{
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
+		System.out.println(updateCritica.getLike());
 		try(InputStream input = new FileInputStream(ruta)){
 			Properties prop = new Properties();
 			prop.load(input);
@@ -194,6 +198,7 @@ public class CriticaDAO {
 			query=query.replaceAll("varresena", updateCritica.getResena());
 			query=query.replaceAll("varlike", Integer.toString(updateCritica.getLike()));
 			query=query.replaceAll("vardislike", Integer.toString(updateCritica.getDislike()));
+			query=query.replaceAll("varid", Integer.toString(updateCritica.getId()));
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
 			dbConnection.closeConnection();
@@ -239,25 +244,30 @@ public class CriticaDAO {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 			
-			int iduser = Integer.parseInt(rs.getString("id"));
-			float puntuacion = Float.parseFloat(rs.getString("puntuacion"));
-			String titulo = rs.getString("titulo");
-			String resena= rs.getString("resena");
-			String mail = rs.getString("mail");
-			int like = rs.getInt("vlike");
-			int dislike =rs.getInt("dislike");
-			ArrayList<VotantesCriticaDTO> votantes = this.requestVotantes(id);
-			int idEsp = Integer.parseInt(rs.getString("idEsp")); 
+			if(rs.next())
+			{
+				int iduser = Integer.parseInt(rs.getString("id"));
+				float puntuacion = Float.parseFloat(rs.getString("puntuacion"));
+				String titulo = rs.getString("titulo");
+				String resena= rs.getString("resena");
+				String mail = rs.getString("mail");
+				int like = rs.getInt("vlike");
+				int dislike =rs.getInt("dislike");
+				ArrayList<VotantesCriticaDTO> votantes = this.requestVotantes(id);
+				int idEsp = Integer.parseInt(rs.getString("idEsp")); 
+				criticaRequest.setMail(mail);
+				criticaRequest.setId(iduser);
+				criticaRequest.settitle(titulo);
+				criticaRequest.setResena(resena);
+				criticaRequest.setPuntuacion(puntuacion); 
+				criticaRequest.setLike(like);
+				criticaRequest.setDislike(dislike);
+				criticaRequest.setVotantes(votantes);
+				criticaRequest.setIdEsp(idEsp);
+			}
 
-			criticaRequest.setMail(mail);
-			criticaRequest.setId(iduser);
-			criticaRequest.settitle(titulo);
-			criticaRequest.setResena(resena);
-			criticaRequest.setPuntuacion(puntuacion); 
-			criticaRequest.setLike(like);
-			criticaRequest.setDislike(dislike);
-			criticaRequest.setVotantes(votantes);
-			criticaRequest.setIdEsp(idEsp);
+
+
 
 			if (stmt != null){ 
 				stmt.close(); 

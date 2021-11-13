@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class EspectaculoDAO {
 
-	String ruta ="/home/valentin/Downloads/PW-Practices-master/P2/P2/P2-E1/src/sql.properties";
+	String ruta ="C:\\Users\\jesus\\eclipse-workspace\\P2\\P2\\P2-E1\\src\\sql.properties";
 	private boolean existIdPunt(int id)
 	{
 		DBConnection dbConnection = new DBConnection();
@@ -286,7 +286,7 @@ public class EspectaculoDAO {
 	public void updateEspectaculoPuntual(EspectaculoPuntDTO updatePunt) { 
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("D:/Descargas/PW-Practices-master/P2/P2-E1/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
+		try(InputStream input = new FileInputStream(ruta)){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("updateEP"); 

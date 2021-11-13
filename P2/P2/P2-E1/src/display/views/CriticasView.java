@@ -1,8 +1,4 @@
 package display.views;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,6 +21,7 @@ public class CriticasView {
 	{
 		
     	String opc = "1";
+    	Scanner reader = new Scanner(System.in);
 		while(opc.equals("1") || opc.equals("2") || opc.equals("3") || opc.equals("4") || opc.equals("5") || opc.equals("6") || opc.equals("7")) {
 			System.out.println("Para crear una critica, pulse 1.");
     	    System.out.println("Para consultar criticas, pulse 2");
@@ -34,20 +31,13 @@ public class CriticasView {
     	    System.out.println("Para buscar sus criticas, pulse 6.");
     	    System.out.println("Para ver las criticas de un usuario concreto, pulse 7.");
     	    System.out.println("Para salir del menu, pulse cualquier otra tecla.");
-	        BufferedReader login = new BufferedReader(new InputStreamReader(System.in));
-	        try 
-	        {
-				opc = login.readLine();
-			} 
-	        catch (IOException e) 
-	        {
-				e.printStackTrace();
-			}
+	        
+			opc = reader.nextLine();
+
 	        
 	        if("1".equals(opc)) 
 			{ 
 	        	String tipo = "1";
-	        	Scanner reader = new Scanner(System.in);
 	     
 	        	System.out.println("CREAR CRITICA");
 	        	System.out.println("Desea escribir una critica de un espectaculo:");
@@ -90,20 +80,21 @@ public class CriticasView {
 	        	else if (tipo.equals("2")) {
 	        		CriticaManager managerCriticaCreateTemp = new CriticaManager(this.getMail());
 	        		ArrayList<EspectaculoDTO> esps = managerCriticaCreateTemp.requestEspCriticablesTemp();
-	        		int cont = 1;
+	        		int cont = 0;
 	        		for(EspectaculoDTO e : esps) {
+	        			cont++;
 	        			System.out.println(cont + ". " + e.getTitulo());
 	        			System.out.println(e.getCategoria());
 	        			System.out.println(e.getDescripcion());
 	        		}
 	        		System.out.println("Introduzca el numero del espectaculo a criticar");
 	            	String criticarEsp = reader.nextLine();
-	            	if(Integer.parseInt(criticarEsp) > 0 && Integer.parseInt(criticarEsp) < cont ) {
-	            		int id = esps.get(Integer.parseInt(criticarEsp)).getID();
+	            	if(Integer.parseInt(criticarEsp) > 0 && Integer.parseInt(criticarEsp) <= cont ) {
+	            		int id = esps.get(Integer.parseInt(criticarEsp)-1).getID();
 	            		String titulo = null;
 	    	        	float puntuacion = 0;
 	    	        	String resena = null;
-	    	        	System.out.println("Va a criticar: " + esps.get(Integer.parseInt(criticarEsp)).getTitulo());
+	    	        	System.out.println("Va a criticar: " + esps.get(Integer.parseInt(criticarEsp)-1).getTitulo());
 	    	        	System.out.println("Introduzca el titulo de la critica");
 	    	        	titulo = reader.nextLine();	
 	    	        	System.out.println("Introduzca la puntuacion que da al espectaculo");
@@ -120,20 +111,21 @@ public class CriticasView {
 	        	else if (tipo.equals("3")) {
 	        		CriticaManager managerCriticaCreateMult = new CriticaManager(this.getMail());
 	        		ArrayList<EspectaculoDTO> esps = managerCriticaCreateMult.requestEspCriticablesMult();
-	        		int cont = 1;
+	        		int cont = 0;
 	        		for(EspectaculoDTO e : esps) {
+	        			cont++;
 	        			System.out.println(cont + ". " + e.getTitulo());
 	        			System.out.println(e.getCategoria());
 	        			System.out.println(e.getDescripcion());
 	        		}
 	        		System.out.println("Introduzca el numero del espectaculo a criticar");
 	            	String criticarEsp = reader.nextLine();
-	            	if(Integer.parseInt(criticarEsp) > 0 && Integer.parseInt(criticarEsp) < cont ) {
-	            		int id = esps.get(Integer.parseInt(criticarEsp)).getID();
+	            	if(Integer.parseInt(criticarEsp) > 0 && Integer.parseInt(criticarEsp) <= cont ) {
+	            		int id = esps.get(Integer.parseInt(criticarEsp)-1).getID();
 	            		String titulo = null;
 	    	        	float puntuacion = 0;
 	    	        	String resena = null;
-	    	        	System.out.println("Va a criticar: " + esps.get(Integer.parseInt(criticarEsp)).getTitulo());
+	    	        	System.out.println("Va a criticar: " + esps.get(Integer.parseInt(criticarEsp)-1).getTitulo());
 	    	        	System.out.println("Introduzca el titulo de la critica");
 	    	        	titulo = reader.nextLine();	
 	    	        	System.out.println("Introduzca la puntuacion que da al espectaculo");
@@ -146,7 +138,7 @@ public class CriticasView {
 	            		System.out.println("Espectaculo no valido");
 	            	}
 	        	}
-	    		
+			}
 		        else if("2".equals(opc))
 		        { 
 		        	System.out.println("CONSULTAR TODAS LAS CRITICAS");
@@ -156,7 +148,7 @@ public class CriticasView {
 		        		System.out.println("------------------------------------------------");
 		        		System.out.println("Titulo : " + c.getTitle());
 			        	System.out.println("	Autor : " + c.getMail());
-		        		System.out.println("	Espectaculo : " + managerCriticaReadAll.selectTituloEsp(c.getId()));
+		        		System.out.println("	Espectaculo : " + managerCriticaReadAll.selectTituloEsp(c.getIdEsp()));
 			        	System.out.println("	Puntuacion : " + c.getPuntuacion());
 			        	System.out.println("	Resena : " + c.getResena());
 			        	System.out.println("	Likes : " + c.getLike());
@@ -175,7 +167,7 @@ public class CriticasView {
 		        			if(c.getMail().equals(this.getMail())) {
 		        				System.out.println("------------------------------------------------");
 		    	        		System.out.println(cont + " Titulo : " + c.getTitle());
-		    	        		System.out.println("	Espectaculo : " + managerCriticaMostrarDelUser.selectTituloEsp(c.getId()));
+		    	        		System.out.println("	Espectaculo : " + managerCriticaMostrarDelUser.selectTituloEsp(c.getIdEsp()));
 		    		        	System.out.println("	Puntuacion : " + c.getPuntuacion());
 		    		        	System.out.println("	Resena : " + c.getResena());
 		    		        	System.out.println("	Likes : " + c.getLike());
@@ -205,12 +197,13 @@ public class CriticasView {
 		        	System.out.println("Estas son todas las criticas que puede valorar");
 		        	CriticaManager managerCriticaLike = new CriticaManager(this.getMail());
 		        	ArrayList<CriticaDTO> criticasValorables = managerCriticaLike.requestCriticasExUser();
-		        	int cont = 1;
+		        	int cont = 0;
 		        	for(CriticaDTO c : criticasValorables) {
+		        		cont++; 
 		        		System.out.println("------------------------------------------------");
-		        		System.out.println("Titulo : " + c.getTitle());
+		        		System.out.println(cont + " Titulo : " + c.getTitle());
 			        	System.out.println("	Autor : " + c.getMail());
-		        		System.out.println("	Espectaculo : " + managerCriticaLike.selectTituloEsp(c.getId()));
+		        		System.out.println("	Espectaculo : " + managerCriticaLike.selectTituloEsp(c.getIdEsp()));
 			        	System.out.println("	Puntuacion : " + c.getPuntuacion());
 			        	System.out.println("	Resena : " + c.getResena());
 			        	System.out.println("	Likes : " + c.getLike());
@@ -219,7 +212,7 @@ public class CriticasView {
 		        	}
 		        	System.out.println("Introduzca el numero de la critica a la que desea dar like");
 		        	String like = reader.nextLine();
-		        	if(Integer.parseInt(like) > 0 && Integer.parseInt(like) < cont ) {
+		        	if(Integer.parseInt(like) > 0 && Integer.parseInt(like) <= cont ) {
 			        	if(managerCriticaLike.darLike(criticasValorables.get(Integer.parseInt(like)-1).getId())) {
 			        		System.out.println("Ha dado like a la critica:");
 			        		CriticaDTO critica = criticasValorables.get(Integer.parseInt(like)-1);
@@ -243,12 +236,13 @@ public class CriticasView {
 		        	System.out.println("Estas son todas las criticas que puede valorar");
 		        	CriticaManager managerCriticaLike = new CriticaManager(this.getMail());
 		        	ArrayList<CriticaDTO> criticasValorables = managerCriticaLike.requestCriticasExUser();
-		        	int cont = 1;
+		        	int cont = 0;
 		        	for(CriticaDTO c : criticasValorables) {
+		        		cont++; 
 		        		System.out.println("------------------------------------------------");
-		        		System.out.println("Titulo : " + c.getTitle());
+		        		System.out.println(cont + " Titulo : " + c.getTitle());
 			        	System.out.println("	Autor : " + c.getMail());
-		        		System.out.println("	Espectaculo : " + managerCriticaLike.selectTituloEsp(c.getId()));
+		        		System.out.println("	Espectaculo : " + managerCriticaLike.selectTituloEsp(c.getIdEsp()));
 			        	System.out.println("	Puntuacion : " + c.getPuntuacion());
 			        	System.out.println("	Resena : " + c.getResena());
 			        	System.out.println("	Likes : " + c.getLike());
@@ -263,7 +257,7 @@ public class CriticasView {
 			        		CriticaDTO critica = criticasValorables.get(Integer.parseInt(dislike)-1);
 			        		System.out.println("Titulo : " + critica.getTitle());
 				        	System.out.println("	Autor : " + critica.getMail());
-			        		System.out.println("	Espectaculo : " + managerCriticaLike.selectTituloEsp(critica.getId()));
+			        		System.out.println("	Espectaculo : " + managerCriticaLike.selectTituloEsp(critica.getIdEsp()));
 				        	System.out.println("	Puntuacion : " + critica.getPuntuacion());
 				        	System.out.println("	Resena : " + critica.getResena());		
 			        	}
@@ -283,8 +277,7 @@ public class CriticasView {
 	        		for(CriticaDTO c : criticasUser) {
 	        			if(c.getMail().equals(this.getMail())) {
 	        				System.out.println("------------------------------------------------");
-	    	        		System.out.println("Titulo : " + c.getTitle());
-	    	        		System.out.println("	Espectaculo : " + managerCriticaMostrarDelUser.selectTituloEsp(c.getId()));
+	    	        		System.out.println("	Espectaculo : " + managerCriticaMostrarDelUser.selectTituloEsp(c.getIdEsp()));
 	    		        	System.out.println("	Puntuacion : " + c.getPuntuacion());
 	    		        	System.out.println("	Resena : " + c.getResena());
 	    		        	System.out.println("	Likes : " + c.getLike());
@@ -299,8 +292,9 @@ public class CriticasView {
 		        	System.out.println("Estos son los usuarios que han escrito criticas");
 		        	CriticaManager managerCriticaMostrarCriticasWriter = new CriticaManager(this.getMail());
 		        	ArrayList<String> writers = managerCriticaMostrarCriticasWriter.requestWriters();
-		        	int cont = 1;
+		        	int cont = 0;
 		        	for(String s : writers) {
+	        			cont++; 
 		        		System.out.println(cont + ". " + s);
 		        	}
 		        	System.out.println("Introduzca el numero del autor del que quiere ver todas sus criticas");
@@ -311,7 +305,7 @@ public class CriticasView {
 		        		if(c.getMail().equals(writer)) {
 		        			System.out.println("------------------------------------------------");
 	    	        		System.out.println("Titulo : " + c.getTitle());
-	    	        		System.out.println("	Espectaculo : " + managerCriticaMostrarCriticasWriter.selectTituloEsp(c.getId()));
+	    	        		System.out.println("	Espectaculo : " + managerCriticaMostrarCriticasWriter.selectTituloEsp(c.getIdEsp()));
 	    		        	System.out.println("	Puntuacion : " + c.getPuntuacion());
 	    		        	System.out.println("	Resena : " + c.getResena());
 	    		        	System.out.println("	Likes : " + c.getLike());
@@ -327,4 +321,3 @@ public class CriticasView {
 			}
 		}
 	}
-}

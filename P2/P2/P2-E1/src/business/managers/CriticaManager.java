@@ -113,6 +113,7 @@ public class CriticaManager {
 	public Boolean darLike(int id) {
 		if(this.CriticaExist(id)) {
 			CriticaDTO critica = this.requestCritica(id);
+			CriticaDAO Like = new CriticaDAO();
 			if(!this.getMail().equals(critica.getMail())) {
 				for(VotantesCriticaDTO v : critica.getVotantes()) {
 					if(v.getVotante().equals(this.getMail())) {
@@ -122,14 +123,18 @@ public class CriticaManager {
 						else {
 							critica.lessDislike();
 							critica.addLike();
+							Like.updateCritica(critica);
+							Like.removeVotanteCritica(this.getMail(), id);
+							Like.addVotanteCritica(this.getMail(), id, "like");
+							return true;	
 						}
 					}
 				}
-				CriticaDAO Like = new CriticaDAO();
+				critica.addLike();
 				Like.updateCritica(critica);
 				Like.removeVotanteCritica(this.getMail(), id);
 				Like.addVotanteCritica(this.getMail(), id, "like");
-				return true;	
+				return true;
 			}				
 		}	
 		return false;
@@ -137,6 +142,7 @@ public class CriticaManager {
 	
 	public Boolean darDislike(int id) {
 		if(this.CriticaExist(id)) {
+			CriticaDAO Like = new CriticaDAO();
 			CriticaDTO critica = this.requestCritica(id);
 			if(!this.getMail().equals(critica.getMail())) {
 				for(VotantesCriticaDTO v : critica.getVotantes()) {
@@ -147,11 +153,14 @@ public class CriticaManager {
 						else {
 							critica.lessLike();
 							critica.addDislike();
+							Like.updateCritica(critica);
+							Like.removeVotanteCritica(this.getMail(), id);
+							Like.addVotanteCritica(this.getMail(), id, "dislike");
+							return true; 
 							
 						}
 					}
 				}
-				CriticaDAO Like = new CriticaDAO();
 				Like.updateCritica(critica);
 				Like.removeVotanteCritica(this.getMail(), id);
 				Like.addVotanteCritica(this.getMail(), id, "dislike");
@@ -162,8 +171,8 @@ public class CriticaManager {
 	}
 	
 	public String selectTituloEsp(int id) {
-		CriticaDAO selectTituloEsp = new CriticaDAO();
-		String titulo = selectTituloEsp.selectTituloEsp(id);
+		CriticaDAO selectTituloEspectaculo = new CriticaDAO();
+		String titulo = selectTituloEspectaculo.selectTituloEsp(id);
 		return titulo;
 	}
 	
