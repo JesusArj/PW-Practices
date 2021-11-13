@@ -11,10 +11,6 @@ public class LoginView
 {
 	public String loginMenu() 
 	{
-		String rutaAbsoluta = new File("").getAbsolutePath();
-		String rutaFicheroProp = rutaAbsoluta + "/sql.properties";
-		System.out.println(rutaAbsoluta);
-		System.out.println(rutaFicheroProp);
 		
 		String opc="1";
 		Scanner opcScan = new Scanner(System.in);

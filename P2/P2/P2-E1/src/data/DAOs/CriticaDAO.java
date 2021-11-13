@@ -14,7 +14,7 @@ import data.common.DBConnection;
 
 public class CriticaDAO {
 
-	String ruta ="/home/valentin/Downloads/PW-Practices-master/P2/P2/P2-E1/src/sql.properties";
+	String ruta ="D:\\Descargas\\PW-Practices-master\\PW-Practices-master\\P2\\P2\\P2-E1\\src\\sql.properties";
 	public String selectTituloEsp(int id) {
 		String titulo = null;
 		DBConnection dbConnection = new DBConnection();

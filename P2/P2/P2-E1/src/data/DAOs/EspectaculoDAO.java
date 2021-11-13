@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class EspectaculoDAO {
 
-	String ruta ="/home/valentin/Downloads/PW-Practices-master/P2/P2/P2-E1/src/sql.properties";
+	String ruta ="D:\\\\Descargas\\\\PW-Practices-master\\\\PW-Practices-master\\\\P2\\\\P2\\\\P2-E1\\\\src\\\\sql.properties";
 	private boolean existIdPunt(int id)
 	{
 		DBConnection dbConnection = new DBConnection();
@@ -245,16 +245,22 @@ public class EspectaculoDAO {
 		try(InputStream input = new FileInputStream(ruta)){
 			Properties prop = new Properties();
 			prop.load(input);
+			System.out.println(newPunt.getLocalidadesVenta());
+			System.out.println(newPunt.getLocalidadesVendidas());
 			String query = prop.getProperty("createEP");
 			query=query.replaceAll("varid", Integer.toString(newPunt.getID())); 
 			query=query.replaceAll("vartitulo", newPunt.getTitulo());
 			query=query.replaceAll("vardescripcion", newPunt.getDescripcion());
+			System.out.println(newPunt.getLocalidadesVenta());
 			query=query.replaceAll("varlocalidades", Integer.toString(newPunt.getLocalidadesVenta()));
 			query=query.replaceAll("varlocalidadesven", Integer.toString(newPunt.getLocalidadesVendidas())); 
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"); 
 			String formattedDateTime = newPunt.getHoraFecha().format(formatter);
 			query=query.replaceAll("varfecha",	formattedDateTime);
 			query=query.replaceAll("varcategoria", newPunt.getCategoria());
+			
+			System.out.println(newPunt.getLocalidadesVenta());
+			System.out.println(newPunt.getLocalidadesVendidas());
 			
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
@@ -627,7 +633,6 @@ public class EspectaculoDAO {
 			
 			while (rs.next()) {
 				String ident = rs.getString("id");
-				System.out.println(ident);
 				String titulo = rs.getString("titulo");
 				String descripcion = rs.getString("descripcion");
 				String localidades = rs.getString("localidades");
@@ -887,7 +892,6 @@ public class EspectaculoDAO {
 	
 	public ArrayList<EspectaculoTempDTO> requestETs(){
 		ArrayList<EspectaculoTempDTO> listETs = new ArrayList<EspectaculoTempDTO>();
-		ArrayList<PasesDTO> listPases = new ArrayList<PasesDTO>();
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
@@ -906,24 +910,9 @@ public class EspectaculoDAO {
 				String localidades = rs.getString("localidades");
 				String localidadesvendidas = rs.getString("localidadesvendidas");
 				String categoria = rs.getString("categoria");
+				int identEsp = Integer.parseInt(ident);
 				
-				String query2 = prop.getProperty("selectFechasEspMul");
-				query2 = query2.replaceAll("varid", ident);
-				
-				ResultSet rs2 = (ResultSet) stmt.executeQuery(query);
-				
-				while (rs2.next()) {
-					String idf = rs.getString("id");
-					String fecha = rs.getString("fechaInicio");
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-					LocalDateTime fechaInicio = LocalDateTime.parse(fecha, formatter);
-					String diaSemana = rs.getString("diaSemana");
-					fecha = rs.getString("fechaFinal");
-					formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-					LocalDateTime fechaFinal = LocalDateTime.parse(fecha, formatter);
-					listPases.add(new PasesDTO(Integer.parseInt(idf), fechaInicio, diaSemana, fechaFinal));
-				} 
-				listETs.add(new EspectaculoTempDTO(Integer.parseInt(ident), titulo, categoria, descripcion, Integer.parseInt(localidades), Integer.parseInt(localidadesvendidas),listPases));
+				listETs.add(new EspectaculoTempDTO(identEsp, titulo, categoria, descripcion, Integer.parseInt(localidades), Integer.parseInt(localidadesvendidas),requestPasesEsp(identEsp)));
 			}
 			if (stmt != null){ 
 				stmt.close(); 
@@ -1117,5 +1106,42 @@ public class EspectaculoDAO {
 			e.printStackTrace();
 		}
 		return listFechas;
+	}
+	
+	public ArrayList<PasesDTO> requestPasesEsp(int id){
+		ArrayList<PasesDTO> listPases = new ArrayList<PasesDTO>();
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream(ruta)){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectPasesEspTemp");
+			query = query.replaceAll("varid", Integer.toString(id));
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			
+			while (rs.next()) 
+			{
+				String ident = rs.getString("id");
+				String fechaBD =  rs.getString("fechaInicio");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+				LocalDateTime fechaInicio = LocalDateTime.parse(fechaBD, formatter);
+				String diaSemana = rs.getString("diaSemana");
+				fechaBD =  rs.getString("fechaFinal");		
+				formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+				LocalDateTime fechaFinal = LocalDateTime.parse(fechaBD, formatter);
+				listPases.add(new PasesDTO(Integer.parseInt(ident), fechaInicio, diaSemana,fechaFinal));
+			}
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return listPases;
 	}
 }

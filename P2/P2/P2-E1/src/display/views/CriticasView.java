@@ -64,6 +64,7 @@ public class CriticasView {
 	        			System.out.println(cont + ". " + e.getTitulo());
 	        			System.out.println(e.getCategoria());
 	        			System.out.println(e.getDescripcion());
+	        			cont++;
 	        		}
 	        		System.out.println("Introduzca el numero del espectaculo a criticar");
 

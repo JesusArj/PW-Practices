@@ -101,7 +101,7 @@ public class EspectaculosView
 	        		int countFechas =1; 
 		        	for(int i=0; i<manager.requestEPs().size(); i++ )
 		        	{
-		        		if(manager.requestEPs().get(i).getLocalidadesVenta() - manager.requestEPs().get(i).getLocalidadesVendidas() > 0)
+		        		if((manager.requestEPs().get(i).getLocalidadesVenta()) > (manager.requestEPs().get(i).getLocalidadesVendidas()))
 		        		{
 			        		System.out.println("------------------------------------------------------------------------------------");
 			        		System.out.println("TITULO: " + manager.requestEPs().get(i).getTitulo());
@@ -115,7 +115,7 @@ public class EspectaculosView
 		        	for(int i=0; i<manager.requestEMs().size(); i++ )
 		        	{
 		        		countFechas=1;
-		        		if(manager.requestEMs().get(i).getLocalidadesVenta() - manager.requestEMs().get(i).getLocalidadesVendidas() > 0)
+		        		if((manager.requestEMs().get(i).getLocalidadesVenta()) > (manager.requestEMs().get(i).getLocalidadesVendidas()))
 		        		{
 		        			System.out.println("------------------------------------------------------------------------------------");
 			        		System.out.println("TITULO: " + manager.requestEMs().get(i).getTitulo());
@@ -134,7 +134,7 @@ public class EspectaculosView
 		        	for(int i=0; i<manager.requestETs().size(); i++ )
 		        	{
 		        		countFechas=1;
-		        		if(manager.requestETs().get(i).getLocalidadesVenta() - manager.requestETs().get(i).getLocalidadesVendidas() > 0)
+		        		if((manager.requestETs().get(i).getLocalidadesVenta()) > (manager.requestETs().get(i).getLocalidadesVendidas()) )
 		        		{
 			        		System.out.println("------------------------------------------------------------------------------------");
 			        		System.out.println("TITULO: " + manager.requestETs().get(i).getTitulo());
@@ -352,14 +352,14 @@ public class EspectaculosView
 								
 								do
 								{
-									System.out.println("Introduce fecha de Inicio. (Formato: yyyy-MM-dd HH:mm)");
+									System.out.println("Introduce fecha de Inicio. (Formato: yyyy-MM-dd HH:mm:ss.S)");
 									String aux = reader.nextLine();
 									//conversion string to localdatetime
-									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
 									fechaInicio = LocalDateTime.parse(aux, formatter);
 									
 									int idP = managerPunt.generarIDPases();
-									System.out.println("Introduce fecha de finalizacion. (Formato: yyyy-MM-dd HH:mm)"); 
+									System.out.println("Introduce fecha de finalizacion. (Formato: yyyy-MM-dd HH:mm:ss.S)"); 
 									aux = reader.nextLine();
 									//conversion string to localdatetime
 									fechaFinal = LocalDateTime.parse(aux, formatter);
@@ -404,15 +404,17 @@ public class EspectaculosView
 								categoria = reader.nextLine(); 
 								System.out.println("Introduce la descripcion.");
 								descripcion = reader.nextLine(); 
+								
+								System.out.println("Introduce fecha de Inicio. (Formato: yyyy-MM-dd HH:mm:ss.S)");
+								String aux = reader.nextLine();
+								
+								DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+								fecha = LocalDateTime.parse(aux, formatter);	
+								
 								System.out.println("Introduce el numero de localidades a la venta.");
 								localidadesVenta = reader.nextInt(); 
 								System.out.println("Introduce el numero de localidades vendidas.");
 								localidadesVendidas = reader.nextInt();
-								System.out.println("Introduce fecha de Inicio. (Formato: yyyy-MM-dd HH:mm)");
-								String aux = reader.nextLine();
-								
-								DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-								fecha = LocalDateTime.parse(aux, formatter);		
 								
 								manager.createEspectaculoPunt(id, titulo, categoria, descripcion, localidadesVenta, localidadesVendidas, fecha);
 								
@@ -440,10 +442,10 @@ public class EspectaculosView
 								
 								do
 								{
-									System.out.println("Introduce fecha. (Formato: yyyy-MM-dd HH:mm)");
+									System.out.println("Introduce fecha. (Formato: yyyy-MM-dd HH:mm:ss.S)");
 									String aux = reader.nextLine();
 									//conversion string to localdatetime
-									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
 									fecha = LocalDateTime.parse(aux, formatter);
 									
 									int idF = managerMult.generarIDFechas();
@@ -632,14 +634,14 @@ public class EspectaculosView
 							        			System.out.println(p.getDiaSemana());
 							        			System.out.println(p.getFechaFinal());
 							        		}
-											System.out.println("Introduce fecha de Inicio. (Formato: yyyy-MM-dd HH:mm)");
+											System.out.println("Introduce fecha de Inicio. (Formato: yyyy-MM-dd HH:mm:ss.S)");
 											String aux = reader.nextLine();
 											//conversion string to localdatetime
 											int idP = pases.get(Integer.parseInt(Pase)).getID();
 											
-											DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+											DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
 											fechaInicio = LocalDateTime.parse(aux, formatter);
-											System.out.println("Introduce fecha de finalizacion. (Formato: yyyy-MM-dd HH:mm)");
+											System.out.println("Introduce fecha de finalizacion. (Formato: yyyy-MM-dd HH:mm:ss.S)");
 											aux = reader.nextLine();
 											//conversion string to localdatetime
 											fechaFinal = LocalDateTime.parse(aux, formatter);
@@ -712,9 +714,9 @@ public class EspectaculosView
 									System.out.println("Introduce el numero de localidades vendidas.");
 									localidadesVendidas = reader.nextInt();	
 		
-									System.out.println("Introduce fecha de Inicio. (Formato: yyyy-MM-dd HH:mm)");
+									System.out.println("Introduce fecha de Inicio. (Formato: yyyy-MM-dd HH:mm:ss.S)");
 									String aux = reader.nextLine();
-									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
 									fecha = LocalDateTime.parse(aux, formatter);
 									
 									manager.updateEspectaculoPunt(id, titulo, categoria, descripcion, localidadesVenta, localidadesVendidas, fecha);
@@ -788,10 +790,10 @@ public class EspectaculosView
 							        		System.out.println("Confirme  el numero de la fecha a actualizar");
 							        		Fecha = reader.nextLine();
 								        	
-											System.out.println("Introduce fecha. (Formato: yyyy-MM-dd HH:mm)");
+											System.out.println("Introduce fecha. (Formato: yyyy-MM-dd HH:mm:ss.S)");
 											String aux = reader.nextLine();
 											//conversion string to localdatetime
-											DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+											DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
 											fecha = LocalDateTime.parse(aux, formatter);
 											
 											int idP = fechas.get(Integer.parseInt(Fecha)).getID();

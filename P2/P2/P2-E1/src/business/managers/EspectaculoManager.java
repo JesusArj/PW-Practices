@@ -108,8 +108,10 @@ public class EspectaculoManager
 		EspectaculoDAO newPuntDAO = new EspectaculoDAO();
 		if(!this.PuntExist(id)) 
 		{
-			EspectaculoPuntDTO newPuntDTO = new EspectaculoPuntDTO(id, titulo, categoria, descripcion, localidades_venta, localidades_vendidas, fecha);  
+			EspectaculoPuntDTO newPuntDTO = new EspectaculoPuntDTO(id, titulo, categoria, descripcion, localidades_venta, localidades_vendidas, fecha);
 			newPuntDAO.createEspectaculoPuntual(newPuntDTO);	
+			System.out.println(localidades_vendidas);
+			System.out.println(localidades_venta);
 			return true;
 		}
 		return false;
