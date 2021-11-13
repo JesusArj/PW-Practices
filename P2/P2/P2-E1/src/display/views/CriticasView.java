@@ -59,23 +59,22 @@ public class CriticasView {
 	        	if(tipo.equals("1")) {
 	        		CriticaManager managerCriticaCreatePunt = new CriticaManager(this.getMail());
 	        		ArrayList<EspectaculoDTO> esps = managerCriticaCreatePunt.requestEspCriticablesPunt();
-	        		int cont = 1;
+	        		int cont = 0;
 	        		for(EspectaculoDTO e : esps) {
-	        			System.out.println(cont + ". " + e.getTitulo());
-	        			System.out.println(e.getCategoria());
-	        			System.out.println(e.getDescripcion());
 	        			cont++;
+	        			System.out.println(cont + ". " + e.getTitulo());
+	        			System.out.println("CATEGORIA: " + e.getCategoria());
+	        			System.out.println("DESCRIPCION:" + e.getDescripcion()); 
 	        		}
 	        		System.out.println("Introduzca el numero del espectaculo a criticar");
 
 	            	String criticarEsp = reader.nextLine();
-	            	System.out.println(cont);
-	            	if(Integer.parseInt(criticarEsp) > 0 && Integer.parseInt(criticarEsp) < cont ) {
-	            		int id = esps.get(Integer.parseInt("1")).getID();
+	            	if(Integer.parseInt(criticarEsp) > 0 && Integer.parseInt(criticarEsp) <= cont ) {
+	            		int id = esps.get(Integer.parseInt(criticarEsp)-1).getID();
 	            		String titulo = null;
 	    	        	float puntuacion = 0;
 	    	        	String resena = null;
-	    	        	System.out.println("Va a criticar: " + esps.get(Integer.parseInt(criticarEsp)).getTitulo());
+	    	        	System.out.println("Va a criticar: " + esps.get(Integer.parseInt(criticarEsp)-1).getTitulo());
 	    	        	System.out.println("Introduzca el titulo de la critica");
 	    	        	titulo = reader.nextLine();	
 	    	        	System.out.println("Introduzca la puntuacion que da al espectaculo");
