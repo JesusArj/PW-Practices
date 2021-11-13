@@ -12,6 +12,7 @@ public class Main
 		String mail = login.loginMenu();
 		String opc="0";
 		System.out.println(mail);
+	   	Scanner reader = new Scanner(System.in);
 		if(!mail.equals(""))
 		{
 			while(opc.equals("1") || opc.equals("2") || opc.equals("3") || opc.equals("0") && (!mail.equals(""))) 
@@ -22,8 +23,10 @@ public class Main
 			   	System.out.println("Para ir a gestion de espectaculos, pulse 3.");
 			   	System.out.println("Para salir del menu, pulse cualquier otra tecla."); 
 			   	
-			   	Scanner reader = new Scanner(System.in);
-				opc = reader.nextLine();
+			   	if(reader.hasNextLine())
+			   	{
+			   		opc = reader.nextLine();
+			   	}
 
 				if("1".equals(opc)) 
 				{ 
@@ -42,13 +45,12 @@ public class Main
 				}
 				else 
 				{
+					System.out.println("Gracias por usar nuestro sistema.");
+					System.out.println("Saliendo. . .");
 					break;
 				}
-				reader.close(); 
 			}
+			reader.close(); 
 		}
 	}
 }
-
-	
-

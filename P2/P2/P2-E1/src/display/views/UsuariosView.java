@@ -99,6 +99,5 @@ public class UsuariosView
 		        }
 	        }
 		}
-		reader.close();
 	}
 }

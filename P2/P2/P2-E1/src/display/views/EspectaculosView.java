@@ -68,7 +68,7 @@ public class EspectaculosView
 		        		System.out.println("FECHAS: ");
 		        		for(int j=0; j<manager.requestEMs().get(i).getFechas().size(); j++)
 		        		{
-		        			System.out.println("Fecha " + Integer.toString(countFechas) + ":" + manager.requestEMs().get(i).getFechas().get(j).getFechaString() );
+		        			System.out.println("Fecha " + Integer.toString(countFechas) + ": " + manager.requestEMs().get(i).getFechas().get(j).getFechaString() );
 		        			countFechas++; 
 		        		}
 		        		System.out.println("------------------------------------------------------------------------------------");
@@ -84,7 +84,7 @@ public class EspectaculosView
 		        		for(int j=0; j<manager.requestETs().get(i).getPases().size(); j++)
 		        		{
 		        			System.out.println(); 
-		        			System.out.println("FECHA " + Integer.toString(countFechas) + ":");
+		        			System.out.println("FECHA " + Integer.toString(countFechas) + ": ");
 		        			System.out.println("DIA: " + manager.requestETs().get(i).getPases().get(j).getDiaSemana());
 		        			System.out.println("INICIO: " + manager.requestETs().get(i).getPases().get(j).getFechaInicioString());
 		        			System.out.println("FINAL: " + manager.requestETs().get(i).getPases().get(j).getFechaFinalString());

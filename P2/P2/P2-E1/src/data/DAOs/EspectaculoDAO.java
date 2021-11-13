@@ -614,7 +614,6 @@ public class EspectaculoDAO {
 	
 	public ArrayList<EspectaculoMultDTO> requestEMs(){
 		ArrayList<EspectaculoMultDTO> listEMs = new ArrayList<EspectaculoMultDTO>();
-		ArrayList<FechasDTO> listFechas = new ArrayList<FechasDTO>();
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
@@ -634,20 +633,9 @@ public class EspectaculoDAO {
 				String localidades = rs.getString("localidades");
 				String localidadesvendidas = rs.getString("localidadesvendidas");
 				String categoria = rs.getString("categoria");
+				int identEsp = Integer.parseInt(ident);
 				
-				String query2 = prop.getProperty("selectFechasEspMul");
-				query2 = query2.replaceAll("varid", ident);
-				
-				ResultSet rs2 = (ResultSet) stmt.executeQuery(query);
-				
-				while (rs2.next()) {
-					String idf = rs.getString("id");
-					String fecha = rs.getString("fecha");
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-					LocalDateTime fecha_date = LocalDateTime.parse(fecha, formatter);
-					listFechas.add(new FechasDTO(Integer.parseInt(idf), fecha_date));
-				}
-				listEMs.add(new EspectaculoMultDTO(Integer.parseInt(ident), titulo, categoria, descripcion, Integer.parseInt(localidades), Integer.parseInt(localidadesvendidas), listFechas));
+				listEMs.add(new EspectaculoMultDTO(identEsp, titulo, categoria, descripcion, Integer.parseInt(localidades), Integer.parseInt(localidadesvendidas), requestFechasEsp(identEsp)));
 			}
 
 			if (stmt != null){ 
@@ -1097,4 +1085,37 @@ public class EspectaculoDAO {
 		return paseRequest;	
 	}
 
+	
+	public ArrayList<FechasDTO> requestFechasEsp(int id){
+		ArrayList<FechasDTO> listFechas = new ArrayList<FechasDTO>();
+		
+		DBConnection dbConnection = new DBConnection();
+		Connection connection = dbConnection.getConnection();
+		try(InputStream input = new FileInputStream(ruta)){
+			Properties prop = new Properties();
+			prop.load(input);
+			String query = prop.getProperty("selectFechasEspMul");
+			query = query.replaceAll("varid", Integer.toString(id));
+			
+			Statement stmt = connection.createStatement();
+			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			
+			while (rs.next()) {
+				String ident = rs.getString("id");
+				String fechaBD =  rs.getString("fecha");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+				LocalDateTime fecha = LocalDateTime.parse(fechaBD, formatter);
+				listFechas.add(new FechasDTO(Integer.parseInt(ident), fecha));
+			}
+			if (stmt != null){ 
+				stmt.close(); 
+			}
+
+			dbConnection.closeConnection();
+		} catch (Exception e){
+			System.err.println(e);
+			e.printStackTrace();
+		}
+		return listFechas;
+	}
 }
