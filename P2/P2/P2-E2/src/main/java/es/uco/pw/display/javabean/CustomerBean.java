@@ -10,6 +10,7 @@ public class CustomerBean implements java.io.Serializable {
 	private String userName = "";
 	private LocalDateTime regTime;
 	private String rol = "";
+	private LocalDateTime lastLogged;
 
 	public String getEmailUser() {
 		return emailUser;
@@ -41,6 +42,14 @@ public class CustomerBean implements java.io.Serializable {
 
 	public void setRol(String rol) {
 		this.rol = rol;
+	}
+
+	public LocalDateTime getLastLogged() {
+		return lastLogged;
+	}
+
+	public void setLastLogged(LocalDateTime lastLogged) {
+		this.lastLogged = lastLogged;
 	}
 	
 }

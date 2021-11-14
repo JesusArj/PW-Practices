@@ -29,17 +29,19 @@ if (customerBean == null || customerBean.getEmailUser()=="")
 else 
 { 
 	if(customerBean.getRol().equals("usuario")) {
+	String user = customerBean.getUsername();
 %>
-	¡¡Bienvenido <jsp:getProperty property="userName" name="customerBean"/>!!
-	Hoy es <%= (new java.util.Date()).toString()%> 
-	Te registraste el <jsp:getProperty property="regTime" name="customerBean"/>
-<% 
+	¡¡Bienvenido <%=customerBean.getUsername()%>!!<br>
+	Hoy es <%= (new java.util.Date()).toString()%> <br>
+	Te registraste el <%=customerBean.getRegisterTime()%><br>
+		
+	<% 
 	}
-	
 	else{
 	//ADMIN PRINTjsp v		
 		}
-	} %>
+	} 
+%>
 	
 </body>
 </html>

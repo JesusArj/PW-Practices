@@ -15,7 +15,11 @@ if (customerBean == null || customerBean.getEmailUser().equals("")) {
 	LocalDateTime regTime = LocalDateTime.now();
 	
 	if (mail != null) {
-		UserDAO userDAO = new UserDAO();
+		String file =application.getInitParameter("properties");
+		java.io.InputStream myIO = application.getResourceAsStream(file); 
+		
+		UserDAO userDAO = new UserDAO(myIO);
+		
 		ArrayList<UserDTO> users = userDAO.requestUsers();
 		Boolean error = false;
 		

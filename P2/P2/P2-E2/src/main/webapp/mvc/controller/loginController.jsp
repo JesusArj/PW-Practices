@@ -10,9 +10,11 @@ if (customerBean == null || customerBean.getEmailUser().equals("")) {
 	String mail = request.getParameter("email");
 	String password = request.getParameter("password");
 
-	
 	if (mail != null) {
-		UserDAO userDAO = new UserDAO();
+		String file =application.getInitParameter("properties");
+		java.io.InputStream myIO = application.getResourceAsStream(file); 
+		
+		UserDAO userDAO = new UserDAO(myIO);
 		String passwd = userDAO.requestCredenciales(mail);
 		ArrayList<UserDTO> users = userDAO.requestUsers();
 		

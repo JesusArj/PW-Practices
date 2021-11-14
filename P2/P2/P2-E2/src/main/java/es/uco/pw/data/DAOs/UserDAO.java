@@ -1,10 +1,8 @@
-// Esta clase DAO es "simulada" - no tiene acceso a la base de datos
 package es.uco.pw.data.DAOs;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.*;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -12,25 +10,32 @@ import es.uco.pw.business.DTOs.*;
 import es.uco.pw.data.common.*;
 
 public class UserDAO {
-
-	String rutaAbsoluta = new File("").getAbsolutePath();
-	String rutaFicheroProp = rutaAbsoluta + "/P2/P2-E1/src/sql.properties";
 	
+	private InputStream input;
+	
+	public UserDAO(InputStream myIO){
+		this.input = myIO;
+	}
+
 	public void createUser(UserDTO newUser) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try{
 			Properties prop = new Properties();
-			prop.load(input);
+			prop.load(this.input);
 			String query = prop.getProperty("createNewUser");
 			query=query.replaceAll("varmail", newUser.getMail());
 			query=query.replaceAll("varpass", newUser.getPasswd());
 			query=query.replaceAll("varname", newUser.getName());
 			query=query.replaceAll("varuser", newUser.getUsername());
 			query=query.replaceAll("varrol", newUser.getRol());
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
+			String formattedDateTime = newUser.getRegisterTime().format(formatter);
+			query = query.replaceAll("varfecharegistro", formattedDateTime);
+			query = query.replaceAll("varultfechaultimaconex", formattedDateTime);
 			
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -42,7 +47,7 @@ public class UserDAO {
 		ArrayList<UserDTO> users = new ArrayList<UserDTO>();
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try{
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectByRol");
@@ -52,7 +57,7 @@ public class UserDAO {
 			
 			while (rs.next()) {
 				String name = rs.getString("name");
-				String email = rs.getString("email");
+				String email = rs.getString("mail");
 				String username = rs.getString("username");
 				users.add(new UserDTO(name, email,username));
 			}
@@ -73,7 +78,7 @@ public class UserDAO {
 		String password = null;
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try{
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectPass");
@@ -81,9 +86,10 @@ public class UserDAO {
 			
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
-			
+			if(rs.next())
+			{
 			password = rs.getString("password");
-			
+			}
 			if (stmt != null){ 
 				stmt.close(); 
 			}
@@ -99,14 +105,14 @@ public class UserDAO {
 	public void deleteUser(String mail) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try{
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("deleteUser");
 			query=query.replaceAll("varmail", mail);
 			
 			Statement stmt = connection.createStatement();
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -117,7 +123,7 @@ public class UserDAO {
 	public void updateUser(UserDTO updateUser) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("D:/Descargas/PW-Practices-master/P2/P2-E1rutaFicheroProp")){
+		try{
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("updateUser");
@@ -140,7 +146,7 @@ public class UserDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try{
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectDataUserMail");
@@ -149,16 +155,18 @@ public class UserDAO {
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 			
-			String name = rs.getString("name");
-			String mail = rs.getString("mail");
-			String username = rs.getString("username");
-			String rol = rs.getString("rol");
-			
-			userRequest.setMail(mail);
-			userRequest.setName(name);
-			userRequest.setUsername(username);
-			userRequest.setRol(rol);
-			
+			if(rs.next())
+			{
+				String name = rs.getString("name");
+				String mail = rs.getString("mail");
+				String username = rs.getString("username");
+				String rol = rs.getString("rol");
+				
+				userRequest.setMail(mail);
+				userRequest.setName(name);
+				userRequest.setUsername(username);
+				userRequest.setRol(rol);
+			}
 			if (stmt != null){ 
 				stmt.close(); 
 			}
@@ -176,7 +184,7 @@ public class UserDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try{
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectDataUserName");
@@ -211,7 +219,7 @@ public class UserDAO {
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("rutaFicheroProp")){
+		try{
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectAllUsers");
@@ -221,7 +229,7 @@ public class UserDAO {
 			
 			while (rs.next()) {
 				String name = rs.getString("name");
-				String email = rs.getString("email");
+				String email = rs.getString("mail");
 				String username = rs.getString("username");
 				String rol = rs.getString("rol");
 				listUsers.add(new UserDTO(name, email,username,rol));
@@ -240,6 +248,4 @@ public class UserDAO {
 	}
 
 }
-
-
 
