@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class EspectaculoDAO {
 
-	String ruta ="D:\\\\Descargas\\\\PW-Practices-master\\\\P2\\\\P2\\\\P2-E1\\\\src\\\\sql.properties";
+	String ruta ="D:\\\\Descargas\\\\PW-Practices-master\\\\PW-Practices-master\\\\P2\\\\P2\\\\P2-E1\\\\src\\\\sql.properties";
 	private boolean existIdPunt(int id)
 	{
 		DBConnection dbConnection = new DBConnection();

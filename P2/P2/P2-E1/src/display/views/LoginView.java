@@ -5,6 +5,11 @@ import java.util.Scanner;
 
 import business.managers.UserManager;
 
+/**
+ * La clase MenuUsuario contiene la funcion UserMenu, el menu de gestion de usuarios.
+ * @author Developers
+ */
+
 public class LoginView 
 {
 	public String loginMenu() 

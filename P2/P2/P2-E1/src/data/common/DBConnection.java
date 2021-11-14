@@ -6,8 +6,7 @@ import java.sql.SQLException;
 
 /**
  * A class to manage the MySQL connection (general methods and configuration).
- * @author 
- * @author 
+ * @author developers
  * */
 
 public class DBConnection {

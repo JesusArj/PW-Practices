@@ -12,9 +12,20 @@ import business.DTOs.EspectaculoDTO;
 import business.DTOs.VotantesCriticaDTO;
 import data.common.DBConnection;
 
+/*
+ * Clase que implementa las funciones relativas a la gestion de 
+ * criticas con respecto a la Base de Dato
+ */
 public class CriticaDAO {
 
-	String ruta ="C:\\Users\\jesus\\eclipse-workspace\\P2\\P2\\P2-E1\\src\\sql.properties";
+	String ruta ="D:\\Descargas\\PW-Practices-master\\PW-Practices-master\\P2\\P2\\P2-E1\\src\\sql.properties";
+	
+	/*
+	 * Funcion que busca y devuleve el titulo de un espectaculo
+	 * almacenado en la base de datos
+	 * @param id Identificador del espectaculo buscado
+	 * @return titulo Titulo del espectaculo deseado
+	 */
 	public String selectTituloEsp(int id) {
 		String titulo=null;
 		DBConnection dbConnection = new DBConnection();
@@ -41,7 +52,11 @@ public class CriticaDAO {
 		}
 		return titulo;
 	}
-	
+	/*
+	 * Funcion que busca una critica y comprueba si existe
+	 * @param id Identificador del espectaculo buscado
+	 * @return true si existe 
+	 */
 	private boolean existIdCritica(int id)
 	{
 		DBConnection dbConnection = new DBConnection();

@@ -12,7 +12,7 @@ import data.DAOs.EspectaculoDAO;
 public class EspectaculoManager
 {
 	
-
+	
 	public Boolean PuntExist(int id) {
 		ArrayList<EspectaculoPuntDTO> Punt = this.requestEPs();
 		for(EspectaculoPuntDTO u : Punt) {
