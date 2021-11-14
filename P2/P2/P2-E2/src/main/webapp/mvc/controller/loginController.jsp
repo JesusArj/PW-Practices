@@ -12,24 +12,36 @@ if (customerBean == null || customerBean.getEmailUser().equals("")) {
 
 	if (mail != null) {
 		String file =application.getInitParameter("properties");
-		java.io.InputStream myIO = application.getResourceAsStream(file); 
+		String url = application.getInitParameter("url");
+		String userC = application.getInitParameter("user");
+		String passwd = application.getInitParameter("password");
+		java.io.InputStream myIO = application.getResourceAsStream(file);
 		
-		UserDAO userDAO = new UserDAO(myIO);
-		String passwd = userDAO.requestCredenciales(mail);
+		UserDAO userDAO = new UserDAO(myIO,url,userC,passwd);
+		String pass = userDAO.requestCredenciales(mail);
 		ArrayList<UserDTO> users = userDAO.requestUsers();
 		
 		for(UserDTO u : users){
 			if(u.getMail().equals(mail)){
-				if (passwd.equals(password)){
-					String username = u.getUsername();
-					LocalDateTime regTime = u.getRegisterTime();
-					String rol = u.getRol();
-					%>
-					<jsp:setProperty property="emailUser" value="<%=mail%>" name="customerBean"/>
-					<jsp:setProperty property="userName" value="<%=username%>" name="customerBean"/>
-					<jsp:setProperty property="regTime" value="<%=regTime%>" name="customerBean"/>
-					<jsp:setProperty property="rol" value="<%=rol%>" name="customerBean"/>
-					<%
+				if (passwd.equals(pass)){
+					if(u.getRol().equals("usuario")){
+						String username = u.getUsername();
+						LocalDateTime regTime = u.getRegisterTime();
+						String rol = u.getRol();
+						%>
+						<jsp:setProperty property="emailUser" value="<%=mail%>" name="customerBean"/>
+						<jsp:setProperty property="userName" value="<%=username%>" name="customerBean"/>
+						<jsp:setProperty property="regTime" value="<%=regTime%>" name="customerBean"/>
+						<jsp:setProperty property="rol" value="<%=rol%>" name="customerBean"/>
+						<%
+					}
+					else{
+						nextPage = "../../userBadPass.jsp";
+						mensajeNextPage = "Wrong password";
+					}
+				}
+				else{
+					
 				}
 			}
 		}

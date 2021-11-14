@@ -18,8 +18,7 @@ if (customerBean != null && !customerBean.getEmailUser().equals("")) {
 	nextPage = "../../index.jsp";
 } else {
 %>
-<%= messageNextPage %><br/><br/>
-<h1>Registro de nuevo usuario</h1>
+<h3>Registro de nuevo usuario</h3>
 Si desea registrarse, introduzca los siguientes datos. 
 <form method="post" action="../controller/loginController.jsp">
 	<label for="name">Name: </label>

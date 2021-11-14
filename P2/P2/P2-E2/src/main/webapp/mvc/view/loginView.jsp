@@ -18,9 +18,7 @@ if (customerBean != null && !customerBean.getEmailUser().equals("")) {
 	nextPage = "../../index.jsp";
 } else {
 %>
-<%= messageNextPage %><br/><br/>
-<h1>Inicio de sesion</h1>
-
+<h3>Inicio de sesion</h3>
 <form method="post" action="../controller/loginController.jsp">
 	<fieldset>
 		<legend>Log In</legend>
@@ -28,7 +26,7 @@ if (customerBean != null && !customerBean.getEmailUser().equals("")) {
 		<input type="email" name="Mail" value="usermail@mail.com"> <br>
 		Password:<br>
 		<input type="password" name="Password" value="Password"> <br><br>
-		<input type="button" value="Login">
+		<input type="submit" value="Login">
 	</fieldset>
 </form>
 <br>

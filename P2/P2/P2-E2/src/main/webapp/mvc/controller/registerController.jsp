@@ -16,16 +16,19 @@ if (customerBean == null || customerBean.getEmailUser().equals("")) {
 	
 	if (mail != null) {
 		String file =application.getInitParameter("properties");
+		String url = application.getInitParameter("url");
+		String userC = application.getInitParameter("user");
+		String passwd = application.getInitParameter("password");
 		java.io.InputStream myIO = application.getResourceAsStream(file); 
 		
-		UserDAO userDAO = new UserDAO(myIO);
+		UserDAO userDAO = new UserDAO(myIO,url,userC,passwd);
 		
 		ArrayList<UserDTO> users = userDAO.requestUsers();
 		Boolean error = false;
 		
 		for(UserDTO u : users){
 			if(u.getMail().equals(mail)){
-				nextPage = "../view/UserExistError.jsp";
+				nextPage = "../../UserExistError.jsp";
 				error = true;
 			}
 		}

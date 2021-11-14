@@ -1,6 +1,5 @@
 package es.uco.pw.data.DAOs;
 
-import java.io.InputStream;
 import java.sql.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -11,14 +10,20 @@ import es.uco.pw.data.common.*;
 
 public class UserDAO {
 	
-	private InputStream input;
+	private java.io.InputStream input;
+	private String url;
+	private String userC;
+	private String passwd;
 	
-	public UserDAO(InputStream myIO){
+	public UserDAO(java.io.InputStream myIO, String url, String userC, String passwd){
 		this.input = myIO;
+		this.url = url;
+		this.userC = userC;
+		this.passwd = passwd;
 	}
 
 	public void createUser(UserDTO newUser) {
-		DBConnection dbConnection = new DBConnection();
+		DBConnection dbConnection = new DBConnection(this.url, this.userC, this.passwd);
 		Connection connection = dbConnection.getConnection();
 		try{
 			Properties prop = new Properties();
@@ -45,7 +50,7 @@ public class UserDAO {
 	
 	public ArrayList<UserDTO> selectByRol(String rol){
 		ArrayList<UserDTO> users = new ArrayList<UserDTO>();
-		DBConnection dbConnection = new DBConnection();
+		DBConnection dbConnection = new DBConnection(this.url, this.userC, this.passwd);
 		Connection connection = dbConnection.getConnection();
 		try{
 			Properties prop = new Properties();
@@ -76,7 +81,7 @@ public class UserDAO {
 	
 	public String requestCredenciales(String mail) {
 		String password = null;
-		DBConnection dbConnection = new DBConnection();
+		DBConnection dbConnection = new DBConnection(this.url, this.userC, this.passwd);
 		Connection connection = dbConnection.getConnection();
 		try{
 			Properties prop = new Properties();
@@ -103,7 +108,7 @@ public class UserDAO {
 	}
 	
 	public void deleteUser(String mail) {
-		DBConnection dbConnection = new DBConnection();
+		DBConnection dbConnection = new DBConnection(this.url, this.userC, this.passwd);
 		Connection connection = dbConnection.getConnection();
 		try{
 			Properties prop = new Properties();
@@ -121,7 +126,7 @@ public class UserDAO {
 	}
 	
 	public void updateUser(UserDTO updateUser) {
-		DBConnection dbConnection = new DBConnection();
+		DBConnection dbConnection = new DBConnection(this.url, this.userC, this.passwd);
 		Connection connection = dbConnection.getConnection();
 		try{
 			Properties prop = new Properties();
@@ -144,7 +149,7 @@ public class UserDAO {
 	public UserDTO requestUser(String email) {
 		UserDTO userRequest = new UserDTO();
 		
-		DBConnection dbConnection = new DBConnection();
+		DBConnection dbConnection = new DBConnection(this.url, this.userC, this.passwd);
 		Connection connection = dbConnection.getConnection();
 		try{
 			Properties prop = new Properties();
@@ -182,7 +187,7 @@ public class UserDAO {
 	public UserDTO requestUserByUsername(String userName) {
 		UserDTO userRequest = new UserDTO();
 		
-		DBConnection dbConnection = new DBConnection();
+		DBConnection dbConnection = new DBConnection(this.url, this.userC, this.passwd);
 		Connection connection = dbConnection.getConnection();
 		try{
 			Properties prop = new Properties();
@@ -217,7 +222,7 @@ public class UserDAO {
 	public ArrayList<UserDTO> requestUsers(){
 		ArrayList<UserDTO> listUsers = new ArrayList<UserDTO>();
 		
-		DBConnection dbConnection = new DBConnection();
+		DBConnection dbConnection = new DBConnection(this.url, this.userC, this.passwd);
 		Connection connection = dbConnection.getConnection();
 		try{
 			Properties prop = new Properties();
