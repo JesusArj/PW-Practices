@@ -295,7 +295,7 @@ public class EspectaculoDAO {
 	public void updateEspectaculoPuntual(EspectaculoPuntDTO updatePunt) { 
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("D:/Descargas/PW-Practices-master/P2/P2-E1/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
+		try(InputStream input = new FileInputStream(ruta)){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("updateEP"); 
@@ -404,7 +404,7 @@ public class EspectaculoDAO {
 	
 	
 	//Espectaculo Multiple
-	public void createEspectaculoMultiple(EspectaculoMultDTO newMult, int idf) {
+	public void createEspectaculoMultiple(EspectaculoMultDTO newMult) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
 		try(InputStream input = new FileInputStream(ruta)){
@@ -417,7 +417,6 @@ public class EspectaculoDAO {
 			query=query.replaceAll("varlocalidades", Integer.toString(newMult.getLocalidadesVenta()));
 			query=query.replaceAll("varvendidas", Integer.toString(newMult.getLocalidadesVendidas())); 
 			query=query.replaceAll("varcategoria", newMult.getCategoria());
-			query=query.replaceAll("varfechaid", Integer.toString(idf));
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
 			dbConnection.closeConnection();
@@ -532,7 +531,7 @@ public class EspectaculoDAO {
 	public void updateEspectaculoMultiple(EspectaculoMultDTO updateMult) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("D:/Descargas/PW-Practices-master/P2/P2-E1/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
+		try(InputStream input = new FileInputStream(ruta)){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("updateEM"); 
@@ -560,7 +559,7 @@ public class EspectaculoDAO {
 			prop.load(input);
 			
 			String query = prop.getProperty("updateFecha");
-			query=query.replaceAll("varid", Integer.toString(idEspectaculo));
+			query=query.replaceAll("varid", Integer.toString(updateFecha.getID()));
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"); 
 			String formattedDateTime = updateFecha.getFecha().format(formatter);
 			query=query.replaceAll("varfecha", formattedDateTime);
@@ -810,7 +809,7 @@ public class EspectaculoDAO {
 	public void updateEspectaculoTemporada(EspectaculoTempDTO updateTemp) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream("D:/Descargas/PW-Practices-master/P2/P2-E1/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
+		try(InputStream input = new FileInputStream(ruta)){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("updateET"); 
@@ -820,7 +819,6 @@ public class EspectaculoDAO {
 			query=query.replaceAll("varlocalidades", Integer.toString(updateTemp.getLocalidadesVenta()));
 			query=query.replaceAll("varvendidas", Integer.toString(updateTemp.getLocalidadesVendidas())); 
 			query=query.replaceAll("varcategoria", updateTemp.getCategoria());
-			
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
 			dbConnection.closeConnection();
@@ -921,7 +919,7 @@ public class EspectaculoDAO {
 	}
 	
 	public ArrayList<EspectaculoTempDTO> requestETs(){
-		ArrayList<EspectaculoTempDTO> listETs = new ArrayList<EspectaculoTempDTO>();
+ArrayList<EspectaculoTempDTO> listETs = new ArrayList<EspectaculoTempDTO>();
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
