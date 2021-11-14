@@ -6,6 +6,11 @@ import business.DTOs.CriticaDTO;
 import business.DTOs.EspectaculoDTO;
 import business.managers.CriticaManager;
 
+/**
+ * La clase CriticasView contiene la funcion CriticaMenu, el menu de gestion de criticas.
+ * @author Developers
+ */
+
 public class CriticasView {
 	private String mail;
 	

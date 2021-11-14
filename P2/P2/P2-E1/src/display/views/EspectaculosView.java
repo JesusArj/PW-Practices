@@ -13,6 +13,12 @@ import business.DTOs.PasesDTO;
 import business.managers.EspectaculoManager;
 import business.managers.UserManager;
 
+/**
+ * La clase EspectaculoView contiene la funcion EspectaculoView, el menu de gestion de espectaculo y 
+ * la funcion EspectaculoMenuAdmin, referente a las gestion de administracion de Espectaculo
+ * @author Developers
+ */
+
 public class EspectaculosView 
 {
 	private String mail;

@@ -14,7 +14,8 @@ import data.common.DBConnection;
 
 /*
  * Clase que implementa las funciones relativas a la gestion de 
- * criticas con respecto a la Base de Dato
+ * criticas con respecto a la Base de Datos
+ * @author Developers
  */
 public class CriticaDAO {
 
@@ -25,6 +26,7 @@ public class CriticaDAO {
 	 * almacenado en la base de datos
 	 * @param id Identificador del espectaculo buscado
 	 * @return titulo Titulo del espectaculo deseado
+	 * @author Developers
 	 */
 	public String selectTituloEsp(int id) {
 		String titulo=null;
@@ -52,10 +54,13 @@ public class CriticaDAO {
 		}
 		return titulo;
 	}
+	
 	/*
 	 * Funcion que busca una critica y comprueba si existe
 	 * @param id Identificador del espectaculo buscado
 	 * @return true si existe 
+	 * @return false si no existe
+	 * @author Developers
 	 */
 	private boolean existIdCritica(int id)
 	{
@@ -82,6 +87,12 @@ public class CriticaDAO {
 		return false; 
 	}
 	
+	/*
+	 * Funcion recursiva que genera un ID aleatorio para una critica,
+	 * asegurandose que no no exista
+	 * @return id Identificador aleatorio creado
+	 * @author Developers
+	 */
 	public int generarIDCritica()
 	{
 		Random r = new Random();
@@ -92,6 +103,16 @@ public class CriticaDAO {
 		}
 		return id;
 	}
+	
+	/*
+	 * Funcion que busca un ID asociado a una votacion 
+	 * y comprueba que exista
+	 * @param id Identificador de la votacion buscada
+	 * @return true si existe 
+	 * @return false si no existe
+	 * @author Developers
+	 */
+
 	private boolean existIdVC(int id)
 	{
 		DBConnection dbConnection = new DBConnection();
@@ -117,6 +138,12 @@ public class CriticaDAO {
 		return false; 
 	}
 	
+	/*
+	 * Funcion recursiva que genera un ID para un voto, 
+	 * comprobando que no se exista ya
+	 * @return id Identificador del voto
+	 * @author Developers
+	 */
 	
 	public int generarIdVC()
 	{
@@ -128,6 +155,12 @@ public class CriticaDAO {
 		}
 		return id;
 	}
+	
+	/*
+	 * Funcion que crea una critica a partir de los datos pasados por un DTO
+	 * @param newCritica DTO de Critica con los datos provenientes del manager
+	 * @author Developers
+	 */
 	
 	public void createCritica(CriticaDTO newCritica)
 	{
@@ -153,6 +186,14 @@ public class CriticaDAO {
 		}
 	}
 	
+	/*
+	 * Funcion que añade un votante y su voto a una critica
+	 * @param mail Mail del votantes
+	 * @param id Identificador de la critica a la que vota
+	 * @param voto Voto dado a la critica
+	 * @author Developers
+	 */
+	
 	public void addVotanteCritica(String mail, int id, String voto) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
@@ -173,6 +214,12 @@ public class CriticaDAO {
 		}
 	}
 	
+	/*
+	 * Funcion que borra de la base de datos las votaciones asociadas a una critica
+	 * @param id Identificador de la votacion a eliminar
+	 * @author Developers
+	 */
+	
 	public void removeVotantesCritica(int id) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
@@ -189,6 +236,13 @@ public class CriticaDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/*
+	 * Funcion que borra de la base de datos una votacion asociada a una critica
+	 * @param mail Mail del votante a eliminar
+	 * @param id Identificador de la critica a la que pertenece el voto
+	 * @author Developers
+	 */
 	
 	public void removeVotanteCritica(String mail, int id) {
 		DBConnection dbConnection = new DBConnection();
@@ -207,6 +261,13 @@ public class CriticaDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/*
+	 * Funcion que devuelve las votaciones asociadas a una critca
+	 * @param id Identificador de la critica
+	 * @return votantes vector de Votaciones asociadas a la critica
+	 * @author Developers
+	 */
 	
 	public ArrayList<VotantesCriticaDTO> requestVotantes(int id){
 		DBConnection dbConnection = new DBConnection();
@@ -236,6 +297,13 @@ public class CriticaDAO {
 		return votantes;
 	}
 	
+	/*
+	 * Funcion que actuliza la informacion de una critica especifica,
+	 * a partir de datos provenientes del manager
+	 * @param updateCritica DTO de Critica con la informacion actualizada
+	 * @author Developers
+	 */
+	
 	public void updateCritica(CriticaDTO updateCritica)
 	{
 		DBConnection dbConnection = new DBConnection();
@@ -258,6 +326,13 @@ public class CriticaDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/*
+	 * Funcion que elimina de la base de datos una critica concreta
+	 * @param id Identificador de la critica a eliminar
+	 * @author Developers
+	 */
+	
 	public void deleteCritica(int id) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
@@ -280,6 +355,14 @@ public class CriticaDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/*
+	 * Funcion que devuelve la informacion de una critica concreta
+	 * @param id Identificador de la critica a buscar
+	 * @return criticaRequesto DTO de Critica con la informacion de la critica buscada
+	 * @author Developers
+	 */
+	
 	public CriticaDTO requestCritica(int id)
 	{
 		CriticaDTO criticaRequest = new CriticaDTO();
@@ -332,6 +415,12 @@ public class CriticaDAO {
 		return criticaRequest;
 	}
 	
+	/*
+	 * Funcion que devuelve la informacion de todas las criticas
+	 * @return listCriticas Vector de DTOs de Criticas con la informacion de cada critica
+	 * @author Developers
+	 */
+	
 	public ArrayList<CriticaDTO> requestCriticas(){
 		ArrayList<CriticaDTO> listCriticas = new ArrayList<CriticaDTO>();
 		
@@ -373,6 +462,13 @@ public class CriticaDAO {
 		return listCriticas;
 	}
 	
+	/*
+	 * Funcion que devuelve la informacion de todas las criticas escritas por un usuario concreto
+	 * @param mail Mail del autor de las criticas
+	 * @return listCriticas Vector de DTOs de Criticas con la informacion de cada critica
+	 * @author Developers
+	 */
+	
 	public ArrayList<CriticaDTO> requestCriticasUser(String mail){
 		ArrayList<CriticaDTO> listCriticas = new ArrayList<CriticaDTO>();
 		
@@ -412,7 +508,14 @@ public class CriticaDAO {
 		}
 		return listCriticas;
 	}
-
+	
+	/*
+	 * Funcion que devuelve la informacion de todas las criticas salvo las escritas por un usuario concreto
+	 * @param mail Mail del usuario concreto
+	 * @return listCriticas Vector de DTOs de Criticas con la informacion de cada critica
+	 * @author Developers
+	 */
+	
 	public ArrayList<CriticaDTO> requestCriticasExUser(String mail){
 		ArrayList<CriticaDTO> listCriticas = new ArrayList<CriticaDTO>();
 		
@@ -450,6 +553,12 @@ public class CriticaDAO {
 		return listCriticas;
 	}
 
+	/*
+	 * Funcion que devuelve los mails de los usuarios que hayan escrito alguna critica
+	 * @return listWriters Vector que almacena los mails de los usuarios que hayan escrito alguna critica
+	 * @author Developers
+	 */
+	
 	public ArrayList<String> requestWriters(){
 		ArrayList<String> listWriters = new ArrayList<String>();
 		
@@ -478,6 +587,12 @@ public class CriticaDAO {
 		}
 		return listWriters;
 	}
+	
+	/*
+	 * Funcion que devuelve los espectaculos puntuales ya acabados
+	 * @return esp Vector de Espectaculos 
+	 * @author Developers
+	 */
 	
 	public ArrayList<EspectaculoDTO> requestEspPuntPast(){
 		ArrayList<EspectaculoDTO> esp = new ArrayList<EspectaculoDTO>();
@@ -518,6 +633,12 @@ public class CriticaDAO {
 		return esp;
 	}
 
+	/*
+	 * Funcion que devuelve los espectaculos multiples con al menos una fecha pasada
+	 * @return esp Vector de Espectaculos 
+	 * @author Developers
+	 */
+	
 	public ArrayList<EspectaculoDTO> requestEspMultPast(){
 		ArrayList<EspectaculoDTO> esp = new ArrayList<EspectaculoDTO>();
 		DBConnection dbConnection = new DBConnection();
@@ -556,6 +677,12 @@ public class CriticaDAO {
 		
 		return esp;
 	}
+	
+	/*
+	 * Funcion que devuelve los espectaculos Puntuales con al menos una fecha pasada
+	 * @return esp Vector de Espectaculos 
+	 * @author Developers
+	 */
 	
 	public ArrayList<EspectaculoDTO> requestEspTempPast(){
 		ArrayList<EspectaculoDTO> esp = new ArrayList<EspectaculoDTO>();

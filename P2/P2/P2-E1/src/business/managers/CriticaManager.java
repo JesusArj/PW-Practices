@@ -153,6 +153,7 @@ public class CriticaManager {
 	 * con un ID especifico
 	 * @param id Identificador de la critica que se busca
 	 * @return true si existe / false si no existe
+	 * @author Developers
 	 */
 	public Boolean CriticaExist(int id) {
 		ArrayList<CriticaDTO> Criticas = this.requestCriticas();
@@ -168,6 +169,7 @@ public class CriticaManager {
 	 * @param id ID de la critica que votar
 	 * @return true si se le ha dado like 
 	 * @return false si no se ha podido dar like
+	 * @author Developers
 	 */
 	
 	public Boolean darLike(int id) {
@@ -204,6 +206,7 @@ public class CriticaManager {
 	 * @param id ID de la critica que votar
 	 * @return true si se le ha dado dislike 
 	 * @return false si no se ha podido dar dislike
+	 * @author Developers
 	 */
 	public Boolean darDislike(int id) {
 		if(this.CriticaExist(id)) {
@@ -239,6 +242,7 @@ public class CriticaManager {
 	 * a partir de us ID
 	 * @param id ID del espectaculo a buscar
 	 * @return titulo Titulo del espectaculo
+	 * @author Developers
 	 */
 	public String selectTituloEsp(int id) {
 		CriticaDAO selectTituloEspectaculo = new CriticaDAO();
@@ -248,6 +252,7 @@ public class CriticaManager {
 	/*Llamada al DAO que pide los mails de usuarios
 	 * que hayan escrito una critica
 	 * @return requestedWriters Vector con los mails de los usuarios
+	 * @author Developers
 	 */
 	public ArrayList<String> requestWriters(){
 		CriticaDAO requestW = new CriticaDAO();

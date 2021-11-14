@@ -15,9 +15,22 @@ import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Random;
 
+/*
+ * Clase que implementa las funciones relativas a la gestion de espectaculos
+ * en la base de datos
+ * @author Developers
+ */
 public class EspectaculoDAO {
 
 	String ruta ="D:\\\\Descargas\\\\PW-Practices-master\\\\PW-Practices-master\\\\P2\\\\P2\\\\P2-E1\\\\src\\\\sql.properties";
+	
+	/* Funcion que comprueba si existe un ID de un espectaculo Puntual
+	 * @param id Identificador a comprobar
+	 * @return true si el identificador existe
+	 * @return false si el identificador no existe
+	 * @author Developers
+	 */
+	
 	private boolean existIdPunt(int id)
 	{
 		DBConnection dbConnection = new DBConnection();
@@ -42,6 +55,13 @@ public class EspectaculoDAO {
 		}
 		return false; 
 	}
+	
+	/* Funcion que comprueba si existe un ID de un espectaculo Multiple
+	 * @param id Identificador a comprobar
+	 * @return true si el identificador existe
+	 * @return false si el identificador no existe
+	 * @author Developers
+	 */
 	
 	private boolean existIdMult(int id)
 	{
@@ -68,6 +88,13 @@ public class EspectaculoDAO {
 		return false; 
 	}
 	
+	/* Funcion que comprueba si existe un ID de un espectaculo de Temporada
+	 * @param id Identificador a comprobar
+	 * @return true si el identificador existe
+	 * @return false si el identificador no existe
+	 * @author Developers
+	 */
+	
 	private boolean existIdTemp(int id)
 	{
 		DBConnection dbConnection = new DBConnection();
@@ -92,7 +119,14 @@ public class EspectaculoDAO {
 		}
 		return false; 
 	}
-
+	
+	/* Funcion que comprueba si existe un ID de una fecha
+	 * @param id Identificador a comprobar
+	 * @return true si el identificador existe
+	 * @return false si el identificador no existe
+	 * @author Developers
+	 */
+	
 	private boolean existIdFecha(int id)
 	{
 		DBConnection dbConnection = new DBConnection();
@@ -117,6 +151,13 @@ public class EspectaculoDAO {
 		}
 		return false; 
 	}
+	
+	/* Funcion que comprueba si existe un ID para la tabala MultipleFechas
+	 * @param id Identificador a comprobar
+	 * @return true si el identificador existe
+	 * @return false si el identificador no existe
+	 * @author Developers
+	 */
 
 	private boolean existIdMultFechas(int id)
 	{
@@ -142,7 +183,14 @@ public class EspectaculoDAO {
 		}
 		return false; 
 	}
-
+	
+	/* Funcion que comprueba si existe un ID de un pase
+	 * @param id Identificador a comprobar
+	 * @return true si el identificador existe
+	 * @return false si el identificador no existe
+	 * @author Developers
+	 */
+	
 	private boolean existIdPases(int id)
 	{
 		DBConnection dbConnection = new DBConnection();
@@ -168,6 +216,11 @@ public class EspectaculoDAO {
 		return false; 
 	}
 	
+	/* Funcion recursiva que genera un ID aleatorio para un pase
+	 * @return id Identificador generado
+	 * @author Developers
+	 */
+	
 	public int generarIdPases()
 	{
 		
@@ -179,6 +232,11 @@ public class EspectaculoDAO {
 		}
 		return id;
 	}
+	
+	/* Funcion recursiva que genera un ID aleatorio para la tabal MultipleFechas
+	 * @return id Identificador generado
+	 * @author Developers
+	 */
 	
 	public int generarIDMultFechas()
 	{
@@ -192,6 +250,11 @@ public class EspectaculoDAO {
 		return id;
 	}
 	
+	/* Funcion recursiva que genera un ID aleatorio para una fecha
+	 * @return id Identificador generado
+	 * @author Developers
+	 */
+	
 	public int generarIDFecha()
 	{
 		
@@ -204,6 +267,11 @@ public class EspectaculoDAO {
 		return id;
 	}
 	
+	/* Funcion recursiva que genera un ID aleatorio para un Espectaculo Multiple
+	 * @return id Identificador generado
+	 * @author Developers
+	 */
+	
 	public int generarIDMult()
 	{
 		
@@ -215,6 +283,11 @@ public class EspectaculoDAO {
 		}
 		return id;
 	}
+	
+	/* Funcion recursiva que genera un ID aleatorio para Espectaculo Puntual
+	 * @return id Identificador generado
+	 * @author Developers
+	 */
 
 	public int generarIDPunt()
 	{
@@ -227,6 +300,11 @@ public class EspectaculoDAO {
 		return id;
 	}
 	
+	/* Funcion recursiva que genera un ID aleatorio para un Espectaculo de Temporada
+	 * @return id Identificador generado
+	 * @author Developers
+	 */
+	
 	public int generarIDTemp()
 	{
 		
@@ -238,6 +316,12 @@ public class EspectaculoDAO {
 		}
 		return id;
 	}
+	
+	/* Funcion que crea un nuevo espectaculo Puntual a partir
+	 * de los datos provenientes del manager
+	 * @param newPunt DTO de Espectaculo Puntual con los datos del nuevo espectaculo
+	 * @author Developers
+	 */
 	
 	public void createEspectaculoPuntual(EspectaculoPuntDTO newPunt) {
 		DBConnection dbConnection = new DBConnection();
@@ -263,6 +347,12 @@ public class EspectaculoDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/* Funcion que borra un Espectaculo Puntual de la base de datos, junto a sus criticas asociadas
+	 * y las votaciones asociadas a dichas criticas
+	 * @param id Identificador del espectaculo a borrar
+	 * @author Developers
+	 */
 	
 	public void deleteEspectaculoPuntual(int id) {
 		DBConnection dbConnection = new DBConnection();
@@ -292,6 +382,11 @@ public class EspectaculoDAO {
 		}
 	}
 	
+	/* Funcion que actualiza la informacion de un Espectaculo Puntual
+	 * @param updatePunt DTO de Espectaculo Puntual con los nuevos datos
+	 * @author Developers
+	 */
+	
 	public void updateEspectaculoPuntual(EspectaculoPuntDTO updatePunt) { 
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
@@ -317,6 +412,12 @@ public class EspectaculoDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/* Funcion que devuelve un Espectaculo Puntual concreto a partir de un id
+	 * @param id Identificador del Espectaculo a devolver
+	 * @return epRequest DTO de Espectaculo Puntual con los datos del Espectaculo buscadp
+	 * @author Developers
+	 */
 	
 	public EspectaculoPuntDTO requestEspectaculoPuntual(int id) {
 		EspectaculoPuntDTO epRequest = new EspectaculoPuntDTO();
@@ -364,6 +465,11 @@ public class EspectaculoDAO {
 		return epRequest;
 	}
 	
+	/* Funcion que devuelve un todos los Espectaculos Puntuales almacenados en el sistema
+	 * @return listEPs Vector de DTOs de Espectaculos Puntuales con los datos de los espectaculos
+	 * @author Developers
+	 */
+	
 	public ArrayList<EspectaculoPuntDTO> requestEPs(){
 		ArrayList<EspectaculoPuntDTO> listEPs = new ArrayList<EspectaculoPuntDTO>();
 		
@@ -402,6 +508,10 @@ public class EspectaculoDAO {
 		return listEPs;
 	}
 	
+	/* Funcion que crea un nuevo Espectaculo Multiple 
+	 * @param newMult DTO de Espectaculo Multiple con los datos del nuevo Espectaculo a crear
+	 * @author Developers
+	 */
 	
 	//Espectaculo Multiple
 	public void createEspectaculoMultiple(EspectaculoMultDTO newMult) {
@@ -426,6 +536,12 @@ public class EspectaculoDAO {
 		}
 	}
 
+	/* Funcion que crea una nueva Fecha asociada a un Espectaculo Multiple 
+	 * @param newFecha DTO de Fecha con los datos de la nueva Fecha
+	 * @param idEspectaculo ID del espectaculo al que esta asociada la Fecha
+	 * @author Developers
+	 */
+	
 	public void createFecha(FechasDTO newFecha, int idEspectaculo) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
@@ -457,6 +573,12 @@ public class EspectaculoDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/* Funcion que borra un Espectaculo Multiple del sistema, junto a todas sus fechas, criticas asociadas
+	 * y votaciones asociadas a dichas criticas.
+	 * @param id ID del espectaculo Multiple a borrar
+	 * @author Developers
+	 */
 	
 	public void deleteEspectaculoMultiple(int id) {
 		DBConnection dbConnection = new DBConnection();
@@ -490,6 +612,12 @@ public class EspectaculoDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/* Funcion que borra una Fecha concreta del sistema
+	 * @param deleteFecha DTO de Fechas con los datos de la fecha a borrar
+	 * @author Developers
+	 */
+	
 	public void deleteFecha(FechasDTO deleteFecha) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
@@ -509,6 +637,11 @@ public class EspectaculoDAO {
 		}
 	}
 	
+	/* Funcion que borra una asociacion de Fechas - Espectaculos Multiples
+	 * @param int idfecha ID de la fecha a la que borrar la asociacion
+	 * @author Developers
+	 */
+	
 	public void deleteMFecha(int idfecha) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
@@ -527,6 +660,11 @@ public class EspectaculoDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/* Funcion que actualiza los datos de un Espectaculo Multiple
+	 * @param updateMult DTO de Espectaculo Multiple con los datos a actulizar
+	 * @author Developers
+	 */
 	
 	public void updateEspectaculoMultiple(EspectaculoMultDTO updateMult) {
 		DBConnection dbConnection = new DBConnection();
@@ -551,6 +689,12 @@ public class EspectaculoDAO {
 		}
 	}
 	
+	/* Funcion que actualiza los datos de una fecha asociada a un espectaculo multiple
+	 * @param updateFecha DTO de fecha con los datos actualizar
+	 * @param idEspectaculo ID del especatculo al que esta asociada la fecha
+	 * @author Developers
+	 */
+	
 	public void updateFecha(FechasDTO updateFecha, int idEspectaculo) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
@@ -573,6 +717,12 @@ public class EspectaculoDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/* Funcion que devuelve los datos de un espectaculo Multiple concreto
+	 * @param id ID del espectaculo a buscar
+	 * @return emRequest DTO de Espectaculo Multiple con los datos del espectaculo requerido
+	 * @author Developers
+	 */
 	
 	public EspectaculoMultDTO requestEspectaculoMultiple(int id) {
 		EspectaculoMultDTO emRequest = new EspectaculoMultDTO();
@@ -631,6 +781,11 @@ public class EspectaculoDAO {
 		return emRequest;
 	}
 	
+	/* Funcion que devuelve los datos de todos los Espectaculos Multiples del sistema
+	 * @return listEMs Vector de DTOs de Espectaculos Multiples con los datos de los espectaculos
+	 * @author Developers
+	 */
+	
 	public ArrayList<EspectaculoMultDTO> requestEMs(){
 		ArrayList<EspectaculoMultDTO> listEMs = new ArrayList<EspectaculoMultDTO>();
 		
@@ -668,7 +823,10 @@ public class EspectaculoDAO {
 		return listEMs;
 	}
 	
-	//Espectaculos Temporada
+	/* Funcion que crea un nuevo Espectaculo de Temporada
+	 * @param newTemp DTO de Espectaculo de Temporada con los datos del nuevo espectaculo a crear
+	 * @author Developers
+	 */
 	
 	public void createEspectaculoTemporada(EspectaculoTempDTO newTemp) {
 		DBConnection dbConnection = new DBConnection();
@@ -693,6 +851,12 @@ public class EspectaculoDAO {
 		}
 	}
 
+	/* Funcion que crea un nuevo pase asociado a un Espectaculo de Temporada
+	 * @param newPase DTO de Pases con los datos del nuevo pase
+	 * @param idEspectaculo ID del espectaculo al que esta asociado el pase
+	 * @author Developers
+	 */
+	
 	public void createPase(PasesDTO newPase, int idEspectaculo) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
@@ -729,6 +893,11 @@ public class EspectaculoDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/* Funcion que borra un Espectaculo de Temporada
+	 * @param id ID del espectaculo a eliminar
+	 * @author Developers
+	 */
 	
 	public void deleteEspectaculoTemporada(int id) {
 		DBConnection dbConnection = new DBConnection();
@@ -768,6 +937,12 @@ public class EspectaculoDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/* Funcion que borra un Pase
+	 * @param deletePase DTO de Pases con los datos del pase a eliminar
+	 * @author Developers
+	 */
+	
 	public void deletePase(PasesDTO deletePase) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
@@ -787,6 +962,11 @@ public class EspectaculoDAO {
 		}
 	}
 	
+	/* Funcion que borra la asociacion Pase - Espectaculo de Temporada
+	 * @param idpase ID del pase a eliminar
+	 * @author Developers
+	 */
+	
 	public void deleteTPase(int idpase) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
@@ -805,6 +985,11 @@ public class EspectaculoDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/* Funcion que actualiza los datos de un Espectaculo de Temporada
+	 * @param updateTemp DTO de Espectaculo de Temporada con los nuevos valores
+	 * @author Developers
+	 */
 	
 	public void updateEspectaculoTemporada(EspectaculoTempDTO updateTemp) {
 		DBConnection dbConnection = new DBConnection();
@@ -827,6 +1012,12 @@ public class EspectaculoDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/* Funcion que actualiza los datos de un pase asociado a un Espectaculo de Temporada
+	 * @param updatePase DTO de Pase con los nuevos valores
+	 * @param idEspectaculo ID del espectaculo al que esta asociado
+	 * @author Developers
+	 */
 	
 	public void updatePase(PasesDTO updatePase, int idEspectaculo) {
 		DBConnection dbConnection = new DBConnection();
@@ -856,6 +1047,12 @@ public class EspectaculoDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/* Funcion que devuelve los datos de un Espectaculo de Temporada concreto
+	 * @param id ID del espectaculo concreto
+	 * @return etRequest DTO de Espectaculo de Temporada con los datos del espectaculo
+	 * @author Developers
+	 */
 	
 	public EspectaculoTempDTO requestEspectaculoTemporada(int id) {
 		EspectaculoTempDTO etRequest = new EspectaculoTempDTO();
@@ -918,8 +1115,13 @@ public class EspectaculoDAO {
 		return etRequest;
 	}
 	
+	/* Funcion que devuelve los datos de todos los Espectaculos de Temporada 
+	 * @return lsitETs Vector de DTOs de Espectaculos de Temporada con los datos de cada espectaculo
+	 * @author Developers
+	 */
+	
 	public ArrayList<EspectaculoTempDTO> requestETs(){
-ArrayList<EspectaculoTempDTO> listETs = new ArrayList<EspectaculoTempDTO>();
+		ArrayList<EspectaculoTempDTO> listETs = new ArrayList<EspectaculoTempDTO>();
 		
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
@@ -954,6 +1156,11 @@ ArrayList<EspectaculoTempDTO> listETs = new ArrayList<EspectaculoTempDTO>();
 		return listETs;
 	}
 	
+	/* Funcion que devuelve los datos de todas las Fechas   
+	 * @return listFechas Vector de DTOs de Fechas con los datos de cada fecha
+	 * @author Developers
+	 */
+	
 	public ArrayList<FechasDTO> requestFechas(){
 		ArrayList<FechasDTO> listFechas = new ArrayList<FechasDTO>();
 		
@@ -985,6 +1192,11 @@ ArrayList<EspectaculoTempDTO> listETs = new ArrayList<EspectaculoTempDTO>();
 		}
 		return listFechas;
 	}
+	
+	/* Funcion que devuelve los datos de todos los Pases 
+	 * @return listPases Vector de DTOs de Pases con los datos de cada pase
+	 * @author Developers
+	 */
 	
 	public ArrayList<PasesDTO> requestPases(){
 		ArrayList<PasesDTO> listPases = new ArrayList<PasesDTO>();
@@ -1021,6 +1233,12 @@ ArrayList<EspectaculoTempDTO> listETs = new ArrayList<EspectaculoTempDTO>();
 		}
 		return listPases;
 	}
+	
+	/* Funcion que devuelve los datos de una Fecha concreta 
+	 * @param id ID de la fecha concreta
+	 * @return fechaRequest DTO de Fecha con los datos de la fecha concreta
+	 * @author Developers
+	 */
 	
 	public FechasDTO requestFecha(int id)
 	{
@@ -1059,6 +1277,12 @@ ArrayList<EspectaculoTempDTO> listETs = new ArrayList<EspectaculoTempDTO>();
 		
 		return fechaRequest;	
 	}
+	
+	/* Funcion que devuelve los datos de un pase concreto
+	 * @param id ID del pase concreto
+	 * @return paseRequest DTO de Pase con los datos del pase concreto
+	 * @author Developers
+	 */
 
 	public PasesDTO requestPase(int id)
 	{
@@ -1104,6 +1328,11 @@ ArrayList<EspectaculoTempDTO> listETs = new ArrayList<EspectaculoTempDTO>();
 		return paseRequest;	
 	}
 
+	/* Funcion que devuelve los datos de todas las Fechas de un espectaculo Multiple concreto
+	 * @param id ID del espectaculo concreto
+	 * @return listFechas Vector de fechas con todas las fechas asociadas al espectaculo
+	 * @author Developers
+	 */
 	
 	public ArrayList<FechasDTO> requestFechasEsp(int id){
 		ArrayList<FechasDTO> listFechas = new ArrayList<FechasDTO>();
@@ -1137,6 +1366,13 @@ ArrayList<EspectaculoTempDTO> listETs = new ArrayList<EspectaculoTempDTO>();
 		}
 		return listFechas;
 	}
+	
+	/* Funcion que devuelve los datos de todas las Fechas de un espectaculo de Temporada concreto
+	 * @param id ID del espectaculo concreto
+	 * @return listPases Vector de pases con todas los pases asociados al espectaculo
+	 * @author Developers
+	 */
+	
 	
 	public ArrayList<PasesDTO> requestPasesEsp(int id){
 		ArrayList<PasesDTO> listPases = new ArrayList<PasesDTO>();

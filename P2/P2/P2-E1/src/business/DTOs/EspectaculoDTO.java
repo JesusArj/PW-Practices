@@ -3,14 +3,10 @@ package business.DTOs;
 
 import java.util.ArrayList;
 
-
-//TODO: Comprobaciones de que la categoria introducida sea correcta
-
-
 /**
  * Clase que implementa un espectaculo abstracto, con sus variables 
  * privadas y metodos. Este Espectaculo es la base de los demas
- * tipos de espectaculos, siguiendo un patr�n Abstract Fabric
+ * tipos de espectaculos, siguiendo un patron Abstract Fabric
  * @author Developers
  *
  */

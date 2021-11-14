@@ -9,9 +9,19 @@ import java.util.Properties;
 import business.DTOs.UserDTO;
 import data.common.DBConnection;
 
+/*
+ * Clase que implementa las funciones relativas a la gestion de usuarios
+ * en la base de datos
+ * @author Developers
+ */
 public class UserDAO {
 
 	String ruta ="D:\\\\Descargas\\\\PW-Practices-master\\\\PW-Practices-master\\\\P2\\\\P2\\\\P2-E1\\\\src\\\\sql.properties";
+	
+	/* Funcion que crea un usuario a partir de los datos provenientes del manager
+	 * @param newUser DTO de Usuario con los datos del usuario a crear
+	 * @author Developers
+	 */
 	public void createUser(UserDTO newUser) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
@@ -37,6 +47,12 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/* Funcion que busca todos los usuarios con determinado rol
+	 * @param rol Rol por el cual se busca
+	 * @return users Vector de usuarios con el rol deseado
+	 * @author Developers
+	 */
 	
 	public ArrayList<UserDTO> selectByRol(String rol){
 		ArrayList<UserDTO> users = new ArrayList<UserDTO>();
@@ -69,6 +85,12 @@ public class UserDAO {
 		return users;
 	}
 	
+	/* Funcion que devuleve las credenciales de un usuario concreto
+	 * @param mail Mail del usuario concreto
+	 * @return password Password del usuario
+	 * @author Developers
+	 */
+	
 	public String requestCredenciales(String mail) {
 		String password = null;
 		DBConnection dbConnection = new DBConnection();
@@ -97,6 +119,11 @@ public class UserDAO {
 		return password;
 	}
 	
+	/* Funcion que elimina un usuario concreto de la base de datos
+	 * @param mail Mail del usuario concreto
+	 * @author Developers
+	 */
+	
 	public void deleteUser(String mail) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
@@ -114,6 +141,11 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/* Funcion que acutaliza la informacion de un usuario concreto
+	 * @param upadteUser DTO de Usuario con los nuevos datos del usuario
+	 * @author Developers
+	 */
 	
 	public void updateUser(UserDTO updateUser) {
 		DBConnection dbConnection = new DBConnection();
@@ -135,6 +167,12 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	/* Funcion que devuleve la informacion de un usuario concreto
+	 * @param mail Mail del usuario concreto
+	 * @return userRequest DTO de Usuario con la informacion del usuario
+	 * @author Developers
+	 */
 	
 	public UserDTO requestUser(String email) {
 		UserDTO userRequest = new UserDTO();
@@ -174,6 +212,12 @@ public class UserDAO {
 		return userRequest;
 	}
 	
+	/* Funcion que devuleve las credenciales de un usuario concreto, a traves de su username
+	 * @param userName Nombre de usuario del usuario
+	 * @return userRequest DTO de Usuario con la informacion del usuario concreto
+	 * @author Developers
+	 */
+	
 	public UserDTO requestUserByUsername(String userName) {
 		UserDTO userRequest = new UserDTO();
 		
@@ -208,6 +252,11 @@ public class UserDAO {
 		}
 		return userRequest;
 	}
+	
+	/* Funcion que devuleve las credenciales de todos los usuarios almacenados en el sistema
+	 * @return listUsers Vector de usuarios con los datos de todos los usuarios
+	 * @author Developers
+	 */
 	
 	public ArrayList<UserDTO> requestUsers(){
 		ArrayList<UserDTO> listUsers = new ArrayList<UserDTO>();
