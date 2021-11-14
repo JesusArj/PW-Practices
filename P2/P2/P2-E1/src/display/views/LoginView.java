@@ -66,9 +66,18 @@ public class LoginView
 		        	rol = opcScan.nextLine();
 		        	if(rol.equals("1"))
 		        		rol = "admin";
-		        	else 
+		        	else if(rol.equals("2"))
+		        	{
 		        		rol = "user";	
-	      
+		        	}
+		        	else
+		        	{
+		        		while(!rol.equals("1") && !rol.equals("2"))
+		        		{
+			        		System.out.println("Introduzca 1 si es Admin, 2 si es usuario");
+			        		rol = opcScan.nextLine();
+		        		}
+		        	}
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 					LocalDateTime now = LocalDateTime.now();
 					String aux = now.format(formatter);

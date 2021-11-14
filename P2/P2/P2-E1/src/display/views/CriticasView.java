@@ -59,19 +59,45 @@ public class CriticasView {
 	        		System.out.println("Introduzca el numero del espectaculo a criticar");
 
 	            	String criticarEsp = reader.nextLine();
+	            	while(!isNumeric(criticarEsp))
+	            	{
+	            		System.out.println("Introduzca el numero del espectaculo a criticar (¡DEBE SER UN NUMERO!)");
+	            		criticarEsp = reader.nextLine();
+	            	}
 	            	if(Integer.parseInt(criticarEsp) > 0 && Integer.parseInt(criticarEsp) <= cont ) {
 	            		int id = esps.get(Integer.parseInt(criticarEsp)-1).getID();
 	            		String titulo = null;
-	    	        	float puntuacion = 0;
+	    	        	String puntuacion=null;
 	    	        	String resena = null;
 	    	        	System.out.println("Va a criticar: " + esps.get(Integer.parseInt(criticarEsp)-1).getTitulo());
 	    	        	System.out.println("Introduzca el titulo de la critica");
 	    	        	titulo = reader.nextLine();	
 	    	        	System.out.println("Introduzca la puntuacion que da al espectaculo");
-	    	        	puntuacion = Float.parseFloat(reader.nextLine());
+	    	        	puntuacion = (reader.nextLine());
+	    	        	 while(!isNumeric(puntuacion) || Float.parseFloat(puntuacion)<0 || Float.parseFloat(puntuacion)>10)
+	                        {
+	                        	if(!isNumeric(puntuacion))
+	                        	{
+				                     System.err.println("La puntuación tiene que ser numerica. Intentelo de nuevo.");
+				                     System.out.println("(Ejemplo: 6.5)");
+				                     puntuacion = reader.nextLine(); 
+	                        	}
+	                        	else
+	                        	{
+			                        System.err.println("La puntuacion debe ser un numero entre 1 y 10. Intentelo de nuevo.");
+			                    	System.out.println("(Ejemplo: 6.5)");
+			                    	puntuacion = reader.nextLine();
+			                    	if(!isNumeric(puntuacion))
+			                		{
+				                     System.err.println("La puntuación tiene que ser numerica. Intentelo de nuevo.");
+				                     System.out.println("(Ejemplo: 6.5)");
+				                     puntuacion = reader.nextLine(); 
+			                		}
+	                        	}
+	                        }
 	    	        	System.out.println("Escriba la resena del mismo");
 	    	        	resena = reader.nextLine(); 
-	    	        	managerCriticaCreatePunt.createCritica(titulo, puntuacion , resena, id); 
+	    	        	managerCriticaCreatePunt.createCritica(titulo, Float.parseFloat(puntuacion) , resena, id); 
 	            	}
 	            	else {
 	            		System.out.println("Espectaculo no valido");
@@ -89,19 +115,45 @@ public class CriticasView {
 	        		}
 	        		System.out.println("Introduzca el numero del espectaculo a criticar");
 	            	String criticarEsp = reader.nextLine();
+	            	while(!isNumeric(criticarEsp))
+	            	{
+	            		System.out.println("Introduzca el numero del espectaculo a criticar (¡DEBE SER UN NUMERO!)");
+	            		criticarEsp = reader.nextLine();
+	            	}
 	            	if(Integer.parseInt(criticarEsp) > 0 && Integer.parseInt(criticarEsp) <= cont ) {
 	            		int id = esps.get(Integer.parseInt(criticarEsp)-1).getID();
 	            		String titulo = null;
-	    	        	float puntuacion = 0;
+	    	        	String puntuacion = null;
 	    	        	String resena = null;
 	    	        	System.out.println("Va a criticar: " + esps.get(Integer.parseInt(criticarEsp)-1).getTitulo());
 	    	        	System.out.println("Introduzca el titulo de la critica");
 	    	        	titulo = reader.nextLine();	
 	    	        	System.out.println("Introduzca la puntuacion que da al espectaculo");
-	    	        	puntuacion = Float.parseFloat(reader.nextLine());
+	    	        	puntuacion = (reader.nextLine());
+	    	        	 while(!isNumeric(puntuacion) || Float.parseFloat(puntuacion)<0 || Float.parseFloat(puntuacion)>10)
+	                        {
+	                        	if(!isNumeric(puntuacion))
+	                        	{
+				                     System.err.println("La puntuación tiene que ser numerica. Intentelo de nuevo.");
+				                     System.out.println("(Ejemplo: 6.5)");
+				                     puntuacion = reader.nextLine(); 
+	                        	}
+	                        	else
+	                        	{
+			                        System.err.println("La puntuacion debe ser un numero entre 1 y 10. Intentelo de nuevo.");
+			                    	System.out.println("(Ejemplo: 6.5)");
+			                    	puntuacion = reader.nextLine();
+			                    	if(!isNumeric(puntuacion))
+			                		{
+				                     System.err.println("La puntuación tiene que ser numerica. Intentelo de nuevo.");
+				                     System.out.println("(Ejemplo: 6.5)");
+				                     puntuacion = reader.nextLine(); 
+			                		}
+	                        	}
+	                        }
 	    	        	System.out.println("Escriba la resena del mismo");
 	    	        	resena = reader.nextLine(); 
-	    	        	managerCriticaCreateTemp.createCritica(titulo, puntuacion , resena, id); 
+	    	        	managerCriticaCreateTemp.createCritica(titulo, Float.parseFloat(puntuacion) , resena, id); 
 	            	}
 	            	else {
 	            		System.out.println("Espectaculo no valido");
@@ -120,19 +172,45 @@ public class CriticasView {
 	        		}
 	        		System.out.println("Introduzca el numero del espectaculo a criticar");
 	            	String criticarEsp = reader.nextLine();
+	            	while(!isNumeric(criticarEsp))
+	            	{
+	            		System.out.println("Introduzca el numero del espectaculo a criticar (¡DEBE SER UN NUMERO!)");
+	            		criticarEsp = reader.nextLine();
+	            	}
 	            	if(Integer.parseInt(criticarEsp) > 0 && Integer.parseInt(criticarEsp) <= cont ) {
 	            		int id = esps.get(Integer.parseInt(criticarEsp)-1).getID();
 	            		String titulo = null;
-	    	        	float puntuacion = 0;
+	    	        	String puntuacion = null;
 	    	        	String resena = null;
 	    	        	System.out.println("Va a criticar: " + esps.get(Integer.parseInt(criticarEsp)-1).getTitulo());
 	    	        	System.out.println("Introduzca el titulo de la critica");
 	    	        	titulo = reader.nextLine();	
 	    	        	System.out.println("Introduzca la puntuacion que da al espectaculo");
-	    	        	puntuacion = Float.parseFloat(reader.nextLine());
+	    	        	puntuacion = (reader.nextLine());
+	    	        	 while(!isNumeric(puntuacion) || Float.parseFloat(puntuacion)<0 || Float.parseFloat(puntuacion)>10)
+	                        {
+	                        	if(!isNumeric(puntuacion))
+	                        	{
+				                     System.err.println("La puntuación tiene que ser numerica. Intentelo de nuevo.");
+				                     System.out.println("(Ejemplo: 6.5)");
+				                     puntuacion = reader.nextLine(); 
+	                        	}
+	                        	else
+	                        	{
+			                        System.err.println("La puntuacion debe ser un numero entre 1 y 10. Intentelo de nuevo.");
+			                    	System.out.println("(Ejemplo: 6.5)");
+			                    	puntuacion = reader.nextLine();
+			                    	if(!isNumeric(puntuacion))
+			                		{
+				                     System.err.println("La puntuación tiene que ser numerica. Intentelo de nuevo.");
+				                     System.out.println("(Ejemplo: 6.5)");
+				                     puntuacion = reader.nextLine(); 
+			                		}
+	                        	}
+	                        }
 	    	        	System.out.println("Escriba la resena del mismo");
 	    	        	resena = reader.nextLine(); 
-	    	        	managerCriticaCreateMult.createCritica(titulo, puntuacion , resena, id);
+	    	        	managerCriticaCreateMult.createCritica(titulo, Float.parseFloat(puntuacion) , resena, id);
 	            	}
 	            	else {
 	            		System.out.println("Espectaculo no valido");
@@ -174,9 +252,14 @@ public class CriticasView {
 		    		        	System.out.println("	Dislikes : " + c.getDislike());
 		    	        		System.out.println("------------------------------------------------");
 		        		}
-		        		System.out.println(criticasUser.size()); 
 		        		System.out.println("Introduzca el numero de la critica que desea borrar");
 			        	String delete = reader.nextLine();
+			        	while(!isNumeric(delete))
+		            	{
+		            		System.out.println("Introduzca el numero del la critica que desea borrar. (¡DEBE SER UN NUMERO!)");
+		            		delete = reader.nextLine();
+		            	}
+			        	
 			        	if(Integer.parseInt(delete) > 0 && Integer.parseInt(delete) <= cont ) {
 			        		System.out.println("Esta accion es permanente. ï¿½Desea borrar la critica " + delete + " ? Y/N.");
 				        	String deleteOpc = reader.nextLine();
@@ -211,6 +294,11 @@ public class CriticasView {
 		        	}
 		        	System.out.println("Introduzca el numero de la critica a la que desea dar like");
 		        	String like = reader.nextLine();
+		        	while(!isNumeric(like))
+	            	{
+	            		System.out.println("Introduzca el numero del la critica a la que quiere dar like (¡DEBE SER UN NUMERO!)");
+	            		like = reader.nextLine();
+	            	}
 		        	if(Integer.parseInt(like) > 0 && Integer.parseInt(like) <= cont ) {
 			        	if(managerCriticaLike.darLike(criticasValorables.get(Integer.parseInt(like)-1).getId())) {
 			        		System.out.println("Ha dado like a la critica:");
@@ -250,6 +338,11 @@ public class CriticasView {
 		        	}
 		        	System.out.println("Introduzca el numero de la critica a la que desea dar dislike");
 		        	String dislike = reader.nextLine();
+		        	while(!isNumeric(dislike))
+	            	{
+	            		System.out.println("Introduzca el numero del la critica a la que quiere dar dislike (¡DEBE SER UN NUMERO!)");
+	            		dislike = reader.nextLine();
+	            	}
 		        	if(Integer.parseInt(dislike) > 0 && Integer.parseInt(dislike) <= cont ) {
 			        	if(managerCriticaLike.darDislike(criticasValorables.get(Integer.parseInt(dislike)-1).getId())) {
 			        		System.out.println("Ha dado dislike a la critica:");
@@ -299,8 +392,21 @@ public class CriticasView {
 		        	}
 		        	System.out.println("Introduzca el numero del autor del que quiere ver todas sus criticas");
 		        	String s = reader.nextLine();
+		        	while(!isNumeric(s) || (Integer.parseInt(s) > writers.size()) || (Integer.parseInt(s) < 0))
+	            	{
+		        		if(!isNumeric(s))
+		        		{
+		            		System.out.println("Introduzca el numero del autor del que quiere ver todas sus criticas (¡DEBE SER UN NUMERO!)");
+		            		s = reader.nextLine();
+		        		}
+		        		else if(Integer.parseInt(s) > writers.size() || Integer.parseInt(s) < 0)
+		        		{
+		        			System.out.println("Numero no valido. Introduzca un numero válido por favor");
+		        			s = reader.nextLine();
+		        		}
+	            	}
 		        	String writer = writers.get(Integer.parseInt(s)-1);
-		        	ArrayList<CriticaDTO> criticasUser = managerCriticaMostrarCriticasWriter.requestCriticas();
+		        	ArrayList<CriticaDTO> criticasUser = managerCriticaMostrarCriticasWriter.requestAllCriticasUser(this.getMail()); ;
 		        	for (CriticaDTO c : criticasUser) {
 		        		if(c.getMail().equals(writer)) {
 		        			System.out.println("------------------------------------------------");
@@ -320,4 +426,18 @@ public class CriticasView {
 		        }
 			}
 		}
+	
+		public boolean isNumeric(String string)
+		{
+			boolean aux = false; 
+		   	 for (int i = 0; i < string.length(); i++) 
+		   	 {
+			     if (Character.isDigit(string.charAt(i))) 
+			     {
+			       aux = true; 
+			     }
+		    }
+		    return aux;
+		}
+		
 	}
