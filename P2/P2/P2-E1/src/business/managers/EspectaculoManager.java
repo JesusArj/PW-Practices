@@ -152,12 +152,12 @@ public class EspectaculoManager
 		return requestedPunt;
 	}
 	
-	public Boolean createEspectaculoMult(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas, ArrayList<FechasDTO> fechas) {
+	public Boolean createEspectaculoMult(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas, ArrayList<FechasDTO> fechas, int idf) {
 		EspectaculoDAO newMultDAO = new EspectaculoDAO();
 		if(!this.MultExist(id)) 
 		{
 			EspectaculoMultDTO newMultDTO = new EspectaculoMultDTO(id, titulo, categoria, descripcion, localidades_venta, localidades_vendidas, fechas);  
-			newMultDAO.createEspectaculoMultiple(newMultDTO);	
+			newMultDAO.createEspectaculoMultiple(newMultDTO, idf);	
 			return true;
 		}
 		return false;
@@ -216,9 +216,9 @@ public class EspectaculoManager
 		return requestedPases;
 	}
 	
-	public Boolean createEspectaculoTemp(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas) {
+	public Boolean createEspectaculoTemp(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas,ArrayList<PasesDTO> pases) {
 		EspectaculoDAO newTempDAO = new EspectaculoDAO();
-			EspectaculoTempDTO newTempDTO = new EspectaculoTempDTO(id, titulo, categoria, descripcion, localidades_venta, localidades_vendidas);  
+			EspectaculoTempDTO newTempDTO = new EspectaculoTempDTO(id, titulo, categoria, descripcion, localidades_venta, localidades_vendidas,pases);  
 			newTempDAO.createEspectaculoTemporada(newTempDTO);	
 			return true;
 	}
@@ -226,6 +226,7 @@ public class EspectaculoManager
 	public Boolean updateEspectaculoTemp(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas,ArrayList<PasesDTO> pases) {
 			if(this.TempExist(id)) 
 			{
+				
 				EspectaculoDAO newEspectaculo = new EspectaculoDAO();			
 				EspectaculoTempDTO newTempDTO = new EspectaculoTempDTO(id, titulo, categoria, descripcion, localidades_venta, localidades_vendidas, pases);  
 				newEspectaculo.updateEspectaculoTemporada(newTempDTO);
@@ -237,6 +238,8 @@ public class EspectaculoManager
 	public Boolean deleteEspectaculoTemp(int id) {
 		if(this.PuntExist(id)) 
 		{
+			System.out.println("manager:");
+			System.out.println(id);
 			EspectaculoDAO deleteTemp = new EspectaculoDAO();
 			deleteTemp.deleteEspectaculoTemporada(id);
 			return true;				
