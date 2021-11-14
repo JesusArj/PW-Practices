@@ -152,12 +152,12 @@ public class EspectaculoManager
 		return requestedPunt;
 	}
 	
-	public Boolean createEspectaculoMult(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas, ArrayList<FechasDTO> fechas, int idf) {
+	public Boolean createEspectaculoMult(int id, String titulo, String categoria,String descripcion, int localidades_venta, int localidades_vendidas, ArrayList<FechasDTO> fechas) {
 		EspectaculoDAO newMultDAO = new EspectaculoDAO();
 		if(!this.MultExist(id)) 
 		{
 			EspectaculoMultDTO newMultDTO = new EspectaculoMultDTO(id, titulo, categoria, descripcion, localidades_venta, localidades_vendidas, fechas);  
-			newMultDAO.createEspectaculoMultiple(newMultDTO, idf);	
+			newMultDAO.createEspectaculoMultiple(newMultDTO);	
 			return true;
 		}
 		return false;
