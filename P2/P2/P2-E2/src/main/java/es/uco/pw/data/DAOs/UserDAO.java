@@ -107,7 +107,7 @@ public class UserDAO {
 		Connection connection = dbConnection.getConnection();
 		try{
 			Properties prop = new Properties();
-			prop.load(input);
+			prop.load(this.input);
 			String query = prop.getProperty("deleteUser");
 			query=query.replaceAll("varmail", mail);
 			
@@ -125,7 +125,7 @@ public class UserDAO {
 		Connection connection = dbConnection.getConnection();
 		try{
 			Properties prop = new Properties();
-			prop.load(input);
+			prop.load(this.input);
 			String query = prop.getProperty("updateUser");
 			query=query.replaceAll("varmail", updateUser.getMail());
 			query=query.replaceAll("varpass", updateUser.getPasswd());
@@ -148,7 +148,7 @@ public class UserDAO {
 		Connection connection = dbConnection.getConnection();
 		try{
 			Properties prop = new Properties();
-			prop.load(input);
+			prop.load(this.input);
 			String query = prop.getProperty("selectDataUserMail");
 			query=query.replaceAll("varmail", email);
 			
@@ -186,7 +186,7 @@ public class UserDAO {
 		Connection connection = dbConnection.getConnection();
 		try{
 			Properties prop = new Properties();
-			prop.load(input);
+			prop.load(this.input);
 			String query = prop.getProperty("selectDataUserName");
 			query=query.replaceAll("varuser", userName);
 			
@@ -221,7 +221,7 @@ public class UserDAO {
 		Connection connection = dbConnection.getConnection();
 		try{
 			Properties prop = new Properties();
-			prop.load(input);
+			prop.load(this.input);
 			String query = prop.getProperty("selectAllUsers");
 			
 			Statement stmt = connection.createStatement();
@@ -232,6 +232,7 @@ public class UserDAO {
 				String email = rs.getString("mail");
 				String username = rs.getString("username");
 				String rol = rs.getString("rol");
+				//LocaLDateTime regTime = rs.getString("regTime");
 				listUsers.add(new UserDTO(name, email,username,rol));
 			}
 

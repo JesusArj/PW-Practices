@@ -20,7 +20,6 @@ if (customerBean != null && !customerBean.getEmailUser().equals("")) {
 %>
 <%= messageNextPage %><br/><br/>
 <h1>Inicio de sesion</h1>
-Bienvenido a nuestro sistema:
 
 <form method="post" action="../controller/loginController.jsp">
 	<fieldset>
@@ -30,9 +29,14 @@ Bienvenido a nuestro sistema:
 		Password:<br>
 		<input type="password" name="Password" value="Password"> <br><br>
 		<input type="button" value="Login">
-		<input type="button" value="Sign Up">
 	</fieldset>
 </form>
+<br>
+<%
+String myPage = "../controller/registerController.jsp";
+%>
+¿No estas registrado? Registrate.
+<input type="button" value="Aqui" onClick="javascript:window.location='<%= myPage %>';">
 <%
 }
 %>
