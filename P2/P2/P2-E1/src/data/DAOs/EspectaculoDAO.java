@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class EspectaculoDAO {
 
-	String ruta ="C:\\Users\\jesus\\eclipse-workspace\\P2\\P2\\P2-E1\\src\\sql.properties";
+	String ruta ="D:\\\\Descargas\\\\PW-Practices-master\\\\P2\\\\P2\\\\P2-E1\\\\src\\\\sql.properties";
 	private boolean existIdPunt(int id)
 	{
 		DBConnection dbConnection = new DBConnection();
@@ -249,7 +249,6 @@ public class EspectaculoDAO {
 			query=query.replaceAll("varid", Integer.toString(newPunt.getID())); 
 			query=query.replaceAll("vartitulo", newPunt.getTitulo());
 			query=query.replaceAll("vardescripcion", newPunt.getDescripcion());
-			System.out.println(newPunt.getLocalidadesVenta());
 			query=query.replaceAll("varlocalidades", Integer.toString(newPunt.getLocalidadesVenta()));
 			query=query.replaceAll("varvendidas", Integer.toString(newPunt.getLocalidadesVendidas())); 
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"); 
@@ -273,9 +272,19 @@ public class EspectaculoDAO {
 			prop.load(input);
 			String query = prop.getProperty("deleteEP");
 			query=query.replaceAll("varid", Integer.toString(id));
-			
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
+			
+			String query2 = prop.getProperty("deleteCriticaEsp");
+			query2=query2.replaceAll("varidEsp", Integer.toString(id));
+			stmt = connection.createStatement();
+			stmt.executeUpdate(query2);
+			
+			String query3 = prop.getProperty("deleteVC");
+			query3=query3.replaceAll("varid", Integer.toString(id));
+			stmt = connection.createStatement();
+			stmt.executeUpdate(query3);
+			
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -286,7 +295,7 @@ public class EspectaculoDAO {
 	public void updateEspectaculoPuntual(EspectaculoPuntDTO updatePunt) { 
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
-		try(InputStream input = new FileInputStream(ruta)){
+		try(InputStream input = new FileInputStream("D:/Descargas/PW-Practices-master/P2/P2-E1/home/valentin/Downloads/PW-Practices-master/P2/P2/sql.properties")){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("updateEP"); 
@@ -395,19 +404,20 @@ public class EspectaculoDAO {
 	
 	
 	//Espectaculo Multiple
-	public void createEspectaculoMultiple(EspectaculoMultDTO newMult) {
+	public void createEspectaculoMultiple(EspectaculoMultDTO newMult, int idf) {
 		DBConnection dbConnection = new DBConnection();
 		Connection connection = dbConnection.getConnection();
 		try(InputStream input = new FileInputStream(ruta)){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("createEM");
-			query=query.replaceAll("varid", Integer.toString(generarIDMult())); //TODO: Make sense?
+			query=query.replaceAll("varid", Integer.toString(newMult.getID())); //TODO: Make sense?
 			query=query.replaceAll("vartitulo", newMult.getTitulo());
 			query=query.replaceAll("vardescripcion", newMult.getDescripcion());
 			query=query.replaceAll("varlocalidades", Integer.toString(newMult.getLocalidadesVenta()));
 			query=query.replaceAll("varvendidas", Integer.toString(newMult.getLocalidadesVendidas())); 
-			query=query.replaceAll("categoria", newMult.getCategoria());
+			query=query.replaceAll("varcategoria", newMult.getCategoria());
+			query=query.replaceAll("varfechaid", Integer.toString(idf));
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
 			dbConnection.closeConnection();
@@ -424,8 +434,11 @@ public class EspectaculoDAO {
 			Properties prop = new Properties();
 			prop.load(input);
 			
+			int identfecha = generarIDFecha();
+			
 			String query = prop.getProperty("createFecha");
-			query=query.replaceAll("varid", Integer.toString(generarIDFecha())); //TODO: Make sense?
+			
+			query=query.replaceAll("varid", Integer.toString(identfecha)); 
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"); 
 			String formattedDateTime = newFecha.getFecha().format(formatter);
 			query=query.replaceAll("varfecha", formattedDateTime);
@@ -434,8 +447,9 @@ public class EspectaculoDAO {
 			stmt.executeUpdate(query);
 			
 			String query2=prop.getProperty("createMFecha");
+			
 			query2=query2.replaceAll("varid", Integer.toString(idEspectaculo));
-			query2=query2.replaceAll("varidfecha",Integer.toString(newFecha.getID()));
+			query2=query2.replaceAll("varfechaid", Integer.toString(identfecha));
 			stmt.executeUpdate(query2);
 			
 			dbConnection.closeConnection();
@@ -457,14 +471,20 @@ public class EspectaculoDAO {
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
 			
-			String query2 = prop.getProperty("deleteFecha");
+			String query2 = prop.getProperty("deleteFechaEspect");
 			query2 = query2.replaceAll("varid", Integer.toString(id));
 			stmt.executeUpdate(query2);
 			
 			String query3 = prop.getProperty("deleteMFecha2");
 			query3 = query3.replaceAll("varid", Integer.toString(id));
 			stmt.executeUpdate(query3);
-
+			
+			String query4 = prop.getProperty("deleteCriticaEsp");
+			query4 = query4.replaceAll("varidEsp", Integer.toString(id));
+			
+			String query5 = prop.getProperty("deleteVC");
+			query5 = query5.replaceAll("varid", Integer.toString(id));
+			
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -658,13 +678,14 @@ public class EspectaculoDAO {
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("createET");
-			query=query.replaceAll("varid", Integer.toString(generarIDTemp()));
+			query=query.replaceAll("varid", Integer.toString(newTemp.getID()));
 			query=query.replaceAll("vartitulo", newTemp.getTitulo()); 
 			query=query.replaceAll("vardescripcion", newTemp.getDescripcion());
 			query=query.replaceAll("varlocalidades", Integer.toString(newTemp.getLocalidadesVenta()));
 			query=query.replaceAll("varvendidas", Integer.toString(newTemp.getLocalidadesVendidas())); 
-			query=query.replaceAll("categoria", newTemp.getCategoria());
+			query=query.replaceAll("varcategoria", newTemp.getCategoria());
 			Statement stmt = connection.createStatement();
+
 			stmt.executeUpdate(query);
 			dbConnection.closeConnection();
 		} catch (Exception e){
@@ -679,25 +700,28 @@ public class EspectaculoDAO {
 		try(InputStream input = new FileInputStream(ruta)){
 			Properties prop = new Properties();
 			prop.load(input);
-			
+			int idp = generarIdPases();
 			String query = prop.getProperty("createPases");
-			query=query.replaceAll("varid", Integer.toString(generarIdPases()));
+			query=query.replaceAll("varid", Integer.toString(idp));
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"); 
 			String formattedDateTime = newPase.getFechaInicio().format(formatter);
-			query=query.replaceAll("varfechaInicio", formattedDateTime);
+			query=query.replaceAll("varfechainicio", formattedDateTime);
 			
-			query = query.replaceAll("diaSemana", newPase.getDiaSemana());
+			query = query.replaceAll("vardiasemana", newPase.getDiaSemana());
 			
 			formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"); 
 			formattedDateTime = newPase.getFechaFinal().format(formatter);
-			query=query.replaceAll("varfechaFinal", formattedDateTime);
+			query=query.replaceAll("varfechafinal", formattedDateTime);
+
 			
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
 			
 			String query2=prop.getProperty("createMPase");
 			query2=query2.replaceAll("varid", Integer.toString(idEspectaculo));
-			query2=query2.replaceAll("varidpase",Integer.toString(newPase.getID()));
+			query2=query2.replaceAll("varpaseid",Integer.toString(idp));
+
+			
 			stmt.executeUpdate(query2);
 			
 			dbConnection.closeConnection();
@@ -713,9 +737,11 @@ public class EspectaculoDAO {
 		try(InputStream input = new FileInputStream(ruta)){
 			Properties prop = new Properties();
 			prop.load(input);
+			System.out.println("dao:");
+			System.out.println(id);
 			String query = prop.getProperty("deleteET");
 			query=query.replaceAll("varid", Integer.toString(id));
-			
+			System.out.println(query);
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
 			
@@ -726,7 +752,17 @@ public class EspectaculoDAO {
 			String query3 = prop.getProperty("deleteMPases2");
 			query3 = query3.replaceAll("varid", Integer.toString(id));
 			stmt.executeUpdate(query3);
-
+			
+			String query4 = prop.getProperty("deleteCriticaEsp");
+			query4=query4.replaceAll("varidEsp", Integer.toString(id));
+			stmt = connection.createStatement();
+			stmt.executeUpdate(query4);
+			
+			String query5 = prop.getProperty("deleteVC");
+			query5=query5.replaceAll("varid", Integer.toString(id));
+			stmt = connection.createStatement();
+			stmt.executeUpdate(query5);
+			
 			dbConnection.closeConnection();
 		} catch (Exception e){
 			System.err.println(e);
@@ -805,13 +841,13 @@ public class EspectaculoDAO {
 			query=query.replaceAll("varid", Integer.toString(idEspectaculo));
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"); 
 			String formattedDateTime = updatePase.getFechaInicio().format(formatter);
-			query=query.replaceAll("varfechaInicio", formattedDateTime);
+			query=query.replaceAll("varfechainicio", formattedDateTime);
 			
-			query=query.replaceAll("diaSemana", updatePase.getDiaSemana());
+			query=query.replaceAll("vardiasemana", updatePase.getDiaSemana());
 			
 			formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"); 
 			formattedDateTime = updatePase.getFechaInicio().format(formatter);
-			query=query.replaceAll("varfechaFinal", formattedDateTime);
+			query=query.replaceAll("varfechafinal", formattedDateTime);
 			
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
@@ -1000,18 +1036,18 @@ public class EspectaculoDAO {
 			prop.load(input);
 			String query = prop.getProperty("selectDataFechaAdmin");
 			query=query.replaceAll("varid", Integer.toString(id));
-			System.out.println(query);
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
 			
-			
-			String ident = rs.getString("id");
-			String fechaDB = rs.getString("fechaFinal");
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-			LocalDateTime fecha = LocalDateTime.parse(fechaDB, formatter);
-			
-			fechaRequest.setID(Integer.parseInt(ident));
-			fechaRequest.setFecha(fecha);
+			if(rs.next())
+			{
+				String ident = rs.getString("id");
+				String fechaDB = rs.getString("fecha");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+				LocalDateTime fecha = LocalDateTime.parse(fechaDB, formatter);		
+				fechaRequest.setID(Integer.parseInt(ident));
+				fechaRequest.setFecha(fecha);
+			}
 			
 			if (stmt != null){ 
 				stmt.close(); 
@@ -1041,21 +1077,22 @@ public class EspectaculoDAO {
 			
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
-			
-			String idf = rs.getString("id");
-			String fecha = rs.getString("fechaInicio");
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-			LocalDateTime fechaInicio = LocalDateTime.parse(fecha, formatter);
-			String diaSemana = rs.getString("diaSemana");
-			fecha = rs.getString("fechaFinal");
-			formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-			LocalDateTime fechaFinal = LocalDateTime.parse(fecha, formatter);
-			
-			paseRequest.setID(Integer.parseInt(idf));
-			paseRequest.setFechaInicio(fechaInicio);
-			paseRequest.setDiaSemana(diaSemana);
-			paseRequest.setFechaInicio(fechaFinal);
-
+			if(rs.next())
+			{
+				String idf = rs.getString("id");
+				String fecha = rs.getString("fechaInicio");
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+				LocalDateTime fechaInicio = LocalDateTime.parse(fecha, formatter);
+				String diaSemana = rs.getString("diaSemana");
+				fecha = rs.getString("fechaFinal");
+				formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+				LocalDateTime fechaFinal = LocalDateTime.parse(fecha, formatter);
+				
+				paseRequest.setID(Integer.parseInt(idf));
+				paseRequest.setFechaInicio(fechaInicio);
+				paseRequest.setDiaSemana(diaSemana);
+				paseRequest.setFechaInicio(fechaFinal);
+			}
 			if (stmt != null){ 
 				stmt.close(); 
 			}
