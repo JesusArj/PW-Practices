@@ -87,6 +87,13 @@ public class CriticaManager {
 		requestedCriticas = requestCritica.requestCriticas();
 		return requestedCriticas;
 	}
+	public ArrayList<CriticaDTO> requestAllCriticasUser(String mail)
+	{
+		CriticaDAO requestCritica = new CriticaDAO();
+		ArrayList<CriticaDTO> requestedCriticas = new ArrayList<CriticaDTO>();
+		requestedCriticas = requestCritica.requestCriticasUser(mail); 
+		return requestedCriticas;
+	}
 	
 	public ArrayList<CriticaDTO> requestCriticasExUser(){
 		CriticaDAO requestCritica = new CriticaDAO();

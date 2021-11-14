@@ -161,10 +161,10 @@ public class CriticasView {
 			        	System.out.println("ELMINACION DE CRITICA");
 			        	System.out.println("Estas son todas sus criticas");
 			        	CriticaManager managerCriticaMostrarDelUser = new CriticaManager(this.getMail());
-		        		ArrayList<CriticaDTO> criticasUser = managerCriticaMostrarDelUser.requestCriticas();
-		        		int cont = 1;
+		        		ArrayList<CriticaDTO> criticasUser = managerCriticaMostrarDelUser.requestAllCriticasUser(this.getMail());
+		        		int cont = 0;
 		        		for(CriticaDTO c : criticasUser) {
-		        			if(c.getMail().equals(this.getMail())) {
+		        				cont++;
 		        				System.out.println("------------------------------------------------");
 		    	        		System.out.println(cont + " Titulo : " + c.getTitle());
 		    	        		System.out.println("	Espectaculo : " + managerCriticaMostrarDelUser.selectTituloEsp(c.getIdEsp()));
@@ -173,12 +173,11 @@ public class CriticasView {
 		    		        	System.out.println("	Likes : " + c.getLike());
 		    		        	System.out.println("	Dislikes : " + c.getDislike());
 		    	        		System.out.println("------------------------------------------------");
-		    	        		cont++;
-		        			}
 		        		}
+		        		System.out.println(criticasUser.size()); 
 		        		System.out.println("Introduzca el numero de la critica que desea borrar");
 			        	String delete = reader.nextLine();
-			        	if(Integer.parseInt(delete) > 0 && Integer.parseInt(delete) < cont ) {
+			        	if(Integer.parseInt(delete) > 0 && Integer.parseInt(delete) <= cont ) {
 			        		System.out.println("Esta accion es permanente. �Desea borrar la critica " + delete + " ? Y/N.");
 				        	String deleteOpc = reader.nextLine();
 				        	if(deleteOpc.equals("Y")) {
@@ -251,7 +250,7 @@ public class CriticasView {
 		        	}
 		        	System.out.println("Introduzca el numero de la critica a la que desea dar dislike");
 		        	String dislike = reader.nextLine();
-		        	if(Integer.parseInt(dislike) > 0 && Integer.parseInt(dislike) < cont ) {
+		        	if(Integer.parseInt(dislike) > 0 && Integer.parseInt(dislike) <= cont ) {
 			        	if(managerCriticaLike.darDislike(criticasValorables.get(Integer.parseInt(dislike)-1).getId())) {
 			        		System.out.println("Ha dado dislike a la critica:");
 			        		CriticaDTO critica = criticasValorables.get(Integer.parseInt(dislike)-1);
@@ -277,6 +276,7 @@ public class CriticasView {
 	        		for(CriticaDTO c : criticasUser) {
 	        			if(c.getMail().equals(this.getMail())) {
 	        				System.out.println("------------------------------------------------");
+	        				System.out.println("	Titulo : " + c.getTitle());
 	    	        		System.out.println("	Espectaculo : " + managerCriticaMostrarDelUser.selectTituloEsp(c.getIdEsp()));
 	    		        	System.out.println("	Puntuacion : " + c.getPuntuacion());
 	    		        	System.out.println("	Resena : " + c.getResena());
