@@ -1,5 +1,7 @@
 package display.views;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -29,6 +31,36 @@ public class EspectaculosView
 	
 	public EspectaculosView(String mail) {
 		this.mail = mail;
+	}
+	
+	public static boolean isValidDate(String inDate) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss:S");
+        dateFormat.setLenient(false);
+
+        try 
+        {
+			dateFormat.parse(inDate.trim());
+		} 
+        catch (ParseException e) {
+			e.printStackTrace();
+			return false;
+		}
+        
+        
+        return true;
+    }
+
+	public boolean isNumeric(String string)
+	{
+		boolean aux = false; 
+	   	 for (int i = 0; i < string.length(); i++) 
+	   	 {
+		     if (Character.isDigit(string.charAt(i))) 
+		     {
+		       aux = true; 
+		     }
+	    }
+	    return aux;
 	}
 	
 	public void EspectaculoMenu()
@@ -322,7 +354,7 @@ public class EspectaculosView
 					if("1".equals(opc))
 					{
 						String opcEspectaculo = "1";
-						while(opcEspectaculo.equals("1") || opcEspectaculo.equals("2") || opcEspectaculo.equals("3"))
+						while(isNumeric(opcEspectaculo)||!opcEspectaculo.equals("1") || opcEspectaculo.equals("2") || opcEspectaculo.equals("3"))
 						{
 							System.out.println("DAR DE ALTA ESPECTACULO");
 							System.out.println("Si quiere crear un espectaculo de temporada, pulse 1");
@@ -351,13 +383,15 @@ public class EspectaculosView
 								{
 									System.out.println("Introduce fecha de Inicio. (Formato: yyyy-MM-dd HH:mm:ss.0)");
 									String aux = reader.nextLine();
+
 									//conversion string to localdatetime
 									DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.0");
 									fechaInicio = LocalDateTime.parse(aux, formatter);
 									
 									int idP = managerPunt.generarIDPases();
-									System.out.println("Introduce fecha de finalizacion. (Formato: yyyy-MM-dd HH:mm:ss.0)"); 
+									System.out.println("Introduce fecha de finalizacion. (Formato: yyyy-MM-dd HH:mm:ss.0)");								
 									aux = reader.nextLine();
+									
 									//conversion string to localdatetime
 									fechaFinal = LocalDateTime.parse(aux, formatter);
 									System.out.println("Introduce dia de la Semana.");
@@ -388,9 +422,21 @@ public class EspectaculosView
 								}while(decisionPases==true); 
 								
 								System.out.println("Introduce el numero de localidades a la venta.");
-								localidadesVenta = reader.nextInt(); 
+								String localaux = reader.nextLine();
+								while(!isNumeric(localaux))
+								{
+									System.out.println("Error. Introduzca un numero");
+									localaux = reader.nextLine();
+								}
+								localidadesVenta = Integer.parseInt(localaux);
 								System.out.println("Introduce el numero de localidades vendidas.");
-								localidadesVendidas = reader.nextInt();								
+								localaux = reader.nextLine();
+								while(!isNumeric(localaux))
+								{
+									System.out.println("Error. Introduzca un numero para las localidades vendidas");
+									localaux = reader.nextLine();
+								}			
+								localidadesVendidas = Integer.parseInt(localaux);
 								manager.createEspectaculoTemp(id, titulo, categoria, descripcion, localidadesVenta, localidadesVendidas, listPases);
 							}
 							if("2".equals(opcEspectaculo))
@@ -483,7 +529,6 @@ public class EspectaculosView
 					}
 					else if("2".equals(opc))
 					{
-						System.out.println("DAR DE BAJA ESPECTACULO");
 						String opcEspectaculo = "1"; 
 						while(opcEspectaculo.equals("1") || opcEspectaculo.equals("2") || opcEspectaculo.equals("3"))
 						{
@@ -507,10 +552,9 @@ public class EspectaculosView
 				        		}
 				        		System.out.println("Introduzca el numero del espectaculo a eliminar");
 					        	String Esp = reader.nextLine();
-					        	if(Integer.parseInt(Esp) > 0 && (Integer.parseInt(Esp)) <= cont ) 
+					        	if(Integer.parseInt(Esp) > 0 && (Integer.parseInt(Esp)-1) <= cont ) 
 					        	{
 					        		int id = esps.get(Integer.parseInt(Esp)-1).getID();
-					        		System.out.println(id);
 					        		deleteTemp.deleteEspectaculoTemp(id);
 					        		System.out.println("Espectaculo eliminado.");
 					        	}
