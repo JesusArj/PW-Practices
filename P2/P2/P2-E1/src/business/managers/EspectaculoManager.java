@@ -434,10 +434,8 @@ public class EspectaculoManager
 	 */
 	
 	public Boolean deleteEspectaculoTemp(int id) {
-		if(this.PuntExist(id)) 
+		if(this.TempExist(id)) 
 		{
-			System.out.println("manager:");
-			System.out.println(id);
 			EspectaculoDAO deleteTemp = new EspectaculoDAO();
 			deleteTemp.deleteEspectaculoTemporada(id);
 			return true;				
