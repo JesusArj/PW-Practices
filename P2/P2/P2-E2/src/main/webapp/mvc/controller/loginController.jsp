@@ -1,3 +1,4 @@
+<%@page import="es.uco.pw.display.javabean.CustomerBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import ="es.uco.pw.business.DTOs.UserDTO,es.uco.pw.data.DAOs.UserDAO, java.util.ArrayList, java.time.LocalDateTime" %>
@@ -7,43 +8,48 @@
 String nextPage = "../../index.jsp";
 String mensajeNextPage = "";
 if (customerBean == null || customerBean.getEmailUser().equals("")) {
-	String mail = request.getParameter("email");
-	String password = request.getParameter("password");
+	String mail = request.getParameter("Mail");
+	String password = request.getParameter("Password");
 
 	if (mail != null) {
-		String file =application.getInitParameter("properties");
+		//String file =application.getInitParameter("properties");
 		String url = application.getInitParameter("url");
 		String userC = application.getInitParameter("user");
 		String passwd = application.getInitParameter("password");
-		java.io.InputStream myIO = application.getResourceAsStream(file);
+		//java.io.InputStream myIO = application.getResourceAsStream(file);
 		
-		UserDAO userDAO = new UserDAO(myIO,url,userC,passwd);
+		UserDAO userDAO = new UserDAO(url,userC,passwd);
 		String pass = userDAO.requestCredenciales(mail);
 		ArrayList<UserDTO> users = userDAO.requestUsers();
 		
 		for(UserDTO u : users){
 			if(u.getMail().equals(mail)){
-				if (passwd.equals(pass)){
+				if (password.equals(pass)){
 					if(u.getRol().equals("usuario")){
 						String username = u.getUsername();
 						LocalDateTime regTime = u.getRegisterTime();
 						String rol = u.getRol();
-						%>
-						<jsp:setProperty property="emailUser" value="<%=mail%>" name="customerBean"/>
-						<jsp:setProperty property="userName" value="<%=username%>" name="customerBean"/>
-						<jsp:setProperty property="regTime" value="<%=regTime%>" name="customerBean"/>
-						<jsp:setProperty property="rol" value="<%=rol%>" name="customerBean"/>
-						<%
+						customerBean.setEmailUser(mail); 
+						customerBean.setUsername(username); 
+						customerBean.setRol(rol); 
+						customerBean.setRegisterTime(regTime); 
 					}
 					else{
-						nextPage = "../../userBadPass.jsp";
-						mensajeNextPage = "Wrong password";
+						String username = u.getUsername();
+						LocalDateTime regTime = u.getRegisterTime();
+						String rol = u.getRol();
+						customerBean.setEmailUser(mail); 
+						customerBean.setUsername(username); 
+						customerBean.setRol(rol); 
+						customerBean.setRegisterTime(regTime); 
 					}
 				}
 				else{
-					
+					nextPage = "../../userBadPass.jsp";
+					mensajeNextPage = "Wrong password";
 				}
 			}
+			
 		}
 	} else {
 		nextPage = "../view/loginView.jsp";

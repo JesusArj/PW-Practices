@@ -1,5 +1,7 @@
 package es.uco.pw.data.DAOs;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.*;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -10,13 +12,14 @@ import es.uco.pw.data.common.*;
 
 public class UserDAO {
 	
-	private java.io.InputStream input;
+	private String ruta ="C:\\Users\\jesus\\workspace-eclipse-luna\\P2-E2\\src\\main\\webapp\\WEB-INF\\sql.properties";
+	//private java.io.InputStream input;
 	private String url;
 	private String userC;
 	private String passwd;
 	
-	public UserDAO(java.io.InputStream myIO, String url, String userC, String passwd){
-		this.input = myIO;
+	public UserDAO(/*java.io.InputStream myIO,*/ String url, String userC, String passwd){
+		//this.input = myIO;
 		this.url = url;
 		this.userC = userC;
 		this.passwd = passwd;
@@ -25,19 +28,21 @@ public class UserDAO {
 	public void createUser(UserDTO newUser) {
 		DBConnection dbConnection = new DBConnection(this.url, this.userC, this.passwd);
 		Connection connection = dbConnection.getConnection();
-		try{
+		try(InputStream input = new FileInputStream(ruta)){
 			Properties prop = new Properties();
-			prop.load(this.input);
+			prop.load(input);
 			String query = prop.getProperty("createNewUser");
 			query=query.replaceAll("varmail", newUser.getMail());
 			query=query.replaceAll("varpass", newUser.getPasswd());
 			query=query.replaceAll("varname", newUser.getName());
 			query=query.replaceAll("varuser", newUser.getUsername());
 			query=query.replaceAll("varrol", newUser.getRol());
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"); 
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S"); 
 			String formattedDateTime = newUser.getRegisterTime().format(formatter);
+			formattedDateTime = formattedDateTime.substring(0, formattedDateTime.length()-1);
+			formattedDateTime = formattedDateTime + "0"; 
 			query = query.replaceAll("varfecharegistro", formattedDateTime);
-			query = query.replaceAll("varultfechaultimaconex", formattedDateTime);
+			query = query.replaceAll("varultimaconex", formattedDateTime);
 			
 			Statement stmt = connection.createStatement();
 			stmt.executeUpdate(query);
@@ -47,12 +52,11 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 	}
-	
 	public ArrayList<UserDTO> selectByRol(String rol){
 		ArrayList<UserDTO> users = new ArrayList<UserDTO>();
 		DBConnection dbConnection = new DBConnection(this.url, this.userC, this.passwd);
 		Connection connection = dbConnection.getConnection();
-		try{
+		try(InputStream input = new FileInputStream(ruta)){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectByRol");
@@ -78,12 +82,13 @@ public class UserDAO {
 		}
 		return users;
 	}
+
 	
 	public String requestCredenciales(String mail) {
 		String password = null;
 		DBConnection dbConnection = new DBConnection(this.url, this.userC, this.passwd);
 		Connection connection = dbConnection.getConnection();
-		try{
+		try(InputStream input = new FileInputStream(ruta)){
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectPass");
@@ -110,9 +115,9 @@ public class UserDAO {
 	public void deleteUser(String mail) {
 		DBConnection dbConnection = new DBConnection(this.url, this.userC, this.passwd);
 		Connection connection = dbConnection.getConnection();
-		try{
+		try(InputStream input = new FileInputStream(ruta)){
 			Properties prop = new Properties();
-			prop.load(this.input);
+			prop.load(input);
 			String query = prop.getProperty("deleteUser");
 			query=query.replaceAll("varmail", mail);
 			
@@ -128,9 +133,9 @@ public class UserDAO {
 	public void updateUser(UserDTO updateUser) {
 		DBConnection dbConnection = new DBConnection(this.url, this.userC, this.passwd);
 		Connection connection = dbConnection.getConnection();
-		try{
+		try(InputStream input = new FileInputStream(ruta)){
 			Properties prop = new Properties();
-			prop.load(this.input);
+			prop.load(input);
 			String query = prop.getProperty("updateUser");
 			query=query.replaceAll("varmail", updateUser.getMail());
 			query=query.replaceAll("varpass", updateUser.getPasswd());
@@ -151,9 +156,9 @@ public class UserDAO {
 		
 		DBConnection dbConnection = new DBConnection(this.url, this.userC, this.passwd);
 		Connection connection = dbConnection.getConnection();
-		try{
+		try(InputStream input = new FileInputStream(ruta)){
 			Properties prop = new Properties();
-			prop.load(this.input);
+			prop.load(input);
 			String query = prop.getProperty("selectDataUserMail");
 			query=query.replaceAll("varmail", email);
 			
@@ -189,9 +194,9 @@ public class UserDAO {
 		
 		DBConnection dbConnection = new DBConnection(this.url, this.userC, this.passwd);
 		Connection connection = dbConnection.getConnection();
-		try{
+		try(InputStream input = new FileInputStream(ruta)){
 			Properties prop = new Properties();
-			prop.load(this.input);
+			prop.load(input);
 			String query = prop.getProperty("selectDataUserName");
 			query=query.replaceAll("varuser", userName);
 			
@@ -219,14 +224,15 @@ public class UserDAO {
 		return userRequest;
 	}
 	
+	
 	public ArrayList<UserDTO> requestUsers(){
 		ArrayList<UserDTO> listUsers = new ArrayList<UserDTO>();
 		
 		DBConnection dbConnection = new DBConnection(this.url, this.userC, this.passwd);
 		Connection connection = dbConnection.getConnection();
-		try{
+		try(InputStream input = new FileInputStream(ruta)){
 			Properties prop = new Properties();
-			prop.load(this.input);
+			prop.load(input);
 			String query = prop.getProperty("selectAllUsers");
 			
 			Statement stmt = connection.createStatement();

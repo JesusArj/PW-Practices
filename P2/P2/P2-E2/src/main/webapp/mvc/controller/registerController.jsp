@@ -13,33 +13,30 @@ if (customerBean == null || customerBean.getEmailUser().equals("")) {
 	String name = request.getParameter("name");
 	String rol = request.getParameter("rol");
 	LocalDateTime regTime = LocalDateTime.now();
-	
 	if (mail != null) {
-		String file =application.getInitParameter("properties");
+		//String file =application.getInitParameter("properties");
 		String url = application.getInitParameter("url");
 		String userC = application.getInitParameter("user");
 		String passwd = application.getInitParameter("password");
-		java.io.InputStream myIO = application.getResourceAsStream(file); 
+		//java.io.InputStream myIO = application.getResourceAsStream(file); 
 		
-		UserDAO userDAO = new UserDAO(myIO,url,userC,passwd);
+		UserDAO userDAO = new UserDAO(url,userC,passwd);
 		
 		ArrayList<UserDTO> users = userDAO.requestUsers();
 		Boolean error = false;
 		
 		for(UserDTO u : users){
 			if(u.getMail().equals(mail)){
-				nextPage = "../../UserExistError.jsp";
+				nextPage = "../../userExistError.jsp";
 				error = true;
 			}
 		}
 		if(!error){
 			UserDTO newUser = new UserDTO(name, mail, username, password, rol, regTime);
 			userDAO.createUser(newUser);
-			%>
-			<jsp:setProperty property="userName" value="<%=username%>" name="customerBean"/>
-			<jsp:setProperty property="regTime" value="<%=regTime.toString()%>" name="customerBean"/>
-			<jsp:setProperty property="rol" value="<%=rol%>" name="customerBean"/>
-			<%
+			customerBean.setUsername(username); 
+			customerBean.setRol(rol); 
+			customerBean.setRegisterTime(regTime); 
 		}
 	} else {
 		nextPage = "../view/registerView.jsp";

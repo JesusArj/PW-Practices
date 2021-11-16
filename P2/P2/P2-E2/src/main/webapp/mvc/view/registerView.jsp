@@ -20,7 +20,7 @@ if (customerBean != null && !customerBean.getEmailUser().equals("")) {
 %>
 <h3>Registro de nuevo usuario</h3>
 Si desea registrarse, introduzca los siguientes datos. 
-<form method="post" action="../controller/loginController.jsp">
+<form method="post" action="../controller/registerController.jsp">
 	<label for="name">Name: </label>
 	<input type="text" name="name" value="Name"><br/>
 	<label for="email">Email: </label>
@@ -30,7 +30,7 @@ Si desea registrarse, introduzca los siguientes datos.
 	<label for="password">Password: </label>
 	<input type="password" name="password" value=""><br/>
 	<label for="rol">Rol: </label><br/>
-	<select id="rol">
+	<select name="rol">
 		<option value="Admin">Administrador</option>
 		<option value="User">Usuario</option>
 	</select>

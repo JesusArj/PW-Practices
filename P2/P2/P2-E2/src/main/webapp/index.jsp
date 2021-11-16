@@ -10,19 +10,17 @@
 </head>
 <body>
 <% 
-//Este código de reset es únicamente para poder probar múltiples veces el MVC
 if (request.getParameter("reset") != null) {
 %>
 <jsp:setProperty property="emailUser" value="" name="customerBean"/>
 <jsp:setProperty property="userName" value="" name="customerBean"/>
 <%
 }
-if (customerBean == null || customerBean.getEmailUser()=="") 
+if (customerBean == null || customerBean.getEmailUser().equals("")) 
 {
-	// Usuario no logado -> Se invoca al controlador de la funcionalidad
 %>
 <h2>Bienvenido a nuestro sistema</h2>
-¿Qu&eacute; desea hacer?
+¿Que desea hacer?
 
 <a href="/P2-E2/mvc/controller/loginController.jsp">Login</a>
 <a href="/P2-E2/mvc/controller/registerController.jsp">Register</a>
@@ -41,7 +39,7 @@ else
 	<% 
 	}
 	else{
-	//ADMIN PRINTjsp v		
+		%> Funcionalidades de administración en desarrollo. <% 
 		}
 	} 
 %>
