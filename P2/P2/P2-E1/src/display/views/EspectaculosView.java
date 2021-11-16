@@ -376,6 +376,7 @@ public class EspectaculosView
 								titulo = reader.nextLine(); 
 								System.out.println("Introduce la categoria.");
 								categoria = reader.nextLine(); 
+								
 								System.out.println("Introduce la descripcion.");
 								descripcion = reader.nextLine(); 
 								
@@ -461,9 +462,21 @@ public class EspectaculosView
 								fecha = LocalDateTime.parse(aux, formatter);	
 								
 								System.out.println("Introduce el numero de localidades a la venta.");
-								localidadesVenta = reader.nextInt(); 
+								String localaux = reader.nextLine();
+								while(!isNumeric(localaux))
+								{
+									System.out.println("Error. Introduzca un numero");
+									localaux = reader.nextLine();
+								}
+								localidadesVenta = Integer.parseInt(localaux);
 								System.out.println("Introduce el numero de localidades vendidas.");
-								localidadesVendidas = reader.nextInt();
+								localaux = reader.nextLine();
+								while(!isNumeric(localaux))
+								{
+									System.out.println("Error. Introduzca un numero");
+									localaux = reader.nextLine();
+								}
+								localidadesVendidas = Integer.parseInt(localaux);
 								
 								manager.createEspectaculoPunt(id, titulo, categoria, descripcion, localidadesVenta, localidadesVendidas, fecha);
 								
@@ -518,9 +531,21 @@ public class EspectaculosView
 								}while(decisionPases==true); 
 
 								System.out.println("Introduce el numero de localidades a la venta.");
-								localidadesVenta = reader.nextInt(); 
+								String localaux = reader.nextLine();
+								while(!isNumeric(localaux))
+								{
+									System.out.println("Error. Introduzca un numero");
+									localaux = reader.nextLine();
+								}
+								localidadesVenta = Integer.parseInt(localaux);
 								System.out.println("Introduce el numero de localidades vendidas.");
-								localidadesVendidas = reader.nextInt();	
+								localaux = reader.nextLine();
+								while(!isNumeric(localaux))
+								{
+									System.out.println("Error. Introduzca un numero");
+									localaux = reader.nextLine();
+								}
+								localidadesVendidas = Integer.parseInt(localaux);	
 								
 								managerMult.createEspectaculoMult(id, titulo, categoria, descripcion, localidadesVenta, localidadesVendidas,listFechas);
 
@@ -719,9 +744,21 @@ public class EspectaculosView
 						        	}
 
 									System.out.println("Introduce el numero de localidades a la venta.");
-									localidadesVenta = reader.nextInt(); 
+									String localaux = reader.nextLine();
+									while(!isNumeric(localaux))
+									{
+										System.out.println("Error. Introduzca un numero");
+										localaux = reader.nextLine();
+									}
+									localidadesVenta = Integer.parseInt(localaux);
 									System.out.println("Introduce el numero de localidades vendidas.");
-									localidadesVendidas = reader.nextInt();	
+									localaux = reader.nextLine();
+									while(!isNumeric(localaux))
+									{
+										System.out.println("Error. Introduzca un numero");
+										localaux = reader.nextLine();
+									}
+									localidadesVendidas = Integer.parseInt(localaux);
 									
 									manager.updateEspectaculoTemp(id, titulo, categoria, descripcion, localidadesVenta, localidadesVendidas, listPases);
 					        		System.out.println("Espectaculo actualizado.");
@@ -770,9 +807,21 @@ public class EspectaculosView
 									fecha = LocalDateTime.parse(aux, formatter);
 
 									System.out.println("Introduce el numero de localidades a la venta.");
-									localidadesVenta = reader.nextInt(); 
+									String localaux = reader.nextLine();
+									while(!isNumeric(localaux))
+									{
+										System.out.println("Error. Introduzca un numero");
+										localaux = reader.nextLine();
+									}
+									localidadesVenta = Integer.parseInt(localaux);
 									System.out.println("Introduce el numero de localidades vendidas.");
-									localidadesVendidas = reader.nextInt();	
+									localaux = reader.nextLine();
+									while(!isNumeric(localaux))
+									{
+										System.out.println("Error. Introduzca un numero");
+										localaux = reader.nextLine();
+									}
+									localidadesVendidas = Integer.parseInt(localaux);	
 									manager.updateEspectaculoPunt(id, titulo, categoria, descripcion, localidadesVenta, localidadesVendidas, fecha);
 					        		System.out.println("Espectaculo actualizado.");
 					        	}
@@ -877,9 +926,21 @@ public class EspectaculosView
 									listFechas = esps.get(Integer.parseInt(Esp)-1).getFechas();
 									 
 									System.out.println("Introduce el numero de localidades a la venta.");
-									localidadesVenta = reader.nextInt(); 
+									String localaux = reader.nextLine();
+									while(!isNumeric(localaux))
+									{
+										System.out.println("Error. Introduzca un numero");
+										localaux = reader.nextLine();
+									}
+									localidadesVenta = Integer.parseInt(localaux);
 									System.out.println("Introduce el numero de localidades vendidas.");
-									localidadesVendidas = reader.nextInt();	
+									localaux = reader.nextLine();
+									while(!isNumeric(localaux))
+									{
+										System.out.println("Error. Introduzca un numero");
+										localaux = reader.nextLine();
+									}
+									localidadesVendidas = Integer.parseInt(localaux);
 									manager.updateEspectaculoMultiple(id, titulo, categoria, descripcion, localidadesVenta, localidadesVendidas, listFechas);
 									
 

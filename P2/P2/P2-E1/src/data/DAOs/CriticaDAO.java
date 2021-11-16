@@ -1,5 +1,6 @@
 package data.DAOs;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.*;
@@ -19,7 +20,9 @@ import data.common.DBConnection;
  */
 public class CriticaDAO {
 
-	String ruta ="D:\\Descargas\\PW-Practices-master\\PW-Practices-master\\P2\\P2\\P2-E1\\src\\sql.properties";
+
+	
+	String ruta = "./src/sql.properties";
 	
 	/*
 	 * Funcion que busca y devuleve el titulo de un espectaculo

@@ -16,7 +16,7 @@ import data.common.DBConnection;
  */
 public class UserDAO {
 
-	String ruta ="D:\\\\Descargas\\\\PW-Practices-master\\\\PW-Practices-master\\\\P2\\\\P2\\\\P2-E1\\\\src\\\\sql.properties";
+	String ruta = "./src/sql.properties";
 	
 	/* Funcion que crea un usuario a partir de los datos provenientes del manager
 	 * @param newUser DTO de Usuario con los datos del usuario a crear

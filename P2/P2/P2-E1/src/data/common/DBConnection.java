@@ -10,6 +10,28 @@ import java.sql.SQLException;
  * */
 
 public class DBConnection {
+	
+	/* Acceso a la base de datos mediante archivo
+	 * config.properties.
+	 * Incluir las siguientes lineas dentro de la funcion
+	 * getConnection().
+	 */
+	
+	
+	/*String rutaAbs = new File("").getAbsolutePath();
+	String ruta = rutaAbs + "/P2/P2-E1/src/config.properties";
+	try(InputStream input = new FileInputStream(ruta)){
+	Properties prop = new Properties();
+	prop.load(input);
+
+	String url = prop.getProperty("url");
+	String user = prop.getProperty("user");
+	String password = prop.getProperty("password");
+	} 
+	catch (Exception e){
+	System.err.println(e);
+	e.printStackTrace();
+	}*/
 
 	protected Connection connection = null;
 

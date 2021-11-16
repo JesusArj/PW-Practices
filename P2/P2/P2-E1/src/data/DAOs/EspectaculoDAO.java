@@ -6,6 +6,7 @@ import business.DTOs.EspectaculoTempDTO;
 import business.DTOs.FechasDTO;
 import business.DTOs.PasesDTO;
 import data.common.DBConnection;
+
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.*;
@@ -22,7 +23,8 @@ import java.util.Random;
  */
 public class EspectaculoDAO {
 
-	String ruta ="D:\\\\Descargas\\\\PW-Practices-master\\\\PW-Practices-master\\\\P2\\\\P2\\\\P2-E1\\\\src\\\\sql.properties";
+
+	String ruta = "./src/sql.properties";
 	
 	/* Funcion que comprueba si existe un ID de un espectaculo Puntual
 	 * @param id Identificador a comprobar
