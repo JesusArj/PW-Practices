@@ -1,28 +1,24 @@
 package display.javabean;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import business.DTOs.EspectaculoPuntDTO;
+import business.DTOs.EspectaculoTempDTO;
+import business.DTOs.PasesDTO;
 
-public class EspPuntBean implements java.io.Serializable {
+public class EspTempBean implements java.io.Serializable {
 
-	private static final long serialVersionUID = 5259493186386143210L;
-	
-	private int id = 0;
+
+	private static final long serialVersionUID = 7590868581323155534L;
+
 	private String categoria = ""; 
 	private String titulo ="";  
 	private String descripcion = ""; 
 	private int localidades_venta = 0; 
 	private int localidades_vendidas = 0; 
-	private LocalDateTime horaFecha;
+	private ArrayList<PasesDTO> pases;
 	private ArrayList<Integer> criticas;
-	private ArrayList<EspectaculoPuntDTO> espsPunt;
+	private ArrayList<EspectaculoTempDTO> espsTemp;
 
-	public int getId()
-	{
-		return id;
-	}
 	
 	public String getCategoria()
 	{
@@ -49,9 +45,9 @@ public class EspPuntBean implements java.io.Serializable {
 		return localidades_vendidas;
 	}
 	
-	public LocalDateTime getHoraFecha()
+	public ArrayList<PasesDTO> getPases()
 	{
-		return horaFecha;
+		return this.pases;
 	}
 	
 	public ArrayList<Integer> getCriticas()
@@ -59,14 +55,9 @@ public class EspPuntBean implements java.io.Serializable {
 		return this.criticas;
 	}
 	
-	public ArrayList<EspectaculoPuntDTO> getEspectaculosPunt()
+	public ArrayList<EspectaculoTempDTO> getEspectaculosTemp()
 	{
-		return this.espsPunt;
-	}
-	
-	public void setId(int id)
-	{
-		this.id = id;
+		return this.espsTemp;
 	}
 	
 	public void setTitulo(String titulo)
@@ -94,9 +85,9 @@ public class EspPuntBean implements java.io.Serializable {
 		this.localidades_vendidas = localidadesVendidas;
 	}
 	
-	public void setHoraFecha(LocalDateTime horaFecha)
+	public void setPases(ArrayList<PasesDTO> pases)
 	{
-		this.horaFecha = horaFecha;
+		this.pases = pases;
 	}
 	
 	public void setCritica(ArrayList<Integer> c)
@@ -104,9 +95,8 @@ public class EspPuntBean implements java.io.Serializable {
 		this.criticas = c;
 	}
 	
-	public void setEspectaculosPunt(ArrayList<EspectaculoPuntDTO> esps)
+	public void setEspectaculosTemp(ArrayList<EspectaculoTempDTO> esps)
 	{
-		this.espsPunt = esps;
+		this.espsTemp = esps;
 	}
 }
-	

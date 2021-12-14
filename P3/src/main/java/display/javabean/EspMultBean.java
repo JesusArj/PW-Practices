@@ -1,6 +1,8 @@
 package display.javabean;
 
 import java.util.ArrayList;
+
+import business.DTOs.EspectaculoMultDTO;
 import business.DTOs.FechasDTO;
 
 public class EspMultBean implements java.io.Serializable {
@@ -15,6 +17,7 @@ public class EspMultBean implements java.io.Serializable {
 	private int localidades_vendidas = 0; 
 	private ArrayList<FechasDTO> fechas;
 	private ArrayList<Integer> criticas;
+	private ArrayList<EspectaculoMultDTO> espsMult;
 
 	public int getId()
 	{
@@ -56,6 +59,11 @@ public class EspMultBean implements java.io.Serializable {
 		return this.criticas;
 	}
 	
+	public ArrayList<EspectaculoMultDTO> getEspectaculosMult()
+	{
+		return this.espsMult;
+	}
+	
 	public void setId(int id)
 	{
 		this.id = id;
@@ -94,5 +102,10 @@ public class EspMultBean implements java.io.Serializable {
 	public void setCritica(ArrayList<Integer> c)
 	{
 		this.criticas = c;
+	}
+	
+	public void setEspectaculosMult(ArrayList<EspectaculoMultDTO> espsMult)
+	{
+		this.espsMult = espsMult;
 	}
 }

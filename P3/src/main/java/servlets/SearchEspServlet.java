@@ -10,10 +10,10 @@ import javax.servlet.http.*;
 import business.DTOs.EspectaculoMultDTO;
 import business.DTOs.EspectaculoPuntDTO;
 import business.DTOs.EspectaculoTempDTO;
-import business.DTOs.UserDTO;
 import data.DAOs.EspectaculoDAO;
-import data.DAOs.UserDAO;
-import display.javabean.CustomerBean;
+import display.javabean.EspMultBean;
+import display.javabean.EspPuntBean;
+import display.javabean.EspTempBean;
 
 @WebServlet(name="SearchEspServlet", urlPatterns="/SearchEspServlet")
 
@@ -75,6 +75,17 @@ public class SearchEspServlet extends HttpServlet
 			}
 			
 			//TODO: Mandar todo al bean y del bean a lo que sea
+			
+			HttpSession session = request.getSession();
+			EspPuntBean puntualBean = (EspPuntBean) session.getAttribute("puntualBean");
+			EspMultBean multipleBean = (EspMultBean) session.getAttribute("multipleBean");
+			EspTempBean temporadaBean = (EspTempBean) session.getAttribute("temporadaBean");
+			
+			
+		}
+		
+		else{
+			response.sendRedirect("../../userBadPass.jsp"); 
 		}
 	}
 } 
