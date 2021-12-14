@@ -27,13 +27,13 @@ public class SearchEspServlet extends HttpServlet
 		String mail = request.getParameter("mail");
 		if (mail != null) 
 		{
-			String tittle = null, category = null;
+			String title = null, category = null;
 			String pass = request.getParameter("password");
 			String url = request.getParameter("url");
 			String userC = request.getParameter("user");
 			if(!"null".equals(request.getParameter("titulo")))
 			{
-				tittle = request.getParameter("titulo");
+				title = request.getParameter("titulo");
 			}
 			else if(!"null".equals(request.getParameter("categoria")))
 			{
@@ -52,7 +52,7 @@ public class SearchEspServlet extends HttpServlet
 			
 			for(EspectaculoPuntDTO e : espPunt)
 			{
-				if(e.getCategoria().equals(category) || e.getTitulo().equals(tittle))
+				if(e.getCategoria().equals(category) || e.getTitulo().equals(title))
 				{
 					foundPunt.add(e);
 				}
@@ -60,7 +60,7 @@ public class SearchEspServlet extends HttpServlet
 			
 			for(EspectaculoMultDTO e : espMult)
 			{
-				if(e.getCategoria().equals(category) || e.getTitulo().equals(tittle))
+				if(e.getCategoria().equals(category) || e.getTitulo().equals(title))
 				{
 					foundMult.add(e);
 				}
@@ -68,7 +68,7 @@ public class SearchEspServlet extends HttpServlet
 			
 			for(EspectaculoTempDTO e : espTemp)
 			{
-				if(e.getCategoria().equals(category) || e.getTitulo().equals(tittle))
+				if(e.getCategoria().equals(category) || e.getTitulo().equals(title))
 				{
 					foundTemp.add(e);
 				}

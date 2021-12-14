@@ -3,9 +3,9 @@ package display.javabean;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class EspPuntBean implements java.io.Serializable {
+public class EspTempBean implements java.io.Serializable {
 
-	private static final long serialVersionUID = 5259493186386143210L;
+	//TODO: Añadir Serial UID
 	
 	private int id = 0;
 	private String categoria = ""; 
@@ -13,7 +13,7 @@ public class EspPuntBean implements java.io.Serializable {
 	private String descripcion = ""; 
 	private int localidades_venta = 0; 
 	private int localidades_vendidas = 0; 
-	private LocalDateTime horaFecha;
+	private ArrayList<PasesDTO> pases;
 	private ArrayList<Integer> criticas;
 
 	public int getId()
@@ -46,9 +46,9 @@ public class EspPuntBean implements java.io.Serializable {
 		return localidades_vendidas;
 	}
 	
-	public LocalDateTime getHoraFecha()
+	public ArrayList<PasesDTO> getPases()
 	{
-		return horaFecha;
+		return this.pases;
 	}
 	
 	public ArrayList<Integer> getCriticas()
@@ -86,9 +86,9 @@ public class EspPuntBean implements java.io.Serializable {
 		this.localidades_vendidas = localidadesVendidas;
 	}
 	
-	public void setHoraFecha(LocalDateTime horaFecha)
+	public void setPases(ArrayList<PasesDTO> pases)
 	{
-		this.horaFecha = horaFecha;
+		this.pases = pases;
 	}
 	
 	public void setCritica(ArrayList<Integer> c)
@@ -96,4 +96,3 @@ public class EspPuntBean implements java.io.Serializable {
 		this.criticas = c;
 	}
 }
-	
