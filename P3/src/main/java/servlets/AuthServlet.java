@@ -1,3 +1,4 @@
+/*
 package servlets;
 
 import java.io.IOException;
@@ -44,3 +45,4 @@ public abstract class AuthServlet implements Filter {
         return true;
     }
 }
+*/

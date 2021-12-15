@@ -1,5 +1,6 @@
-package servlets;
 
+package servlets;
+/*
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -16,13 +17,16 @@ import display.javabean.CustomerBean;
 /**
  * Servlet Filter implementation class AdminAuthServlet
  */
+/*
 @WebFilter("/AdminAuthServlet")
 public abstract class AdminAuthServlet implements Filter {
 
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
+
 	@Override
+		 */
+/*
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
@@ -47,3 +51,4 @@ public abstract class AdminAuthServlet implements Filter {
         return true;
     }
 }
+*/

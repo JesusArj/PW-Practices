@@ -20,7 +20,7 @@
 			</form>
 		<br>
 		<p>¿No estas registrado? Registrate.</p>
-		<input type="button" value="Aqui" onClick = "window.location.href='/P3/views/registerView.html';">
+		<input type="button" value="Aqui" onClick = "window.location.href='/P3/views/registerView.jsp';">
 		
 		</body>
 	</html>

@@ -13,7 +13,7 @@ import data.common.DBConnection;
 
 public class UserDAO {
 	
-	private String ruta ="C:\\Users\\jesus\\workspace-eclipse-luna\\P3\\src\\main\\webapp\\WEB-INF\\sql.properties";
+	private String ruta ="D:\\Descargas\\PW-Practices-master\\P3\\src\\main\\webapp\\WEB-INF\\sql.properties";
 	//private java.io.InputStream input;
 	private String url;
 	private String userC;

@@ -1,7 +1,10 @@
 package servlets;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Properties;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
@@ -20,51 +23,45 @@ public class LoginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
 		
-		String mail = request.getParameter("mail");
+		String mail = request.getParameter("Mail");
+		String pass = request.getParameter("Password");
+		ServletContext app = getServletContext();
 		
 			if (mail != null) {
-				String pass = request.getParameter("password");
-				String url = request.getParameter("url");
-				String userC = request.getParameter("user");
-				UserDAO userDAO = new UserDAO(url,userC,pass);
+				
+				String passBD = app.getInitParameter("password");
+				String urlBD = app.getInitParameter("url");
+				String userBD = app.getInitParameter("user");
+				
+				UserDAO userDAO = new UserDAO(urlBD,userBD,passBD);
 				String password = userDAO.requestCredenciales(mail);
-				ArrayList<UserDTO> users = userDAO.requestUsers();
+				ArrayList<UserDTO> users = userDAO.requestUsers();		
 				
 				for(UserDTO u : users){
 					if(u.getMail().equals(mail)){
 						if (password.equals(pass)){
+							String username = u.getUsername();
+							String rol = u.getRol();
+							HttpSession session = request.getSession();
+							CustomerBean customerBean = (CustomerBean) session.getAttribute("customerBean");
+							customerBean.setEmailUser(mail); 
+							customerBean.setUsername(username); 
+							customerBean.setRol(rol);
 							if(u.getRol().equals("usuario")){
-								String username = u.getUsername();
-								String rol = u.getRol();
-								HttpSession session = request.getSession();
-								CustomerBean customerBean = (CustomerBean) session.getAttribute("customerBean");
-								if (customerBean == null || customerBean.getEmailUser().equals("")) {
-								//TODO forward a login
-								} 
-								else {
-									customerBean.setEmailUser(mail); 
-									customerBean.setUsername(username); 
-									customerBean.setRol(rol);
-									response.sendRedirect("../../home.jsp"); //TODO
-								}
+								response.sendRedirect(request.getContextPath() + "/views/home.jsp");
 							}
 							else{
-								HttpSession session = request.getSession();
-								CustomerBean customerBean = (CustomerBean) session.getAttribute("customerBean");
-								String username = u.getUsername();
-								String rol = u.getRol();
-								customerBean.setEmailUser(mail); 
-								customerBean.setUsername(username); 
-								customerBean.setRol(rol);
-								response.sendRedirect("../../homeAdmin.jsp"); //TODO
+								response.sendRedirect(request.getContextPath() + "/views/homeAdmin.jsp");
 							}
 						}
 						else{
-							response.sendRedirect("../../userBadPass.jsp"); 
+							response.sendRedirect(request.getContextPath() + "/error/userBadPass.jsp"); 
 						}
 					}
-					
 				}
 			}
-	}
-} 
+			response.sendRedirect(request.getContextPath() + "/error/userNotExist.jsp");
+		}
+}
+
+ 
