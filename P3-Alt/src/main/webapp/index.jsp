@@ -19,8 +19,8 @@ if (customerBean == null || customerBean.getEmailUser().equals(""))
 <h2>Bienvenido a nuestro sistema</h2>
 ¿Que desea hacer?
 
-<a href="/P3/views/loginView.jsp">Login</a>
-<a href="/P3/views/registerView.jsp">Register</a>
+<a href="/P3-Alt/P3-Alt/views/loginView.jsp">Login</a>
+<a href="/P3-Alt/P3-Alt/views/registerView.jsp">Register</a>
 
 <% 	
 } 

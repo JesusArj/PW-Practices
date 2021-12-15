@@ -8,7 +8,7 @@
 		<body>
 		<h3>Registro de usuario</h3>
 		
-			<form method="post" action="../../P3/RegisterServlet">
+			<form method="post" action="../../P3-Alt/RegisterServlet">
 				<fieldset>
 					<legend>Register</legend>
 					Mail:<br>

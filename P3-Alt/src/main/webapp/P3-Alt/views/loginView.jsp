@@ -8,7 +8,7 @@
 		<body>
 		<h3>Inicio de sesion</h3>
 		
-			<form method="post" action="../../P3/LoginServlet">
+			<form method="post" action="../../../P3-Alt/LoginServlet">
 				<fieldset>
 					<legend>Log In</legend>
 					Mail:<br>
