@@ -3,6 +3,7 @@ package data.DAOs;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -13,14 +14,13 @@ import data.common.DBConnection;
 
 public class UserDAO {
 	
-	private String ruta ="D:\\Descargas\\PW-Practices-master\\P3\\src\\main\\webapp\\WEB-INF\\sql.properties";
-	//private java.io.InputStream input;
+	private String ruta ="D:\\Descargas\\P3-Alt\\src\\main\\webapp\\sql.properties";
+	//private String ruta = "C:\\Users\\aluja\\Documents\\EclipseLuna\\P3-Alt\\src\\main\\webapp\\sql.properties";
 	private String url;
 	private String userC;
 	private String passwd;
 	
-	public UserDAO(/*java.io.InputStream myIO,*/ String url, String userC, String passwd){
-		//this.input = myIO;
+	public UserDAO( String url, String userC, String passwd){
 		this.url = url;
 		this.userC = userC;
 		this.passwd = passwd;
@@ -235,17 +235,23 @@ public class UserDAO {
 			Properties prop = new Properties();
 			prop.load(input);
 			String query = prop.getProperty("selectAllUsers");
-			
 			Statement stmt = connection.createStatement();
 			ResultSet rs = (ResultSet) stmt.executeQuery(query);
+			
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
 			
 			while (rs.next()) {
 				String name = rs.getString("name");
 				String email = rs.getString("mail");
 				String username = rs.getString("username");
 				String rol = rs.getString("rol");
-				//LocaLDateTime regTime = rs.getString("regTime");
-				listUsers.add(new UserDTO(name, email,username,rol));
+				String fechaReg = rs.getString("fechaRegistro");
+				String fechaLog = rs.getString("fechaUltConex");
+				
+				LocalDateTime regDate = LocalDateTime.parse(fechaReg, formatter);
+				LocalDateTime logDate = LocalDateTime.parse(fechaLog, formatter);
+				
+				listUsers.add(new UserDTO(name, email,username,rol, regDate, logDate));
 			}
 
 			if (stmt != null){ 

@@ -1,6 +1,7 @@
 package business;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 /**
@@ -81,6 +82,16 @@ public class UserDTO{
 		this.passwd = passwd;
 		this.rol = rol;
 		this.registerTime = registerTime;
+	}
+	
+	public UserDTO(String name, String mail, String username, String rol, LocalDateTime registerTime, LocalDateTime lastLogged)
+	{
+		this.name=name; 
+		this.mail=mail;
+		this.username = username;
+		this.rol = rol;
+		this.registerTime = registerTime;
+		this.lastLogged = lastLogged;
 	}
 	
 	public UserDTO(String name, String mail, String username, String rol)
@@ -213,5 +224,19 @@ public class UserDTO{
 
 	public void setRol(String rol) {
 		this.rol = rol;
+	}
+	
+	public String getStringRegister()
+	{
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		String stringRegister = this.registerTime.format(formatter);
+		return stringRegister;
+	}
+	
+	public String getStringLogged()
+	{
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		String stringLogged = this.lastLogged.format(formatter);
+		return stringLogged;
 	}
 }

@@ -3,12 +3,20 @@
 		<head>
 			<meta charset="UTF-8">
 			<title>Register</title>
+		<style type="text/css">
+			h3, form {
+				text-align: center; 
+				float: center;
+			}
+			
+		
+		</style>
 		</head>
 		
 		<body>
 		<h3>Registro de usuario</h3>
 		
-			<form method="post" action="../../P3-Alt/RegisterServlet">
+			<form method="post" action="../../../P3-Alt/RegisterServlet">
 				<fieldset>
 					<legend>Register</legend>
 					Mail:<br>
@@ -23,7 +31,9 @@
 					<select name="rol">
 						<option value="Admin">Administrador</option>
 						<option value="User">Usuario</option>
-					</select><br>
+					</select>
+					<br>
+					<br>
 					<input type="submit" value="Register">
 				</fieldset>
 			</form>

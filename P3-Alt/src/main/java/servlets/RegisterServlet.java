@@ -20,39 +20,37 @@ public class RegisterServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 	throws ServletException, IOException {
-		
+		String ruta = request.getContextPath() + "/index.jsp";
 		String mail = request.getParameter("Mail");
-		System.out.println(mail);
-	
 		if (mail != null) {
-			String url = request.getParameter("url");
-			String pass = request.getParameter("password");
-			String rol = request.getParameter("rol");
-			String username = request.getParameter("username");
-			String name = request.getParameter("name");
-			LocalDateTime regTime = LocalDateTime.now();
-			UserDAO userDAO = new UserDAO(url,username,pass);
+			ServletContext app = getServletContext();
+			String passBD = app.getInitParameter("password");
+			String urlBD = app.getInitParameter("url");
+			String userBD = app.getInitParameter("user");
 			
+			String pass = request.getParameter("Password");
+			String rol = request.getParameter("rol");
+			String username = request.getParameter("Username");
+			String name = request.getParameter("Name");
+			LocalDateTime regTime = LocalDateTime.now();
+			UserDAO userDAO = new UserDAO(urlBD,userBD,passBD);
+
 			ArrayList<UserDTO> users = userDAO.requestUsers();
-			Boolean error = false;
 			
 			for(UserDTO u : users){
 				if(u.getMail().equals(mail)){
-					response.sendRedirect("../../userExistError.html"); //TODO
-					error = true;
+					ruta = request.getContextPath() + "/P3-Alt/error/userExistError.jsp";
 				}
 			}
-			if(!error){
-				UserDTO newUser = new UserDTO(name, mail, username, pass, rol, regTime);
-				userDAO.createUser(newUser);
-				HttpSession session = request.getSession();
-				CustomerBean customerBean = (CustomerBean) session.getAttribute("customerBean");
-				customerBean.setUsername(username); 
-				customerBean.setRol(rol); 
-				customerBean.setRegisterTime(regTime); 
-			}
-		} else {
-			response.sendRedirect("/P3/views/registerView.jsp");//TODO
+			UserDTO newUser = new UserDTO(name, mail, username, pass, rol, regTime);
+			userDAO.createUser(newUser);
+			HttpSession session = request.getSession();
+			CustomerBean customerBean = (CustomerBean) session.getAttribute("customerBean");
+			customerBean.setUsername(username); 
+			customerBean.setRol(rol); 
+			customerBean.setRegisterTime(regTime);
 		}
+
+		response.sendRedirect(ruta);
 	}
 } 

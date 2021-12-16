@@ -8,6 +8,7 @@
 
 </head>
 <body>
+	<jsp:include page="headerNav.jsp"></jsp:include>
 	<div>Informacion de Usuario</div>
 	<a href=/view/userDataHome.jsp><img src="link" name=user></a>
 	<div>Criticas de espectáculos</div>

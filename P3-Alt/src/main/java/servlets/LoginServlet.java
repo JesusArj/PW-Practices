@@ -23,17 +23,16 @@ public class LoginServlet extends HttpServlet {
 		String mail = request.getParameter("Mail");
 		String pass = request.getParameter("Password");
 		ServletContext app = getServletContext();
-		
+		String ruta = request.getContextPath() + "/index.jsp";
 			if (mail != null) {
-				
 				String passBD = app.getInitParameter("password");
 				String urlBD = app.getInitParameter("url");
 				String userBD = app.getInitParameter("user");
-				
+
 				UserDAO userDAO = new UserDAO(urlBD,userBD,passBD);
 				String password = userDAO.requestCredenciales(mail);
 				ArrayList<UserDTO> users = userDAO.requestUsers();		
-				
+				int flag=0;
 				for(UserDTO u : users){
 					if(u.getMail().equals(mail)){
 						if (password.equals(pass)){
@@ -44,21 +43,26 @@ public class LoginServlet extends HttpServlet {
 							customerBean.setEmailUser(mail); 
 							customerBean.setUsername(username); 
 							customerBean.setRol(rol);
-							if(u.getRol().equals("usuario")){
-								response.sendRedirect(request.getContextPath() + "/views/home.jsp");
-							}
-							else{
-								response.sendRedirect(request.getContextPath() + "/views/homeAdmin.jsp");
-							}
+							flag=1;
+							if(rol.equals("Admin"))
+								ruta = request.getContextPath() + "/P3-Alt/views/homeAdmin.jsp";
+							else
+								ruta = request.getContextPath() + "/P3-Alt/views/home.jsp";
 						}
-						else{
-							response.sendRedirect(request.getContextPath() + "/P3-Alt/error/userBadPass.jsp"); 
+						else {
+							flag=2;
+							ruta = request.getContextPath() + "/P3-Alt/error/userBadPass.jsp";
 						}
 					}
 				}
+				if(flag==0)
+					ruta = request.getContextPath() + "/P3-Alt/error/userNotExist.jsp";
 			}
-			response.sendRedirect(request.getContextPath() + "/P3-Alt/error/userNotExist.jsp");
-		}
+			else
+				ruta = request.getContextPath() + "/index.jsp";
+		response.sendRedirect(ruta);	
+	}
+		
 }
 
  
