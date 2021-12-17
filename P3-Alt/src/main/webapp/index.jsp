@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <style type="text/css">
+body {
+		background-color: white;
+		color: #95c2de;
+    }
 	h1, h2{
 	float: center;
 	text-align: center;
@@ -43,9 +47,6 @@
   		background-color: #111;
 	}
 
-	body {
-		background-color: white;
-	}
 </style>
 <jsp:useBean  id="customerBean" scope="session" class="beans.CustomerBean"></jsp:useBean>
 <title>Sistema de criticas</title>

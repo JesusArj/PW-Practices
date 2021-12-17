@@ -1,6 +1,5 @@
 package servlets;
 
-/*
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -19,71 +18,82 @@ public class SearchEspServlet extends HttpServlet
 
 	private static final long serialVersionUID = 7313417310612984176L;
 
+	/**
+	 *
+	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		String mail = request.getParameter("mail");
-		if (mail != null) 
+		
+		ServletContext app = getServletContext();
+		String title = null, category = null;
+		String passBD = app.getInitParameter("password");
+		String urlBD = app.getInitParameter("url");
+		String userBD = app.getInitParameter("user");
+		if(!"".equals(request.getParameter("titulo")))
 		{
-			String title = null, category = null;
-			String pass = request.getParameter("password");
-			String url = request.getParameter("url");
-			String userC = request.getParameter("user");
-			if(!"null".equals(request.getParameter("titulo")))
-			{
-				title = request.getParameter("titulo");
-			}
-			else if(!"null".equals(request.getParameter("categoria")))
-			{
-				category = request.getParameter("categoria");
-			}
-			//TODO: A�adir lo del filtro
-			
-			EspectaculoDAO espDAO = new EspectaculoDAO(url, userC, pass);
+			title = request.getParameter("titulo");
+		}
+		else 
+		{
+			category = request.getParameter("categoria");
+		}
+			//TODO: Add lo del filtro
+		System.out.println(category);
+		if(!"null".equals(title) || !"null".equals(category))
+		{
+			EspectaculoDAO espDAO = new EspectaculoDAO(urlBD, userBD, passBD);
 			ArrayList<EspectaculoPuntDTO> espPunt = espDAO.requestEPs();
 			ArrayList<EspectaculoMultDTO> espMult = espDAO.requestEMs();
 			ArrayList<EspectaculoTempDTO> espTemp = espDAO.requestETs();
-
-			ArrayList<EspectaculoPuntDTO> foundPunt = null;
-			ArrayList<EspectaculoMultDTO> foundMult = null;
-			ArrayList<EspectaculoTempDTO> foundTemp = null;
-			
+	
+			ArrayList<EspectaculoPuntDTO> foundPunt = new ArrayList<EspectaculoPuntDTO>();
+			ArrayList<EspectaculoMultDTO> foundMult = new ArrayList<EspectaculoMultDTO>();
+			ArrayList<EspectaculoTempDTO> foundTemp = new ArrayList<EspectaculoTempDTO>();
+				
 			for(EspectaculoPuntDTO e : espPunt)
 			{
 				if(e.getCategoria().equals(category) || e.getTitulo().equals(title))
 				{
+					System.out.println(e.getCategoria());
 					foundPunt.add(e);
 				}
 			}
-			
+				
 			for(EspectaculoMultDTO e : espMult)
 			{
 				if(e.getCategoria().equals(category) || e.getTitulo().equals(title))
-				{
+				{System.out.println(e.getCategoria());
 					foundMult.add(e);
 				}
 			}
-			
+				
 			for(EspectaculoTempDTO e : espTemp)
 			{
 				if(e.getCategoria().equals(category) || e.getTitulo().equals(title))
-				{
+				{System.out.println(e.getCategoria());
 					foundTemp.add(e);
 				}
 			}
-			
-			//TODO: Mandar todo al bean y del bean a lo que sea
-			
+
 			HttpSession session = request.getSession();
-			EspPuntBean puntualBean = (EspPuntBean) session.getAttribute("puntualBean");
-			EspMultBean multipleBean = (EspMultBean) session.getAttribute("multipleBean");
-			EspTempBean temporadaBean = (EspTempBean) session.getAttribute("temporadaBean");
+			AllEspsBean allEspsBean = new AllEspsBean();
 			
+			allEspsBean.setAllPunt(foundPunt);
+			allEspsBean.setNumPunt(foundPunt.size());
 			
+			allEspsBean.setAllMult(foundMult);
+			allEspsBean.setNumMult(foundMult.size());
+			
+			allEspsBean.setAllTemp(foundTemp);
+			allEspsBean.setNumTemp(foundTemp.size());
+			
+			session.setAttribute("allEspsBean", allEspsBean);
+			response.sendRedirect(request.getContextPath() + "/P3-Alt/views/EspMenu/allEspsView.jsp"); 
 		}
-		
-		else{
-			response.sendRedirect("../../userBadPass.jsp"); 
+		else
+		{
+			response.sendRedirect(request.getContextPath() + "/P3-Alt/error/errorAllViews.jsp"); //TODO: 
+
 		}
 	}
-} 
-*/
+}

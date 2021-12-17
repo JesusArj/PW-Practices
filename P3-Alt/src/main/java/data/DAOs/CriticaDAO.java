@@ -18,7 +18,8 @@ import data.common.DBConnection;
 public class CriticaDAO {
 
 
-	private String ruta ="C:\\Users\\jesus\\workspace-eclipse-luna\\P2-E2\\src\\main\\webapp\\WEB-INF\\sql.properties";
+	private String ruta ="D:\\Descargas\\P3-Alt\\src\\main\\webapp\\sql.properties";
+	//private String ruta = "C:\\Users\\aluja\\Documents\\EclipseLuna\\P3-Alt\\src\\main\\webapp\\sql.properties";;
 	//private java.io.InputStream input;
 	private String url;
 	private String userC;

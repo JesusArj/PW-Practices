@@ -156,4 +156,5 @@ public class PasesDTO
 		{
 			this.fechaFinal = fechaFinal; 
 		}
+		
 	}
